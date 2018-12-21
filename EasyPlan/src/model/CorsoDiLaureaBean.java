@@ -1,18 +1,18 @@
 package model;
 
-public class CorsoDiLaurea {
+public class CorsoDiLaureaBean {
 
 	//VARIABILI DI ISTANZA
-	private String idCorsoDiLaurea;
+	private int idCorsoDiLaurea;
 	private boolean tipo;
 	private String annoOffertaFormativa;
 	
 	//COSTRUTTORI
-	public CorsoDiLaurea() {
+	public CorsoDiLaureaBean() {
 		
 	}
 
-	public CorsoDiLaurea(String idCorsoDiLaurea, boolean tipo, String annoOffertaFormativa) {
+	public CorsoDiLaureaBean(int idCorsoDiLaurea, boolean tipo, String annoOffertaFormativa) {
 		super();
 		this.idCorsoDiLaurea = idCorsoDiLaurea;
 		this.tipo = tipo;
@@ -20,11 +20,11 @@ public class CorsoDiLaurea {
 	}
 
 	//GETTER E SETTER
-	public String getIdCorsoDiLaurea() {
+	public int getIdCorsoDiLaurea() {
 		return idCorsoDiLaurea;
 	}
 
-	public void setIdCorsoDiLaurea(String idCorsoDiLaurea) {
+	public void setIdCorsoDiLaurea(int idCorsoDiLaurea) {
 		this.idCorsoDiLaurea = idCorsoDiLaurea;
 	}
 
@@ -56,7 +56,7 @@ public class CorsoDiLaurea {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((annoOffertaFormativa == null) ? 0 : annoOffertaFormativa.hashCode());
-		result = prime * result + ((idCorsoDiLaurea == null) ? 0 : idCorsoDiLaurea.hashCode());
+		result = prime * result + idCorsoDiLaurea;
 		result = prime * result + (tipo ? 1231 : 1237);
 		return result;
 	}
@@ -69,20 +69,17 @@ public class CorsoDiLaurea {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CorsoDiLaurea other = (CorsoDiLaurea) obj;
+		CorsoDiLaureaBean other = (CorsoDiLaureaBean) obj;
 		if (annoOffertaFormativa == null) {
 			if (other.annoOffertaFormativa != null)
 				return false;
 		} else if (!annoOffertaFormativa.equals(other.annoOffertaFormativa))
 			return false;
-		if (idCorsoDiLaurea == null) {
-			if (other.idCorsoDiLaurea != null)
-				return false;
-		} else if (!idCorsoDiLaurea.equals(other.idCorsoDiLaurea))
+		if (idCorsoDiLaurea != other.idCorsoDiLaurea)
 			return false;
 		if (tipo != other.tipo)
 			return false;
 		return true;
 	}
-	
+
 }
