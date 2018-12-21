@@ -1,17 +1,17 @@
 package model;
 
-public class GruppoEsamiOpzionali {
+public class GruppoEsamiOpzionaliBean {
 
 	//VARIABILI D'ISTANZA
 	private int codiceGEOp;
-	private String anno;
+	private int anno;
 	private int totCFU;
 	private int idCurriculum;
 	
 	//COSTRUTTORI
-	public GruppoEsamiOpzionali() {};
+	public GruppoEsamiOpzionaliBean() {};
 
-	public GruppoEsamiOpzionali(int codiceGEOp, String anno, int totCFU, int idCurriculum) {
+	public GruppoEsamiOpzionaliBean(int codiceGEOp, int anno, int totCFU, int idCurriculum) {
 		this.codiceGEOp = codiceGEOp;
 		this.anno = anno;
 		this.totCFU = totCFU;
@@ -27,11 +27,11 @@ public class GruppoEsamiOpzionali {
 		this.codiceGEOp = codiceGEOp;
 	}
 
-	public String getAnno() {
+	public int getAnno() {
 		return anno;
 	}
 
-	public void setAnno(String anno) {
+	public void setAnno(int anno) {
 		this.anno = anno;
 	}
 
@@ -62,7 +62,7 @@ public class GruppoEsamiOpzionali {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((anno == null) ? 0 : anno.hashCode());
+		result = prime * result + anno;
 		result = prime * result + codiceGEOp;
 		result = prime * result + idCurriculum;
 		result = prime * result + totCFU;
@@ -77,11 +77,8 @@ public class GruppoEsamiOpzionali {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GruppoEsamiOpzionali other = (GruppoEsamiOpzionali) obj;
-		if (anno == null) {
-			if (other.anno != null)
-				return false;
-		} else if (!anno.equals(other.anno))
+		GruppoEsamiOpzionaliBean other = (GruppoEsamiOpzionaliBean) obj;
+		if (anno != other.anno)
 			return false;
 		if (codiceGEOp != other.codiceGEOp)
 			return false;
