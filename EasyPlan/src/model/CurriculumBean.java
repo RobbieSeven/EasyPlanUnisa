@@ -1,6 +1,6 @@
 package model;
 
-public class Curriculum {
+public class CurriculumBean {
 
 	//VARIABILI DI ISTANZA
 	private String nomeCurriculum;
@@ -8,11 +8,11 @@ public class Curriculum {
 	private int idCorsoDiLaurea;
 	
 	//COSTRUTTORI
-	public Curriculum() {
+	public CurriculumBean() {
 		
 	}
 	
-	public Curriculum(String nomeCurriculum, int idCurriculum, int idCorsoDiLaurea) {
+	public CurriculumBean(String nomeCurriculum, int idCurriculum, int idCorsoDiLaurea) {
 		super();
 		this.nomeCurriculum = nomeCurriculum;
 		this.idCurriculum = idCurriculum;
@@ -69,7 +69,7 @@ public class Curriculum {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Curriculum other = (Curriculum) obj;
+		CurriculumBean other = (CurriculumBean) obj;
 		if (idCorsoDiLaurea != other.idCorsoDiLaurea)
 			return false;
 		if (idCurriculum != other.idCurriculum)
