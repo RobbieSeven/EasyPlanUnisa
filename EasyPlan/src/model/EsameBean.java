@@ -1,19 +1,19 @@
 package model;
 
 public class EsameBean {
-	
-	//VARIABILI D'ISTANZA
+
+	// VARIABILI D'ISTANZA
 	private int codiceEsame;
 	private String nome;
 	private int CFU;
 	private String descrizione;
 	private int oreLezione;
 	private String semestre;
-	
-	//COSTRUTTORI
+
+	// COSTRUTTORI
 	public EsameBean() {
 	};
-	
+
 	public EsameBean(int codiceEsame, String nome, int CFU, String descrizione, int oreLezione, String semestre) {
 		this.codiceEsame = codiceEsame;
 		this.nome = nome;
@@ -22,57 +22,57 @@ public class EsameBean {
 		this.oreLezione = oreLezione;
 		this.semestre = semestre;
 	}
-	
-	//GETTER E SETTER
+
+	// GETTER E SETTER
 	public int getCodiceEsame() {
 		return codiceEsame;
 	}
-	
+
 	public void setCodiceEsame(int codiceEsame) {
 		this.codiceEsame = codiceEsame;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public int getCFU() {
 		return CFU;
 	}
-	
+
 	public void setCFU(int cFU) {
 		CFU = cFU;
 	}
-	
+
 	public String getDescrizione() {
 		return descrizione;
 	}
-	
+
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	
+
 	public int getOreLezione() {
 		return oreLezione;
 	}
-	
+
 	public void setOreLezione(int oreLezione) {
 		this.oreLezione = oreLezione;
 	}
-	
+
 	public String getSemestre() {
 		return semestre;
 	}
-	
+
 	public void setSemestre(String semestre) {
 		this.semestre = semestre;
 	}
 
-	//METODI OBJECT
+	// METODI OBJECT
 	@Override
 	public String toString() {
 		return "EsameBean [codiceEsame=" + codiceEsame + ", nome=" + nome + ", CFU=" + CFU + ", descrizione="

@@ -4,16 +4,17 @@ import java.util.ArrayList;
 
 public class CurriculumBean {
 
-	//VARIABILI DI ISTANZA
+	// VARIABILI DI ISTANZA
 	private String nomeCurriculum;
 	private int idCurriculum;
 	private int idCorsoDiLaurea;
-	private ArrayList <GruppoEsamiObbligatoriBean> gruppi_obbligatori;
-	private ArrayList <GruppoEsamiOpzionaliBean> gruppi_opzionali;
-	
-	//COSTRUTTORI
-	public CurriculumBean() {}
-	
+	private ArrayList<GruppoEsamiObbligatoriBean> gruppi_obbligatori;
+	private ArrayList<GruppoEsamiOpzionaliBean> gruppi_opzionali;
+
+	// COSTRUTTORI
+	public CurriculumBean() {
+	}
+
 	public CurriculumBean(String nomeCurriculum, int idCurriculum, int idCorsoDiLaurea,
 			ArrayList<GruppoEsamiObbligatoriBean> gruppi_obbligatori,
 			ArrayList<GruppoEsamiOpzionaliBean> gruppi_opzionali) {
@@ -24,7 +25,7 @@ public class CurriculumBean {
 		this.gruppi_opzionali = gruppi_opzionali;
 	}
 
-	//GETTER E SETTER
+	// GETTER E SETTER
 	public String getNomeCurriculum() {
 		return nomeCurriculum;
 	}
@@ -48,7 +49,7 @@ public class CurriculumBean {
 	public void setIdCorsoDiLaurea(int idCorsoDiLaurea) {
 		this.idCorsoDiLaurea = idCorsoDiLaurea;
 	}
-	
+
 	public ArrayList<GruppoEsamiObbligatoriBean> getGruppi_obbligatori() {
 		return gruppi_obbligatori;
 	}
@@ -65,7 +66,7 @@ public class CurriculumBean {
 		this.gruppi_opzionali = gruppi_opzionali;
 	}
 
-	//METODI OBJECT
+	// METODI OBJECT
 	@Override
 	public String toString() {
 		return "Curriculum [nomeCurriculum=" + nomeCurriculum + ", idCurriculum=" + idCurriculum + ", idCorsoDiLaurea="
@@ -101,6 +102,6 @@ public class CurriculumBean {
 		} else if (!nomeCurriculum.equals(other.nomeCurriculum))
 			return false;
 		return true;
-	}	
-	
+	}
+
 }

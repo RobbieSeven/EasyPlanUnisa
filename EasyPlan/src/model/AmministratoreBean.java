@@ -2,37 +2,37 @@ package model;
 
 public class AmministratoreBean {
 
-	//VARIABILI D'ISTANZA
+	// VARIABILI D'ISTANZA
 	private String username;
 	private String password;
-	
-	//COSTRUTTORI
-	public AmministratoreBean() {}
+
+	// COSTRUTTORI
+	public AmministratoreBean() {
+	}
 
 	public AmministratoreBean(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
 
-	//GETTER E SETTER
+	// GETTER E SETTER
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	
-	//METODI OBJECT
+	// METODI OBJECT
 	@Override
 	public String toString() {
 		return "AmministratoreBean [username=" + username + ", password=" + password + "]";

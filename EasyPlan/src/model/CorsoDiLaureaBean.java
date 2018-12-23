@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 public class CorsoDiLaureaBean {
 
-	//VARIABILI DI ISTANZA
+	// VARIABILI DI ISTANZA
 	private int idCorsoDiLaurea;
 	private boolean tipo;
 	private String annoOffertaFormativa;
-	private ArrayList <CurriculumBean> curricula;
-	
-	//COSTRUTTORI
-	public CorsoDiLaureaBean() {}
+	private ArrayList<CurriculumBean> curricula;
+
+	// COSTRUTTORI
+	public CorsoDiLaureaBean() {
+	}
 
 	public CorsoDiLaureaBean(int idCorsoDiLaurea, boolean tipo, String annoOffertaFormativa,
 			ArrayList<CurriculumBean> curricula) {
@@ -21,9 +22,7 @@ public class CorsoDiLaureaBean {
 		this.curricula = curricula;
 	}
 
-
-
-	//GETTER E SETTER
+	// GETTER E SETTER
 	public int getIdCorsoDiLaurea() {
 		return idCorsoDiLaurea;
 	}
@@ -47,7 +46,7 @@ public class CorsoDiLaureaBean {
 	public void setAnnoOffertaFormativa(String annoOffertaFormativa) {
 		this.annoOffertaFormativa = annoOffertaFormativa;
 	}
-	
+
 	public ArrayList<CurriculumBean> getCurricula() {
 		return curricula;
 	}
@@ -56,7 +55,7 @@ public class CorsoDiLaureaBean {
 		this.curricula = curricula;
 	}
 
-	//METODI OBJECT
+	// METODI OBJECT
 	@Override
 	public String toString() {
 		return "CorsoDiLaurea [idCorsoDiLaurea=" + idCorsoDiLaurea + ", tipo=" + tipo + ", annoOffertaFormativa="

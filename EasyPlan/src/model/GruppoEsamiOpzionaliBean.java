@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 public class GruppoEsamiOpzionaliBean {
 
-	//VARIABILI D'ISTANZA
+	// VARIABILI D'ISTANZA
 	private int codiceGEOp;
 	private int anno;
 	private int totCFU;
 	private int idCurriculum;
-	private ArrayList <EsameBean> esami;
-	
-	//COSTRUTTORI
-	public GruppoEsamiOpzionaliBean() {};
+	private ArrayList<EsameBean> esami;
+
+	// COSTRUTTORI
+	public GruppoEsamiOpzionaliBean() {
+	};
 
 	public GruppoEsamiOpzionaliBean(int codiceGEOp, int anno, int totCFU, int idCurriculum,
 			ArrayList<EsameBean> esami) {
@@ -23,8 +24,7 @@ public class GruppoEsamiOpzionaliBean {
 		this.esami = esami;
 	}
 
-
-	//GETTER E SETTER
+	// GETTER E SETTER
 	public int getCodiceGEOp() {
 		return codiceGEOp;
 	}
@@ -56,7 +56,7 @@ public class GruppoEsamiOpzionaliBean {
 	public void setIdCurriculum(int idCurriculum) {
 		this.idCurriculum = idCurriculum;
 	}
-	
+
 	public ArrayList<EsameBean> getEsami() {
 		return esami;
 	}
@@ -65,7 +65,7 @@ public class GruppoEsamiOpzionaliBean {
 		this.esami = esami;
 	}
 
-	//METODI OBJECT
+	// METODI OBJECT
 	@Override
 	public String toString() {
 		return "GruppoEsamiOpzionali [codiceGEOp=" + codiceGEOp + ", anno=" + anno + ", totCFU=" + totCFU
@@ -102,5 +102,5 @@ public class GruppoEsamiOpzionaliBean {
 			return false;
 		return true;
 	}
-	
+
 }

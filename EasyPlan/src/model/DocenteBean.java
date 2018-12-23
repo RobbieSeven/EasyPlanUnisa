@@ -1,14 +1,14 @@
-package model; 
+package model;
 
 public class DocenteBean {
 
-	//VARIABILI DI ISTANZA
+	// VARIABILI DI ISTANZA
 	private int codiceDocente;
 	private String nome;
 	private String cognome;
 	private String indirizzoPaginaWeb;
-	
-	//COSTRUTTORI
+
+	// COSTRUTTORI
 	public DocenteBean() {
 	}
 
@@ -19,8 +19,8 @@ public class DocenteBean {
 		this.cognome = cognome;
 		this.indirizzoPaginaWeb = indirizzoPaginaWeb;
 	}
-	
-	//GETTER E SETTER
+
+	// GETTER E SETTER
 	public int getCodiceDocente() {
 		return codiceDocente;
 	}
@@ -52,8 +52,8 @@ public class DocenteBean {
 	public void setIndirizzoPaginaWeb(String indirizzoPaginaWeb) {
 		this.indirizzoPaginaWeb = indirizzoPaginaWeb;
 	}
-	
-	//METODI OBJECT
+
+	// METODI OBJECT
 	@Override
 	public String toString() {
 		return "DocenteBean [codiceDocente=" + codiceDocente + ", nome=" + nome + ", cognome=" + cognome
@@ -99,8 +99,5 @@ public class DocenteBean {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }
