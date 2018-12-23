@@ -1,24 +1,29 @@
 package model;
 
+import java.util.ArrayList;
+
 public class CurriculumBean {
 
 	//VARIABILI DI ISTANZA
 	private String nomeCurriculum;
 	private int idCurriculum;
 	private int idCorsoDiLaurea;
+	private ArrayList <GruppoEsamiObbligatoriBean> gruppi_obbligatori;
+	private ArrayList <GruppoEsamiOpzionaliBean> gruppi_opzionali;
 	
 	//COSTRUTTORI
-	public CurriculumBean() {
-		
-	}
+	public CurriculumBean() {}
 	
-	public CurriculumBean(String nomeCurriculum, int idCurriculum, int idCorsoDiLaurea) {
-		super();
+	public CurriculumBean(String nomeCurriculum, int idCurriculum, int idCorsoDiLaurea,
+			ArrayList<GruppoEsamiObbligatoriBean> gruppi_obbligatori,
+			ArrayList<GruppoEsamiOpzionaliBean> gruppi_opzionali) {
 		this.nomeCurriculum = nomeCurriculum;
 		this.idCurriculum = idCurriculum;
 		this.idCorsoDiLaurea = idCorsoDiLaurea;
+		this.gruppi_obbligatori = gruppi_obbligatori;
+		this.gruppi_opzionali = gruppi_opzionali;
 	}
-	
+
 	//GETTER E SETTER
 	public String getNomeCurriculum() {
 		return nomeCurriculum;
@@ -42,6 +47,22 @@ public class CurriculumBean {
 
 	public void setIdCorsoDiLaurea(int idCorsoDiLaurea) {
 		this.idCorsoDiLaurea = idCorsoDiLaurea;
+	}
+	
+	public ArrayList<GruppoEsamiObbligatoriBean> getGruppi_obbligatori() {
+		return gruppi_obbligatori;
+	}
+
+	public void setGruppi_obbligatori(ArrayList<GruppoEsamiObbligatoriBean> gruppi_obbligatori) {
+		this.gruppi_obbligatori = gruppi_obbligatori;
+	}
+
+	public ArrayList<GruppoEsamiOpzionaliBean> getGruppi_opzionali() {
+		return gruppi_opzionali;
+	}
+
+	public void setGruppi_opzionali(ArrayList<GruppoEsamiOpzionaliBean> gruppi_opzionali) {
+		this.gruppi_opzionali = gruppi_opzionali;
 	}
 
 	//METODI OBJECT
@@ -80,13 +101,6 @@ public class CurriculumBean {
 		} else if (!nomeCurriculum.equals(other.nomeCurriculum))
 			return false;
 		return true;
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 }

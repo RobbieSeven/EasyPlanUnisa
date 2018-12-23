@@ -1,19 +1,23 @@
 package model;
 
+import java.util.ArrayList;
+
 public class GruppoEsamiObbligatoriBean {
 
 	//VARIABILI D'ISTANZA
 	private int codiceGEOb;
 	private int anno;
 	private int idCurriculum;
+	private ArrayList <EsameBean> esami;
 	
 	//COSTRUTTORI
 	public GruppoEsamiObbligatoriBean() {};
-
-	public GruppoEsamiObbligatoriBean(int codiceGEOb, int anno, int idCurriculum) {
+	
+	public GruppoEsamiObbligatoriBean(int codiceGEOb, int anno, int idCurriculum, ArrayList<EsameBean> esami) {
 		this.codiceGEOb = codiceGEOb;
 		this.anno = anno;
 		this.idCurriculum = idCurriculum;
+		this.esami = esami;
 	}
 
 	//GETTER E SETTER
@@ -39,6 +43,14 @@ public class GruppoEsamiObbligatoriBean {
 
 	public void setIdCurriculum(int idCurriculum) {
 		this.idCurriculum = idCurriculum;
+	}
+
+	public ArrayList<EsameBean> getEsami() {
+		return esami;
+	}
+
+	public void setEsami(ArrayList<EsameBean> esami) {
+		this.esami = esami;
 	}
 
 	//METODI OBJECT

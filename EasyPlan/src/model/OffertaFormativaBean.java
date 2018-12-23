@@ -1,17 +1,24 @@
 package model;
 
-public class OffertaFormativa {
+import java.util.ArrayList;
+
+public class OffertaFormativaBean {
 
 	//VARIABILI D'ISTANZA
 	private String annoOffertaFormativa;
+	private ArrayList <CorsoDiLaureaBean> lauree;
 	
 	//COSTRUTTORI
-	public OffertaFormativa() {};
+	public OffertaFormativaBean() {};
 
-	public OffertaFormativa(String annoOffertaFormativa) {
+	public OffertaFormativaBean(String annoOffertaFormativa, ArrayList<CorsoDiLaureaBean> lauree) {
+		super();
 		this.annoOffertaFormativa = annoOffertaFormativa;
+		this.lauree = lauree;
 	}
-	
+
+
+
 	//GETTER E SETTER
 	public String getAnnoOffertaFormativa() {
 		return annoOffertaFormativa;
@@ -19,6 +26,14 @@ public class OffertaFormativa {
 
 	public void setAnnoOffertaFormativa(String annoOffertaFormativa) {
 		this.annoOffertaFormativa = annoOffertaFormativa;
+	}
+
+	public ArrayList<CorsoDiLaureaBean> getLauree() {
+		return lauree;
+	}
+
+	public void setLauree(ArrayList<CorsoDiLaureaBean> lauree) {
+		this.lauree = lauree;
 	}
 
 	//METODI OBJECT
@@ -43,7 +58,7 @@ public class OffertaFormativa {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OffertaFormativa other = (OffertaFormativa) obj;
+		OffertaFormativaBean other = (OffertaFormativaBean) obj;
 		if (annoOffertaFormativa == null) {
 			if (other.annoOffertaFormativa != null)
 				return false;
