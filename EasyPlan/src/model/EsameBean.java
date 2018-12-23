@@ -7,18 +7,18 @@ public class EsameBean {
 	private String nome;
 	private int CFU;
 	private String descrizione;
-	private int ore_lezione;
-	private boolean semestre;
+	private int oreLezione;
+	private String semestre;
 	
 	//COSTRUTTORI
 	public EsameBean() {};
 	
-	public EsameBean(int codiceEsame, String nome, int cFU, String descrizione, int ore_lezione, boolean semestre) {
+	public EsameBean(int codiceEsame, String nome, int CFU, String descrizione, int oreLezione, String semestre) {
 		this.codiceEsame = codiceEsame;
 		this.nome = nome;
-		CFU = cFU;
+		this.CFU = CFU;
 		this.descrizione = descrizione;
-		this.ore_lezione = ore_lezione;
+		this.oreLezione = oreLezione;
 		this.semestre = semestre;
 	}
 	
@@ -55,19 +55,19 @@ public class EsameBean {
 		this.descrizione = descrizione;
 	}
 	
-	public int getOre_lezione() {
-		return ore_lezione;
+	public int getOreLezione() {
+		return oreLezione;
 	}
 	
-	public void setOre_lezione(int ore_lezione) {
-		this.ore_lezione = ore_lezione;
+	public void setOreLezione(int oreLezione) {
+		this.oreLezione = oreLezione;
 	}
 	
-	public boolean isSemestre() {
+	public String getSemestre() {
 		return semestre;
 	}
 	
-	public void setSemestre(boolean semestre) {
+	public void setSemestre(String semestre) {
 		this.semestre = semestre;
 	}
 
@@ -75,7 +75,7 @@ public class EsameBean {
 	@Override
 	public String toString() {
 		return "EsameBean [codiceEsame=" + codiceEsame + ", nome=" + nome + ", CFU=" + CFU + ", descrizione="
-				+ descrizione + ", ore_lezione=" + ore_lezione + ", semestre=" + semestre + "]";
+				+ descrizione + ", ore_lezione=" + oreLezione + ", semestre=" + semestre + "]";
 	}
 
 	@Override
@@ -86,8 +86,8 @@ public class EsameBean {
 		result = prime * result + codiceEsame;
 		result = prime * result + ((descrizione == null) ? 0 : descrizione.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ore_lezione;
-		result = prime * result + (semestre ? 1231 : 1237);
+		result = prime * result + oreLezione;
+		result = prime * result + ((semestre == null) ? 0 : semestre.hashCode());
 		return result;
 	}
 
@@ -114,10 +114,14 @@ public class EsameBean {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (ore_lezione != other.ore_lezione)
+		if (oreLezione != other.oreLezione)
 			return false;
-		if (semestre != other.semestre)
+		if (semestre == null) {
+			if (other.semestre != null)
+				return false;
+		} else if (!semestre.equals(other.semestre))
 			return false;
 		return true;
 	}
+
 }
