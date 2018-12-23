@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class GruppoEsamiObbligatoriBeanDAO {
 
+	//Funzione per salvare un gruppo d'esami obbligatori
 	public synchronized int doSave(GruppoEsamiObbligatoriBean gb) throws IOException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -18,8 +19,8 @@ public class GruppoEsamiObbligatoriBeanDAO {
 			
 			String query = null;
 			
-			query = "INSERT INTO gruppoesamiobbligatori(CodiceGEOb, Anno, TotCFU, IDCurriculum) "
-					   + "values (?, ?, ?, ?)";
+			query = "INSERT INTO gruppoesamiobbligatori(CodiceGEOb,Anno,Curriculum) "
+					   + "values (?, ?, ?)";
 			ps = conn.prepareStatement(query);
 			
 			ps.setInt(1, gb.getCodiceGEOb());
@@ -36,7 +37,8 @@ public class GruppoEsamiObbligatoriBeanDAO {
 		return 0;
 	}
 	
-	public synchronized boolean doSaveOrUpdate(GruppoEsamiOpzionaliBean gb) throws IOException {
+	//Funzione per modificare e salvare un gruppo d'esami obbligatori
+	public synchronized boolean doSaveOrUpdate(GruppoEsamiObbligatoriBean gb) throws IOException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 	
@@ -44,16 +46,15 @@ public class GruppoEsamiObbligatoriBeanDAO {
 			conn = DriverManagerConnectionPool.getConnection();
 		
 			String query = null;
-			ResultSet result= ps.executeQuery("SELECT CodiceGEOp FROM gruppoesamiopzionali WHERE CodiceGEOp='"+gb.getCodiceGEOp()+"'");
+			ResultSet result= ps.executeQuery("SELECT CodiceGEOb FROM gruppoesamiobbligatori WHERE CodiceGEOb='"+gb.getCodiceGEOb()+"'");
 
 			if(result.next()) {
-				query="UPDATE gruppoesamiopzionali SET Anno=?, TotCFU=?, IDCurriculum=? WHERE CodiceGEOp=?";
+				query="UPDATE gruppoesamiobbligatori SET Anno=?,Curriculum=? WHERE CodiceGEOb=?";
 				ps = conn.prepareStatement(query);
 			
 				ps.setInt(1, gb.getAnno());
-				ps.setInt(2, gb.getTotCFU());
-				ps.setInt(3,gb.getIdCurriculum());
-				ps.setInt(4, gb.getCodiceGEOp());
+				ps.setInt(2,gb.getIdCurriculum());
+				ps.setInt(3, gb.getCodiceGEOb());
 			
 				int i = ps.executeUpdate();
 				if(i != 0)
@@ -66,25 +67,25 @@ public class GruppoEsamiObbligatoriBeanDAO {
 		return false;
 	}
 	
-	public synchronized GruppoEsamiOpzionaliBean doRetrieveByKey(int codiceGEOp) {
-		GruppoEsamiOpzionaliBean gb = new GruppoEsamiOpzionaliBean();
+	//Funzione per trovare gruppo d'esami obbligatori data la sua chiave
+	public synchronized GruppoEsamiObbligatoriBean doRetrieveByKey(int codiceGEOb) {
+		GruppoEsamiObbligatoriBean gb = new GruppoEsamiObbligatoriBean();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		
 		try {	
 			conn = DriverManagerConnectionPool.getConnection(); 
 	
-			String query = "SELECT * FROM gruppoesamiopzionali WHERE CodiceGEOp= ?";
+			String query = "SELECT * FROM gruppoesamiobbligatori WHERE CodiceGEOb= ?";
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, codiceGEOp);
+			ps.setInt(1, codiceGEOb);
 
 			ResultSet items = ps.executeQuery();
 
 			while(items.next()) {
-				gb.setCodiceGEOp(codiceGEOp);
+				gb.setCodiceGEOb(codiceGEOb);
 				gb.setAnno(items.getInt("Anno"));
-				gb.setIdCurriculum(items.getInt("IDCurriculum"));
-				gb.setTotCFU(items.getInt("TotCFU"));
+				gb.setIdCurriculum(items.getInt("Curriculum"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -93,26 +94,25 @@ public class GruppoEsamiObbligatoriBeanDAO {
 		return gb;
 	}
 	
-	public synchronized ArrayList<GruppoEsamiOpzionaliBean> doRetriveAll() throws ClassNotFoundException, SQLException {
-		ArrayList<GruppoEsamiOpzionaliBean> lista = new ArrayList<GruppoEsamiOpzionaliBean>();
+	//Funzione per trovare tutti i  gruppi d'esami obbligatori 
+	public synchronized ArrayList<GruppoEsamiObbligatoriBean> doRetriveAll() throws ClassNotFoundException, SQLException {
+		ArrayList<GruppoEsamiObbligatoriBean> lista = new ArrayList<GruppoEsamiObbligatoriBean>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		
 		try {	
 			conn = DriverManagerConnectionPool.getConnection(); 
-			String query = "SELECT * FROM gruppoesamiopzionali";
+			String query = "SELECT * FROM gruppoesamiobbligatori";
 
 			ps = conn.prepareStatement(query);
 			
 			ResultSet items = ps.executeQuery();
 
 			while(items.next()) {
-				GruppoEsamiOpzionaliBean gb= new GruppoEsamiOpzionaliBean();
+				GruppoEsamiObbligatoriBean gb= new GruppoEsamiObbligatoriBean();
 				gb.setAnno(items.getInt("Anno"));
-				gb.setCodiceGEOp(items.getInt("CodiceGEOp"));
-				gb.setIdCurriculum(items.getInt("IDCurriculum"));
-				gb.setTotCFU(items.getInt("TotCFU"));
-				
+				gb.setCodiceGEOb(items.getInt("CodiceGEOb"));
+				gb.setIdCurriculum(items.getInt("Curriculum"));
 				lista.add(gb);
 				}
 		} catch(SQLException e) {
@@ -122,17 +122,18 @@ public class GruppoEsamiObbligatoriBeanDAO {
 		return lista;
 	}
 	
-	public synchronized boolean doDelete(int codiceGEOp) throws IOException {
+	//Funzione per eliminare un gruppo d'esami obbligatori dato il suo codice
+	public synchronized boolean doDelete(int codiceGEOb) throws IOException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 			
 		try {	
 			conn = DriverManagerConnectionPool.getConnection(); 
 				
-			String query = "DELETE FROM gruppoesamiopzionali WHERE CodiceGEOp=?";
+			String query = "DELETE FROM gruppoesamiobbligatori WHERE CodiceGEOb=?";
 
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, codiceGEOp);
+			ps.setInt(1, codiceGEOb);
 				
 			int i = ps.executeUpdate();
 			if(i != 0) 
