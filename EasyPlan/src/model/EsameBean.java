@@ -11,7 +11,8 @@ public class EsameBean {
 	private String semestre;
 	
 	//COSTRUTTORI
-	public EsameBean() {};
+	public EsameBean() {
+	};
 	
 	public EsameBean(int codiceEsame, String nome, int CFU, String descrizione, int oreLezione, String semestre) {
 		this.codiceEsame = codiceEsame;

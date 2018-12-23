@@ -91,7 +91,7 @@ public class EsameBeanDAO {
 				eb.setOreLezione(items.getInt("OreLezione"));
 				eb.setSemestre(items.getString("Semestre"));
 			}
-		}catch(SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
