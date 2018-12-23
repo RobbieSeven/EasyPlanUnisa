@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 public class OffertaFormativaBean {
 
-	//VARIABILI D'ISTANZA
+	// VARIABILI D'ISTANZA
 	private String annoOffertaFormativa;
-	private ArrayList <CorsoDiLaureaBean> lauree;
-	
-	//COSTRUTTORI
-	public OffertaFormativaBean() {};
+	private ArrayList<CorsoDiLaureaBean> lauree;
+
+	// COSTRUTTORI
+	public OffertaFormativaBean() {
+	};
 
 	public OffertaFormativaBean(String annoOffertaFormativa, ArrayList<CorsoDiLaureaBean> lauree) {
 		super();
@@ -17,9 +18,7 @@ public class OffertaFormativaBean {
 		this.lauree = lauree;
 	}
 
-
-
-	//GETTER E SETTER
+	// GETTER E SETTER
 	public String getAnnoOffertaFormativa() {
 		return annoOffertaFormativa;
 	}
@@ -36,7 +35,7 @@ public class OffertaFormativaBean {
 		this.lauree = lauree;
 	}
 
-	//METODI OBJECT
+	// METODI OBJECT
 	@Override
 	public String toString() {
 		return "OffertaFormativa [annoOffertaFormativa=" + annoOffertaFormativa + "]";
@@ -66,5 +65,5 @@ public class OffertaFormativaBean {
 			return false;
 		return true;
 	}
-	
+
 }
