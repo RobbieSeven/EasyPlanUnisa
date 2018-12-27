@@ -65,13 +65,31 @@
 			<%for(int i=0; i<of.size(); i++){ %>
 			<center>
 				<div class=center-block style="border: 2px solid black; width: 15%;">
-					<button>
-						<span class="glyphicon glyphicon-trash"></span>
-					</button>
+					
+					<form action="GestioneOffertaFormativa" method="POST">
+						<input type="hidden" name="metodo" value="eliminaOfferta">
+						<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa()%>">
+							<button>
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+					</form>
+					
 					<a href="#" id="offertaformativa##"><%=of.get(i).getAnnoOffertaFormativa() %></a>
 					<!-- Default switch -->
-					<label class="switch"> <input type="checkbox"> <span
-						class="slider"></span>
+					<label class="switch">
+					
+						<form action="GestioneOffertaFormativa" method="POST">
+							<input type="hidden" name="metodo" value="visibilita">
+							<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa() %>">
+							<% if(of.get(i).isVisibilita()) { %> 
+								<input type="hidden" name="visibile" value="si">
+								<input type="checkbox" checked onChange="this.form.submit()"> <span class="slider"></span>
+							<% } else { %>
+								<input type="hidden" name="visibile" value="no">
+								<input type="checkbox" onChange="this.form.submit()"> <span class="slider"></span>
+							<% } %>
+							
+						</form>
 					</label>
 				</div>
 			</center>

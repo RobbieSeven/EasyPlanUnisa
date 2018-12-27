@@ -51,10 +51,11 @@
 		<br><br>
 		
 		<form action="GestioneOffertaFormativa" method="post">
+			<input type="hidden" name="metodo" value="aggiungiOfferta">
 			<div class="container col-sm-12 col-lg-12">
 				<div class=" col-sm-4 col-lg-4"></div>
 				<div class="col-sm-3 col-lg-4 ">
-					<input type="text" class="form-control" id="nomeOffeta" placeholder="AAAA/AA" name="nomeCurricula">
+					<input type="text" class="form-control" id="nomeOfferta" placeholder="AAAA/AA" name="nomeOfferta">
 				</div>
 				<div class=" col-sm-5 col-lg-4"></div>
 			</div>

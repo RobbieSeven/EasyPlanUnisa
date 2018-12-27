@@ -7,15 +7,16 @@ public class OffertaFormativaBean {
 	// VARIABILI D'ISTANZA
 	private String annoOffertaFormativa;
 	private ArrayList<CorsoDiLaureaBean> lauree;
+	private boolean visibilita;
 
 	// COSTRUTTORI
 	public OffertaFormativaBean() {
 	};
 
-	public OffertaFormativaBean(String annoOffertaFormativa, ArrayList<CorsoDiLaureaBean> lauree) {
-		super();
+	public OffertaFormativaBean(String annoOffertaFormativa, ArrayList<CorsoDiLaureaBean> lauree, boolean visibilita) {
 		this.annoOffertaFormativa = annoOffertaFormativa;
 		this.lauree = lauree;
+		this.visibilita = visibilita;
 	}
 
 	// GETTER E SETTER
@@ -35,6 +36,14 @@ public class OffertaFormativaBean {
 		this.lauree = lauree;
 	}
 
+	public void setVisibilita(boolean visibilita) {
+		this.visibilita = visibilita;
+	}
+	
+	public boolean isVisibilita() {
+		return visibilita;
+	}
+	
 	// METODI OBJECT
 	@Override
 	public String toString() {

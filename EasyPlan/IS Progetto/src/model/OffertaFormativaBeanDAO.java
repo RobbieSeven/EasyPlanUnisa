@@ -19,10 +19,11 @@ public class OffertaFormativaBeanDAO {
 
 			String query = null;
 
-			query = "INSERT INTO offertaformativa(AnnoOffertaFormativa) values (?)";
+			query = "INSERT INTO offertaformativa(AnnoOffertaFormativa, visibilita) values (?, ?)";
 			ps = conn.prepareStatement(query);
 
 			ps.setString(1, of.getAnnoOffertaFormativa());
+			ps.setBoolean(2, false);
 
 			int i = ps.executeUpdate();
 			if (i != 0) {
@@ -44,20 +45,17 @@ public class OffertaFormativaBeanDAO {
 			conn = DriverManagerConnectionPool.getConnection();
 
 			String query = null;
-			ResultSet result = ps
-					.executeQuery("SELECT AnnoOffertaFormativa FROM offertaformativa WHERE AnnoOffertaFormativa='"
-							+ of.getAnnoOffertaFormativa() + "'");
+			ResultSet result = null;
+			
+			query = "UPDATE offertaformativa SET visibilita=? WHERE AnnoOffertaFormativa=?";
+			ps = conn.prepareStatement(query);
 
-			if (result.next()) {
-				query = "UPDATE offertaformativa SET AnnoOffertaFormativa=? WHERE AnnoOffertaFormativa=?";
-				ps = conn.prepareStatement(query);
+			ps.setBoolean(1, of.isVisibilita());
+			ps.setString(2, of.getAnnoOffertaFormativa());
 
-				ps.setString(1, of.getAnnoOffertaFormativa());
-
-				int i = ps.executeUpdate();
-				if (i != 0) {
-					return true;
-				}
+			int i = ps.executeUpdate();
+			if (i != 0) {
+				return true;		
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,8 +79,10 @@ public class OffertaFormativaBeanDAO {
 
 			ResultSet items = ps.executeQuery();
 
-			while (items.next())
+			while (items.next()) {
 				of.setAnnoOffertaFormativa(offertaformativa);
+				of.setVisibilita(items.getBoolean("visibilita"));
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -131,6 +131,7 @@ public class OffertaFormativaBeanDAO {
 			while (items.next()) {
 				OffertaFormativaBean of = new OffertaFormativaBean();
 				of.setAnnoOffertaFormativa(items.getString("AnnoOffertaFormativa"));
+				of.setVisibilita(items.getBoolean("visibilita"));
 				lista.add(of);
 			}
 		} catch (SQLException e) {
