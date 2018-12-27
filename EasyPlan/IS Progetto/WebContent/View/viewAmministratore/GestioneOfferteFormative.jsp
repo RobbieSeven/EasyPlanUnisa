@@ -1,13 +1,14 @@
+<%@page import="model.OffertaFormativaBeanDAO"%>
+<%@page import="model.OffertaFormativaBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>
 
-
 <%
      	// Simulazione dati presi dal database
-     	ArrayList<String> off = new ArrayList<String>();
-     	off.add("2018/19"); off.add("2017/18"); off.add("2016/17");
+     	ArrayList<OffertaFormativaBean> of = new ArrayList<OffertaFormativaBean>();
+     	OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
+     	of = ofbd.doRetriveByAll();
      %>
-
 
 <!DOCTYPE html>
 <html>
@@ -61,13 +62,13 @@
 				</div>
 			</center>
 			<br>
-			<%for(int i = 0; i < off.size(); i++){ %>
+			<%for(int i=0; i<of.size(); i++){ %>
 			<center>
 				<div class=center-block style="border: 2px solid black; width: 15%;">
 					<button>
 						<span class="glyphicon glyphicon-trash"></span>
 					</button>
-					<a href="#" id="offertaformativa##"><%=off.get(i) %></a>
+					<a href="#" id="offertaformativa##"><%=of.get(i).getAnnoOffertaFormativa() %></a>
 					<!-- Default switch -->
 					<label class="switch"> <input type="checkbox"> <span
 						class="slider"></span>
