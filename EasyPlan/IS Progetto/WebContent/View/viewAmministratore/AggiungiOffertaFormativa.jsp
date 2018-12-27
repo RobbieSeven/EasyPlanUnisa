@@ -50,16 +50,19 @@
 		
 		<br><br>
 		
-		<div class="container col-sm-12 col-lg-12">
-			<div class=" col-sm-4 col-lg-4"></div>
-			<div class="col-sm-3 col-lg-4 ">
-				<input type="text" class="form-control" id="nomeOffeta" placeholder="AAAA/AA" name="nomeCurricula">
+		<form action="GestioneOffertaFormativa" method="post">
+			<div class="container col-sm-12 col-lg-12">
+				<div class=" col-sm-4 col-lg-4"></div>
+				<div class="col-sm-3 col-lg-4 ">
+					<input type="text" class="form-control" id="nomeOffeta" placeholder="AAAA/AA" name="nomeCurricula">
+				</div>
+				<div class=" col-sm-5 col-lg-4"></div>
 			</div>
-			<div class=" col-sm-5 col-lg-4"></div>
-		</div>
+			
+			<br><br><br><br>
+			
+			<center><input type="submit" class="btn btn-default" name="conferma" value="Conferma"></center>
+		</form>
 		
-		<br><br><br><br>
-		
-		<center><input type="submit" class="btn btn-default" name="conferma" value="Conferma"></center>
 	</body>
 </html>
