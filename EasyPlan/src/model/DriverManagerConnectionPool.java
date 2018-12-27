@@ -15,10 +15,10 @@ public class DriverManagerConnectionPool {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("DB driver not found:"+ e.getMessage());
-		} 
+			System.out.println("DB driver not found:" + e.getMessage());
+		}
 	}
-	
+
 	private static synchronized Connection createDBConnection() throws SQLException {
 		Connection newConnection = null;
 		String ip = "localhost";
@@ -27,7 +27,7 @@ public class DriverManagerConnectionPool {
 		String username = "easyplan";
 		String password = "project";
 
-		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+"/"+db, username, password);
+		newConnection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + db, username, password);
 
 		newConnection.setAutoCommit(true);
 		return newConnection;
@@ -48,15 +48,15 @@ public class DriverManagerConnectionPool {
 				connection = getConnection();
 			}
 		} else {
-			connection = createDBConnection();		
+			connection = createDBConnection();
 		}
 
 		return connection;
 	}
 
 	public static synchronized void releaseConnection(Connection connection) throws SQLException {
-		if(connection != null)
+		if (connection != null)
 			freeDbConnections.add(connection);
 	}
-	
+
 }
