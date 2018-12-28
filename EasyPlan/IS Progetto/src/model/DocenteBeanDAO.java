@@ -94,7 +94,7 @@ public class DocenteBeanDAO {
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 
-			String query = "select d.Nome, d.Cognome, d.IndirizzoPaginaWeb" + 
+			String query = "select d.Nome, d.Cognome, d.IndirizzoPaginaWeb, d.CodiceDocente" + 
 					"	from ((((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
 					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum) join formazione as f \n" + 
 					"            on go.CodiceGEOb = f.CodiceGEOb) join esame e on e.CodiceEsame = f.CodiceEsame) join insegnamento i on e.CodiceEsame = i.CodiceEsame)\n" + 
@@ -132,7 +132,7 @@ public class DocenteBeanDAO {
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 
-			String query = "select d.Nome, d.Cognome, d.IndirizzoPaginaWeb" + 
+			String query = "select d.Nome, d.Cognome, d.IndirizzoPaginaWeb, d.CodiceDocente" + 
 					"	from ((((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
 					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum) join formazione as f \n" + 
 					"            on go.CodiceGEOb = f.CodiceGEOb) join esame e on e.CodiceEsame = f.CodiceEsame) join insegnamento i on e.CodiceEsame = i.CodiceEsame)\n" + 

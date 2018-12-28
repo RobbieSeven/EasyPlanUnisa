@@ -52,10 +52,10 @@
 	    
 	    
 	    <%for(int i = 0; i < cm.size(); i++){ %>
-	    <form action="DioBrando" method = "post">
+	    <form action="getEsamiOffertaFormativa" method = "post">
 		    <input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
 	      	<input type="hidden" name="laurea" value="<%=cd.get(0).isTipo()%>">
-	        <input type="hidden" name=curricula value="<%=cm.get(i).getNomeCurriculum()%>">
+	        <input type="hidden" name=curricula value="<%=cm.get(i).getIdCurriculum()%>">
 		    <button name="button" id="c"<%=+cm.get(i).getIdCurriculum()%> class="btn btn-default btn-responsive center-block"><%=cm.get(i).getNomeCurriculum() %></button>
 		    <br>
 	    </form>

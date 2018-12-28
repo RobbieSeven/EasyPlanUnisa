@@ -30,6 +30,10 @@
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script src="jquery-2.1.3.js"></script>
+  <script src="jspdf.js"></script>
+  <script src="pdfFromHTML.js"></script>
     <style type="text/css">
     .navbar-inverse {
       background-color: #ada2b2;
@@ -105,7 +109,5 @@ overflow-y: auto;
    <a href="https://esse3web.unisa.it/Home.do" name="button" class="btn btn-default btn-responsive center">Vai ad Esse3</a></center>
 
   </body>
-  <script src="jquery-2.1.3.js"></script>
-  <script src="jspdf.js"></script>
-  <script src="pdfFromHTML.js"></script>
+  
 </html>
