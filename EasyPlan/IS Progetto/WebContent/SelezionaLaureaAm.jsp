@@ -40,13 +40,16 @@
     <div class="col-md-12">
    
       <br>
+      <%System.out.println(request.getParameter("offerta")) ;%>
        <form action="SelezionaCurriculaAm.jsp" method = "post">
-       <input type="hidden" name="metodo" value="triennale">
+       <input type="hidden" name="laurea" value="triennale">
+       <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
          <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea triennale</button>
          </form>
          <br>
          <form action="SelezionaCurriculaAm.jsp" method = "post">
-         <input type="hidden" name="metodo" value="magistrale">
+         <input type="hidden" name="laurea" value="magistrale">
+          <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
          <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea magistrale</button>
    		</form>
        </div>

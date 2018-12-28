@@ -176,5 +176,31 @@ public synchronized ArrayList<CurriculumBean> doRetriveByCorsoDiLaureaOffertaFor
 	}
 	return lista;
 }
+	public synchronized int doRetrieveByIDMaggiore() {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
 
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+
+			String query = "select c.IDCurriculum " + 
+					"from curriculum c " + 
+					"order by c.IDCurriculum DESC";
+			ps = conn.prepareStatement(query);
+			
+
+			ResultSet items = ps.executeQuery();
+			int c;
+			items.next();
+			c= items.getInt("IDCurriculum");
+			return c+1;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+		
+	}
+	
 }

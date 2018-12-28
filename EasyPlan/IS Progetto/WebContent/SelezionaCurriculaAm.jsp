@@ -7,7 +7,15 @@
      	// Simulazione dati presi dal database
      	 ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
      	CurriculumBeanDAO cd = new CurriculumBeanDAO();
-     	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(2,"2018/19");
+     	String laurea=request.getParameter("laurea");
+     	System.out.println(laurea);
+     	int tipo;
+     	if(laurea.equals("triennale")){
+     	tipo=1;	
+     	}else {tipo=2;}
+     	String offerta= request.getParameter("offerta");
+     	System.out.println(offerta);
+     	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(tipo,offerta);
      %>
 
 <!DOCTYPE html>
@@ -49,11 +57,20 @@
       <center><h2>Seleziona curricula da modificare</h2></center>
       <%for(int i=0; i<lista.size(); i++){ %>
           <center><div>
-            <input type="button" name="curriculum" value="<%=lista.get(i).getNomeCurriculum()%>" class="btn btn-default btn-responsive center">
-            <button class="btn btn-default btn-responsive center">
+            <form action="GestioneEsami.jsp" method="POST">
+             <input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
+             <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
+             <input type="hidden" name="curriculum" value="<%= lista.get(i).getNomeCurriculum()%>">
+             <button class="btn btn-default btn-responsive center" class="btn btn-default btn-responsive center"><%=lista.get(i).getNomeCurriculum()%></button>
+             <input type="hidden" name="idCurriculum" value="<%=lista.get(i).getIdCurriculum()%>">
+            </form>
+            
             <form action="GestioneCurricula" method="POST">
+            <button class="btn btn-default btn-responsive center">
 						<input type="hidden" name="metodo" value="eliminaCurricula">
-						<input type="hidden" name="idCurriculum" value="<%=lista.get(i). getIdCurriculum()%>">
+						<input type="hidden" name="laurea" value="<%=laurea%>">
+						<input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
+						<input type="hidden" name="idCurriculum" value="<%=lista.get(i).getIdCurriculum()%>">
             <span class="glyphicon glyphicon-trash"></span></button>
             </form>
           </div></center>
@@ -64,6 +81,8 @@
           <center><div>
           <form action="AggiungiCurricula.jsp" method="POST">
           <input type="hidden" name="metodo" value="aggiuntaCurricula">
+          <input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
+          <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
           <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-plus"><br>Aggiungi</button></span></div></center>
 		  </form>
    

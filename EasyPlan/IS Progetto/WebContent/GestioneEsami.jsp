@@ -1,11 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="model.GruppoEsamiObbligatoriBeanDAO"%>
+<%@page import="model.GruppoEsamiObbligatoriBean"%>
+<%@page import="model.GruppoEsamiOpzionaliBeanDAO"%>
+<%@page import="model.GruppoEsamiOpzionaliBean"%>
+<%@page import="model.EsameBeanDAO"%>
+<%@page import="model.EsameBean"%>
+<%@page import="model.DocenteBeanDAO"%>
+<%@page import="model.DocenteBean"%>
+
+
+<%
+     	// Simulazione dati presi dal database
+     	/* ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
+     	CurriculumBeanDAO cd = new CurriculumBeanDAO();
+     	String laurea=request.getParameter("laurea");
+     	System.out.println(laurea);
+     	int tipo;
+     	if(laurea.equals("triennale")){
+     	tipo=1;	
+     	}else {tipo=2;}
+     	String offerta= request.getParameter("offerta");
+     	System.out.println(offerta);
+     	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(tipo,offerta);*/
+     %>
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="UTF-8">
-  <title>EasyPlan | Aggiunta gruppo esame</title>
+  <title>EasyPlan |Gestione gruppi esami</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- for social icon -->
@@ -73,7 +97,7 @@
     </nav>
 
     <center>
-      <h1>Nome laurea anno offerta formativa</h1>
+      <h1>Curriculum <%=request.getParameter("curriculum") %> anno: <%=request.getParameter("offerta") %></h1>
       <fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width:95%">
         <legend class="reset-this redo-legend">Inserire anno</legend>
         <fieldset class="reset-this redo-fieldset" style="margin-left: 10px;  width:97%">

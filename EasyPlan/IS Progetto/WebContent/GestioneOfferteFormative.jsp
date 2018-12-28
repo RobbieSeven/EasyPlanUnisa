@@ -73,8 +73,9 @@
 								<span class="glyphicon glyphicon-trash"></span>
 							</button>
 					</form>
-					
-					<a href="#" id="offertaformativa##"><%=of.get(i).getAnnoOffertaFormativa() %></a>
+
+					<input type="hidden" name="offerta" value="<%=of.get(i).getAnnoOffertaFormativa()%>">
+					<a href="SelezionaLaureaAm.jsp?offerta=<%=of.get(i).getAnnoOffertaFormativa()%>"> <%=of.get(i).getAnnoOffertaFormativa() %></a>
 					<!-- Default switch -->
 					<label class="switch">
 					
