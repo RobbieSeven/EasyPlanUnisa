@@ -38,12 +38,17 @@
       </div>
     </nav>
     <div class="col-md-12">
-    <form action="DioBrando" method = "post">
+   
       <br>
+       <form action="SelezionaCurriculaAm.jsp" method = "post">
+       <input type="hidden" name="metodo" value="triennale">
          <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea triennale</button>
+         </form>
          <br>
+         <form action="SelezionaCurriculaAm.jsp" method = "post">
+         <input type="hidden" name="metodo" value="magistrale">
          <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea magistrale</button>
-   </form>
+   		</form>
        </div>
   </body>
 </html>

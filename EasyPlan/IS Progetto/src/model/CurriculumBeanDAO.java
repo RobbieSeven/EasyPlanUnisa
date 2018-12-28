@@ -144,4 +144,37 @@ public class CurriculumBeanDAO {
 		return lista;
 	}
 
+
+
+public synchronized ArrayList<CurriculumBean> doRetriveByCorsoDiLaureaOffertaFormativa(int laurea,String anno) throws ClassNotFoundException, SQLException {
+
+	ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
+	Connection conn = null;
+	PreparedStatement ps = null;
+	
+	
+	try {
+		conn = DriverManagerConnectionPool.getConnection();
+		String query = "select * from (corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \r\n" + 
+				"			on c.IDcorsodilaurea = cu.IDcorsodilaurea " + 
+				"		where o.AnnoOffertaFormativa ='"+ anno+"' && c.tipo ="+laurea+";";
+				
+
+		ps = conn.prepareStatement(query);
+
+		ResultSet items = ps.executeQuery();
+
+		while (items.next()) {
+			CurriculumBean cb = new CurriculumBean();
+			cb.setIdCurriculum(items.getInt("IDCurriculum"));
+			cb.setNomeCurriculum(items.getString("Nome"));
+			cb.setIdCorsoDiLaurea(items.getInt("IDCorsoDiLaurea"));
+			lista.add(cb);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return lista;
+}
+
 }

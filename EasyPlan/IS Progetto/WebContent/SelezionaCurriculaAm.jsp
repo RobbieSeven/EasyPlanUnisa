@@ -1,5 +1,15 @@
+<%@page import="model.CurriculumBeanDAO"%>
+<%@page import="model.CurriculumBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	import="java.util.ArrayList" pageEncoding="UTF-8"%>
+
+<%
+     	// Simulazione dati presi dal database
+     	 ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
+     	CurriculumBeanDAO cd = new CurriculumBeanDAO();
+     	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(2,"2018/19");
+     %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -37,30 +47,26 @@
     </nav>
     <div class="col-md-12">
       <center><h2>Seleziona curricula da modificare</h2></center>
-      <form action="DioBrando" method = "post">
+      <%for(int i=0; i<lista.size(); i++){ %>
           <center><div>
-            <input type="button" name="Sicurezza" value="Sicurezza" class="btn btn-default btn-responsive center">
-            <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"></span></button>
+            <input type="button" name="curriculum" value="<%=lista.get(i).getNomeCurriculum()%>" class="btn btn-default btn-responsive center">
+            <button class="btn btn-default btn-responsive center">
+            <form action="GestioneCurricula" method="POST">
+						<input type="hidden" name="metodo" value="eliminaCurricula">
+						<input type="hidden" name="idCurriculum" value="<%=lista.get(i). getIdCurriculum()%>">
+            <span class="glyphicon glyphicon-trash"></span></button>
+            </form>
           </div></center>
           <br>
-          <center><div>
-            <input type="button" name="Sists" value="Sits" class="btn btn-default btn-responsive center">
-            <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"></span></button>
-          </div></center>
-          <br>
-          <center><div>
-            <input type="button" name="IoT" value="IoT" class="btn btn-default btn-responsive center">
-            <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"></span></button>
-          </div></center>
-          <br>
-          <center><div>
-            <input type="button" name="Cloud computing" value="Cloud computing" class="btn btn-default btn-responsive center">
-            <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"></span></button>
-          </div></center>
-          <br>
-          <center><div><button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-plus"><br>Aggiungi</button></span></div></center>
+          <% } %>
 
-     </form>
+          <br>
+          <center><div>
+          <form action="AggiungiCurricula.jsp" method="POST">
+          <input type="hidden" name="metodo" value="aggiuntaCurricula">
+          <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-plus"><br>Aggiungi</button></span></div></center>
+		  </form>
+   
     </div>
   </body>
 </html>

@@ -1,5 +1,14 @@
+<%@page import="model.CurriculumBeanDAO"%>
+<%@page import="model.CurriculumBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	import="java.util.ArrayList" pageEncoding="UTF-8"%>
+
+<%
+     	// Simulazione dati presi dal database
+     	 ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
+     	CurriculumBeanDAO cd = new CurriculumBeanDAO();
+     	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(2,"2018/19");
+     %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -51,10 +60,10 @@
 					<div class="form-group" >
 						<div class="col-md-3" >
 							<select class="form-control selcls" style="margin: 0px 0px 0px 435px">
-							<option value="volvo">Nessuno</option>
-							<option value="saab">Sicurezza</option>
-							<option value="opel">Sits</option>
-							<option value="audi">Cloud computing</option>
+							<option value="nessuno">Nessuno</option>
+							<%for(int i=0; i<lista.size(); i++){ %>
+							<option value="<%=lista.get(i).getNomeCurriculum()%>"><%=lista.get(i).getNomeCurriculum()%></option>
+							<% } %>
 							</select>
 						</div>
 					</div>
