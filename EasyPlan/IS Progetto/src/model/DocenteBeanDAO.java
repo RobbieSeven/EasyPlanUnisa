@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DocenteBeanDAO {
 
@@ -85,4 +86,79 @@ public class DocenteBeanDAO {
 		return false;
 	}
 
+	public synchronized ArrayList<DocenteBean> doRetrieveDocEsameObb(String anno, int laurea, String curricula,int grOb, String nome) {
+		ArrayList<DocenteBean> list = new ArrayList<DocenteBean>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+
+			String query = "select d.Nome, d.Cognome, d.IndirizzoPaginaWeb" + 
+					"	from ((((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
+					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum) join formazione as f \n" + 
+					"            on go.CodiceGEOb = f.CodiceGEOb) join esame e on e.CodiceEsame = f.CodiceEsame) join insegnamento i on e.CodiceEsame = i.CodiceEsame)\n" + 
+					"            join docente d on d.CodiceDocente = i.CodiceDocente\n" + 
+					"		where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.CodiceGEOb = ? && e.Nome = ?";
+			ps = conn.prepareStatement(query);
+			ps.setString(1, anno);
+			ps.setInt(2, laurea);
+			ps.setString(3, curricula);
+			ps.setInt(4, grOb);
+			ps.setString(5, nome);
+
+			ResultSet items = ps.executeQuery();
+
+			while (items.next()) {
+				DocenteBean db = new DocenteBean();
+				db.setCodiceDocente(items.getInt("CodiceDocente"));
+				db.setNome(items.getString("Nome"));
+				db.setCognome(items.getString("Cognome"));
+				db.setIndirizzoPaginaWeb(items.getString("IndirizzoPaginaWeb"));
+				
+				list.add(db);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public synchronized ArrayList<DocenteBean> doRetrieveDocEsameOpz(String anno, int laurea, String curricula,int grOpz, String nome) {
+		ArrayList<DocenteBean> list = new ArrayList<DocenteBean>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+
+			String query = "select d.Nome, d.Cognome, d.IndirizzoPaginaWeb" + 
+					"	from ((((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
+					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum) join formazione as f \n" + 
+					"            on go.CodiceGEOb = f.CodiceGEOb) join esame e on e.CodiceEsame = f.CodiceEsame) join insegnamento i on e.CodiceEsame = i.CodiceEsame)\n" + 
+					"            join docente d on d.CodiceDocente = i.CodiceDocente\n" + 
+					"		where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.CodiceGEOb = ? && e.Nome = ?";
+			ps = conn.prepareStatement(query);
+			ps.setString(1, anno);
+			ps.setInt(2, laurea);
+			ps.setString(3, curricula);
+			ps.setInt(4, grOpz);
+			ps.setString(5, nome);
+
+			ResultSet items = ps.executeQuery();
+
+			while (items.next()) {
+				DocenteBean db = new DocenteBean();
+				db.setCodiceDocente(items.getInt("CodiceDocente"));
+				db.setNome(items.getString("Nome"));
+				db.setCognome(items.getString("Cognome"));
+				db.setIndirizzoPaginaWeb(items.getString("IndirizzoPaginaWeb"));
+				
+				list.add(db);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

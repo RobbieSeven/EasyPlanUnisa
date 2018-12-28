@@ -149,4 +149,80 @@ public class EsameBeanDAO {
 
 		return false;
 	}
+	
+	public synchronized ArrayList<EsameBean> doRetriveEsamiOffertaFormativaObb(String anno, int laurea, String curricula,int grOb) throws ClassNotFoundException, SQLException {
+		ArrayList<EsameBean> lista = new ArrayList<EsameBean>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			String query = "select e.nome, e.CFU, e.OreLezione, e.Semestre" + 
+					"	from ((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
+					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum) join formazione as f \n" + 
+					"            on go.CodiceGEOb = f.CodiceGEOb) join esame e on e.CodiceEsame = f.CodiceEsame\n" + 
+					"		where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.CodiceGEOb = ?";
+
+			ps = conn.prepareStatement(query);
+			ps.setString(1, anno);
+			ps.setInt(2, laurea);
+			ps.setString(3, curricula);
+			ps.setInt(4, grOb);
+			
+			ResultSet items = ps.executeQuery();
+
+			while (items.next()) {
+				EsameBean eb = new EsameBean();
+				eb.setCodiceEsame(items.getInt("CodiceEsame"));
+				eb.setNome(items.getString("Nome"));
+				eb.setCFU(items.getInt("CFU"));
+				eb.setOreLezione(items.getInt("OreLezione"));
+				eb.setSemestre(items.getString("Semestre"));
+
+				lista.add(eb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+	
+	public synchronized ArrayList<EsameBean> doRetriveEsamiOffertaFormativaOpz(String anno, int laurea, String curricula,int grOpz) throws ClassNotFoundException, SQLException {
+		ArrayList<EsameBean> lista = new ArrayList<EsameBean>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			String query = "select e.nome, e.CFU, e.OreLezione, e.Semestre" + 
+					"	from ((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
+					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiopzionali as go on cu.IDCurriculum = go.IDCurriculum) join formato as f \n" + 
+					"            on go.CodiceGEOp = f.CodiceGEOp) join esame e on e.CodiceEsame = f.CodiceEsame\n" + 
+					"		where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.CodiceGEOp = ?";
+
+			ps = conn.prepareStatement(query);
+			ps.setString(1, anno);
+			ps.setInt(2, laurea);
+			ps.setString(3, curricula);
+			ps.setInt(4, grOpz);
+			
+			ResultSet items = ps.executeQuery();
+
+			while (items.next()) {
+				EsameBean eb = new EsameBean();
+				eb.setCodiceEsame(items.getInt("CodiceEsame"));
+				eb.setNome(items.getString("Nome"));
+				eb.setCFU(items.getInt("CFU"));
+				eb.setOreLezione(items.getInt("OreLezione"));
+				eb.setSemestre(items.getString("Semestre"));
+
+				lista.add(eb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
 }
