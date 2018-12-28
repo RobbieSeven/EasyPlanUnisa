@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
+    pageEncoding="UTF-8" import="model.OffertaFormativaBean" import="model.CorsoDiLaureaBean"%>
+    
+    <%
+    	OffertaFormativaBean of = (OffertaFormativaBean) request.getAttribute("offertaFormativa"); 
+    	ArrayList<CorsoDiLaureaBean> cd = of.getLauree();
+    %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -36,15 +41,27 @@
         </div>
       </div>
     </nav>
-    <img alt="logo" src="../../immagini/logo.png" class="img-responsive center-block">
+    <img alt="logo" src="immagini/logo.png" class="img-responsive center-block">
 
     <div class="col-md-12">
-    <form action="DioBrando" method = "post">
-      <br>
-         <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea triennale</button>
-         <br>
-         <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea magistrale</button>
-   </form>
+    <%for(int i =0; i < cd.size(); i++){ %>
+    <%if(cd.get(i).isTipo()==1){ %>
+    <form action="" method = "post">
+      	<br>
+      	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
+      	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
+         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block">Laurea triennale</button>
+    </form>
+    <%}else{
+    	%>
+    	<form action="" method = "post">
+      	<br>
+      	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
+      	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
+         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block">Laurea triennale</button>
+    </form>
+    <%} %>
+   <%} %>
        </div>
   </body>
 </html>

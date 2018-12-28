@@ -22,7 +22,7 @@ public class CorsoDiLaureaBeanDAO {
 			ps = conn.prepareStatement(query);
 
 			ps.setInt(1, cb.getIdCorsoDiLaurea());
-			ps.setBoolean(2, cb.isTipo());
+			ps.setInt(2, cb.isTipo());
 			ps.setString(3, cb.getAnnoOffertaFormativa());
 
 			int i = ps.executeUpdate();
@@ -50,7 +50,7 @@ public class CorsoDiLaureaBeanDAO {
 				query = "UPDATE corsodilaurea SET Tipo=?, AnnoOffertaFormativa=? WHERE IDCorsoDiLaurea=?";
 				ps = conn.prepareStatement(query);
 
-				ps.setBoolean(1, cb.isTipo());
+				ps.setInt(1, cb.isTipo());
 				ps.setString(2, cb.getAnnoOffertaFormativa());
 				ps.setInt(3, cb.getIdCorsoDiLaurea());
 
@@ -81,7 +81,7 @@ public class CorsoDiLaureaBeanDAO {
 
 			while (items.next()) {
 				cb.setIdCorsoDiLaurea(IdCorsoDiLaurea);
-				cb.setTipo(items.getBoolean("Tipo"));
+				cb.setTipo(items.getInt("Tipo"));
 				cb.setAnnoOffertaFormativa(items.getString("AnnoOffertaFormativa"));
 			}
 		} catch (SQLException e) {
@@ -106,7 +106,7 @@ public class CorsoDiLaureaBeanDAO {
 			while (items.next()) {
 				CorsoDiLaureaBean cb = new CorsoDiLaureaBean();
 				cb.setIdCorsoDiLaurea(items.getInt("IDCorsoDiLaurea"));
-				cb.setTipo(items.getBoolean("Tipo"));
+				cb.setTipo(items.getInt("Tipo"));
 				cb.setAnnoOffertaFormativa(items.getString("AnnoOffertaFormativa"));
 
 				lista.add(cb);
@@ -138,5 +138,36 @@ public class CorsoDiLaureaBeanDAO {
 		}
 
 		return false;
+	}
+
+	public ArrayList<CorsoDiLaureaBean> getCorsiLaureaOfferta(String nomeOfferta) {
+		ArrayList<CorsoDiLaureaBean> lista = new ArrayList<CorsoDiLaureaBean>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			String query = "select c.Tipo, c.IDCorsoDiLaurea, c.AnnoOffertaFormativa" + 
+					"	from corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa\n" + 
+					"		where o.AnnoOffertaFormativa = ?";
+
+			ps = conn.prepareStatement(query);
+			ps.setString(1, nomeOfferta);
+
+			ResultSet items = ps.executeQuery();
+
+			while (items.next()) {
+				CorsoDiLaureaBean cb = new CorsoDiLaureaBean();
+				cb.setIdCorsoDiLaurea(items.getInt("IDCorsoDiLaurea"));
+				cb.setTipo(items.getInt("Tipo"));
+				cb.setAnnoOffertaFormativa(items.getString("AnnoOffertaFormativa"));
+
+				lista.add(cb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lista;
 	}
 }

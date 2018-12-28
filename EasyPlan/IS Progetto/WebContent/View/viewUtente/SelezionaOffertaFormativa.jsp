@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
-    pageEncoding="UTF-8"%>
-    
+    pageEncoding="UTF-8" import="model.OffertaFormativaBeanDAO" import="model.OffertaFormativaBean"%>
+
     
      <%
      	// Simulazione dati presi dal database
-     	ArrayList<String> off = new ArrayList<String>();
-     	off.add("2018/19"); off.add("2017/18"); off.add("2016/17");
+     	ArrayList<OffertaFormativaBean> of = new ArrayList<OffertaFormativaBean>();
+     	OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
+     	of = ofbd.doRetriveByAll();
      %>
      
      
@@ -47,14 +48,17 @@
     </nav>
     <img alt="logo" src="../../immagini/logo.png" class="img-responsive center-block">
     <div class="col-md-12">
-	    <form action="DioBrando" method = "post">
 	    
-	    <%for(int i = 0; i < off.size(); i++){ %>
-	         <button name="button" id="offertaformativa##" class="btn btn-default btn-responsive center-block"><%=off.get(i) %></button>
-	         <br>
+	    
+	    <%for(int i = 0; i < of.size(); i++){ %>
+	    	<%if(of.get(i).isVisibilita()){ %>
+	    	<form action="../../getCorsiDiLaureaServlet" method = "post">
+		    	<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa() %>">
+		         	<button name="button" id="offertaformativa"<%=+i%> class="btn btn-default btn-responsive center-block"><%=of.get(i).getAnnoOffertaFormativa() %></button>
+		         <br>
+	         </form>
+	         <%} %>
 	     <%}%>
-	     
-	   </form>
     </div>
   </body>
 </html>
