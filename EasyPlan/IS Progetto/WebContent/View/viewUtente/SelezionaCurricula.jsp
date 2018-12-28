@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="model.OffertaFormativaBean" import="model.CorsoDiLaureaBean"
+    import="model.CurriculumBean"%>
     
     
      <%
      	// Simulazione dati presi dal database
-     	ArrayList<String> curricula = new ArrayList<String>();
-     curricula.add("Sicurezza"); curricula.add("SITS"); curricula.add("Cloud computing");
+     	OffertaFormativaBean of = (OffertaFormativaBean) request.getAttribute("offertaFormativa"); 
+    	ArrayList<CorsoDiLaureaBean> cd = of.getLauree();
+    	ArrayList<CurriculumBean> cm = cd.get(0).getCurricula();
      %>
      
      
@@ -45,16 +47,21 @@
         </div>
       </div>
     </nav>
-    <img alt="logo" src="../../immagini/logo.png" class="img-responsive center-block">
+    <img alt="logo" src="immagini/logo.png" class="img-responsive center-block">
     <div class="col-md-12">
-	    <form action="DioBrando" method = "post">
 	    
-	    <%for(int i = 0; i < curricula.size(); i++){ %>
-	         <button name="button" id="curricula##" class="btn btn-default btn-responsive center-block"><%=curricula.get(i) %></button>
-	         <br>
+	    
+	    <%for(int i = 0; i < cm.size(); i++){ %>
+	    <form action="DioBrando" method = "post">
+		    <input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
+	      	<input type="hidden" name="laurea" value="<%=cd.get(0).isTipo()%>">
+	        <input type="hidden" name=curricula value="<%=cm.get(i).getIdCurriculum()%>">
+		    <button name="button" id="c"<%=+cm.get(i).getIdCurriculum()%> class="btn btn-default btn-responsive center-block"><%=cm.get(i).getNomeCurriculum() %></button>
+		    <br>
+	    </form>
 	     <%}%>
 	     
-	   </form>
+	   
     </div>
   </body>
 </html>

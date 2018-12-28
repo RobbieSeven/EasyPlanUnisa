@@ -46,7 +46,7 @@
     <div class="col-md-12">
     <%for(int i =0; i < cd.size(); i++){ %>
     <%if(cd.get(i).isTipo()==1){ %>
-    <form action="" method = "post">
+    <form action="getCurriculaFromLaureaOff" method = "post">
       	<br>
       	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
       	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
@@ -54,7 +54,7 @@
     </form>
     <%}else{
     	%>
-    	<form action="" method = "post">
+    	<form action="getCurriculaFromLaureaOff" method = "post">
       	<br>
       	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
       	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
