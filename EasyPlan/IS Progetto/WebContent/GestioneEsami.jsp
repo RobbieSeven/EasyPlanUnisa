@@ -13,53 +13,76 @@
 
 <%
 		String laurea=request.getParameter("laurea");
-		System.out.println(laurea);
 		int tipo;
 		if(laurea.equals("triennale")){
 			tipo=1;	
 		}else {tipo=2;}
+		
 		String offerta= request.getParameter("offerta");
 		String curriculum= request.getParameter("curriculum");
-		ArrayList<GruppoEsamiObbligatoriBean> grob = new ArrayList<GruppoEsamiObbligatoriBean>();
-		ArrayList<GruppoEsamiOpzionaliBean> grop = new ArrayList<GruppoEsamiOpzionaliBean>();
-		GruppoEsamiObbligatoriBeanDAO grobB = new GruppoEsamiObbligatoriBeanDAO();
-		GruppoEsamiOpzionaliBeanDAO gropB = new GruppoEsamiOpzionaliBeanDAO();
+		ArrayList<GruppoEsamiObbligatoriBean> grob1 = new ArrayList<GruppoEsamiObbligatoriBean>();
+		ArrayList<GruppoEsamiObbligatoriBean> grob2 = new ArrayList<GruppoEsamiObbligatoriBean>();
+		ArrayList<GruppoEsamiObbligatoriBean> grob3 = new ArrayList<GruppoEsamiObbligatoriBean>();
+		ArrayList<GruppoEsamiOpzionaliBean> grop1 = new ArrayList<GruppoEsamiOpzionaliBean>();
+		ArrayList<GruppoEsamiOpzionaliBean> grop2 = new ArrayList<GruppoEsamiOpzionaliBean>();
+		ArrayList<GruppoEsamiOpzionaliBean> grop3 = new ArrayList<GruppoEsamiOpzionaliBean>();
+		GruppoEsamiObbligatoriBeanDAO grupObDao = new GruppoEsamiObbligatoriBeanDAO();
+		GruppoEsamiOpzionaliBeanDAO grupOpDao = new GruppoEsamiOpzionaliBeanDAO();
 		EsameBeanDAO esameB = new EsameBeanDAO();
 		DocenteBeanDAO docentiB = new DocenteBeanDAO();
 		
-		grob = grobB.doRetriveGruppoEsamiObbByOfferta(offerta,tipo,curriculum); 
-		grop = gropB.doRetriveGruppoEsamiOpzByOfferta(offerta,tipo,curriculum); 
-		
-		for(int i =0; i < grob.size(); i++)
-			grob.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob.get(i).getCodiceGEOb()));
-
-		for(int y =0; y < grop.size(); y++)
-			grop.get(y).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(offerta, tipo, curriculum, grop.get(y).getCodiceGEOp()));
-		
-		// carico per gli esami i corrispettivi docenti prima gli obbligatori e poi gli opzionali
-		for(int  j = 0; j < grob.size(); j++) {
-			for(int d = 0; d < grob.get(j).getEsami().size(); d++)
-				grob.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob.get(j).getCodiceGEOb(), grob.get(j).getEsami().get(d).getNome()));
+		//GRUPPI ESAMI OBB E OPP PRIMO ANNO
+		grob1 = grupObDao.doRetriveGruppoEsamiObbByOffertaAndAnno(offerta, tipo, curriculum, 1);
+		for(int i =0; i < grob1.size(); i++)
+			grob1.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob1.get(i).getCodiceGEOb()));
+		for(int  j = 0; j < grob1.size(); j++) {
+			for(int d = 0; d < grob1.get(j).getEsami().size(); d++)
+				grob1.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob1.get(j).getCodiceGEOb(), grob1.get(j).getEsami().get(d).getNome()));
+		}
+		//gruppo opzionali
+		grop1 = grupOpDao.doRetriveGruppoEsamiOpzByOffertaAndAnno(offerta, tipo, curriculum, 1);
+		for(int i =0; i < grop1.size(); i++)
+			grop1.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grop1.get(i).getCodiceGEOp()));
+		for(int  z = 0; z < grop1.size(); z++) {
+			for(int d1 = 0; d1 < grop1.get(z).getEsami().size(); d1++)
+				grop1.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop1.get(z).getCodiceGEOp(), grop1.get(z).getEsami().get(d1).getNome()));
 		}
 		
-		for(int  z = 0; z < grop.size(); z++) {
-			for(int d1 = 0; d1 < grop.get(z).getEsami().size(); d1++)
-				grop.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop.get(z).getCodiceGEOp(), grop.get(z).getEsami().get(d1).getNome()));
+		//GRUPPI ESAMI OBB E OPP SECONDO ANNO
+		grob2 = grupObDao.doRetriveGruppoEsamiObbByOffertaAndAnno(offerta, tipo, curriculum, 2);
+		for(int i =0; i < grob2.size(); i++)
+			grob2.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob2.get(i).getCodiceGEOb()));
+		for(int  j = 0; j < grob2.size(); j++) {
+			for(int d = 0; d < grob2.get(j).getEsami().size(); d++)
+				grob2.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob2.get(j).getCodiceGEOb(), grob2.get(j).getEsami().get(d).getNome()));
+		}
+		//gruppo opzionali
+		grop2 = grupOpDao.doRetriveGruppoEsamiOpzByOffertaAndAnno(offerta, tipo, curriculum, 2);
+		for(int i =0; i < grop2.size(); i++)
+			grop2.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grop2.get(i).getCodiceGEOp()));
+		for(int  z = 0; z < grop2.size(); z++) {
+			for(int d1 = 0; d1 < grop2.get(z).getEsami().size(); d1++)
+				grop2.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop2.get(z).getCodiceGEOp(), grop2.get(z).getEsami().get(d1).getNome()));
 		}
 		
-		
-     	// Simulazione dati presi dal database
-     	/* ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
-     	CurriculumBeanDAO cd = new CurriculumBeanDAO();
-     	String laurea=request.getParameter("laurea");
-     	System.out.println(laurea);
-     	int tipo;
-     	if(laurea.equals("triennale")){
-     	tipo=1;	
-     	}else {tipo=2;}
-     	String offerta= request.getParameter("offerta");
-     	System.out.println(offerta);
-     	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(tipo,offerta);*/
+		//GRUPPI ESAMI OBB E OPP TERZO ANNO (LAUREA TRIENNALE ONLY)
+		if(tipo == 1){
+			grob3 = grupObDao.doRetriveGruppoEsamiObbByOffertaAndAnno(offerta, tipo, curriculum, 3);
+			for(int i =0; i < grob3.size(); i++)
+				grob3.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob3.get(i).getCodiceGEOb()));
+			for(int  j = 0; j < grob3.size(); j++) {
+				for(int d = 0; d < grob3.get(j).getEsami().size(); d++)
+					grob3.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob3.get(j).getCodiceGEOb(), grob3.get(j).getEsami().get(d).getNome()));
+			}
+			//gruppo opzionali
+			grop3 = grupOpDao.doRetriveGruppoEsamiOpzByOffertaAndAnno(offerta, tipo, curriculum, 3);
+			for(int i =0; i < grop3.size(); i++)
+				grop3.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grop3.get(i).getCodiceGEOp()));
+			for(int  z = 0; z < grop3.size(); z++) {
+				for(int d1 = 0; d1 < grop3.get(z).getEsami().size(); d1++)
+					grop3.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop3.get(z).getCodiceGEOp(), grop3.get(z).getEsami().get(d1).getNome()));
+			}
+		}
      %>
 <!DOCTYPE html>
 <html>
@@ -136,10 +159,16 @@
     <center>
       <h1>Curriculum <%=request.getParameter("curriculum") %> anno: <%=request.getParameter("offerta") %></h1>
       
+      <% if(tipo == 1){
+    	  for(int i = 1; i <= 3; i++){
+    	%>
       <fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width:95%">
-        <legend class="reset-this redo-legend">Inserire anno</legend>
+        <legend class="reset-this redo-legend">Anno <%= i%></legend>
+        <% if(i == 1){
+        	for(int j = 0; j < grob1.size();j++){    	
+        %>
         <fieldset class="reset-this redo-fieldset" style="margin-left: 10px;  width:97%">
-          <legend class="reset-this redo-legend">Tipo gruppo</legend>
+          <legend class="reset-this redo-legend">Gruppo obbligatorio</legend>
           <fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width:100%">
             <input type="button" value="Nome esame" data-toggle="collapse" data-target="#demo" style="border:0px; background: #ffffff;">
           </fieldset>
@@ -239,7 +268,7 @@
               <div class="col-sm-3 col-lg-3">
                 <h4>Syllabus:</h4>
               </div>
-<div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
+			 <div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
               </div>
               <div class="col-sm-3 col-lg-3">
                 <h4>Modalità di esame:</h4>
@@ -263,7 +292,266 @@
 
         </div></center>
     </fieldset>
-  </fieldset>
+    <%}
+    	for(int j = 0; j < grop1.size(); j++){
+    		%>
+    <fieldset class="reset-this redo-fieldset" style="margin-left: 10px;  width:97%">
+          <legend class="reset-this redo-legend"><%=grop1.get(j).getTotCFU() %> a scelta tra: </legend>
+          <fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width:100%">
+            <input type="button" value="Nome esame" data-toggle="collapse" data-target="#demo" style="border:0px; background: #ffffff;">
+          </fieldset>
+          <div class="contents">
+            <div id="demo" class="collapse">
+              <div class="container">
+                <center>
+                  <div class="row">
+                    <div class="col-sm-3 col-lg-3">
+                      CFU <input type="number" min="1" max="12" class="btn btn-default" name="insertCFU" value="1">
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                      Ore <input type="number" min="1" max="96" class="btn btn-default" name="insertOre" value="1">
+                    </div>
+                    <div class="col-sm-6 col-lg-6">
+                      Anno <select class="form-control selcls" name="Scelta anno" style="width: 40%; display:inline">
+                        <option value="primo anno obbiligatorio">Primo anno obbiligatorio</option>
+                        <option value="secondo anno obbiligatorio">Secondo anno obbiligatorio</option>
+                      </select>
+                    </div>
+                  </div>
+                </center>
+                <div id="prof1" class="row">
+                  <br><br>
+                  <div class="col-sm-12 col-lg-12">
+                    <h4>Docenti:</h4>
+                  </div>
+				<div class="col-sm-3 col-lg-3">
+                    <h4>Nome docente classe 1:</h4>
+                  </div>
+                  <div class="col-sm-3 col-lg-3"><input type="text" class="form-control" placeholder="Costantino Delizia" name="nomeProf">
+                  </div>
+                  <div class="col-sm-3 col-lg-3">
+                    <input type="text" class="form-control" placeholder="Inserire url prof" name="urlProf" style="display:inline">
+                  </div>
+                  <div class="col-sm-3 col-lg-3">
+                    <button type="button" name="button" onClick=add() class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button> </div>
+                </div>
+                <div class="col-sm-3 col-lg-3">
+                  <h4>Syllabus:</h4>
+                </div>
+                <div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
+                </div>
+                <div class="col-sm-3 col-lg-3">
+                  <h4>Modalità di esame:</h4>
+                </div>
+                <div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
+                </div>
+                <div class="col-sm-4 col-lg-4" style="margin-top:2%">
+                  <center>
+                    <div><button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"><br>Cancella esame</button></span></div>
+                  </center>
+                </div>
+                <div class="col-sm-8 col-lg-8" style="margin-top:2%"><input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px" ></div>
+              </div>
+            </div>
+          </div>
+           <fieldset class="reset-this redo-fieldset"
+                    style="margin-left: -11px; width:100%">
+                  <input type="button" value="Nome esame 2" data-toggle="collapse" data-target="#demo2" style="border:0px; background: #ffffff;">
+        </fieldset>
+        <div class="contents">
+          <div id="demo2" class="collapse">
+            <div class="container">
+              <center>
+                <div class="row">
+                  <div class="col-sm-3 col-lg-3">
+                    CFU <input type="number" min="1" max="12" class="btn btn-default" name="insertCFU" value="1">
+                  </div>
+                  <div class="col-sm-3 col-lg-3">
+                    Ore <input type="number" min="1" max="96" class="btn btn-default" name="insertOre" value="1">
+                  </div>
+                  <div class="col-sm-6 col-lg-6">
+                    Anno <select class="form-control selcls" name="Scelta anno" style="width: 40%; display:inline">
+                      <option value="primo anno obbiligatorio">Primo anno obbiligatorio</option>
+                      <option value="secondo anno obbiligatorio">Secondo anno obbiligatorio</option>
+                    </select>
+                  </div>
+                </div>
+              </center>
+              <div class="row">
+                <br><br>
+                <div class="col-sm-12 col-lg-12">
+                  <h4>Docenti:</h4>
+                </div>
+                <div class="col-sm-3 col-lg-3">
+                  <h4>Nome docente classe 1:</h4>
+                </div>
+                <div class="col-sm-3 col-lg-3"><input type="text" class="form-control" placeholder="Costantino Delizia" name="nomeProf">
+                </div>
+                <div class="col-sm-3 col-lg-3">
+                  <input type="text" class="form-control" placeholder="Inserire url prof" name="urlProf" style="display:inline">
+                </div>
+                <div class="col-sm-3 col-lg-3">
+                  <button type="button" name="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button> </div>
+              </div>
+              <div class="col-sm-3 col-lg-3">
+                <h4>Syllabus:</h4>
+              </div>
+			 <div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
+              </div>
+              <div class="col-sm-3 col-lg-3">
+                <h4>Modalità di esame:</h4>
+              </div>
+              <div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
+              </div>
+              <div class="col-sm-4 col-lg-4" style="margin-top:2%">
+                <center>
+                  <div><button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"><br>Cancella esame</button></span></div>
+                </center>
+              </div>
+              <div class="col-sm-8 col-lg-8" style="margin-top:2%"><input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px"> </div>
+            </div>
+           </div>
+         </div>
+         <center><div>
+                  <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"><br>Cancella gruppo</button></span>
+                  <button class="btn btn-default btn-responsive center">Aggiungi un nuovo esame</button>
+                  <button class="btn btn-default btn-responsive center">Aggiungi esame esistente</button>
+                  <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-pencil"><br>Modifica gruppo</button></span>
+
+        </div></center>
+    </fieldset><%}} %>
+  </fieldset><%}} 
+  else if (tipo == 2){
+	  for(int i = 1; i <= 2; i++){
+	    	%>
+	      <fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width:95%">
+	        <legend class="reset-this redo-legend">Anno <%= i %></legend>
+	        <fieldset class="reset-this redo-fieldset" style="margin-left: 10px;  width:97%">
+	          <legend class="reset-this redo-legend">Tipo gruppo</legend>
+	          <fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width:100%">
+	            <input type="button" value="Nome esame" data-toggle="collapse" data-target="#demo" style="border:0px; background: #ffffff;">
+	          </fieldset>
+	          <div class="contents">
+	            <div id="demo" class="collapse">
+	              <div class="container">
+	                <center>
+	                  <div class="row">
+	                    <div class="col-sm-3 col-lg-3">
+	                      CFU <input type="number" min="1" max="12" class="btn btn-default" name="insertCFU" value="1">
+	                    </div>
+	                    <div class="col-sm-3 col-lg-3">
+	                      Ore <input type="number" min="1" max="96" class="btn btn-default" name="insertOre" value="1">
+	                    </div>
+	                    <div class="col-sm-6 col-lg-6">
+	                      Anno <select class="form-control selcls" name="Scelta anno" style="width: 40%; display:inline">
+	                        <option value="primo anno obbiligatorio">Primo anno obbiligatorio</option>
+	                        <option value="secondo anno obbiligatorio">Secondo anno obbiligatorio</option>
+	                      </select>
+	                    </div>
+	                  </div>
+	                </center>
+	                <div id="prof1" class="row">
+	                  <br><br>
+	                  <div class="col-sm-12 col-lg-12">
+	                    <h4>Docenti:</h4>
+	                  </div>
+					<div class="col-sm-3 col-lg-3">
+	                    <h4>Nome docente classe 1:</h4>
+	                  </div>
+	                  <div class="col-sm-3 col-lg-3"><input type="text" class="form-control" placeholder="Costantino Delizia" name="nomeProf">
+	                  </div>
+	                  <div class="col-sm-3 col-lg-3">
+	                    <input type="text" class="form-control" placeholder="Inserire url prof" name="urlProf" style="display:inline">
+	                  </div>
+	                  <div class="col-sm-3 col-lg-3">
+	                    <button type="button" name="button" onClick=add() class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button> </div>
+	                </div>
+	                <div class="col-sm-3 col-lg-3">
+	                  <h4>Syllabus:</h4>
+	                </div>
+	                <div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
+	                </div>
+	                <div class="col-sm-3 col-lg-3">
+	                  <h4>Modalità di esame:</h4>
+	                </div>
+	                <div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
+	                </div>
+	                <div class="col-sm-4 col-lg-4" style="margin-top:2%">
+	                  <center>
+	                    <div><button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"><br>Cancella esame</button></span></div>
+	                  </center>
+	                </div>
+	                <div class="col-sm-8 col-lg-8" style="margin-top:2%"><input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px" ></div>
+	              </div>
+	            </div>
+	          </div>
+	           <fieldset class="reset-this redo-fieldset"
+	                    style="margin-left: -11px; width:100%">
+	                  <input type="button" value="Nome esame 2" data-toggle="collapse" data-target="#demo2" style="border:0px; background: #ffffff;">
+	        </fieldset>
+	        <div class="contents">
+	          <div id="demo2" class="collapse">
+	            <div class="container">
+	              <center>
+	                <div class="row">
+	                  <div class="col-sm-3 col-lg-3">
+	                    CFU <input type="number" min="1" max="12" class="btn btn-default" name="insertCFU" value="1">
+	                  </div>
+	                  <div class="col-sm-3 col-lg-3">
+	                    Ore <input type="number" min="1" max="96" class="btn btn-default" name="insertOre" value="1">
+	                  </div>
+	                  <div class="col-sm-6 col-lg-6">
+	                    Anno <select class="form-control selcls" name="Scelta anno" style="width: 40%; display:inline">
+	                      <option value="primo anno obbiligatorio">Primo anno obbiligatorio</option>
+	                      <option value="secondo anno obbiligatorio">Secondo anno obbiligatorio</option>
+	                    </select>
+	                  </div>
+	                </div>
+	              </center>
+	              <div class="row">
+	                <br><br>
+	                <div class="col-sm-12 col-lg-12">
+	                  <h4>Docenti:</h4>
+	                </div>
+	                <div class="col-sm-3 col-lg-3">
+	                  <h4>Nome docente classe 1:</h4>
+	                </div>
+	                <div class="col-sm-3 col-lg-3"><input type="text" class="form-control" placeholder="Costantino Delizia" name="nomeProf">
+	                </div>
+	                <div class="col-sm-3 col-lg-3">
+	                  <input type="text" class="form-control" placeholder="Inserire url prof" name="urlProf" style="display:inline">
+	                </div>
+	                <div class="col-sm-3 col-lg-3">
+	                  <button type="button" name="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button> </div>
+	              </div>
+	              <div class="col-sm-3 col-lg-3">
+	                <h4>Syllabus:</h4>
+	              </div>
+	<div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
+	              </div>
+	              <div class="col-sm-3 col-lg-3">
+	                <h4>Modalità di esame:</h4>
+	              </div>
+	              <div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea>
+	              </div>
+	              <div class="col-sm-4 col-lg-4" style="margin-top:2%">
+	                <center>
+	                  <div><button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"><br>Cancella esame</button></span></div>
+	                </center>
+	              </div>
+	              <div class="col-sm-8 col-lg-8" style="margin-top:2%"><input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px"> </div>
+	            </div>
+	           </div>
+	         </div>
+	         <center><div>
+	                  <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-trash"><br>Cancella gruppo</button></span>
+	                  <button class="btn btn-default btn-responsive center">Aggiungi un nuovo esame</button>
+	                  <button class="btn btn-default btn-responsive center">Aggiungi esame esistente</button>
+	                  <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-pencil"><br>Modifica gruppo</button></span>
+
+	        </div></center>
+	    </fieldset>
+	  </fieldset><%}} %>
   </center>
 </div>
 </body>

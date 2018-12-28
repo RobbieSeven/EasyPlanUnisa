@@ -180,4 +180,40 @@ public class GruppoEsamiObbligatoriBeanDAO {
 
 		return lista;
 	}
+	
+	public synchronized ArrayList<GruppoEsamiObbligatoriBean> doRetriveGruppoEsamiObbByOffertaAndAnno(String offertaForm, int laurea, String curricula, int anno)
+			throws ClassNotFoundException, SQLException {
+		ArrayList<GruppoEsamiObbligatoriBean> lista = new ArrayList<GruppoEsamiObbligatoriBean>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			String query = "select go.CodiceGEOb, go.Anno, go.Curriculum" + 
+					"	from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
+					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum\n" + 
+					"	where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.anno = ?";
+
+			ps = conn.prepareStatement(query);
+			ps.setString(1, offertaForm);
+			ps.setInt(2, laurea);
+			ps.setString(3, curricula);
+			ps.setInt(4, anno);
+			
+			
+			ResultSet items = ps.executeQuery();
+
+			while (items.next()) {
+				GruppoEsamiObbligatoriBean gb = new GruppoEsamiObbligatoriBean();
+				gb.setAnno(items.getInt("Anno"));
+				gb.setCodiceGEOb(items.getInt("CodiceGEOb"));
+				gb.setIdCurriculum(items.getInt("Curriculum"));
+				lista.add(gb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
 }
