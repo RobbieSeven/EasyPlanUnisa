@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@page import="model.GruppoEsamiObbligatoriBeanDAO"%>
 <%@page import="model.GruppoEsamiObbligatoriBean"%>
 <%@page import="model.GruppoEsamiOpzionaliBeanDAO"%>
@@ -8,9 +6,48 @@
 <%@page import="model.EsameBean"%>
 <%@page import="model.DocenteBeanDAO"%>
 <%@page import="model.DocenteBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	import="java.util.ArrayList" pageEncoding="UTF-8"%>
+
 
 
 <%
+		String laurea=request.getParameter("laurea");
+		System.out.println(laurea);
+		int tipo;
+		if(laurea.equals("triennale")){
+			tipo=1;	
+		}else {tipo=2;}
+		String offerta= request.getParameter("offerta");
+		String curriculum= request.getParameter("curriculum");
+		ArrayList<GruppoEsamiObbligatoriBean> grob = new ArrayList<GruppoEsamiObbligatoriBean>();
+		ArrayList<GruppoEsamiOpzionaliBean> grop = new ArrayList<GruppoEsamiOpzionaliBean>();
+		GruppoEsamiObbligatoriBeanDAO grobB = new GruppoEsamiObbligatoriBeanDAO();
+		GruppoEsamiOpzionaliBeanDAO gropB = new GruppoEsamiOpzionaliBeanDAO();
+		EsameBeanDAO esameB = new EsameBeanDAO();
+		DocenteBeanDAO docentiB = new DocenteBeanDAO();
+		
+		grob = grobB.doRetriveGruppoEsamiObbByOfferta(offerta,tipo,curriculum); 
+		grop = gropB.doRetriveGruppoEsamiOpzByOfferta(offerta,tipo,curriculum); 
+		
+		for(int i =0; i < grob.size(); i++)
+			grob.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob.get(i).getCodiceGEOb()));
+
+		for(int y =0; y < grop.size(); y++)
+			grop.get(y).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(offerta, tipo, curriculum, grop.get(y).getCodiceGEOp()));
+		
+		// carico per gli esami i corrispettivi docenti prima gli obbligatori e poi gli opzionali
+		for(int  j = 0; j < grob.size(); j++) {
+			for(int d = 0; d < grob.get(j).getEsami().size(); d++)
+				grob.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob.get(j).getCodiceGEOb(), grob.get(j).getEsami().get(d).getNome()));
+		}
+		
+		for(int  z = 0; z < grop.size(); z++) {
+			for(int d1 = 0; d1 < grop.get(z).getEsami().size(); d1++)
+				grop.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop.get(z).getCodiceGEOp(), grop.get(z).getEsami().get(d1).getNome()));
+		}
+		
+		
      	// Simulazione dati presi dal database
      	/* ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
      	CurriculumBeanDAO cd = new CurriculumBeanDAO();
@@ -98,6 +135,7 @@
 
     <center>
       <h1>Curriculum <%=request.getParameter("curriculum") %> anno: <%=request.getParameter("offerta") %></h1>
+      
       <fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width:95%">
         <legend class="reset-this redo-legend">Inserire anno</legend>
         <fieldset class="reset-this redo-fieldset" style="margin-left: 10px;  width:97%">
