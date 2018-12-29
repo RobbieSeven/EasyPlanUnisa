@@ -74,8 +74,9 @@
 			}
 			//gruppo opzionali
 			grop3.addAll(grupOpDao.doRetriveGruppoEsamiOpzByOffertaAndAnno(offerta, tipo, curriculum, 3));
-			for(int i =0; i < grop3.size(); i++)
-				grop3.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grop3.get(i).getCodiceGEOp()));
+			for(int i =0; i < grop3.size(); i++){
+				grop3.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(offerta, tipo, curriculum, grop3.get(i).getCodiceGEOp()));
+			}
 			for(int  z = 0; z < grop3.size(); z++) {
 				for(int d1 = 0; d1 < grop3.get(z).getEsami().size(); d1++)
 					grop3.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop3.get(z).getCodiceGEOp(), grop3.get(z).getEsami().get(d1).getNome()));
@@ -777,7 +778,6 @@ input[type=button]:active {
 						ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 					<fieldset class="reset-this redo-fieldset"
 						style="margin-left: -11px; width: 100%">
-						<% System.out.println(esame.getNome()); %>
 						<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 							data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
 					</fieldset>
