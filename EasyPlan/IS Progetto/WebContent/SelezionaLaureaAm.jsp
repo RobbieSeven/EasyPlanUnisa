@@ -37,6 +37,9 @@
         </div>
       </div>
     </nav>
+    <form action="GestioneOfferteFormative.jsp" method = "post">
+    	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive left-block">Indietro</button>
+    </form>
     <div class="col-md-12">
    
       <br>
