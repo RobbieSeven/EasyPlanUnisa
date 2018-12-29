@@ -157,7 +157,7 @@ public class EsameBeanDAO {
 
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			String query = "select e.nome, e.CFU, e.OreLezione, e.Semestre, e.CodiceEsame" + 
+			String query = "select e.nome, e.CFU, e.OreLezione, e.Semestre, e.CodiceEsame, e.Descrizione" + 
 					"	from ((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
 					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum) join formazione as f \n" + 
 					"            on go.CodiceGEOb = f.CodiceGEOb) join esame e on e.CodiceEsame = f.CodiceEsame\n" + 
@@ -178,6 +178,7 @@ public class EsameBeanDAO {
 				eb.setCFU(items.getInt("CFU"));
 				eb.setOreLezione(items.getInt("OreLezione"));
 				eb.setSemestre(items.getString("Semestre"));
+				eb.setDescrizione(items.getString("Descrizione"));
 
 				lista.add(eb);
 			}
@@ -195,7 +196,7 @@ public class EsameBeanDAO {
 
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			String query = "select e.nome, e.CFU, e.OreLezione, e.Semestre, e.CodiceEsame" + 
+			String query = "select e.nome, e.CFU, e.OreLezione, e.Semestre, e.CodiceEsame, e.Descrizione" + 
 					"	from ((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
 					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiopzionali as go on cu.IDCurriculum = go.IDCurriculum) join formato as f \n" + 
 					"            on go.CodiceGEOp = f.CodiceGEOp) join esame e on e.CodiceEsame = f.CodiceEsame\n" + 
@@ -216,6 +217,7 @@ public class EsameBeanDAO {
 				eb.setCFU(items.getInt("CFU"));
 				eb.setOreLezione(items.getInt("OreLezione"));
 				eb.setSemestre(items.getString("Semestre"));
+				eb.setDescrizione(items.getString("Descrizione"));
 
 				lista.add(eb);
 			}

@@ -94,12 +94,13 @@ public class DocenteBeanDAO {
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 
-			String query = "select d.Nome, d.Cognome, d.IndirizzoPaginaWeb, d.CodiceDocente" + 
-					"	from ((((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
-					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum) join formazione as f \n" + 
-					"            on go.CodiceGEOb = f.CodiceGEOb) join esame e on e.CodiceEsame = f.CodiceEsame) join insegnamento i on e.CodiceEsame = i.CodiceEsame)\n" + 
-					"            join docente d on d.CodiceDocente = i.CodiceDocente\n" + 
-					"		where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.CodiceGEOb = ? && e.Nome = ?";
+			String query = "select  d.nome, d.cognome, d.CodiceDocente, i.classe, d.IndirizzoPaginaWeb " +
+					" from ((((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu " +
+					" on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum) join formazione as f " +
+					" on go.CodiceGEOb = f.CodiceGEOb) join esame e on e.CodiceEsame = f.CodiceEsame) join insegnamento i on e.CodiceEsame = i.CodiceEsame) " +
+					"join docente d on d.CodiceDocente = i.CodiceDocente " +
+					"where o.AnnoOffertaFormativa=? && c.tipo=? && cu.Nome=? && go.CodiceGEOb=? && e.Nome=?";
+			
 			ps = conn.prepareStatement(query);
 			ps.setString(1, anno);
 			ps.setInt(2, laurea);
@@ -115,6 +116,7 @@ public class DocenteBeanDAO {
 				db.setNome(items.getString("Nome"));
 				db.setCognome(items.getString("Cognome"));
 				db.setIndirizzoPaginaWeb(items.getString("IndirizzoPaginaWeb"));
+				db.setInsegnamento(items.getString("classe"));
 				
 				list.add(db);
 			}
@@ -131,13 +133,20 @@ public class DocenteBeanDAO {
 
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-
-			String query = "select d.Nome, d.Cognome, d.IndirizzoPaginaWeb, d.CodiceDocente" + 
-					"	from ((((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
-					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum) join formazione as f \n" + 
-					"            on go.CodiceGEOb = f.CodiceGEOb) join esame e on e.CodiceEsame = f.CodiceEsame) join insegnamento i on e.CodiceEsame = i.CodiceEsame)\n" + 
-					"            join docente d on d.CodiceDocente = i.CodiceDocente\n" + 
-					"		where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.CodiceGEOb = ? && e.Nome = ?";
+			/*
+			String query = "select d.Nome, d.Cognome, d.CodiceDocente, ins.classe, d.IndirizzoPaginaWeb " + 
+					" from (((((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu " + 
+					" on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiopzionali as go on cu.IDCurriculum = go.IDCurriculum) join formato as f " + 
+					" on go.CodiceGEOp = f.CodiceGEOp) join esame e on e.CodiceEsame = f.CodiceEsame) join insegnamento i on e.CodiceEsame = i.CodiceEsame) " + 
+					" join docente d on d.CodiceDocente = i.CodiceDocente) join insegnamento as ins on ins.CodiceEsame = e.CodiceEsame " + 
+					" where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.CodiceGEOp = ? && e.Nome = ?";
+			*/
+			String query = "select d.nome, d.cognome, d.CodiceDocente, i.classe, d.IndirizzoPaginaWeb " +
+					" from ((((((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu " +
+					" on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiopzionali as go on cu.IDCurriculum = go.IDCurriculum) join formato as f " +
+					" on go.CodiceGEOp = f.CodiceGEOp) join esame e on e.CodiceEsame = f.CodiceEsame) join insegnamento i on e.CodiceEsame = i.CodiceEsame) " +
+					"join docente d on d.CodiceDocente = i.CodiceDocente " +
+					"where o.AnnoOffertaFormativa=? && c.tipo=? && cu.Nome=? && go.CodiceGEOp=? && e.Nome=?";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, anno);
 			ps.setInt(2, laurea);
@@ -153,6 +162,7 @@ public class DocenteBeanDAO {
 				db.setNome(items.getString("Nome"));
 				db.setCognome(items.getString("Cognome"));
 				db.setIndirizzoPaginaWeb(items.getString("IndirizzoPaginaWeb"));
+				db.setInsegnamento(items.getString("classe"));
 				
 				list.add(db);
 			}
