@@ -1592,10 +1592,8 @@
 							<center>
 								<div>
 									<button class="btn btn-default btn-responsive center">
-										<span class="glyphicon glyphicon-trash"><br>Cancella
-											gruppo 
+										<span class="glyphicon glyphicon-trash"><br>Cancella gruppo 	</span>
 									</button>
-									</span>
 									<button class="btn btn-default btn-responsive center">Aggiungi
 										un nuovo esame</button>
 									<button class="btn btn-default btn-responsive center">Aggiungi
