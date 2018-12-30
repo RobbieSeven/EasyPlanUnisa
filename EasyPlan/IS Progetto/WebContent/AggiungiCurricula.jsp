@@ -52,6 +52,13 @@
 				</div>
 			</div>
 		</nav>
+		
+		<form action="SelezionaCurriculaAm.jsp">
+			<input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
+			<input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
+			<input type="submit" class="btn btn-default" name="indietro" value="Indietro">
+		</form>
+		
 		<div class="col-md-12">
 			<div class="container">
 				<center><h2>Aggiungi curricula</h2></center>
