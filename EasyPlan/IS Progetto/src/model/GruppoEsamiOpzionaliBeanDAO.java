@@ -184,15 +184,14 @@ public class GruppoEsamiOpzionaliBeanDAO {
 		ArrayList<GruppoEsamiOpzionaliBean> lista = new ArrayList<GruppoEsamiOpzionaliBean>();
 		Connection conn = null;
 		PreparedStatement ps = null;
-		
+
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			
-			String query = "select go.CodiceGEOp, go.Anno, go.IDCurriculum, go.TotCFU " + 
-					"  from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu " + 
-					"  on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiopzionali as go on cu.IDCurriculum = go.IDCurriculum " + 
-					"  where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.Anno = ?";
-			
+			String query = "select go.CodiceGEOp, go.Anno, go.IDCurriculum, go.TotCFU" + 
+					"	from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
+					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiopzionali as go on cu.IDCurriculum = go.IDCurriculum\n" + 
+					"	where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.anno = ?";
+
 			ps = conn.prepareStatement(query);
 			ps.setString(1, offertaForm);
 			ps.setInt(2, laurea);
@@ -209,7 +208,6 @@ public class GruppoEsamiOpzionaliBeanDAO {
 
 				lista.add(gb);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
