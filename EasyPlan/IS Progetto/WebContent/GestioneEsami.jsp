@@ -18,6 +18,7 @@
 		
 		String offerta= request.getParameter("offerta");
 		String curriculum= request.getParameter("curriculum");
+		int id= Integer.parseInt(request.getParameter("idCurriculum"));
 		ArrayList<GruppoEsamiObbligatoriBean> grob1 = new ArrayList<GruppoEsamiObbligatoriBean>();
 		ArrayList<GruppoEsamiObbligatoriBean> grob2 = new ArrayList<GruppoEsamiObbligatoriBean>();
 		ArrayList<GruppoEsamiObbligatoriBean> grob3 = new ArrayList<GruppoEsamiObbligatoriBean>();
@@ -189,7 +190,9 @@
 						<!--  Esame -->
 						<% for(int k=0; k<esami1.size(); k++) {  
 							EsameBean esame = esami1.get(k);
-							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>						
+							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>			
+						
+						<form action ="GestioneEsamiServlet" method = "POST">
 						<fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width: 100%">
 							<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse" data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
 						</fieldset>
@@ -199,12 +202,10 @@
 									<center>
 										<div class="row">
 											<div class="col-sm-3 col-lg-3">
-												CFU <input type="number" min="1" max="12"
-													class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
+												CFU <input type="number" min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
 											</div>
 											<div class="col-sm-3 col-lg-3">
-												Ore <input type="number" min="1" max="96"
-													class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
+												Ore <input type="number" min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
 											</div>
 											<div class="col-sm-6 col-lg-6">
 												Anno
@@ -268,55 +269,55 @@
 										<h4>Descrizione:</h4>
 									</div>
 									<div class="col-sm-9 col-lg-9">
-										<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
+										<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
 									</div>
 									
 									<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 										<center>
 										
-											<form action ="GestioneEsamiServlet" method ="POST">
-													<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 													<div>
-														<button class="btn btn-default btn-responsive center">
+														<button type="submit" class="btn btn-default btn-responsive center" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>
-											</form>
-										
-										</center>
+											
+										</center>										
 									</div>
 									
-									<form action ="GestioneEsamiServlet" method ="POST">
-										<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 										<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-											<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
+										
+											<button class="btn btn-default" style="margin-left: 15%; height: 45px" type="submit" name="metodo" value="updateEsame">
+											Applica
+											</button>
 										</div>
-									</form>
-									
 								</div>
 							</div>
 						</div>
+						</form>	
 						<% } %>
 						
 						<center>
 							<div>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-trash"><br>Cancella
-										gruppo 
-								</button>
-								</span>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									un nuovo esame</button>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									esame esistente</button>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-pencil"><br>Modifica
-										gruppo 
-								</button>
-								</span>
-	
+								<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<button type="submit" class="btn btn-default btn-responsive center" name="metodo" value="deleteGruppo">
+										<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
+									</button>
+									</form>
+									<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+										<button type="submit" class="btn btn-default btn-responsive center" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame
+										</button>
+									</form>
+									<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+										<button type="submit" class="btn btn-default btn-responsive center" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente
+										</button>
+									</form>
+								
 							</div>
 						</center>
+						
 					</fieldset>
 					<% } 
 	        	esami1.clear();
@@ -331,6 +332,8 @@
 						<% for(int k=0; k<esami1.size(); k++) {  
 							EsameBean esame = esami1.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
+						<form action="GestioneGruppoEsamiOpzionali" method = "post">
+						<%System.out.println("Ciaoooo") ;%>
 						<fieldset class="reset-this redo-fieldset"
 							style="margin-left: -11px; width: 100%">
 							<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -417,51 +420,68 @@
 									<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 										<center>
 											
-											<form action ="GestioneEsamiServlet" method ="POST">
-												<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 												<div>
-													<button class="btn btn-default btn-responsive center">
+													<button type="submit" class="btn btn-default btn-responsive center" name="metodo" value="cancellaEsame">
 														<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 													</button>												
-												</div>
-											</form>
+												</div>										
 											
 										</center>
 									</div>
 									
-									<form action ="GestioneEsamiServlet" method ="POST">
-										<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 										<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-											<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
-										</div>
-									</form>
-									
+										
+											<button class="btn btn-default" style="margin-left: 15%; height: 45px" type="submit" name="metodo" value="updateEsame">
+											Applica
+											</button>
+											</div>
 								</div>
 							</div>
 						</div>
+						</form>	
 						<% } %>
 						
 						<center>
 							<div>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-trash"><br>Cancella
-										gruppo 
-								</button>
-								</span>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									un nuovo esame</button>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									esame esistente</button>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-pencil"><br>Modifica
-										gruppo 
-								</button>
-								</span>
-	
+									
+							 <form action="GestioneGruppoEsamiOpzionali" method="POST"> 
+									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+									<button type="submit" class="btn btn-default btn-responsive center" name="metodo" value="deleteGruppo">
+										<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
+									</button>		
+							</form>	
+							<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>		
+									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame
+									</button>
+							</form>
+							<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente
+									</button>
+							</form>
+							<form action = "ModificaGruppoEsame.jsp" method = "POST">
+								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="updateGruppo">
+										<span class="glyphicon glyphicon-pencil"></span><br>Modifica gruppo
+									</button>
+							</form>
 							</div>
 						</center>
 					</fieldset>
 					<%} %>
+					<center>
+						<div>
+						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
+						 <input type="hidden" name="offerta" value="<%=offerta %>"></input>
+						 <input type="hidden" name="laurea" value="<%=laurea %>"></input>
+						 <input type="hidden" name="idCurriculum" value="<%=id %>"></input>
+						 <input type="hidden" name="anno" value="1"></input>
+							<button class="btn btn-default btn-responsive center" type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami
+							</button>
+							</form>
+						</div>
+					</center>
 					<% }
 	
 			 else if(i == 2){ // Secondo anno
@@ -477,6 +497,7 @@
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
+							<form action="GestioneGruppoEsamiObbligatori" method = "post">
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -563,48 +584,44 @@
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
-											
-												<form action ="GestioneEsamiServlet" method ="POST">
-													<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 													<div>
-														<button class="btn btn-default btn-responsive center">
+														<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
-													</div>
-												</form>
-												
+													</div>	
 											</center>
 										</div>
 										
-										<form action ="GestioneEsamiServlet" method ="POST">
-											<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-												<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
-											</div>
-										</form>
-									
-									</div>
+												
+											<button class="btn btn-default btn-responsive center" name="metodo" value="updateEsame" type="submit">
+												Applica
+											</button>
+												</div>
 								</div>
 							</div>
-							<% } %>
+						</div>
+						</form>	
+						<% } %>
 							
 							<center>
 								<div>
-									<button class="btn btn-default btn-responsive center">
-										<span class="glyphicon glyphicon-trash"><br>Cancella
-											gruppo 
-									</button>
-									</span>
-									<button class="btn btn-default btn-responsive center">Aggiungi
-										un nuovo esame</button>
-									<button class="btn btn-default btn-responsive center">Aggiungi
-										esame esistente</button>
-									<button class="btn btn-default btn-responsive center">
-										<span class="glyphicon glyphicon-pencil"><br>Modifica
-											gruppo 
-									</button>
-									</span>
-	
+									<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="deleteGruppo">
+											<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
+										</button>
+									</form>
+									<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame
+										</button>
+									</form>
+									<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente
+										</button>
+									</form>
 								</div>
 							</center>
 						</fieldset>
@@ -621,6 +638,7 @@
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
+							<form action="SelezionaCurriculaAm.jsp" method = "post">
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -707,52 +725,67 @@
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
-											
-												<form action ="GestioneEsamiServlet" method ="POST">
-													<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 													<div>
-														<button class="btn btn-default btn-responsive center">
+														<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>
-												</form>
 												
 											</center>
 										</div>
 										
-										<form action ="GestioneEsamiServlet" method ="POST">
-											<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-												<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
-											</div>
-										</form>
-										
-									</div>
+												
+												<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="updateEsame">
+													Applica
+												</button>
+										</div>
 								</div>
 							</div>
-							<% } %>
+						</div>
+						</form>	
+						<% } %>
 							
 							<center>
 								<div>
-									<button class="btn btn-default btn-responsive center">
-										<span class="glyphicon glyphicon-trash"><br>Cancella
-											gruppo 
-									</button>
-									</span>
-									<button class="btn btn-default btn-responsive center">Aggiungi
-										un nuovo esame</button>
-									<button class="btn btn-default btn-responsive center">Aggiungi
-										esame esistente</button>
-									<button class="btn btn-default btn-responsive center">
-										<span class="glyphicon glyphicon-pencil"><br>Modifica
-											gruppo 
-									</button>
-									</span>
-	
+									<form action="GestioneGruppoEsamiOpzionali" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="deleteGruppo">
+											<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
+										</button>	
+									</form>
+									<form action="AggiuntaNuovoEsame.jsp" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>				
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame
+										</button>
+									</form>
+									<form action="AggiuntaEsameEsistente.jsp" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente
+										</button>
+									</form>
+									<form action="ModificaGruppoEsame.jsp" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit"  name="metodo" value="updateGruppo">
+											<span class="glyphicon glyphicon-pencil"><br>Modifica gruppo </span>
+										</button>
+									</form>
+									
 								</div>
 							</center>
 						</fieldset>
 						<%} %>
+						<center>
+						<div>
+						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
+						 <input type="hidden" name="offerta" value="<%=offerta %>"></input>
+						 <input type="hidden" name="laurea" value="<%=laurea %>"></input>
+						 <input type="hidden" name="idCurriculum" value="<%=id %>"></input>
+						 <input type="hidden" name="anno" value="2"></input>
+							<button class="btn btn-default btn-responsive center">Aggiungi nuovo gruppo d'esami</button>
+							</form>
+						</div>
+					</center>
 						<% }
 	    	
 	    	else if(i == 3){ // Terzo anno
@@ -760,14 +793,14 @@
 	        	for(int j = 0; j<grob3.size(); j++){ 	
 	        		esami3.addAll(grob3.get(j).getEsami());
 	        %>
-					<fieldset class="reset-this redo-fieldset"
-						style="margin-left: 10px; width: 97%">
+					<fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width: 97%">
 						<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob3.get(j).getCodiceGEOb() %></legend>
 						
 						<!--  Esame -->
 						<% for(int k=0; k<esami3.size(); k++) {  
 							EsameBean esame = esami3.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
+						<form action="SelezionaCurriculaAm.jsp" method = "post">
 						<fieldset class="reset-this redo-fieldset"
 							style="margin-left: -11px; width: 100%">
 							<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -854,48 +887,43 @@
 									
 									<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 										<center>
-											
-											<form action ="GestioneEsamiServlet" method ="POST">
-												<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 												<div>
-													<button class="btn btn-default btn-responsive center">
+													<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="cancellaEsame">
 														<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 													</button>												
 												</div>
-											</form>
-											
 										</center>
 									</div>
-									
-									<form action ="GestioneEsamiServlet" method ="POST">
-											<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-												<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
-											</div>
-									</form>
-									
+												<button class="btn btn-default btn-responsive center" name="metodo" value="updateEsame">
+													Applica
+												</button>
+												</div>
 								</div>
 							</div>
 						</div>
+						</form>	
 						<% } %>
 						
 						<center>
 							<div>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-trash"><br>Cancella
-										gruppo 
-								</button>
-								</span>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									un nuovo esame</button>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									esame esistente</button>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-pencil"><br>Modifica
-										gruppo 
-								</button>
-								</span>
-	
+								<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
+									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="deleteGruppo" >
+										<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
+									</button>
+								</form>
+								<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
+									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame
+									</button>
+								</form>
+								<form action = "AggiuntaEsameEsistente" method = "POST">
+									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
+									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente
+									</button>
+								</form>
+								
 							</div>
 						</center>
 					</fieldset>
@@ -904,15 +932,14 @@
 	    	for (int j=0; j<grop3.size(); j++) { 
 	    		esami3.addAll(grop3.get(j).getEsami());
 	    		%>
-					<fieldset class="reset-this redo-fieldset"
-						style="margin-left: 10px; width: 97%">
+					<fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width: 97%">
 						<legend class="reset-this redo-legend"><%=grop3.get(j).getTotCFU() %> a scelta tra:
 						</legend>
-						
 						<!--  Esame -->
 						<% for(int k=0; k<esami3.size(); k++) {  
 							EsameBean esame = esami3.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
+						<form action="SelezionaCurriculaAm.jsp" method = "post">
 						<fieldset class="reset-this redo-fieldset"
 							style="margin-left: -11px; width: 100%">
 							<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1000,49 +1027,62 @@
 									<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 										<center>
 										
-											<form action ="GestioneEsamiServlet" method ="POST">
-												<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 												<div>
-													<button class="btn btn-default btn-responsive center">
+													<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="cancellaEsame">
 														<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 													</button>												
-												</div>
-											</form>
-									
-										</center>
+												</div>				
+										</center>	
 									</div>
-									<form action ="GestioneEsamiServlet" method ="POST">
-											<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
-											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-												<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
-											</div>
-									</form>
+					                            <div class="col-sm-8 col-lg-8" style="margin-top: 2%">
+												<button class="btn btn-default btn-responsive center"  type="submit" name="metodo" value="updateEsame">
+													Applica
+												</button>
+												</div>
 								</div>
 							</div>
 						</div>
+						</form>	
 						<% } %>
 						
 						<center>
 							<div>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-trash"><br>Cancella
-										gruppo 
-								</button>
-								</span>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									un nuovo esame</button>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									esame esistente</button>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-pencil"><br>Modifica
-										gruppo 
-								</button>
-								</span>
-	
+								<form action="GestioneGruppoEsamiOpzionali" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="deleteGruppo">
+											<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
+										</button>	
+								</form>	
+								<form action="AggiuntaNuovoEsame.jsp" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>					
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+								</form>
+								<form action="AggiuntaEsameEsistente.jsp" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+								</form>
+								<form action="ModificaGruppoEsame.jsp" method="POST">	
+										<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="updateGruppo">
+											<span class="glyphicon glyphicon-pencil"><br>Modifica gruppo </span>
+										</button>
+								</form>
+									
 							</div>
 						</center>
 					</fieldset>
 					<%} %>
+						<center>
+						<div>
+						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
+						 <input type="hidden" name="offerta" value="<%=offerta %>"></input>
+						 <input type="hidden" name="laurea" value="<%=laurea %>"></input>
+						 <input type="hidden" name="idCurriculum" value="<%=id %>"></input>
+						 <input type="hidden" name="anno" value="3"></input>
+							<button class="btn btn-default btn-responsive center">Aggiungi nuovo gruppo d'esami</button>
+							</form>
+						</div>
+					</center>
 					<% } %>
 	
 				</fieldset>
@@ -1074,6 +1114,7 @@
 						<% for(int k=0; k<esami1.size(); k++) {  
 							EsameBean esame = esami1.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
+						<form action="GestioneEsamiServlet" method = "post">
 						<fieldset class="reset-this redo-fieldset"
 							style="margin-left: -11px; width: 100%">
 							<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1153,47 +1194,40 @@
 									<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 										<center>
 											
-											<form action ="GestioneEsamiServlet" method ="POST">
-												<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 												<div>
-													<button class="btn btn-default btn-responsive center">
+													<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="cancellaEsame">
 														<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 													</button>												
 												</div>
-											</form>
-											
 										</center>
 									</div>
-									
-									<form action ="GestioneEsamiServlet" method ="POST">
-											<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
-											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-												<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
-											</div>
-									</form>
-									
+										<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
+												<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="updateEsame">
+													Applica
+												</button>
+										</div>
 								</div>
 							</div>
 						</div>
+						</form>	
 						<% } %>
 						
 						<center>
 							<div>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-trash"><br>Cancella
-										gruppo 
-								</button>
-								</span>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									un nuovo esame</button>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									esame esistente</button>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-pencil"><br>Modifica
-										gruppo 
-								</button>
-								</span>
-	
+								<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="deleteGruppo">
+										<span class="glyphicon glyphicon-trash" ><br>Cancella gruppo </span>
+									</button>
+								</form>
+								<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+								</form>
+								<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+								</form>
 							</div>
 						</center>
 					</fieldset>
@@ -1211,6 +1245,7 @@
 						<% for(int k=0; k<esami1.size(); k++) {  
 							EsameBean esame = esami1.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
+						<form action="GestioneEsamiServlet" method = "post">
 						<fieldset class="reset-this redo-fieldset"
 							style="margin-left: -11px; width: 100%">
 							<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1290,53 +1325,64 @@
 									<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 										<center>
 											
-											<form action ="GestioneEsamiServlet" method ="POST">
-												<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 												<div>
-													<button class="btn btn-default btn-responsive center">
+													<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="cancellaEsame">
 														<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 													</button>												
 												</div>
-											</form>
-											
 										</center>
 									</div>
-									
-									<form action ="GestioneEsamiServlet" method ="POST">
-											<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
-											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-												<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
-											</div>
-									</form>
-									
+									<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
+												<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="updateEsame">
+													Applica
+												</button>
+										</div>
 								</div>
 							</div>
 						</div>
+						</form>	
 						<% } %>
 						
 						<center>
 							<div>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-trash"><br>Cancella
-										gruppo 
-								</button>
-								</span>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									un nuovo esame</button>
-								<button class="btn btn-default btn-responsive center">Aggiungi
-									esame esistente</button>
-								<button class="btn btn-default btn-responsive center">
-									<span class="glyphicon glyphicon-pencil"><br>Modifica
-										gruppo 
-								</button>
-								</span>
-	
+								<form action="GestioneGruppoEsamiOpzionali" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center"  type="submit" name="metodo" value="deleteGruppo">
+											<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
+										</button>			
+								</form>
+								<form action="AggiuntaNuovoEsame.jsp" method="POST">		
+										<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+								</form>
+								<form action="AggiuntaEsameEsistente.jsp" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+								</form>
+								<form action="ModificaGruppoEsame.jsp" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center"type="submit" name="metodo" value="updateGruppo" >
+											<span class="glyphicon glyphicon-pencil"><br>Modifica gruppo </span>
+										</button>
+								</form>
 							</div>
 						</center>
+						
 					</fieldset>
 					<%} %>
+					<center>
+						<div>
+						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
+						 <input type="hidden" name="offerta" value="<%=offerta %>"></input>
+						 <input type="hidden" name="laurea" value="<%=laurea %>"></input>
+						 <input type="hidden" name="idCurriculum" value="<%=id %>"></input>
+						 <input type="hidden" name="anno" value="1"></input>
+							<button class="btn btn-default btn-responsive center">Aggiungi nuovo gruppo d'esami</button>
+							</form>
+						</div>
+					</center>
 					<% }
-	
+					
 			 else if(i == 2){ // Secondo anno
 				 ArrayList<EsameBean> esami2 = new ArrayList<EsameBean>();
 		        	for(int j = 0; j<grob2.size(); j++){ 	
@@ -1350,6 +1396,7 @@
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
+							<form action="GestioneEsamiServlet" method = "post">
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1429,47 +1476,41 @@
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
 												
-												<form action ="GestioneEsamiServlet" method ="POST">
-													<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 													<div>
-														<button class="btn btn-default btn-responsive center">
-															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
+														<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="cancellaEsame">
+															<span class="glyphicon glyphicon-trash" ><br>Cancella esame </span>
 														</button>												
-													</div>
-												</form>
-												
+													</div>		
 											</center>
 										</div>
 										
-										<form action ="GestioneEsamiServlet" method ="POST">
-											<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
-											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-												<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
-											</div>
-										</form>
-										
-									</div>
+											  <div class="col-sm-8 col-lg-8" style="margin-top: 2%">
+												<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="updateEsame">
+													Applica
+												</button>
+										      </div>
 								</div>
 							</div>
-							<% } %>
+						</div>
+						</form>	
+						<% } %>
 							
 							<center>
 								<div>
-									<button class="btn btn-default btn-responsive center">
-										<span class="glyphicon glyphicon-trash"><br>Cancella
-											gruppo 
-									</button>
-									</span>
-									<button class="btn btn-default btn-responsive center">Aggiungi
-										un nuovo esame</button>
-									<button class="btn btn-default btn-responsive center">Aggiungi
-										esame esistente</button>
-									<button class="btn btn-default btn-responsive center">
-										<span class="glyphicon glyphicon-pencil"><br>Modifica
-											gruppo 
-									</button>
-									</span>
-	
+									<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="deleteGruppo">
+											<span class="glyphicon glyphicon-trash" ><br>Cancella gruppo </span>
+										</button>
+									</form>
+									<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+									</form>
+									<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+									</form>
 								</div>
 							</center>
 						</fieldset>
@@ -1486,8 +1527,8 @@
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
-							<fieldset class="reset-this redo-fieldset"
-								style="margin-left: -11px; width: 100%">
+							<form action="GestioneEsamiServlet" method = "post">
+							<fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 									data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
 							</fieldset>
@@ -1564,51 +1605,62 @@
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
-												
-												<form action ="GestioneEsamiServlet" method ="POST">
-													<input type="hidden" name="eliminaEsame" value="<%=esame.getCodiceEsame() %>"></input>
 													<div>
-														<button class="btn btn-default btn-responsive center">
+														<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
-													</div>
-												</form>
-												
+													</div>		
 											</center>
 										</div>
 										
-										<form action ="GestioneEsamiServlet" method ="POST">
-											<input type="hidden" name="modificaEsame" value="<%=esame.getCodiceEsame() %>"></input>
-											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
-												<input type="submit" class="btn btn-default" name="applica" value="Applica" style="margin-left: 15%; height: 45px">
-											</div>
-										</form>
-										
-									</div>
+												 <div class="col-sm-8 col-lg-8" style="margin-top: 2%">
+												 	<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="updateEsame">
+													Applica
+													</button>
+										        </div>
 								</div>
 							</div>
-							<% } %>
+						</div>
+						</form>	
+						<% } %>
 							
 							<center>
 								<div>
-									<button class="btn btn-default btn-responsive center">
-										<span class="glyphicon glyphicon-trash"><br>Cancella
-											gruppo 
-									</button>
-									</span>
-									<button class="btn btn-default btn-responsive center">Aggiungi
-										un nuovo esame</button>
-									<button class="btn btn-default btn-responsive center">Aggiungi
-										esame esistente</button>
-									<button class="btn btn-default btn-responsive center">
-										<span class="glyphicon glyphicon-pencil"><br>Modifica gruppo 
-									</button>
-									</span>
-	
+									<form action="GestioneGruppoEsamiOpzionali" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="deleteGruppo">
+											<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
+										</button>
+									</form>				
+									<form action="AggiuntaNuovoEsame.jsp" method="POST">		
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+									</form>
+									<form action="AggiuntaEsameEsistente.jsp" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+									</form>
+									<form action="ModificaGruppoEsame.jsp" method="POST">
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="updateGruppo">
+											<span class="glyphicon glyphicon-pencil"><br>Modifica gruppo </span>
+										</button>
+									</form>
 								</div>
 							</center>
 						</fieldset>
 						<%} %>
+						<center>
+						<div>
+						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
+						 <input type="hidden" name="offerta" value="<%=offerta %>"></input>
+						 <input type="hidden" name="laurea" value="<%=laurea %>"></input>
+						 <input type="hidden" name="idCurriculum" value="<%=id %>"></input>
+						 <input type="hidden" name="anno" value="2"></input>
+							<button class="btn btn-default btn-responsive center">Aggiungi nuovo gruppo d'esami</button>
+							</form>
+						</div>
+					</center>
 						<% }%>
 				</fieldset>
 				<%}} %>

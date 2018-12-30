@@ -54,7 +54,7 @@ public class getCurriculaFromLaureaOff extends HttpServlet {
 		cdL.get(0).setCurricula(crm);
 		OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, cdL, true);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("View/viewUtente/SelezionaCurricula.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("SelezionaCurricula.jsp");
 		request.setAttribute("offertaFormativa", ofb);
 		rd.forward(request, response);
 	}

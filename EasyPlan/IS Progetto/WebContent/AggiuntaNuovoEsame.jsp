@@ -82,25 +82,29 @@
 				</center>
 				<div id="prof1" class="row">
 				<br><br>
+				<div class="col-sm-3 col-lg-3">
+					<h4>Nome esame:</h4>
+				</div>
+				<div class="col-sm-3 col-lg-3"><input type="text" class="form-control" placeholder="PD" name="nomeEsame"></div>
 				<div class="col-sm-12 col-lg-12">
 					<h4><b>Docenti:</b></h4>
 				</div>	
 				<div class="col-sm-3 col-lg-3">
-					<h4>Nome docente classe 1:</h4>
+					<h4>Nome docente:</h4>
 				</div>
 				<div class="col-sm-3 col-lg-3"><input type="text" class="form-control" placeholder="Costantino Delizia" name="nomeProf"></div>
 				<div class="col-sm-3 col-lg-3">
 					<input type="text" class="form-control" placeholder="Inserire url prof" name="urlProf" style="display:inline">
 				</div>
+				<div>
+				
+				</div>
 				<div class="col-sm-3 col-lg-3">
 					<button type="button" name="button" onClick=add() class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button> </div>
 				</div>
+				
 				<div class="col-sm-3 col-lg-3">
-					<h4>Syllabus:</h4>
-				</div>
-				<div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea></div>
-				<div class="col-sm-3 col-lg-3">
-					<h4>Modalità di esame:</h4>
+					<h4>Descrizione:</h4>
 				</div>
 				<div class="col-sm-9 col-lg-9"><textarea name="descrizione" rows="5" cols="79"></textarea></div>
 				<div class="col-sm-4 col-lg-4" style="margin-top:2%"></div>

@@ -74,6 +74,7 @@ public class getEsamiOffertaFormativa extends HttpServlet {
 			cur.add(curB.doRetrieveByKey(curricula));
 			lau.get(0).setCurricula(cur);
 			
+			System.out.println(cur.get(0).getNomeCurriculum());
 			//inserisco i gruppi di esami nei curricula dell' offerta formativa
 			grob = grobB.doRetriveGruppoEsamiObbByOfferta(nomeOfferta,laurea,cur.get(0).getNomeCurriculum()); 
 			grop = gropB.doRetriveGruppoEsamiOpzByOfferta(nomeOfferta,laurea,cur.get(0).getNomeCurriculum()); 
@@ -93,17 +94,19 @@ public class getEsamiOffertaFormativa extends HttpServlet {
 					grob.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grob.get(j).getCodiceGEOb(), grob.get(j).getEsami().get(d).getNome()));
 			}
 			
+			
 			for(int  z = 0; z < grop.size(); z++) {
 				for(int d1 = 0; d1 < grop.get(z).getEsami().size(); d1++)
 					grop.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grop.get(z).getCodiceGEOp(), grop.get(z).getEsami().get(d1).getNome()));
 			}
+			
 			
 		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("View/viewUtente/FormulazionePiano.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("FormulazionePiano.jsp");
 		request.setAttribute("offertaFormativa", of);
 		rd.forward(request, response);
 		

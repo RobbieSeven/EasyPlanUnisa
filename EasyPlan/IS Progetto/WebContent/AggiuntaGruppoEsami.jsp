@@ -1,3 +1,25 @@
+<%@page import="model.GruppoEsamiObbligatoriBeanDAO"%>
+<%@page import="model.GruppoEsamiObbligatoriBean"%>
+<%@page import="model.GruppoEsamiOpzionaliBeanDAO"%>
+<%@page import="model.GruppoEsamiOpzionaliBean"%>
+<%@page import="model.EsameBeanDAO"%>
+<%@page import="model.EsameBean"%>
+<%@page import="model.DocenteBeanDAO"%>
+<%@page import="model.DocenteBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	import="java.util.ArrayList" pageEncoding="UTF-8"%>
+
+<% String laurea=request.getParameter("laurea");
+		int tipo;
+		if(laurea.equals("triennale")){
+			tipo=1;	
+		}else {tipo=2;}
+		String offerta= request.getParameter("offerta");
+		int id= Integer.parseInt(request.getParameter("idCurriculum"));
+		int anno = Integer.parseInt(request.getParameter("anno"));
+		%>
+
+
 <!DOCTYPE html>
 <html>
 

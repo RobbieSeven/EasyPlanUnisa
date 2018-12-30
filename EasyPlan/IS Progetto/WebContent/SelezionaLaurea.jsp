@@ -1,21 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
-    pageEncoding="UTF-8" import="model.OffertaFormativaBean" import="model.CorsoDiLaureaBean"
-    import="model.CurriculumBean"%>
+    pageEncoding="UTF-8" import="model.OffertaFormativaBean" import="model.CorsoDiLaureaBean"%>
     
-    
-     <%
-     	// Simulazione dati presi dal database
-     	OffertaFormativaBean of = (OffertaFormativaBean) request.getAttribute("offertaFormativa"); 
+    <%
+    	OffertaFormativaBean of = (OffertaFormativaBean) request.getAttribute("offertaFormativa"); 
     	ArrayList<CorsoDiLaureaBean> cd = of.getLauree();
-    	ArrayList<CurriculumBean> cm = cd.get(0).getCurricula();
-     %>
-     
-     
+    %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>EasyPlan | Scelta curricula</title>
+    <title>EasyPlan | Scelta laurea</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- for social icon -->
@@ -42,26 +36,32 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-<!-- "Login amministratore" --><li><a href="Login amministratore" style="color:#000000">Admin</a></li>
+<!-- "Login amministratore" --><li><a href="Login.html" style="color:#000000">Admin</a></li>
           </ul>
         </div>
       </div>
     </nav>
     <img alt="logo" src="immagini/logo.png" class="img-responsive center-block">
+
     <div class="col-md-12">
-	    
-	    
-	    <%for(int i = 0; i < cm.size(); i++){ %>
-	    <form action="getEsamiOffertaFormativa" method = "post">
-		    <input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
-	      	<input type="hidden" name="laurea" value="<%=cd.get(0).isTipo()%>">
-	        <input type="hidden" name=curricula value="<%=cm.get(i).getIdCurriculum()%>">
-		    <button name="button" id="c"<%=+cm.get(i).getIdCurriculum()%> class="btn btn-default btn-responsive center-block"><%=cm.get(i).getNomeCurriculum() %></button>
-		    <br>
-	    </form>
-	     <%}%>
-	     
-	   
-    </div>
+    <%for(int i =0; i < cd.size(); i++){ %>
+    <%if(cd.get(i).isTipo()==1){ %>
+    <form action="getCurriculaFromLaureaOff" method = "post">
+      	<br>
+      	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
+      	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
+         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block">Laurea triennale</button>
+    </form>
+    <%}else{
+    	%>
+    	<form action="getCurriculaFromLaureaOff" method = "post">
+      	<br>
+      	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
+      	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
+         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block">Laurea magistrale</button>
+    </form>
+    <%} %>
+   <%} %>
+       </div>
   </body>
 </html>

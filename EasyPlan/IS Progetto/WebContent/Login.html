@@ -10,6 +10,7 @@
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="loginController.js" ></script>
     <style type="text/css">
         .navbar-inverse {
           background-color: #ada2b2;
@@ -40,21 +41,21 @@
     <div class="col-md-12">
       <div class="container">
     <center><h2>Login amministratore</h2></center>
-    <form class="form-horizontal">
-    <div class="form-group">
+    <form class="form-horizontal" id="form" action="AmministratoreServlet" method="post">
+    <div class="form-group" >
         <label class="control-label col-sm-5" for="email">Email:</label>
         <div class="col-sm-3">
-          <input type="Login" class="form-control" id="login" placeholder="Enter username" name="username">
+          <input type="Login" class="form-control" id="username" placeholder="Enter username" name="username">
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-5" for="pwd">Password:</label>
         <div class="col-sm-3">
-          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+          <input type="password" class="form-control" id="password" placeholder="Enter password" name="pwd">
         </div>
       </div>
         <div class="col-sm-offset-5 col-sm-10">
-          <button type="submit" class="btn btn-default" style="margin:0px 0px 0px 45px">Accedi</button>
+          <button type="submit" onclick="validateForm(this.form)" class="btn btn-default" style="margin:0px 0px 0px 45px">Accedi</button>
         </div>
      </form>
     </div>

@@ -38,7 +38,7 @@ public class getCorsiDiLaureaServlet extends HttpServlet {
 		ArrayList<CorsoDiLaureaBean> cdL = cdLD.getCorsiLaureaOfferta(nomeOfferta);
 		OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, cdL, true);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("View/viewUtente/SelezionaLaurea.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("SelezionaLaurea.jsp");
 		request.setAttribute("offertaFormativa", ofb);
 		rd.forward(request, response);
 	}

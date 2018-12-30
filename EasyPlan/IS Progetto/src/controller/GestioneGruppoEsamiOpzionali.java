@@ -27,7 +27,16 @@ public class GestioneGruppoEsamiOpzionali extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		if(request.getParameter("metodo").equals("deleteGruppo")) {
+			// pulsante aggiungi un nuovo esame
+		}else if(request.getParameter("metodo").equals("aggiungiEsame")) {
+			// pulsante aggiungi  esame esistente
+		}else if(request.getParameter("metodo").equals("aggiungiEsameEsistente")) {
+			// pulsante modifica gruppo
+		}else if(request.getParameter("metodo").equals("updateGruppo")) {
+			
+		} 
 	}
 
 	/**

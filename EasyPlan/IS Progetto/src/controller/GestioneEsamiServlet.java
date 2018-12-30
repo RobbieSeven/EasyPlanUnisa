@@ -18,7 +18,7 @@ public class GestioneEsamiServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public GestioneEsamiServlet() {
-        super();
+ 
         // TODO Auto-generated constructor stub
     }
 
@@ -26,8 +26,14 @@ public class GestioneEsamiServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 
+		if(request.getParameter("metodo").equals("updateEsame")) {
+			
+		}//pulsante cancella esame
+		else if(request.getParameter("metodo").equals("cancellaEsame")) {
+			
+		} 
+		
 	}
 
 	/**
