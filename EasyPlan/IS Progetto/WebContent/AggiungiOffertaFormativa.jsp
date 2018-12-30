@@ -12,6 +12,25 @@
 		<!-- -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- Validation script -->
+		<script>
+			function notify(msg) {
+	  	  		document.getElementById("error").innerHTML = msg;
+	  	 	}		
+		
+			function validate() {
+		        var name = document.form1.nomeOfferta;
+		        var format = /^\d{4}[/]\d{2}$/;
+		        if(name.value.match(format))
+		          	return true;
+		        else {
+					notify("Formato non corretto (AAAA/AA)");
+		            name.focus();
+		          	return false;
+		        }
+			}
+		</script>
+		<!-- ./Validation script -->
 		<style type="text/css">
 		.navbar-inverse {
 		background-color: #ada2b2;
@@ -44,25 +63,33 @@
 			<input type="submit" class="btn btn-default" name="indietro" value="Indietro">
 		</form>
 		
-		<center>
-			<h2>Inserisci il nome della nuova offerta formativa</h2>
-		</center>
+		<h2 align="center">Inserisci il nome della nuova offerta formativa</h2>
 		
 		<br><br>
 		
-		<form action="GestioneOffertaFormativa" method="post">
+		<form action="GestioneOffertaFormativa" method="post" name="form1" onsubmit="return validate()">
 			<input type="hidden" name="metodo" value="aggiungiOfferta">
 			<div class="container col-sm-12 col-lg-12">
 				<div class=" col-sm-4 col-lg-4"></div>
-				<div class="col-sm-3 col-lg-4 ">
+				<div class="col-sm-4 col-lg-4 ">
 					<input type="text" class="form-control" id="nomeOfferta" placeholder="AAAA/AA" name="nomeOfferta">
 				</div>
-				<div class=" col-sm-5 col-lg-4"></div>
+				<br>
+				<div class=" col-sm-4 col-lg-4"></div>
 			</div>
 			
+			<div class="container col-sm-12 col-lg-12">
+			<div class=" col-sm-4 col-lg-4"></div>
+			<div class=" col-sm-4 col-lg-4">
+					<p id="error" class="text-danger"></p>
+				</div>
+			</div>
+			<div class=" col-sm-4 col-lg-4"></div>
 			<br><br><br><br>
 			
-			<center><input type="submit" class="btn btn-default" name="conferma" value="Conferma"></center>
+			<center>
+				<input type="submit" class="btn btn-default" name="conferma" value="Conferma">
+			</center>
 		</form>
 		
 	</body>
