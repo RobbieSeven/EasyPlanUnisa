@@ -306,6 +306,7 @@
 									</form>
 									<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+										<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
 										<button type="submit" class="btn btn-default btn-responsive center" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame
 										</button>
 									</form>

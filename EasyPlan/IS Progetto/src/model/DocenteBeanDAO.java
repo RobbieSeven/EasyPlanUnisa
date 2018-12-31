@@ -171,4 +171,25 @@ public class DocenteBeanDAO {
 		}
 		return list;
 	}
+	
+	public synchronized int doRetrieveLastID() {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int codiceDocente = 0;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+
+			String query = "SELECT max(CodiceDocente) AS massimoID FROM docente";
+			ps = conn.prepareStatement(query);
+
+			ResultSet items = ps.executeQuery();
+
+			items.next();
+			codiceDocente = items.getInt("massimoID");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codiceDocente;
+	}
 }
