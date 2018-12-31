@@ -215,5 +215,32 @@ public class GruppoEsamiOpzionaliBeanDAO {
 		return lista;
 	}
 	
+	// Funzione per inserire un esame in un gruppo
+			public synchronized int insertEsameInGruppo(int CodiceGruppo, int CodiceEsame) throws IOException {
+				Connection conn = null;
+				PreparedStatement ps = null;
+
+				try {
+					conn = DriverManagerConnectionPool.getConnection();
+
+					String query = null;
+
+					query = "INSERT INTO formato(CodiceGEOp,CodiceEsame) values (?,?)";
+					ps = conn.prepareStatement(query);
+
+					ps.setInt(1, CodiceGruppo);
+					ps.setInt(2, CodiceEsame);
+					
+					int i = ps.executeUpdate();
+					
+					if (i != 0) {
+						return 1;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return 0;
+			}
+	
 	
 }

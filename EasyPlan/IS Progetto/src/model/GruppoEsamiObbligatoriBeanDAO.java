@@ -218,7 +218,7 @@ public class GruppoEsamiObbligatoriBeanDAO {
 		return lista;
 	}
 	
-	// Funzione per salvare un gruppo d'esami obbligatori
+	// Funzione per inserire un esame in un gruppo
 		public synchronized int insertEsameInGruppo(int CodiceGruppo, int CodiceEsame) throws IOException {
 			Connection conn = null;
 			PreparedStatement ps = null;

@@ -14,6 +14,8 @@ import model.DocenteBeanDAO;
 import model.EsameBean;
 import model.EsameBeanDAO;
 import model.GruppoEsamiObbligatoriBeanDAO;
+import model.GruppoEsamiOpzionaliBean;
+import model.GruppoEsamiOpzionaliBeanDAO;
 
 @WebServlet("/GestioneEsamiServlet")
 public class GestioneEsamiServlet extends HttpServlet {
@@ -53,6 +55,10 @@ public class GestioneEsamiServlet extends HttpServlet {
 			
 			if(tipoGruppo.equals("obbligatorio")) {
 				GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
+				dao.insertEsameInGruppo(idGruppo, nuovoIdEsame);
+			}
+			else if(tipoGruppo.equals("opzionale")) {
+				GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
 				dao.insertEsameInGruppo(idGruppo, nuovoIdEsame);
 			}
 	
