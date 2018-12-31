@@ -306,7 +306,11 @@
 									</form>
 									<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
-										<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
+										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
+										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
+										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
+										<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>									
 										<button type="submit" class="btn btn-default btn-responsive center" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame
 										</button>
 									</form>

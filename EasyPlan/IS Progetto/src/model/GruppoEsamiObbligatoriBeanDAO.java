@@ -19,7 +19,7 @@ public class GruppoEsamiObbligatoriBeanDAO {
 
 			String query = null;
 
-			query = "INSERT INTO gruppoesamiobbligatori(CodiceGEOb,Anno,Curriculum) " + "values (?, ?, ?)";
+			query = "INSERT INTO gruppoesamiobbligatori(CodiceGEOb,Anno,Curriculum) values (?, ?, ?)";
 			ps = conn.prepareStatement(query);
 
 			ps.setInt(1, gb.getCodiceGEOb());
@@ -27,6 +27,7 @@ public class GruppoEsamiObbligatoriBeanDAO {
 			ps.setInt(3, gb.getIdCurriculum());
 
 			int i = ps.executeUpdate();
+			
 			if (i != 0) {
 				return gb.getIdCurriculum();
 			}
@@ -216,4 +217,31 @@ public class GruppoEsamiObbligatoriBeanDAO {
 
 		return lista;
 	}
+	
+	// Funzione per salvare un gruppo d'esami obbligatori
+		public synchronized int insertEsameInGruppo(int CodiceGruppo, int CodiceEsame) throws IOException {
+			Connection conn = null;
+			PreparedStatement ps = null;
+
+			try {
+				conn = DriverManagerConnectionPool.getConnection();
+
+				String query = null;
+
+				query = "INSERT INTO formazione(CodiceGEOb,CodiceEsame) values (?,?)";
+				ps = conn.prepareStatement(query);
+
+				ps.setInt(1, CodiceGruppo);
+				ps.setInt(2, CodiceEsame);
+				
+				int i = ps.executeUpdate();
+				
+				if (i != 0) {
+					return 1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return 0;
+		}
 }

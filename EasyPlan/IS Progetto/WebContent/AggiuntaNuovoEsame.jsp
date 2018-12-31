@@ -3,6 +3,10 @@
 <%
 	int codiceGruppo = Integer.parseInt(request.getParameter("codiceGruppo"));
 	String tipoGruppo = request.getParameter("tipoGruppo");
+	String laurea=request.getParameter("laurea");
+	String offerta= request.getParameter("offerta");
+	String curriculum= request.getParameter("curriculum");
+	int id= Integer.parseInt(request.getParameter("idCurriculum"));
 %>
 <!DOCTYPE html>
 <html>
@@ -80,8 +84,12 @@ input[type=button]:active {
 	</nav>
 	<form action="GestioneEsamiServlet" method="POST">
 		<input type="hidden" name="codiceGruppo" value="<%=codiceGruppo%>"></input>
-		<input type="hidden" name="metodo" value="aggiuntaNuovoEsame" /> <input
-			type="hidden" name="tipo" value="<%=tipoGruppo%>" />
+		<input type="hidden" name="metodo" value="aggiuntaNuovoEsame" /> 
+		<input type="hidden" name="tipoGruppo" value="<%=tipoGruppo%>" />
+		<input type="hidden" name="laurea" value="<%=laurea%>"></input>
+		<input type="hidden" name="offerta" value="<%=offerta%>"></input>
+		<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+		<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 		<div class="container">
 			<center>
 				<center>
@@ -92,19 +100,23 @@ input[type=button]:active {
 				<br>
 
 				<div class="row">
-					<div class="col-sm-3 col-lg-3">
+					<div class="col-sm-4 col-lg-4">
 						CFU <input type="number" min="1" max="12" class="btn btn-default"
 							name="cfu" value="1">
 					</div>
-					<div class="col-sm-3 col-lg-3">
+					<div class="col-sm-4 col-lg-4">
 						Ore <input type="number" min="1" max="96" class="btn btn-default"
 							name="ore" value="1">
 					</div>
-					<div class="col-sm-6 col-lg-6"></div>
+					<div class="col-sm-4 col-lg-4">
+						<input type="text" class="form-control" placeholder="Inserire il semestre" name="semestre"></div>
+					</div>
+					
 				</div>
 			</center>
 			<div id="prof1" class="row">
 				<br> <br>
+				<div class="col-sm-3 col-lg-3"></div>
 				<div class="col-sm-3 col-lg-3">
 					<h4>Nome esame:</h4>
 				</div>
@@ -112,12 +124,18 @@ input[type=button]:active {
 					<input type="text" class="form-control" placeholder="Nome Esame"
 						name="nomeEsame">
 				</div>
+				<div class="col-sm-3 col-lg-3"></div>
 				<div class="col-sm-12 col-lg-12">
-					<h4>
-						<b>Docenti:</b>
-					</h4>
+					<div class="col-sm-1 col-lg-1"></div>
+					<div class="col-sm-2 col-lg-2">
+						<h4>
+							<b>Docenti:</b>
+						</h4>
+					</div>
+					<div class="col-sm-9 col-lg-9"></div>
 				</div>
 				<div class="col-sm-12 col-lg-12">
+					<div class="col-sm-12 col-lg-12">
 					<div class="col-sm-3 col-lg-3">
 						<input type="text" class="form-control" placeholder="Classe"
 							name="classeDocente">
@@ -135,13 +153,15 @@ input[type=button]:active {
 							name="urlDocente" style="display: inline">
 					</div>
 					<div></div>
-					<div class="col-sm-1 col-lg-1">
+					<div class="col-sm-2 col-lg-2">
 						<button type="button" name="button" onClick=add()
 							class="btn btn-default">
 							<span class="glyphicon glyphicon-plus"></span>
 						</button>
 					</div>
-					<br>
+					</div>
+				
+					<br><br><br><br><br><br>
 					<div class="col-sm-12 col-lg-12">
 						<div class="col-sm-3 col-lg-3">
 							<h4>Descrizione:</h4>
@@ -155,8 +175,8 @@ input[type=button]:active {
 						<input type="submit" class="btn btn-default" name="aggiungi"
 							value="Aggiungi" style="margin-left: 15%; height: 45px">
 					</div>
-
 				</div>
+				
 	</form>
 </body>
 </html>

@@ -18,7 +18,7 @@ public class EsameBeanDAO {
 
 			String query = null;
 
-			query = "INSERT INTO esame(CodiceEsame, Nome, CFU, OreLezione, Semestre) " + "values (?, ?, ?, ?, ?)";
+			query = "INSERT INTO esame(CodiceEsame, Nome, CFU, OreLezione, Semestre,Descrizione) " + "values (?, ?, ?, ?, ?,?)";
 			ps = conn.prepareStatement(query);
 
 			ps.setInt(1, eb.getCodiceEsame());
@@ -26,6 +26,7 @@ public class EsameBeanDAO {
 			ps.setInt(3, eb.getCFU());
 			ps.setInt(4, eb.getOreLezione());
 			ps.setString(5, eb.getSemestre());
+			ps.setString(6, eb.getDescrizione());
 
 			int i = ps.executeUpdate();
 			if (i != 0) {
@@ -226,5 +227,26 @@ public class EsameBeanDAO {
 		}
 
 		return lista;
+	}
+	
+	public synchronized int doRetrieveLastID() {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int codiceEsame = 0;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+
+			String query = "SELECT max(CodiceEsame) AS massimoID FROM esame";
+			ps = conn.prepareStatement(query);
+
+			ResultSet items = ps.executeQuery();
+
+			items.next();
+			codiceEsame = items.getInt("massimoID");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codiceEsame;
 	}
 }

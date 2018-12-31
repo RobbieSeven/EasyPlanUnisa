@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class DocenteBeanDAO {
 
 	// Funzione per inserire un docente nel database
-	public synchronized int doSave(DocenteBean db) throws IOException {
+	public synchronized int doSave(DocenteBean db, int CodiceEsame) throws IOException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 
@@ -28,9 +28,22 @@ public class DocenteBeanDAO {
 			ps.setString(4, db.getIndirizzoPaginaWeb());
 
 			int i = ps.executeUpdate();
-			if (i != 0) {
-				return 1;
+			
+			if(i!=0) {
+				query = "INSERT INTO insegnamento(CodiceDocente,CodiceEsame,classe) values (?,?,?)";
+				ps = conn.prepareStatement(query);
+				
+				ps.setInt(1, db.getCodiceDocente());
+				ps.setInt(2, CodiceEsame);
+				ps.setString(3, db.getInsegnamento());
+				
+				i = ps.executeUpdate();
+				
+				if (i != 0) {
+					return 1;
+				}
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

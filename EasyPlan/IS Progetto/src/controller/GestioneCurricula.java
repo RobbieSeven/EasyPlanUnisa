@@ -50,7 +50,6 @@ public class GestioneCurricula extends HttpServlet {
 		
 		RequestDispatcher rd = request.getRequestDispatcher("SelezionaCurriculaAm.jsp");
 		String laurea=request.getParameter("laurea");
-		System.out.println(laurea);
 		request.setAttribute("laurea", laurea);
 		rd.forward(request, response);
 	}
@@ -65,7 +64,6 @@ public class GestioneCurricula extends HttpServlet {
 	
 	public void removeCurriculum(int id)throws IOException {
 		CurriculumBeanDAO cbd = new CurriculumBeanDAO();
-		System.out.println("jdghjhgd "+id);
 		cbd.doDelete(id);
 	}
 	
