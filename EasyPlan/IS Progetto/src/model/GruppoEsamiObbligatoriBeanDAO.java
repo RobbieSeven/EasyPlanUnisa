@@ -244,4 +244,65 @@ public class GruppoEsamiObbligatoriBeanDAO {
 			}
 			return 0;
 		}
+		
+		// Funzione per cancellare un esame in un gruppo
+				public synchronized int deleteEsameInGruppo(int codiceGruppo, int codiceEsame) throws IOException {
+					Connection conn = null;
+					PreparedStatement ps = null;
+
+					try {
+						conn = DriverManagerConnectionPool.getConnection();
+
+						String query = null;
+
+						query = "DELETE FROM formazione WHERE CodiceGEOb = ? && CodiceEsame = ? ";
+						ps = conn.prepareStatement(query);
+
+						ps.setInt(1, codiceGruppo);
+						ps.setInt(2, codiceEsame);
+						
+						int i = ps.executeUpdate();
+						
+						if(i != 0) {
+							//controllo se è presente in formato
+							query = "select count(*) as numeroDiOccorrenze" + 
+									"	from esame as e join formato as f on e.CodiceEsame  = f.CodiceEsame" + 
+									"		where e.CodiceEsame = ?";
+							ps = conn.prepareStatement(query);
+							ps.setInt(1, codiceEsame);
+							
+							int numeroDiOccorrenzeInGruppiObbligatori = 1;
+							int numeroDiOccorrenzeInGruppiOpzionali = 1;
+							
+							ResultSet item = ps.executeQuery();
+							while (item.next()) {
+							numeroDiOccorrenzeInGruppiObbligatori = item.getInt("numeroDiOccorrenze");
+								System.out.println(numeroDiOccorrenzeInGruppiObbligatori);
+							}
+							//controllo se è presente in formazione
+							query = "select count(*) as numeroDiOccorrenze" + 
+									"	from esame as e join formazione as f on e.CodiceEsame  = f.CodiceEsame" + 
+									"		where e.CodiceEsame = ?";
+							ps = conn.prepareStatement(query);
+							ps.setInt(1, codiceEsame);
+							
+							item = ps.executeQuery();
+							while (item.next()) {
+								numeroDiOccorrenzeInGruppiOpzionali = item.getInt("numeroDiOccorrenze");
+							}
+							
+							//se non è presente in nessun gruppo lo cancello dal database
+							if(numeroDiOccorrenzeInGruppiObbligatori == 0 && numeroDiOccorrenzeInGruppiOpzionali == 0) {
+								EsameBeanDAO dao = new EsameBeanDAO();
+								dao.doDelete(codiceEsame);
+							}
+							
+							return 1;
+						}
+						
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return 0;
+				}
 }

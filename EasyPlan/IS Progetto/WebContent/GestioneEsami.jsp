@@ -198,7 +198,8 @@
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
-							<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>	
+							<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
+							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 							<fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse" data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
 							</fieldset>
@@ -357,6 +358,7 @@
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="opzionale"></input>
+							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -546,6 +548,7 @@
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
+								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 								<fieldset class="reset-this redo-fieldset"
 									style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -708,6 +711,7 @@
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="opzionale"></input>
+								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 								<fieldset class="reset-this redo-fieldset"
 									style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -887,13 +891,14 @@
 						<% for(int k=0; k<esami3.size(); k++) {  
 							EsameBean esame = esami3.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
-						<form action="SelezionaCurriculaAm.jsp" method = "post">
+						<form action="GestioneEsamiServlet" method = "post">
 							<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>	
+							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1050,6 +1055,7 @@
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="opzionale"></input>
+							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1251,6 +1257,7 @@
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
+							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1403,6 +1410,7 @@
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="opzionale"></input>
+							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1578,6 +1586,7 @@
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
+								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 								<fieldset class="reset-this redo-fieldset"
 									style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1728,6 +1737,7 @@
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="opzionale"></input>
+								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 								<fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 										data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">

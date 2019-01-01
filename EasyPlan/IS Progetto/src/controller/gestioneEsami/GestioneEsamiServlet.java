@@ -1,4 +1,4 @@
-package controller;
+package controller.gestioneEsami;
 
 import java.io.IOException;
 
@@ -61,7 +61,19 @@ public class GestioneEsamiServlet extends HttpServlet {
 				GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
 				dao.insertEsameInGruppo(idGruppo, nuovoIdEsame);
 			}
-	
+		}else if(request.getParameter("metodo").equals("cancellaEsame")) {
+			int idGruppo = Integer.parseInt(request.getParameter("codiceGruppo"));
+			int idEsame = Integer.parseInt(request.getParameter("codiceEsame"));
+			String tipoGruppo = request.getParameter("tipoGruppo");
+			
+			if(tipoGruppo.equals("obbligatorio")) {
+				GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
+				dao.deleteEsameInGruppo(idGruppo, idEsame);
+			}
+			/*else if(tipoGruppo.equals("opzionale")) {
+				GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
+				dao.insertEsameInGruppo(idGruppo, nuovoIdEsame);*/
+			
 		}
 		
 	    RequestDispatcher rd = request.getRequestDispatcher("GestioneEsami.jsp");
