@@ -200,6 +200,7 @@
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
 							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+							<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 							<fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse" data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
 							</fieldset>
@@ -209,38 +210,47 @@
 										<center>
 											<div class="row">
 												<div class="col-sm-3 col-lg-3">
-													CFU <input type="number" min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													Ore <input type="number" min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
+													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-													<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													<input type="hidden" name="gruppoIniziale" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 														<%for(int b = 0; b < grob1.size(); b++){
 														if(b == j){%>
 														<option value="<%=grob1.get(b).getCodiceGEOb() %>" selected>Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+														<%request.setAttribute(grob1.get(b).getCodiceGEOb()+"","obbligatorio"); %>
 														<%}else {%>
 														<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+														<%request.setAttribute(grob1.get(b).getCodiceGEOb()+"","obbligatorio"); %>
 														<%}} for(int b = 0; b < grob2.size(); b++){
 														%>
 														<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+														<%request.setAttribute(grob2.get(b).getCodiceGEOb()+"","obbligatorio"); %>
 														<%}
 															for(int b = 0;b < grob3.size(); b++){
 															%>
 														<option value="<%=grob3.get(b).getCodiceGEOb() %>">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+														<%request.setAttribute(grob3.get(b).getCodiceGEOb()+"","obbligatorio"); %>
 														<%}
 															for(int b = 0;b < grop1.size(); b++){
 															%>
 														<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+														<%request.setAttribute(grop1.get(b).getCodiceGEOp()+"","opzionale"); %>
+														
 														<%}
 															for(int b = 0;b < grop2.size(); b++){
 															%>
 														<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+														<%request.setAttribute(grop2.get(b).getCodiceGEOp()+"","opzionale"); %>
 														<%}
 															for(int b = 0;b < grop3.size(); b++){
 															%>
 														<option value="<%=grop3.get(b).getCodiceGEOp() %>">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+														<%request.setAttribute(grop3.get(b).getCodiceGEOp()+"","opzionale"); %>
 														<%} %>													
 													</select>
 												</div>
@@ -253,18 +263,29 @@
 											</div>
 											
 											<% for(int l=0; l<docenti.size(); l++) {  
-												DocenteBean docente = docenti.get(l); %>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+											<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<h4><%= docente.getInsegnamento() %>:</h4>
+													<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-												</div>
-												<div class="col-sm-3 col-lg-3">
+												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
 														<span class="glyphicon glyphicon-plus"></span>
 													</button>
@@ -272,6 +293,7 @@
 											</div>
 											<% } %>
 										</div>
+										<br>
 										<div class="col-sm-3 col-lg-3">
 											<h4>Descrizione:</h4>
 										</div>
@@ -359,6 +381,7 @@
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="opzionale"></input>
 							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+							<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -419,15 +442,18 @@
 												DocenteBean docente = docenti.get(l); %>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<h4><%= docente.getInsegnamento() %>:</h4>
+													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-												</div>
-												<div class="col-sm-3 col-lg-3">
+												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
 														<span class="glyphicon glyphicon-plus"></span>
 													</button>
@@ -435,6 +461,7 @@
 											</div>
 											<% } %>
 										</div>
+										<br>
 										<div class="col-sm-3 col-lg-3">
 											<h4>Descrizione:</h4>
 										</div>
@@ -549,6 +576,7 @@
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
 								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+								<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 								<fieldset class="reset-this redo-fieldset"
 									style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -610,15 +638,18 @@
 													DocenteBean docente = docenti.get(l); %>
 												<div class="col-sm-12 col-lg-12">
 													<div class="col-sm-3 col-lg-3">
-														<h4><%= docente.getInsegnamento() %>:</h4>
+														<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
 													</div>
 													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
 													</div>
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-													</div>
-													<div class="col-sm-3 col-lg-3">
+													<div class="col-sm-2 col-lg-2">
 														<button type="button" name="button" onClick=add() class="btn btn-default">
 															<span class="glyphicon glyphicon-plus"></span>
 														</button>
@@ -626,6 +657,7 @@
 												</div>
 												<% } %>
 											</div>
+											<br>
 											<div class="col-sm-3 col-lg-3">
 												<h4>Descrizione:</h4>
 											</div>
@@ -712,6 +744,7 @@
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="opzionale"></input>
 								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+								<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 								<fieldset class="reset-this redo-fieldset"
 									style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -773,15 +806,18 @@
 													DocenteBean docente = docenti.get(l); %>
 												<div class="col-sm-12 col-lg-12">
 													<div class="col-sm-3 col-lg-3">
-														<h4><%= docente.getInsegnamento() %>:</h4>
+														<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
 													</div>
 													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
 													</div>
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-													</div>
-													<div class="col-sm-3 col-lg-3">
+													<div class="col-sm-2 col-lg-2">
 														<button type="button" name="button" onClick=add() class="btn btn-default">
 															<span class="glyphicon glyphicon-plus"></span>
 														</button>
@@ -789,6 +825,7 @@
 												</div>
 												<% } %>
 											</div>
+											<br>
 											<div class="col-sm-3 col-lg-3">
 												<h4>Descrizione:</h4>
 											</div>
@@ -899,6 +936,7 @@
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>	
 							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+							<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -960,15 +998,18 @@
 												DocenteBean docente = docenti.get(l); %>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<h4><%= docente.getInsegnamento() %>:</h4>
+													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-												</div>
-												<div class="col-sm-3 col-lg-3">
+												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
 														<span class="glyphicon glyphicon-plus"></span>
 													</button>
@@ -976,6 +1017,7 @@
 											</div>
 											<% } %>
 										</div>
+										<br>
 										<div class="col-sm-3 col-lg-3">
 											<h4>Descrizione:</h4>
 										</div>
@@ -1056,6 +1098,7 @@
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="opzionale"></input>
 							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+							<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1117,15 +1160,18 @@
 												DocenteBean docente = docenti.get(l); %>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<h4><%= docente.getInsegnamento() %>:</h4>
+													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-												</div>
-												<div class="col-sm-3 col-lg-3">
+												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
 														<span class="glyphicon glyphicon-plus"></span>
 													</button>
@@ -1133,6 +1179,7 @@
 											</div>
 											<% } %>
 										</div>
+										<br>
 										<div class="col-sm-3 col-lg-3">
 											<h4>Descrizione:</h4>
 										</div>
@@ -1258,6 +1305,7 @@
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
 							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+							<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1311,15 +1359,18 @@
 												DocenteBean docente = docenti.get(l); %>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<h4><%= docente.getInsegnamento() %>:</h4>
+													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-												</div>
-												<div class="col-sm-3 col-lg-3">
+												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
 														<span class="glyphicon glyphicon-plus"></span>
 													</button>
@@ -1327,6 +1378,7 @@
 											</div>
 											<% } %>
 										</div>
+										<br>
 										<div class="col-sm-3 col-lg-3">
 											<h4>Descrizione:</h4>
 										</div>
@@ -1411,6 +1463,7 @@
 							<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 							<input type="hidden" name="tipoGruppo" value="opzionale"></input>
 							<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+							<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1464,15 +1517,18 @@
 												DocenteBean docente = docenti.get(l); %>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<h4><%= docente.getInsegnamento() %>:</h4>
+													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-												</div>
-												<div class="col-sm-3 col-lg-3">
+												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
 														<span class="glyphicon glyphicon-plus"></span>
 													</button>
@@ -1480,6 +1536,7 @@
 											</div>
 											<% } %>
 										</div>
+										<br>
 										<div class="col-sm-3 col-lg-3">
 											<h4>Descrizione:</h4>
 										</div>
@@ -1587,6 +1644,7 @@
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
 								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+								<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 								<fieldset class="reset-this redo-fieldset"
 									style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
@@ -1640,15 +1698,18 @@
 													DocenteBean docente = docenti.get(l); %>
 												<div class="col-sm-12 col-lg-12">
 													<div class="col-sm-3 col-lg-3">
-														<h4><%= docente.getInsegnamento() %>:</h4>
+														<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
 													</div>
 													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
 													</div>
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-													</div>
-													<div class="col-sm-3 col-lg-3">
+													<div class="col-sm-2 col-lg-2">
 														<button type="button" name="button" onClick=add() class="btn btn-default">
 															<span class="glyphicon glyphicon-plus"></span>
 														</button>
@@ -1656,6 +1717,7 @@
 												</div>
 												<% } %>
 											</div>
+											<br>
 											<div class="col-sm-3 col-lg-3">
 												<h4>Descrizione:</h4>
 											</div>
@@ -1738,6 +1800,7 @@
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="opzionale"></input>
 								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
+								<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 								<fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 										data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
@@ -1790,15 +1853,18 @@
 													DocenteBean docente = docenti.get(l); %>
 												<div class="col-sm-12 col-lg-12">
 													<div class="col-sm-3 col-lg-3">
-														<h4><%= docente.getInsegnamento() %>:</h4>
+														<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
 													</div>
 													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getNome() %> <%= docente.getCognome() %>" name="nomeProf">
+														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
 													</div>
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline">
-													</div>
-													<div class="col-sm-3 col-lg-3">
+													<div class="col-sm-2 col-lg-2">
 														<button type="button" name="button" onClick=add() class="btn btn-default">
 															<span class="glyphicon glyphicon-plus"></span>
 														</button>
@@ -1806,6 +1872,7 @@
 												</div>
 												<% } %>
 											</div>
+											<br>
 											<div class="col-sm-3 col-lg-3">
 												<h4>Descrizione:</h4>
 											</div>

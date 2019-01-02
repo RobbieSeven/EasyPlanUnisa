@@ -1,6 +1,7 @@
 package controller.gestioneEsami;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -74,8 +75,6 @@ public class GestioneEsamiServlet extends HttpServlet {
 				GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
 				dao.deleteEsameInGruppo(idGruppo, idEsame);
 			}
-			
-		}
 		
 	    RequestDispatcher rd = request.getRequestDispatcher("GestioneEsami.jsp");
 	    request.setAttribute("laurea", request.getParameter("laurea"));
@@ -84,8 +83,49 @@ public class GestioneEsamiServlet extends HttpServlet {
 	    request.setAttribute("idCurriculum", request.getParameter("idCurriculum"));
 		rd.forward(request, response);
 
-	}
+	}else if (request.getParameter("metodo").equals("updateEsame")) {
+			
+			int cfu = Integer.parseInt(request.getParameter("insertCFU"));
+			System.out.println(cfu);
+			int ore = Integer.parseInt(request.getParameter("insertOre"));
+			System.out.println(ore);
+			String descrizioneEsame =  request.getParameter("descrizione");
+			System.out.println(descrizioneEsame);
+		
+			int codice=Integer.parseInt(request.getParameter("codiceEsame"));
+			System.out.println(codice);
+			String gruppoIniziale= request.getParameter("gruppoIniziale");
+			String gruppoScelto= request.getParameter("sceltaAnno");
+			if(!gruppoIniziale.equals(gruppoScelto)) {
+				if( request.getParameter("tipoGruppo").equals("obbligatorio")) {
+					
+				}else {
+					
+				}
+			}
+			DocenteBeanDAO dao= new DocenteBeanDAO();
+			
+			int size= Integer.parseInt(request.getParameter("sizeArray"));
+			for(int i=1; i<=size;i++) {
+				DocenteBean db= new DocenteBean();
+				db.setCodiceDocente(Integer.parseInt(request.getParameter("codiceDocente"+i)));
+				db.setNome(request.getParameter("nomeProf"+i));
+				db.setCognome(request.getParameter("cognomeDocente"+i));
+				db.setIndirizzoPaginaWeb(request.getParameter("urlProf"+i));
+				db.setInsegnamento(request.getParameter("classe"+i));
+				dao.doSaveOrUpdate(db, codice);
 
+			}
+			
+			
+
+			/*EsameBeanDAO esameDAO = new EsameBeanDAO();
+			EsameBean esame = new EsameBean(codice, nomeEsame, cfu, descrizioneEsame, ore, semestre);
+			esameDAO.doSaveOrUpdate(nuovoEsame);*/
+
+			
+	}
+}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 		

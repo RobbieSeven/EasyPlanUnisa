@@ -49,6 +49,44 @@ public class DocenteBeanDAO {
 		}
 		return 0;
 	}
+	public synchronized void doSaveOrUpdate(DocenteBean db,int CodiceEsame) throws IOException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int i= doSave(db,CodiceEsame);
+		if(i==0) {
+			
+		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+
+			String query = null;
+			query = "UPDATE docente SET (Nome,Cognome,IndirizzoPaginaWeb) values (?,?,?) WHERE CodiceDocente=?";
+			ps = conn.prepareStatement(query);
+
+			
+			ps.setString(1, db.getNome());
+			ps.setString(2, db.getCognome());
+			ps.setString(3, db.getIndirizzoPaginaWeb());
+			ps.setInt(4, db.getCodiceDocente());
+			
+			int y = ps.executeUpdate();
+			
+			if(y!=0) {
+				query = "UPDATE insegnamento SET (classe) values (?) WHERE CodiceDocente=? AND CodiceEsame=? ";
+				ps = conn.prepareStatement(query);
+				
+				ps.setString(1, db.getInsegnamento());
+				ps.setInt(2, db.getCodiceDocente());
+				ps.setInt(3, CodiceEsame);
+				
+				y = ps.executeUpdate();	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	} 
+}
 
 	// Funzione per ricercare un docente dalla chiave
 	public synchronized DocenteBean doRetrieveByKey(int codiceDocente) {
