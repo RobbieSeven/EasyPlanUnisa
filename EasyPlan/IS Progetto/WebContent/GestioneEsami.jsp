@@ -351,7 +351,7 @@
 						<% for(int k=0; k<esami1.size(); k++) {  
 							EsameBean esame = esami1.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
-						<form action="GestioneGruppoEsamiOpzionali" method = "post">
+						<form action="GestioneEsamiServlet" method = "post">
 							<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -541,7 +541,7 @@
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
-							<form action="GestioneGruppoEsamiObbligatori" method = "post">
+							<form action="GestioneEsamiServlet" method = "post">
 								<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -704,7 +704,7 @@
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
-							<form action="SelezionaCurriculaAm.jsp" method = "post">
+							<form action="GestioneEsamiServlet" method = "post">
 								<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -1048,7 +1048,7 @@
 						<% for(int k=0; k<esami3.size(); k++) {  
 							EsameBean esame = esami3.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
-						<form action="SelezionaCurriculaAm.jsp" method = "post">
+						<form action="GestioneEsamiServlet" method = "post">
 							<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
