@@ -27,7 +27,7 @@ public class GruppoEsamiObbligatoriBeanDAO {
 			ps.setInt(3, gb.getIdCurriculum());
 
 			int i = ps.executeUpdate();
-			
+
 			if (i != 0) {
 				return gb.getIdCurriculum();
 			}
@@ -146,26 +146,25 @@ public class GruppoEsamiObbligatoriBeanDAO {
 
 		return false;
 	}
-	
-	public synchronized ArrayList<GruppoEsamiObbligatoriBean> doRetriveGruppoEsamiObbByOfferta(String anno, int laurea, String curricula)
-			throws ClassNotFoundException, SQLException {
+
+	public synchronized ArrayList<GruppoEsamiObbligatoriBean> doRetriveGruppoEsamiObbByOfferta(String anno, int laurea,
+			String curricula) throws ClassNotFoundException, SQLException {
 		ArrayList<GruppoEsamiObbligatoriBean> lista = new ArrayList<GruppoEsamiObbligatoriBean>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			String query = "select go.CodiceGEOb, go.Anno, go.Curriculum" + 
-					"	from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
-					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum\n" + 
-					"	where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ?";
+			String query = "select go.CodiceGEOb, go.Anno, go.Curriculum"
+					+ "	from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n"
+					+ "			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum\n"
+					+ "	where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ?";
 
 			ps = conn.prepareStatement(query);
 			ps.setString(1, anno);
 			ps.setInt(2, laurea);
 			ps.setString(3, curricula);
-			
-			
+
 			ResultSet items = ps.executeQuery();
 
 			while (items.next()) {
@@ -181,27 +180,26 @@ public class GruppoEsamiObbligatoriBeanDAO {
 
 		return lista;
 	}
-	
-	public synchronized ArrayList<GruppoEsamiObbligatoriBean> doRetriveGruppoEsamiObbByOffertaAndAnno(String offertaForm, int laurea, String curricula, int anno)
-			throws ClassNotFoundException, SQLException {
+
+	public synchronized ArrayList<GruppoEsamiObbligatoriBean> doRetriveGruppoEsamiObbByOffertaAndAnno(
+			String offertaForm, int laurea, String curricula, int anno) throws ClassNotFoundException, SQLException {
 		ArrayList<GruppoEsamiObbligatoriBean> lista = new ArrayList<GruppoEsamiObbligatoriBean>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			String query = "select go.CodiceGEOb, go.Anno, go.Curriculum" + 
-					"	from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n" + 
-					"			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum\n" + 
-					"	where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.anno = ?";
+			String query = "select go.CodiceGEOb, go.Anno, go.Curriculum"
+					+ "	from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = c.AnnoOffertaFormativa ) join curriculum as cu \n"
+					+ "			on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as go on cu.IDCurriculum = go.Curriculum\n"
+					+ "	where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.anno = ?";
 
 			ps = conn.prepareStatement(query);
 			ps.setString(1, offertaForm);
 			ps.setInt(2, laurea);
 			ps.setString(3, curricula);
 			ps.setInt(4, anno);
-			
-			
+
 			ResultSet items = ps.executeQuery();
 
 			while (items.next()) {
@@ -217,92 +215,119 @@ public class GruppoEsamiObbligatoriBeanDAO {
 
 		return lista;
 	}
-	
+
 	// Funzione per inserire un esame in un gruppo
-		public synchronized int insertEsameInGruppo(int CodiceGruppo, int CodiceEsame) throws IOException {
-			Connection conn = null;
-			PreparedStatement ps = null;
+	public synchronized int insertEsameInGruppo(int CodiceGruppo, int CodiceEsame) throws IOException {
+		Connection conn = null;
+		PreparedStatement ps = null;
 
-			try {
-				conn = DriverManagerConnectionPool.getConnection();
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
 
-				String query = null;
+			String query = null;
 
-				query = "INSERT INTO formazione(CodiceGEOb,CodiceEsame) values (?,?)";
-				ps = conn.prepareStatement(query);
+			query = "INSERT INTO formazione(CodiceGEOb,CodiceEsame) values (?,?)";
+			ps = conn.prepareStatement(query);
 
-				ps.setInt(1, CodiceGruppo);
-				ps.setInt(2, CodiceEsame);
-				
-				int i = ps.executeUpdate();
-				
-				if (i != 0) {
-					return 1;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			ps.setInt(1, CodiceGruppo);
+			ps.setInt(2, CodiceEsame);
+
+			int i = ps.executeUpdate();
+
+			if (i != 0) {
+				return 1;
 			}
-			return 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		// Funzione per cancellare un esame in un gruppo
-				public synchronized int deleteEsameInGruppo(int codiceGruppo, int codiceEsame) throws IOException {
-					Connection conn = null;
-					PreparedStatement ps = null;
+		return 0;
+	}
 
-					try {
-						conn = DriverManagerConnectionPool.getConnection();
+	// Funzione per cancellare un esame in un gruppo
+	public synchronized int deleteEsameInGruppo(int codiceGruppo, int codiceEsame) throws IOException {
+		Connection conn = null;
+		PreparedStatement ps = null;
 
-						String query = null;
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
 
-						query = "DELETE FROM formazione WHERE CodiceGEOb = ? && CodiceEsame = ? ";
-						ps = conn.prepareStatement(query);
+			String query = null;
 
-						ps.setInt(1, codiceGruppo);
-						ps.setInt(2, codiceEsame);
-						
-						int i = ps.executeUpdate();
-						
-						if(i != 0) {
-							//controllo se è presente in formato
-							query = "select count(*) as numeroDiOccorrenze" + 
-									"	from esame as e join formato as f on e.CodiceEsame  = f.CodiceEsame" + 
-									"		where e.CodiceEsame = ?";
-							ps = conn.prepareStatement(query);
-							ps.setInt(1, codiceEsame);
-							
-							int numeroDiOccorrenzeInGruppiObbligatori = 1;
-							int numeroDiOccorrenzeInGruppiOpzionali = 1;
-							
-							ResultSet item = ps.executeQuery();
-							while (item.next()) {
-							numeroDiOccorrenzeInGruppiObbligatori = item.getInt("numeroDiOccorrenze");
-								System.out.println(numeroDiOccorrenzeInGruppiObbligatori);
-							}
-							//controllo se è presente in formazione
-							query = "select count(*) as numeroDiOccorrenze" + 
-									"	from esame as e join formazione as f on e.CodiceEsame  = f.CodiceEsame" + 
-									"		where e.CodiceEsame = ?";
-							ps = conn.prepareStatement(query);
-							ps.setInt(1, codiceEsame);
-							
-							item = ps.executeQuery();
-							while (item.next()) {
-								numeroDiOccorrenzeInGruppiOpzionali = item.getInt("numeroDiOccorrenze");
-							}
-							
-							//se non è presente in nessun gruppo lo cancello dal database
-							if(numeroDiOccorrenzeInGruppiObbligatori == 0 && numeroDiOccorrenzeInGruppiOpzionali == 0) {
-								EsameBeanDAO dao = new EsameBeanDAO();
-								dao.doDelete(codiceEsame);
-							}
-							
-							return 1;
-						}
-						
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					return 0;
+			query = "DELETE FROM formazione WHERE CodiceGEOb = ? && CodiceEsame = ? ";
+			ps = conn.prepareStatement(query);
+
+			ps.setInt(1, codiceGruppo);
+			ps.setInt(2, codiceEsame);
+
+			int i = ps.executeUpdate();
+
+			if (i != 0) {
+				// controllo se ï¿½ presente in formato
+				query = "select count(*) as numeroDiOccorrenze"
+						+ "	from esame as e join formato as f on e.CodiceEsame  = f.CodiceEsame"
+						+ "		where e.CodiceEsame = ?";
+				ps = conn.prepareStatement(query);
+				ps.setInt(1, codiceEsame);
+
+				int numeroDiOccorrenzeInGruppiObbligatori = 1;
+				int numeroDiOccorrenzeInGruppiOpzionali = 1;
+
+				ResultSet item = ps.executeQuery();
+				while (item.next()) {
+					numeroDiOccorrenzeInGruppiObbligatori = item.getInt("numeroDiOccorrenze");
+					System.out.println(numeroDiOccorrenzeInGruppiObbligatori);
 				}
+				// controllo se ï¿½ presente in formazione
+				query = "select count(*) as numeroDiOccorrenze"
+						+ "	from esame as e join formazione as f on e.CodiceEsame  = f.CodiceEsame"
+						+ "		where e.CodiceEsame = ?";
+				ps = conn.prepareStatement(query);
+				ps.setInt(1, codiceEsame);
+
+				item = ps.executeQuery();
+				while (item.next()) {
+					numeroDiOccorrenzeInGruppiOpzionali = item.getInt("numeroDiOccorrenze");
+				}
+
+				// se non ï¿½ presente in nessun gruppo lo cancello dal database
+				if (numeroDiOccorrenzeInGruppiObbligatori == 0 && numeroDiOccorrenzeInGruppiOpzionali == 0) {
+					EsameBeanDAO dao = new EsameBeanDAO();
+					dao.doDelete(codiceEsame);
+				}
+
+				return 1;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public synchronized int deleteEsame(int codiceGruppo, int codiceEsame) throws IOException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+
+			String query = null;
+
+			query = "DELETE FROM formazione WHERE CodiceGEOb = ? && CodiceEsame = ? ";
+			ps = conn.prepareStatement(query);
+
+			ps.setInt(1, codiceGruppo);
+			ps.setInt(2, codiceEsame);
+
+			int i = ps.executeUpdate();
+
+			if (i != 0) {
+				return 1;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }
