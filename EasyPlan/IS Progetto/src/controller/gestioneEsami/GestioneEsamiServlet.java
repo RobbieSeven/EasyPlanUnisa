@@ -70,9 +70,10 @@ public class GestioneEsamiServlet extends HttpServlet {
 				GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
 				dao.deleteEsameInGruppo(idGruppo, idEsame);
 			}
-			/*else if(tipoGruppo.equals("opzionale")) {
+			else if(tipoGruppo.equals("opzionale")) {
 				GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
-				dao.insertEsameInGruppo(idGruppo, nuovoIdEsame);*/
+				dao.deleteEsameInGruppo(idGruppo, idEsame);
+			}
 			
 		}
 		
