@@ -47,24 +47,20 @@ public class EsameBeanDAO {
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 
-			String query = null;
-			ResultSet result = ps
-					.executeQuery("SELECT CodiceEsame FROM esame WHERE CodiceEsame='" + eb.getCodiceEsame() + "'");
-
-			if (result.next()) {
-				query = "UPDATE esame SET Nome=?, CFU=?, OreLezione=?, Semestre=? WHERE CodiceEsame=?";
+				String query = "UPDATE esame SET Nome=?, CFU=?, OreLezione=?, Semestre=?, Descrizione = ? WHERE CodiceEsame=?";
 				ps = conn.prepareStatement(query);
 
 				ps.setString(1, eb.getNome());
 				ps.setInt(2, eb.getCFU());
 				ps.setInt(3, eb.getOreLezione());
 				ps.setString(4, eb.getSemestre());
-				ps.setInt(5, eb.getCodiceEsame());
+				ps.setString(5, eb.getDescrizione());
+				ps.setInt(6, eb.getCodiceEsame());
 
 				int i = ps.executeUpdate();
 				if (i != 0)
 					return true;
-			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -380,51 +380,53 @@
 							<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
 							<fieldset class="reset-this redo-fieldset"
 								style="margin-left: -11px; width: 100%">
-								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
-									data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+								<input type="hidden" name="nomeEsame" value="<%=esame.getNome()%>"/>
 							</fieldset>
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container">
 										<center>
 											<div class="row">
-												<div class="col-sm-3 col-lg-3">
-													CFU <input type="number" min="1" max="12"
-														class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
+												<div class="col-sm-2 col-lg-2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													Ore <input type="number" min="1" max="96"
-														class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
+												<div class="col-sm-2 col-lg-2">
+													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
-													Anno 
-														<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													Anno
+														<input type="hidden" name="gruppoIniziale" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0;b < grob3.size(); b++){
 																%>
-															<option value="<%=grob3.get(b).getCodiceGEOb() %>">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+															<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																if(b == j){%>
-																<option value="<%=grop1.get(b).getCodiceGEOp() %>" selected>Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+																<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 																<%}else {%>
-																<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+																<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 																<%}} for(int b = 0; b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop3.size(); b++){
 																%>
-															<option value="<%=grop3.get(b).getCodiceGEOp() %>">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
 															<%} %>													
 														</select>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
 										</center>
@@ -435,19 +437,27 @@
 											</div>
 											
 											<% for(int l=0; l<docenti.size(); l++) {  
-												DocenteBean docente = docenti.get(l); %>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+											<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+													<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
+													<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
@@ -573,54 +583,55 @@
 								<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
 								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 								<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
-								<fieldset class="reset-this redo-fieldset"
-									style="margin-left: -11px; width: 100%">
-									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
-										data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+								<fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width: 100%">
+									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+									<input type="hidden" name="nomeEsame" value="<%=esame.getNome()%>"/>
 								</fieldset>
 								<div class="contents">
 									<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 										<div class="container">
 											<center>
 												<div class="row">
-													<div class="col-sm-3 col-lg-3">
-														CFU <input type="number" min="1" max="12"
-															class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
-													</div>
-													<div class="col-sm-3 col-lg-3">
-														Ore <input type="number" min="1" max="96"
-															class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
-													</div>
-													<div class="col-sm-6 col-lg-6">
-														Anno 
-														<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													<div class="col-sm-2 col-lg-2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
+												</div>
+												<div class="col-sm-6 col-lg-6">
+													Anno 
+														<input type="hidden" name="gruppoIniziale" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
 															<%}
 															for(int b = 0;b < grob2.size(); b++){
 																if(b == j){%>
-																<option value="<%=grob2.get(b).getCodiceGEOb() %>" selected>Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+																<option value="<%=grob2.get(b).getCodiceGEOb()%>,obbligatorio" selected>Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 																<%}else {%>
-																<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+																<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 																<%}} 
 																for(int b = 0; b < grop3.size(); b++){
 																%>
-															<option value="<%=grob3.get(b).getCodiceGEOb() %>">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+															<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop3.size(); b++){
 																%>
-															<option value="<%=grop3.get(b).getCodiceGEOp() %>">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
 															<%} %>													
 														</select>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 													</div>
 												</div>
 											</center>
@@ -631,19 +642,27 @@
 												</div>
 												
 												<% for(int l=0; l<docenti.size(); l++) {  
-													DocenteBean docente = docenti.get(l); %>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+												<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
 												<div class="col-sm-12 col-lg-12">
 													<div class="col-sm-3 col-lg-3">
-														<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+														<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
 													</div>
 													<div class="col-sm-2 col-lg-2">
-														<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+														<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
 													</div>
 													<div class="col-sm-2 col-lg-2">
-														<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
+														<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
 													</div>
 													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
+														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
 													</div>
 													<div class="col-sm-2 col-lg-2">
 														<button type="button" name="button" onClick=add() class="btn btn-default">
@@ -741,54 +760,55 @@
 								<input type="hidden" name="tipoGruppo" value="opzionale"></input>
 								<input type="hidden" name="codiceEsame" value="<%=esame.getCodiceEsame()%>"></input>
 								<input type="hidden" name="sizeArray" value="<%=docenti.size()%>"></input>
-								<fieldset class="reset-this redo-fieldset"
-									style="margin-left: -11px; width: 100%">
-									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
-										data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+								<fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width: 100%">
+									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+									<input type="hidden" name="nomeEsame" value="<%=esame.getNome()%>"/>
 								</fieldset>
 								<div class="contents">
 									<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 										<div class="container">
 											<center>
 												<div class="row">
-													<div class="col-sm-3 col-lg-3">
-														CFU <input type="number" min="1" max="12"
-															class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
+													<div class="col-sm-2 col-lg-2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
 													</div>
-													<div class="col-sm-3 col-lg-3">
-														Ore <input type="number" min="1" max="96"
-															class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
+													<div class="col-sm-2 col-lg-2">
+														Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 													</div>
 													<div class="col-sm-6 col-lg-6">
-														Anno 
-														<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													Anno 
+														<input type="hidden" name="gruppoIniziale" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0;b < grob3.size(); b++){
 																%>
-															<option value="<%=grob3.get(b).getCodiceGEOb() %>">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+															<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																if(b == j){%>
-																<option value="<%=grop2.get(b).getCodiceGEOp() %>" selected>Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+																<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 																<%}else {%>
-																<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+																<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 																<%}} 
 																for(int b = 0; b < grop3.size(); b++){
 																%>
-															<option value="<%=grop3.get(b).getCodiceGEOp() %>">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
 															<%} %>													
 														</select>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 													</div>
 												</div>
 											</center>
@@ -799,27 +819,35 @@
 												</div>
 												
 												<% for(int l=0; l<docenti.size(); l++) {  
-													DocenteBean docente = docenti.get(l); %>
-												<div class="col-sm-12 col-lg-12">
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
-													</div>
-													<div class="col-sm-2 col-lg-2">
-														<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
-													</div>
-													<div class="col-sm-2 col-lg-2">
-														<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
-													</div>
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
-													</div>
-													<div class="col-sm-2 col-lg-2">
-														<button type="button" name="button" onClick=add() class="btn btn-default">
-															<span class="glyphicon glyphicon-plus"></span>
-														</button>
-													</div>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+											<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
+											<div class="col-sm-12 col-lg-12">
+												<div class="col-sm-3 col-lg-3">
+													<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
 												</div>
-												<% } %>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
+												</div>
+												<div class="col-sm-3 col-lg-3">
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<button type="button" name="button" onClick=add() class="btn btn-default">
+														<span class="glyphicon glyphicon-plus"></span>
+													</button>
+												</div>
+											</div>
+											<% } %>
 											</div>
 											<br>
 											<div class="col-sm-3 col-lg-3">
@@ -937,50 +965,53 @@
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 									data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+								<input type="hidden" name="nomeEsame" value="<%=esame.getNome()%>"/>
 							</fieldset>
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container">
 										<center>
 											<div class="row">
-												<div class="col-sm-3 col-lg-3">
-													CFU <input type="number" min="1" max="12"
-														class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
+												<div class="col-sm-2 col-lg-2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													Ore <input type="number" min="1" max="96"
-														class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
+												<div class="col-sm-2 col-lg-2">
+													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-													<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													<input type="hidden" name="gruppoIniziale" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
+													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0;b < grob3.size(); b++){
 																if(b == j){%>
-																<option value="<%=grob3.get(b).getCodiceGEOb() %>" selected>Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+																<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio" selected>Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
 																<%}else {%>
-																<option value="<%=grob3.get(b).getCodiceGEOb() %>">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+																<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
 																<%}} 
 																for(int b = 0; b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop3.size(); b++){
 																%>
-															<option value="<%=grop3.get(b).getCodiceGEOp() %>">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
 															<%} %>													
 													</select>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
 										</center>
@@ -991,19 +1022,27 @@
 											</div>
 											
 											<% for(int l=0; l<docenti.size(); l++) {  
-												DocenteBean docente = docenti.get(l); %>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+											<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+													<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
+													<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
@@ -1099,50 +1138,53 @@
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 									data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+								<input type="hidden" name="nomeEsame" value="<%=esame.getNome()%>"/>
 							</fieldset>
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container">
 										<center>
 											<div class="row">
-												<div class="col-sm-3 col-lg-3">
-													CFU <input type="number" min="1" max="12"
-														class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
+												<div class="col-sm-2 col-lg-2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													Ore <input type="number" min="1" max="96"
-														class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
+												<div class="col-sm-2 col-lg-2">
+													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-													<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													<input type="hidden" name="gruppoIniziale" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0;b < grob3.size(); b++){
 																%>
-															<option value="<%=grob3.get(b).getCodiceGEOb() %>">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+															<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop3.size(); b++){
 																	if(b == j){%>
-																	<option value="<%=grop3.get(b).getCodiceGEOp() %>" selected>Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta</option>
+																	<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta</option>
 																	<%}else {%>
-																	<option value="<%=grop3.get(b).getCodiceGEOp() %>">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+																	<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
 																<%}}%>													
 													</select>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
 										</center>
@@ -1153,19 +1195,27 @@
 											</div>
 											
 											<% for(int l=0; l<docenti.size(); l++) {  
-												DocenteBean docente = docenti.get(l); %>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+											<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+													<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
+													<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
@@ -1306,42 +1356,45 @@
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 									data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+								<input type="hidden" name="nomeEsame" value="<%=esame.getNome()%>"/>
 							</fieldset>
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container">
 										<center>
 											<div class="row">
-												<div class="col-sm-3 col-lg-3">
-													CFU <input type="number" min="1" max="12"
-														class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
+												<div class="col-sm-2 col-lg-2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													Ore <input type="number" min="1" max="96"
-														class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
+												<div class="col-sm-2 col-lg-2">
+													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-													<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													<input type="hidden" name="gruppoIniziale" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0;b < grob1.size(); b++){
 																if(b == j){%>
-																	<option value="<%=grob1.get(b).getCodiceGEOb() %>" selected>Gruppo obbligatorio <%=grob1.get(b).getCodiceGEOb()%> </option>
+																	<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio" selected>Gruppo obbligatorio <%=grob1.get(b).getCodiceGEOb()%> </option>
 																	<%}else {%>
-																	<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbligatorio <%=grob1.get(b).getCodiceGEOb()%> </option>
+																	<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob1.get(b).getCodiceGEOb()%> </option>
 																	<%}} 
 																for(int b = 0; b < grob2.size(); b++){
 																%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}%>													
 													</select>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
 										</center>
@@ -1352,19 +1405,27 @@
 											</div>
 											
 											<% for(int l=0; l<docenti.size(); l++) {  
-												DocenteBean docente = docenti.get(l); %>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+											<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+													<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
+													<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
@@ -1464,42 +1525,45 @@
 								style="margin-left: -11px; width: 100%">
 								<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 									data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+								<input type="hidden" name="nomeEsame" value="<%=esame.getNome()%>"/>
 							</fieldset>
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container">
 										<center>
 											<div class="row">
-												<div class="col-sm-3 col-lg-3">
-													CFU <input type="number" min="1" max="12"
-														class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
+												<div class="col-sm-2 col-lg-2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
 												</div>
-												<div class="col-sm-3 col-lg-3">
-													Ore <input type="number" min="1" max="96"
-														class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
+												<div class="col-sm-2 col-lg-2">
+													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
-													Anno 
-													<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													Anno
+													<input type="hidden" name="gruppoIniziale" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																	if(b == j){%>
-																		<option value="<%=grop1.get(b).getCodiceGEOp() %>" selected>Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+																		<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 																		<%}else {%>
-																		<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+																		<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 																		<%}} 
 																for(int b = 0; b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}%>													
 													</select>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
 										</center>
@@ -1510,19 +1574,27 @@
 											</div>
 											
 											<% for(int l=0; l<docenti.size(); l++) {  
-												DocenteBean docente = docenti.get(l); %>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+											<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
 											<div class="col-sm-12 col-lg-12">
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
+													<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
-													<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
+													<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
 												</div>
 												<div class="col-sm-3 col-lg-3">
-													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													<button type="button" name="button" onClick=add() class="btn btn-default">
@@ -1645,42 +1717,45 @@
 									style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 										data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+									<input type="hidden" name="nomeEsame" value="<%=esame.getNome()%>"/>
 								</fieldset>
 								<div class="contents">
 									<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 										<div class="container">
 											<center>
 												<div class="row">
-													<div class="col-sm-3 col-lg-3">
-														CFU <input type="number" min="1" max="12"
-															class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
-													</div>
-													<div class="col-sm-3 col-lg-3">
-														Ore <input type="number" min="1" max="96"
-															class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
-													</div>
-													<div class="col-sm-6 col-lg-6">
-														Anno 
-														<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													<div class="col-sm-2 col-lg-2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
+												</div>
+												<div class="col-sm-6 col-lg-6">
+													Anno 
+														<input type="hidden" name="gruppoIniziale" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
 															<%}
 															for(int b = 0;b < grob2.size(); b++){
 																	if(b == j){%>
-																		<option value="<%=grob2.get(b).getCodiceGEOb() %>" selected>Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+																		<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio" selected>Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 																		<%}else {%>
-																		<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%> </option>
+																		<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%> </option>
 																		<%}} 
 																for(int b = 0; b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}%>													
 														</select>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 													</div>
 												</div>
 											</center>
@@ -1691,27 +1766,35 @@
 												</div>
 												
 												<% for(int l=0; l<docenti.size(); l++) {  
-													DocenteBean docente = docenti.get(l); %>
-												<div class="col-sm-12 col-lg-12">
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
-													</div>
-													<div class="col-sm-2 col-lg-2">
-														<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
-													</div>
-													<div class="col-sm-2 col-lg-2">
-														<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
-													</div>
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
-													</div>
-													<div class="col-sm-2 col-lg-2">
-														<button type="button" name="button" onClick=add() class="btn btn-default">
-															<span class="glyphicon glyphicon-plus"></span>
-														</button>
-													</div>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+											<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
+											<div class="col-sm-12 col-lg-12">
+												<div class="col-sm-3 col-lg-3">
+													<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
 												</div>
-												<% } %>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
+												</div>
+												<div class="col-sm-3 col-lg-3">
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<button type="button" name="button" onClick=add() class="btn btn-default">
+														<span class="glyphicon glyphicon-plus"></span>
+													</button>
+												</div>
+											</div>
+											<% } %>
 											</div>
 											<br>
 											<div class="col-sm-3 col-lg-3">
@@ -1800,42 +1883,45 @@
 								<fieldset class="reset-this redo-fieldset" style="margin-left: -11px; width: 100%">
 									<input type="button" value="<%= esame.getNome() %>" data-toggle="collapse"
 										data-target="#<%= esame.getCodiceEsame() %>" style="border: 0px; background: #ffffff;">
+									<input type="hidden" name="nomeEsame" value="<%=esame.getNome()%>"/>
 								</fieldset>
 								<div class="contents">
 									<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 										<div class="container">
 											<center>
 												<div class="row">
-													<div class="col-sm-3 col-lg-3">
-														CFU <input type="number" min="1" max="12"
-															class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>">
-													</div>
-													<div class="col-sm-3 col-lg-3">
-														Ore <input type="number" min="1" max="96"
-															class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>">
-													</div>
-													<div class="col-sm-6 col-lg-6">
-														Anno 
-														<select class="form-control selcls" name="Scelta anno" style="width: 40%; display: inline">
+													<div class="col-sm-2 col-lg-2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
+												</div>
+												<div class="col-sm-6 col-lg-6">
+													Anno
+														<input type="hidden" name="gruppoIniziale" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																	if(b == j){%>
-																		<option value="<%=grop2.get(b).getCodiceGEOp() %>" selected>Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+																		<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
 																		<%}else {%>
-																		<option value="<%=grop2.get(b).getCodiceGEOp() %>">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta  </option>
+																		<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta  </option>
 																<%}}%>													
 														</select>
+													</div>
+													<div class="col-sm-2 col-lg-2">
+														Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 													</div>
 												</div>
 											</center>
@@ -1846,27 +1932,35 @@
 												</div>
 												
 												<% for(int l=0; l<docenti.size(); l++) {  
-													DocenteBean docente = docenti.get(l); %>
-												<div class="col-sm-12 col-lg-12">
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" name="classe" value="<%= docente.getInsegnamento() %>"></input>
-													</div>
-													<div class="col-sm-2 col-lg-2">
-														<input type="text" class="form-control" value="<%= docente.getNome() %> " name="nomeProf"></input>
-													</div>
-													<div class="col-sm-2 col-lg-2">
-														<input type="text" class="form-control" name="cognomeDocente" value="<%= docente.getCognome() %>"></input>
-													</div>
-													<div class="col-sm-3 col-lg-3">
-														<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="urlProf" style="display: inline"></input>
-													</div>
-													<div class="col-sm-2 col-lg-2">
-														<button type="button" name="button" onClick=add() class="btn btn-default">
-															<span class="glyphicon glyphicon-plus"></span>
-														</button>
-													</div>
+												DocenteBean docente = docenti.get(l);
+												String codiceDocente="codiceDocente"+(l+1);
+												String nomeProf="nomeProf"+(l+1);
+												String cognomeDocente="cognomeDocente"+(l+1);
+												String urlProf="urlProf"+(l+1);
+												String classe="classe"+(l+1);
+												%>
+												
+											<input type ="hidden" name="<%=codiceDocente %>" value="<%=docente.getCodiceDocente()%>"></input>
+											<div class="col-sm-12 col-lg-12">
+												<div class="col-sm-3 col-lg-3">
+													<input type="text" name="<%=classe %>" value="<%= docente.getInsegnamento() %>"></input>
 												</div>
-												<% } %>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" value="<%= docente.getNome() %> " name="<%=nomeProf %>"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<input type="text" class="form-control" name="<%=cognomeDocente %>" value="<%= docente.getCognome() %>"></input>
+												</div>
+												<div class="col-sm-3 col-lg-3">
+													<input type="text" class="form-control" value="<%= docente.getIndirizzoPaginaWeb() %>" name="<%=urlProf %>" style="display: inline"></input>
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<button type="button" name="button" onClick=add() class="btn btn-default">
+														<span class="glyphicon glyphicon-plus"></span>
+													</button>
+												</div>
+											</div>
+											<% } %>
 											</div>
 											<br>
 											<div class="col-sm-3 col-lg-3">

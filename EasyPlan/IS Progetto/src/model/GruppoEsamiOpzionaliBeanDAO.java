@@ -312,7 +312,7 @@ public class GruppoEsamiOpzionaliBeanDAO {
 
 			String query = null;
 
-			query = "DELETE FROM formato WHERE CodiceGEOb = ? && CodiceEsame = ? ";
+			query = "DELETE FROM formato WHERE CodiceGEOp = ? && CodiceEsame = ? ";
 			ps = conn.prepareStatement(query);
 
 			ps.setInt(1, codiceGruppo);

@@ -94,20 +94,20 @@ public class GestioneEsamiServlet extends HttpServlet {
 			if (!gruppoIniziale.equals(gruppoScelto) || !tipoScelto.equals(tipoGruppo)) {
 				// Rimozione
 				if (tipoGruppo.equals("opzionale")) {
-					GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
+					GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
 					dao.deleteEsame(Integer.parseInt(gruppoIniziale), codice);
 				} else {
-					GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
+					GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
 					dao.deleteEsame(Integer.parseInt(gruppoIniziale), codice);
 				}
 
 				// Aggiunta
 				if (tipoScelto.equals("opzionale")) {
-					GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
-					dao.insertEsameInGruppo(Integer.parseInt(gruppoIniziale), codice);
-				} else {
 					GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
-					dao.insertEsameInGruppo(Integer.parseInt(gruppoIniziale), codice);
+					dao.insertEsameInGruppo(Integer.parseInt(gruppoScelto), codice);
+				} else {
+					GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
+					dao.insertEsameInGruppo(Integer.parseInt(gruppoScelto), codice);
 				}
 			}
 
@@ -128,6 +128,7 @@ public class GestioneEsamiServlet extends HttpServlet {
 			EsameBean esame = new EsameBean(codice, nomeEsame, cfu, descrizioneEsame, ore, semestre);
 			esameDAO.doSaveOrUpdate(esame);
 		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("GestioneEsami.jsp");
 		request.setAttribute("laurea", request.getParameter("laurea"));
 		request.setAttribute("offerta", request.getParameter("offerta"));
