@@ -74,14 +74,6 @@ public class GestioneEsamiServlet extends HttpServlet {
 				GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
 				dao.deleteEsameInGruppo(idGruppo, idEsame);
 			}
-
-			RequestDispatcher rd = request.getRequestDispatcher("GestioneEsami.jsp");
-			request.setAttribute("laurea", request.getParameter("laurea"));
-			request.setAttribute("offerta", request.getParameter("offerta"));
-			request.setAttribute("curriculum", request.getParameter("curriculum"));
-			request.setAttribute("idCurriculum", request.getParameter("idCurriculum"));
-			rd.forward(request, response);
-
 		} else if (request.getParameter("metodo").equals("updateEsame")) {
 			String nomeEsame = request.getParameter("nomeEsame");
 			int cfu = Integer.parseInt(request.getParameter("insertCFU"));
@@ -136,12 +128,17 @@ public class GestioneEsamiServlet extends HttpServlet {
 			EsameBean esame = new EsameBean(codice, nomeEsame, cfu, descrizioneEsame, ore, semestre);
 			esameDAO.doSaveOrUpdate(esame);
 		}
+		RequestDispatcher rd = request.getRequestDispatcher("GestioneEsami.jsp");
+		request.setAttribute("laurea", request.getParameter("laurea"));
+		request.setAttribute("offerta", request.getParameter("offerta"));
+		request.setAttribute("curriculum", request.getParameter("curriculum"));
+		request.setAttribute("idCurriculum", request.getParameter("idCurriculum"));
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-
 	}
 
 }
