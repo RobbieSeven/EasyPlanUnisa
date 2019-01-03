@@ -22,7 +22,7 @@ import model.GruppoEsamiOpzionaliBeanDAO;
 public class GestioneEsamiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public GestioneEsamiServlet() {
+	public GestioneEsamiServlet() { 
 		super();
 	}
 
