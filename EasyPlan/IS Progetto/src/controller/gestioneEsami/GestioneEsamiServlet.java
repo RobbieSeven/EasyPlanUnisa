@@ -128,6 +128,20 @@ public class GestioneEsamiServlet extends HttpServlet {
 			EsameBean esame = new EsameBean(codice, nomeEsame, cfu, descrizioneEsame, ore, semestre);
 			esameDAO.doSaveOrUpdate(esame);
 		}
+		else if (request.getParameter("metodo").equals("aggiuntaEsameEsistente")) {
+			EsameBeanDAO dao = new EsameBeanDAO();
+			EsameBean esame = dao.doRetrieveByKey(Integer.parseInt(request.getParameter("codiceEsame")));
+			String tipoGruppo = request.getParameter("tipoGruppo");
+			if(tipoGruppo.equals("obbligatorio")) {
+				GruppoEsamiObbligatoriBeanDAO gruppoObDao = new GruppoEsamiObbligatoriBeanDAO();
+				gruppoObDao.insertEsameInGruppo(Integer.parseInt(request.getParameter("codiceGruppo")), esame.getCodiceEsame());
+			}
+			else {
+				GruppoEsamiOpzionaliBeanDAO gruppoObDao = new GruppoEsamiOpzionaliBeanDAO();
+				gruppoObDao.insertEsameInGruppo(Integer.parseInt(request.getParameter("codiceGruppo")), esame.getCodiceEsame());
+			}
+			
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("GestioneEsami.jsp");
 		request.setAttribute("laurea", request.getParameter("laurea"));
@@ -137,7 +151,6 @@ public class GestioneEsamiServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);

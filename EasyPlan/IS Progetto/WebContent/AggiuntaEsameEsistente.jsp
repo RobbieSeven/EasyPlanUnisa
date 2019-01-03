@@ -1,10 +1,22 @@
+<%@page import="model.OffertaFormativaBean"%>
+<%@page import="model.OffertaFormativaBeanDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
     pageEncoding="UTF-8"%>
     
     <%
-     	// Simulazione dati presi dal database
-     	ArrayList<String> off = new ArrayList<String>();
-     	off.add("2018/19"); off.add("2017/18"); off.add("2016/17");
+     	/* Simulazione dati presi dal database
+     	ArrayList<OffertaFormativaBean> offerte = new ArrayList<>();
+    	OffertaFormativaBeanDAO dao = new OffertaFormativaBeanDAO();
+    	offerte.addAll(dao.doRetriveByAll());*/
+    	
+    	int codiceGruppo = Integer.parseInt(request.getParameter("codiceGruppo"));
+    	String tipoGruppo = request.getParameter("tipoGruppo");
+    	String laurea=request.getParameter("laurea");
+    	String offerta= request.getParameter("offerta");
+    	String curriculum= request.getParameter("curriculum");
+    	int id= Integer.parseInt(request.getParameter("idCurriculum"));
+    	
+    	
      %>
     
 <!DOCTYPE html>
@@ -47,22 +59,47 @@
     
     <div class="col-md-5 col-centered"></div>
      <div class="col-md-2 col-centered">
-	    <form action="DioBrando" method = "post">
-	    Seleziona curricula<select>
-	    						<option></option>
-	    				   </select>
-	 	</br>
-	   Seleziona Gruppo esame<select>
-	    						<option></option>
-	    				   </select>
-	 	</br>
-	   Seleziona Esame<select>
-	    					<option></option>
-	    			  </select>
-	 	</br> </br>
-	     <button>Aggiungi esame</button>
+	    <form action="GestioneEsamiServlet" method = "post">
+	    <input type="hidden" name="codiceGruppo" value="<%=codiceGruppo%>"></input>
+		<input type="hidden" name="metodo" value="aggiuntaEsameEsistente" /> 
+		<input type="hidden" name="tipoGruppo" value="<%=tipoGruppo%>" />
+		<input type="hidden" name="laurea" value="<%=laurea%>"></input>
+		<input type="hidden" name="offerta" value="<%=offerta%>"></input>
+		<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+		<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
+		   <!--  Seleziona Offerta Formativa<select nome="codiceOfferta" onChang>
+		   							<option selected></option>
+		   							<for(int i = 0; i < offerte.size(); i++){	
+		   							%>
+		    						<option value="<=offerte.get(i).getAnnoOffertaFormativa()%>">Offerta formativa <=offerte.get(i).getAnnoOffertaFormativa()%></option>
+		    						<} %>
+		    				   </select>
+		   Seleziona Curriculum<select>
+		    						<option></option>
+		    				   </select>
+		 	</br>Seleziona Gruppo esame<   Selselect>
+		    						<option></option>
+		    				   </select>
+		 	</br>
+		   Seleziona Esame<select>
+		    					<option></option>
+		    			  </select>
+		 	</br> </br>-->
+		 	<input type="text" name="codiceEsame" placeholder="Inserire codice esame"></input>
+		 	</select>
+		     <button>Aggiungi esame</button>
 	   </form>
     </div>
      <div class="col-md-5 col-centered"></div>
   </body>
+  <!--  <script>
+  function loadCurricula(){
+  	var xhttp = new XMLHttpRequest();
+  	xhttp.onreadystatechange = function(){
+  		if(xhttp.readyState == 4 && xhttp.status == 200){
+  			
+  		}}
+  	}
+  }
+  </script>-->
 </html>

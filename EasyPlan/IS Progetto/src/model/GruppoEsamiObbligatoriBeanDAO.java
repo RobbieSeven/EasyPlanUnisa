@@ -330,4 +330,25 @@ public class GruppoEsamiObbligatoriBeanDAO {
 		}
 		return 0;
 	}
+	
+	public synchronized int doRetrieveLastID() {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int codiceDocente = 0;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			
+			String query = "SELECT max(CodiceGEOb) AS massimoID FROM gruppoesamiobbligatori";
+			ps = conn.prepareStatement(query);
+
+			ResultSet items = ps.executeQuery();
+
+			items.next();
+			codiceDocente = items.getInt("massimoID");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codiceDocente;
+	}
 }

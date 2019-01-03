@@ -329,4 +329,25 @@ public class GruppoEsamiOpzionaliBeanDAO {
 		}
 		return 0;
 	}
+	
+	public synchronized int doRetrieveLastID() {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int codiceDocente = 0;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+
+			String query = "SELECT max(CodiceGEOp) AS massimoID FROM gruppoesamiopzionali";
+			ps = conn.prepareStatement(query);
+
+			ResultSet items = ps.executeQuery();
+
+			items.next();
+			codiceDocente = items.getInt("massimoID");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codiceDocente;
+	}
 }

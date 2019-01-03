@@ -9,12 +9,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>
 
-<% String laurea=request.getParameter("laurea");
-		int tipo;
-		if(laurea.equals("triennale")){
-			tipo=1;	
-		}else {tipo=2;}
+<% 
+		String laurea=request.getParameter("laurea");
 		String offerta= request.getParameter("offerta");
+		String curriculum = request.getParameter("curriculum");
 		int id= Integer.parseInt(request.getParameter("idCurriculum"));
 		int anno = Integer.parseInt(request.getParameter("anno"));
 		%>
@@ -81,22 +79,30 @@
             <center>
               <h2>Aggiunta nuovo gruppo di esami</h2>
             </center>
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="GestioneGruppoEsami" method="POST">
+            	
+				<input type="hidden" name="laurea" value="<%=laurea%>"></input>
+				<input type="hidden" name="offerta" value="<%=offerta%>"></input>
+				<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+				<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
+				<input type="hidden" name="anno" value="<%=anno%>"></input>
+				<input type="hidden" name="metodo" value="aggiungiGruppo"></input>
               <div class="form-group">
                 <label class="control-label col-sm-6" for="numerocfu">Numero CFU:</label>
                 <div class="col-sm-1">
-                  <input type="number" name="quantity" min="0" max="18" step="1" value="30">
+                  <input type="number" name="quantity" min="1" step="1" value="1">
                 </div>
               </div>
+              <div class="col-sm-offset-5 col-sm-10">
+            	<br>
+             	 <input type="radio" name="esame" value="obbligatorio" > Obbligatorio<br>
+             	 <input type="radio" name="esame" value="opzionale" checked > Opzionale
+         	 </div>
+         	 <div class="col-sm-offset-5 col-sm-10">
+          		<input type="submit" name="" value="Aggiungi nuovo gruppo" class="btn btn-default" style="margin-top:2%">
+          	</div>
+          	</form>
           </div>
-          <div class="col-sm-offset-5 col-sm-10">
-            <br>
-            <form action="">
-              <input type="radio" name="esame" value="obbligatorio"> Obbligatorio<br>
-              <input type="radio" name="esame" value="opzionale"> Opzionale
-            </form>
-          </div>
-          <center><input type="submit" name="" value="Aggiungi nuovo curricula" class="btn btn-default" style="margin-top:2%"></center>
         </div>
       </fieldset>
     </center>

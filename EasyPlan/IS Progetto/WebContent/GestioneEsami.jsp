@@ -182,6 +182,7 @@
 					<% if(i == 1){ // Primo anno
 						ArrayList<EsameBean> esami1 = new ArrayList<EsameBean>();
 	        	for(int j = 0; j<grob1.size(); j++){ 	
+	        		esami1.clear();
 	        		esami1.addAll(grob1.get(j).getEsami());
 	        %>
 					<fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width: 97%">
@@ -290,13 +291,20 @@
 											<% } %>
 										</div>
 										<br>
-										<div class="col-sm-3 col-lg-3">
-											<h4>Descrizione:</h4>
-										</div>
-										<div class="col-sm-9 col-lg-9">
-											<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
-										</div>
-										
+										<div class="col-sm-12 col-lg-12">
+											<div class="col-sm-2 col-lg-2">
+												<h4>Descrizione:</h4>
+											</div>
+											<div class="col-sm-7 col-lg-7 ">
+												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+											</div>
+											<div class="col-sm-2 col-lg-2">
+												<h4>Codice</h4>
+											</div>
+											<div class="col-sm-1 col-lg-1">
+												<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+											</div>
+										</div>	
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
 											
@@ -323,7 +331,7 @@
 						<center>
 							<div>
 							
-								<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -358,7 +366,8 @@
 					</fieldset>
 					<% } 
 	        	esami1.clear();
-	    	for (int j = 0; j < grop1.size(); j++) { 
+	    	for (int j = 0; j < grop1.size(); j++) {
+	    		esami1.clear();
 	    		esami1.addAll(grop1.get(j).getEsami());
 	    		%>
 					<fieldset class="reset-this redo-fieldset"
@@ -468,12 +477,21 @@
 											<% } %>
 										</div>
 										<br>
-										<div class="col-sm-3 col-lg-3">
-											<h4>Descrizione:</h4>
-										</div>
-										<div class="col-sm-9 col-lg-9">
-											<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
-										</div>
+										
+										<div class="col-sm-12 col-lg-12">
+											<div class="col-sm-2 col-lg-2">
+												<h4>Descrizione:</h4>
+											</div>
+											<div class="col-sm-7 col-lg-7 ">
+												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+											</div>
+											<div class="col-sm-2 col-lg-2">
+												<h4>Codice</h4>
+											</div>
+											<div class="col-sm-1 col-lg-1">
+												<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+											</div>
+										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
@@ -502,7 +520,7 @@
 						<center>
 							<div>
 									
-							 <form action="GestioneGruppoEsamiOpzionali" method="POST"> 
+							 <form action="GestioneGruppoEsami" method="POST"> 
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -554,8 +572,8 @@
 							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
 							<input type="hidden" name="anno" value="1"></input>
-							<button class="btn btn-default btn-responsive center" type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami 
-							</button>
+							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+							<button class="btn btn-default btn-responsive center" type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
 						</form>
 						</div>
 					</center>
@@ -563,7 +581,8 @@
 	
 			 else if(i == 2){ // Secondo anno
 				 ArrayList<EsameBean> esami2 = new ArrayList<EsameBean>();
-		        	for(int j = 0; j<grob2.size(); j++){ 	
+		        	for(int j = 0; j<grob2.size(); j++){ 
+		        		esami2.clear();
 		        		esami2.addAll(grob2.get(j).getEsami());
 		        %>
 						<fieldset class="reset-this redo-fieldset"
@@ -673,12 +692,21 @@
 												<% } %>
 											</div>
 											<br>
-											<div class="col-sm-3 col-lg-3">
-												<h4>Descrizione:</h4>
-											</div>
-											<div class="col-sm-9 col-lg-9">
-												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
-											</div>
+											
+											<div class="col-sm-12 col-lg-12">
+												<div class="col-sm-2 col-lg-2">
+													<h4>Descrizione:</h4>
+												</div>
+												<div class="col-sm-7 col-lg-7 ">
+													<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<h4>Codice</h4>
+												</div>
+												<div class="col-sm-1 col-lg-1">
+													<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+												</div>
+											</div>	
 											
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 												<center>
@@ -704,7 +732,7 @@
 							
 							<center>
 								<div>
-									<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+									<form action = "GestioneGruppoEsami" method = "POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -741,6 +769,7 @@
 						<% } 
 		        	esami2.clear();
 		    	for (int j = 0; j < grop2.size(); j++) { 
+		    		esami2.clear();
 		    		esami2.addAll(grop2.get(j).getEsami());
 		    		%>
 						<fieldset class="reset-this redo-fieldset"
@@ -850,12 +879,20 @@
 											<% } %>
 											</div>
 											<br>
-											<div class="col-sm-3 col-lg-3">
-												<h4>Descrizione:</h4>
-											</div>
-											<div class="col-sm-9 col-lg-9">
-												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
-											</div>
+											<div class="col-sm-12 col-lg-12">
+												<div class="col-sm-2 col-lg-2">
+													<h4>Descrizione:</h4>
+												</div>
+												<div class="col-sm-7 col-lg-7 ">
+													<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<h4>Codice</h4>
+												</div>
+												<div class="col-sm-1 col-lg-1">
+													<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+												</div>
+											</div>	
 											
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 												<center>
@@ -882,7 +919,7 @@
 							
 							<center>
 								<div>
-									<form action="GestioneGruppoEsamiOpzionali" method="POST">
+									<form action="GestioneGruppoEsami" method="POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -930,12 +967,13 @@
 						<center>
 						<div>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
-						 <input type="hidden" name="offerta" value="<%=offerta %>"></input>
-						 <input type="hidden" name="laurea" value="<%=laurea %>"></input>
-						 <input type="hidden" name="idCurriculum" value="<%=id %>"></input>
-						 <input type="hidden" name="anno" value="2"></input>
-							<button class="btn btn-default btn-responsive center">Aggiungi nuovo gruppo d'esami</button>
-							</form>
+							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
+							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
+							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
+							<input type="hidden" name="anno" value="2"></input>
+							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+							<button class="btn btn-default btn-responsive center" type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
+						</form>
 						</div>
 					</center>
 						<% }
@@ -943,6 +981,7 @@
 	    	else if(i == 3){ // Terzo anno
 	    		ArrayList<EsameBean> esami3 = new ArrayList<EsameBean>();
 	        	for(int j = 0; j<grob3.size(); j++){ 	
+	        		esami3.clear();
 	        		esami3.addAll(grob3.get(j).getEsami());
 	        %>
 					<fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width: 97%">
@@ -1053,12 +1092,20 @@
 											<% } %>
 										</div>
 										<br>
-										<div class="col-sm-3 col-lg-3">
-											<h4>Descrizione:</h4>
-										</div>
-										<div class="col-sm-9 col-lg-9">
-											<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
-										</div>
+										<div class="col-sm-12 col-lg-12">
+											<div class="col-sm-2 col-lg-2">
+												<h4>Descrizione:</h4>
+											</div>
+											<div class="col-sm-7 col-lg-7 ">
+												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+											</div>
+											<div class="col-sm-2 col-lg-2">
+												<h4>Codice</h4>
+											</div>
+											<div class="col-sm-1 col-lg-1">
+												<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+											</div>
+										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
@@ -1080,7 +1127,7 @@
 						
 						<center>
 							<div>
-								<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -1100,7 +1147,7 @@
 									<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
 									<button class="btn btn-default btn-responsive center" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame </button>
 								</form>
-								<form action = "AggiuntaEsameEsistente" method = "POST">
+								<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -1116,6 +1163,7 @@
 					<% } 
 	        	esami3.clear();
 	    	for (int j=0; j<grop3.size(); j++) { 
+	    		esami3.clear();
 	    		esami3.addAll(grop3.get(j).getEsami());
 	    		%>
 					<fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width: 97%">
@@ -1226,12 +1274,20 @@
 											<% } %>
 										</div>
 										<br>
-										<div class="col-sm-3 col-lg-3">
-											<h4>Descrizione:</h4>
-										</div>
-										<div class="col-sm-9 col-lg-9">
-											<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
-										</div>
+										<div class="col-sm-12 col-lg-12">
+											<div class="col-sm-2 col-lg-2">
+												<h4>Descrizione:</h4>
+											</div>
+											<div class="col-sm-7 col-lg-7 ">
+												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+											</div>
+											<div class="col-sm-2 col-lg-2">
+												<h4>Codice</h4>
+											</div>
+											<div class="col-sm-1 col-lg-1">
+												<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+											</div>
+										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
@@ -1256,7 +1312,7 @@
 						
 						<center>
 							<div>
-								<form action="GestioneGruppoEsamiOpzionali" method="POST">
+								<form action="GestioneGruppoEsami" method="POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -1304,12 +1360,13 @@
 						<center>
 						<div>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
-						 <input type="hidden" name="offerta" value="<%=offerta %>"></input>
-						 <input type="hidden" name="laurea" value="<%=laurea %>"></input>
-						 <input type="hidden" name="idCurriculum" value="<%=id %>"></input>
-						 <input type="hidden" name="anno" value="3"></input>
-							<button class="btn btn-default btn-responsive center">Aggiungi nuovo gruppo d'esami</button>
-							</form>
+							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
+							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
+							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
+							<input type="hidden" name="anno" value="3"></input>
+							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+							<button class="btn btn-default btn-responsive center" type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
+						</form>
 						</div>
 					</center>
 					<% } %>
@@ -1332,7 +1389,8 @@
 	
 					<% if(i == 1){ // Primo anno
 						ArrayList<EsameBean> esami1 = new ArrayList<EsameBean>();
-	        	for(int j = 0; j<grob1.size(); j++){ 	
+	        	for(int j = 0; j<grob1.size(); j++){ 
+	        		esami1.clear();
 	        		esami1.addAll(grob1.get(j).getEsami());
 	        %>
 					<fieldset class="reset-this redo-fieldset"
@@ -1436,12 +1494,20 @@
 											<% } %>
 										</div>
 										<br>
-										<div class="col-sm-3 col-lg-3">
-											<h4>Descrizione:</h4>
-										</div>
-										<div class="col-sm-9 col-lg-9">
-											<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
-										</div>
+										<div class="col-sm-12 col-lg-12">
+											<div class="col-sm-2 col-lg-2">
+												<h4>Descrizione:</h4>
+											</div>
+											<div class="col-sm-7 col-lg-7 ">
+												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+											</div>
+											<div class="col-sm-2 col-lg-2">
+												<h4>Codice</h4>
+											</div>
+											<div class="col-sm-1 col-lg-1">
+												<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+											</div>
+										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
@@ -1466,7 +1532,7 @@
 						
 						<center>
 							<div>
-								<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -1501,6 +1567,7 @@
 					<% } 
 	        	esami1.clear();
 	    	for (int j = 0; j < grop1.size(); j++) { 
+	    		esami1.clear();
 	    		esami1.addAll(grop1.get(j).getEsami());
 	    		%>
 					<fieldset class="reset-this redo-fieldset"
@@ -1605,12 +1672,20 @@
 											<% } %>
 										</div>
 										<br>
-										<div class="col-sm-3 col-lg-3">
-											<h4>Descrizione:</h4>
-										</div>
-										<div class="col-sm-9 col-lg-9">
-											<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
-										</div>
+										<div class="col-sm-12 col-lg-12">
+											<div class="col-sm-2 col-lg-2">
+												<h4>Descrizione:</h4>
+											</div>
+											<div class="col-sm-7 col-lg-7 ">
+												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+											</div>
+											<div class="col-sm-2 col-lg-2">
+												<h4>Codice</h4>
+											</div>
+											<div class="col-sm-1 col-lg-1">
+												<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+											</div>
+										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											<center>
@@ -1633,7 +1708,7 @@
 						
 						<center>
 							<div>
-								<form action="GestioneGruppoEsamiOpzionali" method="POST">
+								<form action="GestioneGruppoEsami" method="POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -1681,11 +1756,12 @@
 					<center>
 						<div>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
-							 <input type="hidden" name="offerta" value="<%=offerta %>"></input>
-							 <input type="hidden" name="laurea" value="<%=laurea %>"></input>
-							 <input type="hidden" name="idCurriculum" value="<%=id %>"></input>
-							 <input type="hidden" name="anno" value="1"></input>
-							<button class="btn btn-default btn-responsive center">Aggiungi nuovo gruppo d'esami</button>
+							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
+							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
+							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
+							<input type="hidden" name="anno" value="1"></input>
+							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+							<button class="btn btn-default btn-responsive center" type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
 						</form>
 						</div>
 					</center>
@@ -1693,7 +1769,8 @@
 					
 			 else if(i == 2){ // Secondo anno
 				 ArrayList<EsameBean> esami2 = new ArrayList<EsameBean>();
-		        	for(int j = 0; j<grob2.size(); j++){ 	
+		        	for(int j = 0; j<grob2.size(); j++){ 
+		        		esami2.clear();
 		        		esami2.addAll(grob2.get(j).getEsami());
 		        %>
 						<fieldset class="reset-this redo-fieldset"
@@ -1797,12 +1874,20 @@
 											<% } %>
 											</div>
 											<br>
-											<div class="col-sm-3 col-lg-3">
-												<h4>Descrizione:</h4>
-											</div>
-											<div class="col-sm-9 col-lg-9">
-												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
-											</div>
+											<div class="col-sm-12 col-lg-12">
+												<div class="col-sm-2 col-lg-2">
+													<h4>Descrizione:</h4>
+												</div>
+												<div class="col-sm-7 col-lg-7 ">
+													<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<h4>Codice</h4>
+												</div>
+												<div class="col-sm-1 col-lg-1">
+													<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+												</div>
+											</div>	
 											
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 												<center>
@@ -1826,7 +1911,7 @@
 							
 							<center>
 								<div>
-									<form action = "GestioneGruppoEsamiObbligatori" method = "POST">
+									<form action = "GestioneGruppoEsami" method = "POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -1861,6 +1946,7 @@
 						<% } 
 		        	esami2.clear();
 		    	for (int j = 0; j < grop2.size(); j++) { 
+		    		esami2.clear();
 		    		esami2.addAll(grop2.get(j).getEsami());
 		    		%>
 						<fieldset class="reset-this redo-fieldset"
@@ -1963,12 +2049,20 @@
 											<% } %>
 											</div>
 											<br>
-											<div class="col-sm-3 col-lg-3">
-												<h4>Descrizione:</h4>
-											</div>
-											<div class="col-sm-9 col-lg-9">
-												<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>
-											</div>
+											<div class="col-sm-12 col-lg-12">
+												<div class="col-sm-2 col-lg-2">
+													<h4>Descrizione:</h4>
+												</div>
+												<div class="col-sm-7 col-lg-7 ">
+													<textarea name="descrizione" rows="5" cols="79"><%= esame.getDescrizione() %></textarea>										
+												</div>
+												<div class="col-sm-2 col-lg-2">
+													<h4>Codice</h4>
+												</div>
+												<div class="col-sm-1 col-lg-1">
+													<input type="text" readonly value="<%=esame.getCodiceEsame() %>"></input>
+												</div>
+											</div>	
 											
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 												<center>
@@ -1991,7 +2085,7 @@
 							
 							<center>
 								<div>
-									<form action="GestioneGruppoEsamiOpzionali" method="POST">
+									<form action="GestioneGruppoEsami" method="POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
@@ -2038,11 +2132,12 @@
 						<center>
 						<div>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
-							 <input type="hidden" name="offerta" value="<%=offerta %>"></input>
-							 <input type="hidden" name="laurea" value="<%=laurea %>"></input>
-							 <input type="hidden" name="idCurriculum" value="<%=id %>"></input>
-							 <input type="hidden" name="anno" value="2"></input>
-							<button class="btn btn-default btn-responsive center">Aggiungi nuovo gruppo d'esami</button>
+							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
+							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
+							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
+							<input type="hidden" name="anno" value="2"></input>
+							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+							<button class="btn btn-default btn-responsive center" type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
 						</form>
 						</div>
 					</center>
