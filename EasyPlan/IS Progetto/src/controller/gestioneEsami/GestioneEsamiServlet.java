@@ -120,6 +120,7 @@ public class GestioneEsamiServlet extends HttpServlet {
 				dao.doSaveOrUpdate(db, codice);
 			}
 
+			
 			EsameBeanDAO esameDAO = new EsameBeanDAO(); 
 			EsameBean esame = new EsameBean(codice, nomeEsame, cfu, descrizioneEsame, ore, semestre);
 			esameDAO.doSaveOrUpdate(esame);
