@@ -61,9 +61,12 @@ public class GestioneGruppoEsami extends HttpServlet {
 				GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
 				dao.doDelete(codiceGruppo);
 			}
-			
+		}else if(request.getParameter("metodo").equals("modificaGruppo")) { 
+			int codiceGruppo = Integer.parseInt(request.getParameter("codiceGruppo"));
+			int numeroCFU = Integer.parseInt(request.getParameter("quantity"));
+			GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
+			dao.updateTotCFU(codiceGruppo, numeroCFU);
 		}
-		
 		RequestDispatcher rd = request.getRequestDispatcher("GestioneEsami.jsp");
 		request.setAttribute("laurea", request.getParameter("laurea"));
 		request.setAttribute("offerta", request.getParameter("offerta"));

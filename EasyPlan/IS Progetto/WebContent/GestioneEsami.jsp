@@ -552,6 +552,7 @@
 							</form>
 							<form action = "ModificaGruppoEsame.jsp" method = "POST">
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+								<input type="hidden" name="totCFU" value ="<%=grop1.get(j).getTotCFU() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -950,6 +951,7 @@
 									</form>
 									<form action="ModificaGruppoEsame.jsp" method="POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<input type="hidden" name="totCFU" value ="<%=grop2.get(j).getTotCFU() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1343,6 +1345,7 @@
 								</form>
 								<form action="ModificaGruppoEsame.jsp" method="POST">	
 									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+									<input type="hidden" name="totCFU" value ="<%=grop3.get(j).getTotCFU() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1739,6 +1742,7 @@
 								</form>
 								<form action="ModificaGruppoEsame.jsp" method="POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+									<input type="hidden" name="totCFU" value ="<%=grop1.get(j).getTotCFU() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -2116,6 +2120,7 @@
 									</form>
 									<form action="ModificaGruppoEsame.jsp" method="POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<input type="hidden" name="totCFU" value ="<%=grop2.get(j).getTotCFU() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>

@@ -350,4 +350,30 @@ public class GruppoEsamiOpzionaliBeanDAO {
 		}
 		return codiceDocente;
 	}
+	
+	public synchronized boolean updateTotCFU(int codiceGruppo, int numeroCFU) throws IOException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+
+			String query = null;
+			
+				query = "UPDATE gruppoesamiopzionali SET  TotCFU=? WHERE CodiceGEOp=?";
+				ps = conn.prepareStatement(query);
+
+				ps.setInt(1, codiceGruppo);
+				ps.setInt(2, numeroCFU);
+
+				int i = ps.executeUpdate();
+				if (i != 0)
+					return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 }
