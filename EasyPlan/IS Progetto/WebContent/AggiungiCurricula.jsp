@@ -8,7 +8,6 @@
 	ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
 	CurriculumBeanDAO cd = new CurriculumBeanDAO();
 	String laurea = request.getParameter("laurea");
-	System.out.println(laurea);
 	int tipo;
 	if (laurea.equals("triennale")) {
 		tipo = 1;
@@ -16,7 +15,6 @@
 		tipo = 2;
 	}
 	String offerta = request.getParameter("offerta");
-	System.out.println(offerta);
 	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(tipo, offerta);
 %>
 <!DOCTYPE html>
@@ -84,12 +82,9 @@
 	</nav>
 
 	<form action="SelezionaCurriculaAm.jsp">
-		<input type="hidden" name="laurea"
-			value="<%=request.getParameter("laurea")%>"> <input
-			type="hidden" name="offerta"
-			value="<%=request.getParameter("offerta")%>"> <input
-			type="submit" class="btn btn-default" name="indietro"
-			value="Indietro">
+		<input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>"> 
+		<input type="hidden" name="offerta"value="<%=request.getParameter("offerta")%>"> 
+		<input type="submit" class="btn btn-default" name="indietro"value="Indietro">
 	</form>
 
 	<div class="col-md-12">
@@ -108,27 +103,7 @@
 						<input type="text" class="form-control" id="nomeCurricula" placeholder="Inserisci nome Curricula" name="nomeCurricula">
 					</div>
 					<p id="error" class="text-danger"></p>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-7" for="scelta"
-						style="margin: 0px 0px 0px 65px">Da quale curricula
-						vorresti importare gli esami?</label><br>
-				</div>
-				<div class="form-group">
-					<div class="col-md-3">
-						<select class="form-control selcls"
-							style="margin: 0px 0px 0px 435px">
-							<option value="nessuno">Nessuno</option>
-							<%
-								for (int i = 0; i < lista.size(); i++) {
-							%>
-							<option value="<%=lista.get(i).getNomeCurriculum()%>"><%=lista.get(i).getNomeCurriculum()%></option>
-							<%
-								}
-							%>
-						</select>
-					</div>
-				</div>
+				</div>				
 				<div class="col-sm-offset-5 col-sm-10">
 					<br> <br>
 

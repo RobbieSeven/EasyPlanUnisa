@@ -43,7 +43,7 @@
     <div class="col-md-12">
    
       <br>
-      <%System.out.println(request.getParameter("offerta")) ;%>
+      
        <form action="SelezionaCurriculaAm.jsp" method = "post">
        <input type="hidden" name="laurea" value="triennale">
        <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">

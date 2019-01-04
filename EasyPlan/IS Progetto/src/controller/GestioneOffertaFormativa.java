@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.CorsoDiLaureaBean;
+import model.CorsoDiLaureaBeanDAO;
 import model.OffertaFormativaBean;
 import model.OffertaFormativaBeanDAO;
 
@@ -27,6 +29,11 @@ public class GestioneOffertaFormativa extends HttpServlet {
 			OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
 			OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, null, false);
 			ofbd.doSave(ofb);
+			CorsoDiLaureaBeanDAO daoLaurea = new CorsoDiLaureaBeanDAO();
+			CorsoDiLaureaBean corsoDiLaureaTriennale = new CorsoDiLaureaBean((daoLaurea.doRetrieveLastID() +1),1, nomeOfferta, null);
+			CorsoDiLaureaBean corsoDiLaureaMagistrale = new CorsoDiLaureaBean((daoLaurea.doRetrieveLastID() +1),2, nomeOfferta, null);
+			daoLaurea.doSave(corsoDiLaureaTriennale);
+			daoLaurea.doSave(corsoDiLaureaMagistrale);
 		} else if(request.getParameter("metodo").equals("eliminaOfferta")) {
 			String nomeOfferta = request.getParameter("nomeOfferta");
 			OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();

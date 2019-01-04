@@ -40,12 +40,12 @@ public class GestioneCurricula extends HttpServlet {
 		}
 		if(request.getParameter("metodo").equals("aggiuntaCurricula")) {
 			String laurea=request.getParameter("laurea");
-			int tipo;
+			/*int tipo;
 			if(laurea.equals("triennale")){
 		     	tipo=1;	
-		     	}else {tipo=2;}
+		     	}else {tipo=2;}*/
 			String nome= request.getParameter("nomeCurricula");
-			addCurriculum(nome,tipo);
+			//addCurriculum(nome,tipo);
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("SelezionaCurriculaAm.jsp");

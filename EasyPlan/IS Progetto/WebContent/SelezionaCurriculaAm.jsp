@@ -14,7 +14,6 @@
      	tipo=1;	
      	}else {tipo=2;}
      	String offerta= request.getParameter("offerta");
-     	System.out.println(offerta);
      	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(tipo,offerta);
      %>
 

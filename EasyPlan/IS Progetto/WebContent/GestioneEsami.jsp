@@ -522,7 +522,6 @@
 									
 							 <form action="GestioneGruppoEsami" method="POST"> 
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
-								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
