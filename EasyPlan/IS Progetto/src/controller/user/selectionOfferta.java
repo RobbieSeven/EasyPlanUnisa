@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CorsoDiLaureaBean;
+import model.CurriculumBean;
 import model.EsameBean;
 import model.EsameBeanDAO;
 import model.GruppoEsamiObbligatoriBean;
@@ -43,102 +45,347 @@ public class selectionOfferta extends HttpServlet {
 	        {
 				OffertaFormativaBean of = (OffertaFormativaBean)session.getAttribute("offertaFormativa");
 				
-	        	ArrayList<GruppoEsamiObbligatoriBean> obb = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori");
-	        	ArrayList<GruppoEsamiOpzionaliBean> opz = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali");
+				ArrayList<GruppoEsamiObbligatoriBean> ob1 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori1");
+				ArrayList<GruppoEsamiObbligatoriBean> ob2 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori2");
+				ArrayList<GruppoEsamiObbligatoriBean> ob3 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori3");
 	        	
-	        	for(int i = 0; i < opz.size(); i++) {
-	        		int cfu = opz.get(i).getTotCFU();
-	        		int comp_cfu=0;
-	        			if(opz.get(i).getEsami() != null) {
-	        				for(int j = 0; j< opz.get(i).getEsami().size(); j++) {
-	        					comp_cfu += opz.get(i).getEsami().get(j).getCFU();
-	        				}
-	        			}
-	        			if(cfu >= comp_cfu) {
-	        				 RequestDispatcher rd = request.getRequestDispatcher("View/viewUtente/FormulazionePiano.jsp");
-	        				 request.setAttribute("offertaFormativa", of);
-	        			     request.setAttribute("opzion", opz);
-	        				 rd.forward(request, response);
-	        			}
-	        			comp_cfu = 0;
-	        		}
+				ArrayList<GruppoEsamiOpzionaliBean> op1 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("o1");
+				ArrayList<GruppoEsamiOpzionaliBean> op2 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("o2");
+				ArrayList<GruppoEsamiOpzionaliBean> op3 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("o3");
 	        	
-	        	 RequestDispatcher rd = request.getRequestDispatcher("View/viewUtente/PianoDiStudi.jsp");
-				 request.setAttribute("esamiOb", obb);
-			     request.setAttribute("esamiOpz", opz);
-				 rd.forward(request, response);
-	        	
+				boolean check1 = false ,check2 = false;
+				
+	        	if(op1 == null || op2 == null || op3 == null) {
+	        		RequestDispatcher rd = request.getRequestDispatcher("FormulazionePiano.jsp");
+    				 request.setAttribute("offertaFormativa", of);
+    				 session.setAttribute("errore", "CFU minimi dei gruppi opzionali  non rispettati");
+    				 rd.forward(request, response);
 	        	}
 	        	
+	        	if(op1.size() == 0 && op2.size() == 0)
+	        		check2 = true;
 	        	
-
-		}
-		else {
-			int gruppo = Integer.parseInt(request.getParameter("gruppoopz"));
+	        	if(op1.size() == 0 && op3.size() == 0)
+	        		check1 = true;
+	        	if(op1.size() == 0)
+	        		check1 = true;
+	        	
+	        	boolean pass = false;
+	        	
+	        	// controllo gruppi opzionali anno 1
+	        	for(int i = 0; i < op1.size(); i++) {
+	        		int cfu = op1.get(i).getTotCFU();
+	        		
+	        		int comp_cfu=0;	
+	        			if(op1.get(i).getEsami() != null) {
+	        				for(int j = 0; j< op1.get(i).getEsami().size(); j++) {
+ 	        					comp_cfu += op1.get(i).getEsami().get(j).getCFU();
+ 	        				}
+	        				if(cfu > comp_cfu) {
+	        					pass=false;
+ 	        					session.setAttribute("errore", "CFU minimi del gruppo opzionale del 1° anno da "+ cfu+" cfu non rispettati");
+	        				}
+	        				else if(cfu <= comp_cfu){
+ 	        					pass= true;
+ 	        				}
+	        			}
+	        			if(pass == true ) {
+			 	        	 check1 = true;
+			 	        	 pass = false;
+		 	        	 }else{
+		     				 RequestDispatcher rd = request.getRequestDispatcher("FormulazionePiano.jsp");
+		     				 request.setAttribute("offertaFormativa", of);
+		     				 session.setAttribute("errore", "CFU minimi del gruppo opzionale del 1° anno da"+ cfu+" cfu non rispettati");
+		     				
+		     				 session.removeAttribute("o1");
+				        	 session.setAttribute("o1", op1);
+				        	 session.removeAttribute("o2");
+				        	 session.setAttribute("o2", op2);
+				        	 session.removeAttribute("3");
+				        	 session.setAttribute("o3", op3);
+		     				 
+		     				 rd.forward(request, response);
+		 	        	 }
+	        	}
+	        	
+	        	if(check1 == true) {
+	        	// controllo gruppi opzionali anno 2
+	        	for(int i = 0; i < op2.size(); i++) {
+	        		int cfu = op2.get(i).getTotCFU();
+	        		
+	        		int comp_cfu=0;	
+	        			if(op2.get(i).getEsami() != null) {
+	        				for(int j = 0; j< op2.get(i).getEsami().size(); j++) {
+ 	        					comp_cfu += op2.get(i).getEsami().get(j).getCFU();
+ 	        				}
+	        				if(cfu > comp_cfu) {
+	        					pass=false;
+ 	        					session.setAttribute("errore", "CFU minimi del gruppo opzionale del 2° anno da "+ cfu+" cfu non rispettati");
+	        				}
+	        				else if(cfu <= comp_cfu){
+ 	        					pass= true;
+ 	        				}
+	        			}
+	        			if(pass == true ) {
+			 	        	 check2 = true;
+			 	        	 pass = false;
+				        	 
+		 	        	 }else{
+		     				 RequestDispatcher rd = request.getRequestDispatcher("FormulazionePiano.jsp");
+		     				 request.setAttribute("offertaFormativa", of);
+		     				 session.setAttribute("errore", "CFU minimi del gruppo opzionale del 2° anno da"+ cfu+" cfu non rispettati");
+		     				
+		     				 session.removeAttribute("o1");
+				        	 session.setAttribute("o1", op1);
+				        	 session.removeAttribute("o2");
+				        	 session.setAttribute("o2", op2);
+				        	 session.removeAttribute("3");
+				        	 session.setAttribute("o3", op3);
+		     				 
+		     				 rd.forward(request, response);
+		 	        	 }
+	        		}
+	        	}
+	        	
+	        	if(check2 == true) {
+	        	// controllo gruppi opzionali anno 3
+	        	for(int i = 0; i < op3.size(); i++) {
+	        		int cfu = op3.get(i).getTotCFU();
+	        		
+	        		int comp_cfu=0;	
+	        			if(op3.get(i).getEsami() != null) {
+	        				for(int j = 0; j< op3.get(i).getEsami().size(); j++) {
+ 	        					comp_cfu += op3.get(i).getEsami().get(j).getCFU();
+ 	        				}
+	        				if(cfu > comp_cfu) {
+	        					pass=false;
+ 	        					session.setAttribute("errore", "CFU minimi del gruppo opzionale del 3° anno da "+ cfu+" cfu non rispettati");
+	        				}
+	        				else if(cfu <= comp_cfu){
+ 	        					pass= true;
+ 	        				}
+	        			}
+	        			if(pass == true) {
+			 	        	 pass = true;
+		 	        	 }else{
+		     				 RequestDispatcher rd = request.getRequestDispatcher("FormulazionePiano.jsp");
+		     				 request.setAttribute("offertaFormativa", of);
+		     				 session.setAttribute("errore", "CFU minimi del gruppo opzionale del 3° anno da"+ cfu+" cfu non rispettati");
+		     				
+		     				 session.removeAttribute("o1");
+				        	 session.setAttribute("o1", op1);
+				        	 session.removeAttribute("o2");
+				        	 session.setAttribute("o2", op2);
+				        	 session.removeAttribute("3");
+				        	 session.setAttribute("o3", op3);
+		     				 
+		     				 rd.forward(request, response);
+		 	        	 }
+	        	}
+	        }
+	        	// if con tutte lo combinazioni  possibili di correttezza
+	        	if(pass == true && check1== true && check2==true) {
+	        		RequestDispatcher rd = request.getRequestDispatcher("PianoDiStudi.jsp");
+	 	        	 
+	 	        	 session.removeAttribute("o1");
+		        	 session.setAttribute("o1", op1);
+		        	 session.removeAttribute("o2");
+		        	 session.setAttribute("o2", op2);
+		        	 session.removeAttribute("3");
+		        	 session.setAttribute("o3", op3);
+	 				 
+		        	 session.removeAttribute("obbligatori1");
+			         session.setAttribute("obbligatori1", ob1);
+			         session.removeAttribute("obbligatori2");
+			         session.setAttribute("obbligatori2", ob2);
+			         session.removeAttribute("obbligatori3");
+			         session.setAttribute("obbligatori3", ob3);
+		        	 
+	 				 rd.forward(request, response);
+	        	}else if(check1==true && pass==true || check1==true && pass==false) {
+	        		RequestDispatcher rd = request.getRequestDispatcher("PianoDiStudi.jsp");
+	 	        	 
+	 	        	 session.removeAttribute("o1");
+		        	 session.setAttribute("o1", op1);
+		        	 session.removeAttribute("o2");
+		        	 session.setAttribute("o2", op2);
+		        	 session.removeAttribute("3");
+		        	 session.setAttribute("o3", op3);
+	 				 
+		        	 session.removeAttribute("obbligatori1");
+			         session.setAttribute("obbligatori1", ob1);
+			         session.removeAttribute("obbligatori2");
+			         session.setAttribute("obbligatori2", ob2);
+			         session.removeAttribute("obbligatori3");
+			         session.setAttribute("obbligatori3", ob3);
+		        	 
+	 				 rd.forward(request, response);
+	        	}else if(check1==true && check2==true && pass==false){
+	        		RequestDispatcher rd = request.getRequestDispatcher("PianoDiStudi.jsp");
+	 	        	 
+	 	        	 session.removeAttribute("o1");
+		        	 session.setAttribute("o1", op1);
+		        	 session.removeAttribute("o2");
+		        	 session.setAttribute("o2", op2);
+		        	 session.removeAttribute("3");
+		        	 session.setAttribute("o3", op3);
+	 				 
+		        	 session.removeAttribute("obbligatori1");
+			         session.setAttribute("obbligatori1", ob1);
+			         session.removeAttribute("obbligatori2");
+			         session.setAttribute("obbligatori2", ob2);
+			         session.removeAttribute("obbligatori3");
+			         session.setAttribute("obbligatori3", ob3);
+		        	 
+	 				 rd.forward(request, response);
+	        	}
+	    }
+	}
+	else {
+			String gruppo = request.getParameter("gruppoopz");
 			int esame = Integer.parseInt(request.getParameter("esame"));
+			int gcfu = Integer.parseInt(request.getParameter("cfu"));
 			
 			EsameBeanDAO esB = new EsameBeanDAO();
 			EsameBean cercato = esB.doRetrieveByKey(esame);
 			
-			ArrayList<EsameBean> opz1 = new ArrayList<EsameBean>();
-			ArrayList<EsameBean> opz2 = new ArrayList<EsameBean>();
-			ArrayList<EsameBean> opz3 = new ArrayList<EsameBean>();
+			ArrayList<GruppoEsamiOpzionaliBean> opz1 = new ArrayList<GruppoEsamiOpzionaliBean>();
+			ArrayList<GruppoEsamiOpzionaliBean> opz2 = new ArrayList<GruppoEsamiOpzionaliBean>();
+			ArrayList<GruppoEsamiOpzionaliBean> opz3 = new ArrayList<GruppoEsamiOpzionaliBean>();
+			ArrayList<GruppoEsamiOpzionaliBean> scelti = new ArrayList<GruppoEsamiOpzionaliBean>();
 			
 			HttpSession session = request.getSession(true);
 			OffertaFormativaBean of = null;
-			ArrayList<GruppoEsamiOpzionaliBean> opz = null;
+			ArrayList<GruppoEsamiOpzionaliBean> op1 = null;
+			ArrayList<GruppoEsamiOpzionaliBean> op2 = null;
+			ArrayList<GruppoEsamiOpzionaliBean> op3 = null;
+			ArrayList<GruppoEsamiObbligatoriBean> ob1 = null;
+			ArrayList<GruppoEsamiObbligatoriBean> ob2 = null;
+			ArrayList<GruppoEsamiObbligatoriBean> ob3 = null;
 	        synchronized (session)
 	        {
 	        	of = (OffertaFormativaBean)session.getAttribute("offertaFormativa");
-	        	ArrayList<GruppoEsamiObbligatoriBean> obb = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori");
-	        	opz = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali");
+	        	ob1 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori1");
+	        	ob2 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori2");
+	        	ob3 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori3");
 	        	
-	        	if(opz.get(0).getEsami() != null)
-        			opz1 = opz.get(0).getEsami();
+	        	op1 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali1");
+	        	op2 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali2");
+	        	op3 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali3");
 	        	
-	        	if(opz.get(1).getEsami() != null)
-        			opz2 = opz.get(1).getEsami();
 	        	
-	        	if(gruppo == 2 && opz.get(0).getEsami() != null)
-        			opz3 = opz.get(0).getEsami();
+	        	if(session.getAttribute("o1") == null ){
+		        	for(int i = 0; i < op1.size(); i++ ) {
+		        		opz1.add(new GruppoEsamiOpzionaliBean());
+		        		opz1.get(i).setTotCFU(op1.get(i).getTotCFU());
+		        		opz1.get(i).setEsami(new ArrayList<EsameBean>());
+		        	}
+	        	}else {
+	        		opz1 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("o1");
+	        	}
 	        	
-	        	if(gruppo == 0 && !opz1.contains(cercato)) {
-	        		opz1.add(cercato);
-	        		opz.get(0).setEsami(opz1);
-	        		
+	        	if(session.getAttribute("o2") == null ){
+		        	for(int i = 0; i < op2.size(); i++ ) {
+		        		opz2.add(new GruppoEsamiOpzionaliBean() );
+		        		opz2.get(i).setTotCFU(op2.get(i).getTotCFU());
+		        		opz2.get(i).setEsami(new ArrayList<EsameBean>());
+		        	}
+	        	}else {
+	        		opz2 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("o2");
 	        	}
-	        	else if(gruppo == 1 && !opz1.contains(cercato)) {
-	        		opz2.add(cercato);
-	        		opz.get(1).setEsami(opz2);
-	        	}
-	        	else if(gruppo == 2 && !opz1.contains(cercato)) {
-	        		opz3.add(cercato);
-	        		opz.get(0).setEsami(opz3);
-	        	}
-	        	// rimuovono gli esami 
-	        	else if(gruppo == 0 && opz1.contains(cercato)) {
-	        		opz1.remove(cercato);
-	        		opz.get(0).setEsami(opz1);
-	        	}
-	        	else if(gruppo == 1 && opz1.contains(cercato)) {
-	        		opz2.remove(cercato);
-	        		opz.get(1).setEsami(opz2);
-	        	}
-	        	else if(gruppo == 2 && opz1.contains(cercato)) {
-	        		opz3.remove(cercato);
-	        		opz.get(0).setEsami(opz3);
-	        	}
-	        	session.removeAttribute("obbligatori");
-	        	session.setAttribute("obbligatori", obb);
 	        	
-	        	session.removeAttribute("opzionali");
-	        	session.setAttribute("opzionali", opz);
+	        	if(session.getAttribute("o3") == null ){
+		        	for(int i = 0; i < op3.size(); i++ ) {
+		        		opz3.add(new GruppoEsamiOpzionaliBean() );
+		        		opz3.get(i).setTotCFU(op3.get(i).getTotCFU());
+		        		opz3.get(i).setEsami(new ArrayList<EsameBean>());
+		        	}
+	        	}else {
+	        		opz3 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("o3");
+	        	}
 	        	
+	        	//aggiunta esami nei gruppi opzionali 1
+	        	for(int i = 0; i < opz1.size(); i++ ) {
+	        		if(gruppo.equals("opzA1"+i) && !opz1.get(i).getEsami().contains(cercato)) {
+	        			opz1.get(i).getEsami().add(cercato);
+	        			for(int z = 0; z < op1.get(i).getEsami().size(); z++) {
+	    					if(op1.get(i).getEsami().get(z).getCodiceEsame() == cercato.getCodiceEsame()) {
+	    						op1.get(i).getEsami().get(z).setCheck(true);
+	    					}	
+	        			}
+	        		}else {
+	        			opz1.get(i).getEsami().remove(cercato);
+	        			for(int z = 0; z < op1.get(i).getEsami().size(); z++) {
+	    					if(op1.get(i).getEsami().get(z).getCodiceEsame() == cercato.getCodiceEsame())
+	    						op1.get(i).getEsami().get(z).setCheck(false);
+	    				}
+	        		}
+	        	}
+	        	
+	        	
+	        	//aggiunta esami nei gruppi opzionali 2 e eventuale rimozione
+	        	for(int i = 0; i < opz2.size(); i++ ) {
+	        		if(gruppo.equals("opzA2"+i) && !opz2.get(i).getEsami().contains(cercato)) {
+	        			opz2.get(i).getEsami().add(cercato);
+	        				for(int z = 0; z < op2.get(i).getEsami().size(); z++) {
+	        					if(op2.get(i).getEsami().get(z).getCodiceEsame() == cercato.getCodiceEsame())
+	        						op2.get(i).getEsami().get(z).setCheck(true);
+	        				}
+	        			
+	        		}else {
+	        			opz2.get(i).getEsami().remove(cercato);
+	        				for(int z = 0; z < op2.get(i).getEsami().size(); z++) {
+	        					if(op2.get(i).getEsami().get(z).getCodiceEsame() == cercato.getCodiceEsame())
+	        						op2.get(i).getEsami().get(z).setCheck(false);
+	        				}
+	        			}
+	        		}
+	        	
+	        	//aggiunta esami nei gruppi opzionali 3
+	        	for(int i = 0; i < opz3.size(); i++ ) {
+	        		if(gruppo.equals("opzA3"+i) && !opz3.get(i).getEsami().contains(cercato)) {
+	        			opz3.get(i).getEsami().add(cercato);
+	        			for(int z = 0; z < op3.get(i).getEsami().size(); z++) {
+	    					if(op3.get(i).getEsami().get(z).getCodiceEsame() == cercato.getCodiceEsame())
+	    						op3.get(i).getEsami().get(z).setCheck(true);
+	    				}
+	        		}else {
+	        			for(int z = 0; z < op3.get(i).getEsami().size(); z++) {
+	    					if(op3.get(i).getEsami().get(z).getCodiceEsame() == cercato.getCodiceEsame())
+	    						op3.get(i).getEsami().get(z).setCheck(false);
+	    				}
+	        		}
+	        	}
+	        	
+	        	
+	        	session.removeAttribute("obbligatori1");
+	        	session.setAttribute("obbligatori1", ob1);
+	        	session.removeAttribute("obbligatori2");
+	        	session.setAttribute("obbligatori2", ob2);
+	        	session.removeAttribute("obbligatori3");
+	        	session.setAttribute("obbligatori3", ob3);
+	        	
+	        	
+	        	
+	        	session.removeAttribute("opzionali1");
+	        	session.setAttribute("opzionali1", op1);
+	        	session.removeAttribute("opzionali2");
+	        	session.setAttribute("opzionali2", op2);
+	        	session.removeAttribute("opzionali3");
+	        	session.setAttribute("opzionali3", op3);
+	        	
+	        	session.removeAttribute("o1");
+	        	session.removeAttribute("o2");
+	        	session.removeAttribute("o3");
+	        	session.setAttribute("o1",opz1);
+	        	session.setAttribute("o2",opz2);
+	        	session.setAttribute("o3",opz3);
 	        }
 	        
 	        RequestDispatcher rd = request.getRequestDispatcher("FormulazionePiano.jsp");
+	        request.removeAttribute("offertaFormativa");
 	        request.setAttribute("offertaFormativa", of);
-	        request.setAttribute("opzion", opz);
+	       
 			rd.forward(request, response);
 		}
 	}

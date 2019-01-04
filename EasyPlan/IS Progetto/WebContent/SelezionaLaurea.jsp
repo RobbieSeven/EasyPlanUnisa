@@ -17,6 +17,7 @@
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="centerelements.css">
     <style type="text/css">
     .navbar-inverse {
    	 background-color: #ada2b2;
@@ -41,16 +42,15 @@
         </div>
       </div>
     </nav>
-    <img alt="logo" src="immagini/logo.png" class="img-responsive center-block">
+    <img alt="logo" src="immagini/logo.png" class="img-responsive center-block centerImg">
 
     <div class="col-md-12">
     <%for(int i =0; i < cd.size(); i++){ %>
     <%if(cd.get(i).isTipo()==1){ %>
     <form action="getCurriculaFromLaureaOff" method = "post">
-      	<br>
       	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
       	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
-         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block">Laurea triennale</button>
+         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block buttonwidth">Laurea triennale</button>
     </form>
     <%}else{
     	%>
@@ -58,7 +58,7 @@
       	<br>
       	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
       	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
-         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block">Laurea magistrale</button>
+         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block buttonwidth">Laurea magistrale</button>
     </form>
     <%} %>
    <%} %>

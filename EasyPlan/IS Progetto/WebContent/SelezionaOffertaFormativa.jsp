@@ -22,6 +22,7 @@
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="centerelements.css">
     <style type="text/css">
     .navbar-inverse {
    	 background-color: #ada2b2;
@@ -46,7 +47,7 @@
         </div>
       </div>
     </nav>
-    <img alt="logo" src="../immagini/logo.png" class="img-responsive center-block">
+    <img alt="logo" src="immagini/logo.png" class="img-responsive center-block centerImg">
     <div class="col-md-12">
 	    
 	    
@@ -54,7 +55,7 @@
 	    	<%if(of.get(i).isVisibilita()){ %>
 	    	<form action="getCorsiDiLaureaServlet" method = "post">
 		    	<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa() %>">
-		         	<button name="button" id="offertaformativa"<%=+i%> class="btn btn-default btn-responsive center-block"><%=of.get(i).getAnnoOffertaFormativa() %></button>
+		         	<button name="button" id="offertaformativa"<%=+i%> class="btn btn-default btn-responsive center-block buttonwidth"><%=of.get(i).getAnnoOffertaFormativa() %></button>
 		         <br>
 	         </form>
 	         <%} %>

@@ -1,0 +1,99 @@
+.centerImg{
+	    position: relative;
+	margin-top:7%;
+	margin-bottom:2%;
+}
+
+.centerButton{
+	    position: relative;
+}
+
+
+.buttonwidth{
+	width: 200px;
+}
+
+/* The container */
+.c {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 32px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* nascondo al browser la checkbox di default*/
+.c input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/*creazione checkbox base*/
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #ccc;
+}
+
+/*colore quando ci passo sopra*/
+.c:hover input ~ .checkmark {
+  background-color: #888a85;  
+}
+
+/* quando premo lo fondo diventa verde */
+.c input:checked ~ .checkmark {
+  background-color: #90ee90;
+}
+
+/* creo la v quando clicco */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* mostro la vi quando è checcata la chekbox*/
+.c input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Stile della v */
+.c .checkmark:after {
+  left: 9px;
+  top: 3px;
+  width: 10px;
+  height: 15px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+@media screen and (max-width: 500px) {
+	
+	.centerImg{
+    position: relative;
+    margin-top:19%;
+	}
+
+	.centerButton{
+		position: relative;
+		margin-top: 3%;
+	}
+	
+	.buttonwidth{
+		width: 200px;
+	}
+}

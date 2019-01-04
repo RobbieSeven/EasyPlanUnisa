@@ -76,29 +76,30 @@ public class getEsamiOffertaFormativa extends HttpServlet {
 			
 			System.out.println(cur.get(0).getNomeCurriculum());
 			//inserisco i gruppi di esami nei curricula dell' offerta formativa
-			grob = grobB.doRetriveGruppoEsamiObbByOfferta(nomeOfferta,laurea,cur.get(0).getNomeCurriculum()); 
+			grob = grobB.doRetriveGruppoEsamiObbByOfferta(nomeOfferta,laurea,cur.get(0).getNomeCurriculum());		
 			grop = gropB.doRetriveGruppoEsamiOpzByOfferta(nomeOfferta,laurea,cur.get(0).getNomeCurriculum()); 
-			
+		
 			cur.get(0).setGruppi_obbligatori(grob); 	cur.get(0).setGruppi_opzionali(grop);
 			
-			// inserisco nei gruppi di esami gli esami dell'offerta formativa
-			for(int i =0; i < grob.size(); i++)
-				grob.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grob.get(i).getCodiceGEOb()));
-	
-			for(int y =0; y < grop.size(); y++)
-				grop.get(y).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grop.get(y).getCodiceGEOp()));
 			
-			// carico per gli esami i corrispettivi docenti prima gli obligatori e poi gli opzionali
-			for(int  j = 0; j < grob.size(); j++) {
-				for(int d = 0; d < grob.get(j).getEsami().size(); d++)
-					grob.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grob.get(j).getCodiceGEOb(), grob.get(j).getEsami().get(d).getNome()));
-			}
-			
-			
-			for(int  z = 0; z < grop.size(); z++) {
-				for(int d1 = 0; d1 < grop.get(z).getEsami().size(); d1++)
-					grop.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grop.get(z).getCodiceGEOp(), grop.get(z).getEsami().get(d1).getNome()));
-			}
+				// inserisco nei gruppi di esami gli esami dell'offerta formativa
+				for(int i =0; i < grob.size(); i++)
+					grob.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grob.get(i).getCodiceGEOb()));
+		
+				for(int y =0; y < grop.size(); y++)
+					grop.get(y).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grop.get(y).getCodiceGEOp()));
+				
+				// carico per gli esami i corrispettivi docenti prima gli obligatori e poi gli opzionali
+				for(int  j = 0; j < grob.size(); j++) {
+					for(int d = 0; d < grob.get(j).getEsami().size(); d++)
+						grob.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grob.get(j).getCodiceGEOb(), grob.get(j).getEsami().get(d).getNome()));
+				}
+				
+				
+				for(int  z = 0; z < grop.size(); z++) {
+					for(int d1 = 0; d1 < grop.get(z).getEsami().size(); d1++)
+						grop.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(nomeOfferta, laurea, cur.get(0).getNomeCurriculum(), grop.get(z).getCodiceGEOp(), grop.get(z).getEsami().get(d1).getNome()));
+				}
 			
 			
 		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {

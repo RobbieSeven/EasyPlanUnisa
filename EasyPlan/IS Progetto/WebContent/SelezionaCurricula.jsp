@@ -23,10 +23,17 @@
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="centerelements.css">
     <style type="text/css">
     .navbar-inverse {
    	 background-color: #ada2b2;
    	 border-color: #ada2b2;
+    }
+    
+    .centerImg{
+    	 position: relative;
+	margin-top:4%;
+	margin-bottom:2%;
     }
     </style>
   </head>
@@ -47,7 +54,7 @@
         </div>
       </div>
     </nav>
-    <img alt="logo" src="immagini/logo.png" class="img-responsive center-block">
+    <img alt="logo" src="immagini/logo.png" class="img-responsive center-block centerImg">
     <div class="col-md-12">
 	    
 	    
@@ -56,12 +63,14 @@
 		    <input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
 	      	<input type="hidden" name="laurea" value="<%=cd.get(0).isTipo()%>">
 	        <input type="hidden" name=curricula value="<%=cm.get(i).getIdCurriculum()%>">
-		    <button name="button" id="c"<%=+cm.get(i).getIdCurriculum()%> class="btn btn-default btn-responsive center-block"><%=cm.get(i).getNomeCurriculum() %></button>
+	        <%if(cm.get(i).getNomeCurriculum().equalsIgnoreCase("Sistemi Informatici e Tecnologie del Software (SITS)")){ %>
+	        <button name="button" id="c"<%=+cm.get(i).getIdCurriculum()%> class="btn btn-default btn-responsive center-block buttonwidth"><%="SITS" %></button>
+	        <%}else{ %>
+		    <button name="button" id="c"<%=+cm.get(i).getIdCurriculum()%> class="btn btn-default btn-responsive center-block buttonwidth"><%=cm.get(i).getNomeCurriculum() %></button>
+		    <%} %>
 		    <br>
 	    </form>
 	     <%}%>
-	     
-	   
     </div>
   </body>
 </html>

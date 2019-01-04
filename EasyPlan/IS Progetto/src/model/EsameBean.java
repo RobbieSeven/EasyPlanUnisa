@@ -12,6 +12,7 @@ public class EsameBean {
 	private int oreLezione;
 	private String semestre;
 	private ArrayList<DocenteBean> docenti = new ArrayList<DocenteBean>();
+	private boolean check = false;
 
 	// COSTRUTTORI
 	public EsameBean() {
@@ -82,6 +83,15 @@ public class EsameBean {
 	public void setDocenti(ArrayList<DocenteBean> docenti) {
 		this.docenti = docenti;
 	}
+	
+	public boolean isCheck() {
+		return check;
+	}
+
+	public void setCheck(boolean check) {
+		this.check = check;
+	}
+	
 	// METODI OBJECT
 	@Override
 	public String toString() {

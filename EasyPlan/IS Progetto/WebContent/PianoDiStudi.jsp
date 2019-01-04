@@ -6,15 +6,13 @@
     
     <%// Simulazione dati presi dal database
     
-    ArrayList<GruppoEsamiObbligatoriBean> obb = (ArrayList<GruppoEsamiObbligatoriBean>) request.getAttribute("esamiOb");
-	ArrayList<GruppoEsamiOpzionaliBean> opz = (ArrayList<GruppoEsamiOpzionaliBean>) request.getAttribute("esamiOpz");
+    ArrayList<GruppoEsamiObbligatoriBean> ob1 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori1");
+	ArrayList<GruppoEsamiObbligatoriBean> ob2 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori2");
+	ArrayList<GruppoEsamiObbligatoriBean> ob3 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori3");
 	
-	int anni = 0;
-	
-	if(obb.size()==2)
-		anni = 2;
-	if(obb.size()==3)
-		anni = 3;
+	ArrayList<GruppoEsamiOpzionaliBean> op1 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("o1");
+	ArrayList<GruppoEsamiOpzionaliBean> op2 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("o2");
+	ArrayList<GruppoEsamiOpzionaliBean> op3 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("o3");
      %>
      
      
@@ -40,11 +38,11 @@
       border-color: #ada2b2;
     }
     .table-wrapper-scroll-y {
-display: block;
-max-height: 200px;
-overflow-y: auto;
--ms-overflow-style: -ms-autohiding-scrollbar;
-}
+		display: block;
+		max-height: 200px;
+		overflow-y: auto;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+	}
     </style>
   </head>
   <body>
@@ -67,73 +65,155 @@ overflow-y: auto;
     <div id="HTMLtoPDF">
     	<center><h3>Il tuo Piano di studi</h3></center><br>
     		<div class="col-md-12">
-		      <%for(int i = 0; i < anni; i++) { %>
+		      <!-- esami obbligatori anno 1 -->
+   				<%for(int i = 0; i < ob1.size(); i++){ %>
 		    	<div class="table-wrapper-scroll-y">
 			   		<table class="table table-bordered table-striped">
 						<thead>
-						<tr><td ><b><%=(i+1) %> anno obbligatorio</b></td><td><%=" " %></td></tr>
+						<tr><td ><b><%=ob1.get(i).getAnno() %> anno obbligatorio</b></td><td><%=" " %></td></tr>
 		      				<tr>
-						        <th scope="col">Nome esame</th>
-						        <th scope="col">CFU</th>
+						         <th scope="col" style="width:80%">Nome esame</th>
+						         <th scope="col" style="width:20%">CFU</th>
 		      				</tr>
 		    			</thead>
 		    				<tbody>
-			   				<% for(int j = 0; j< obb.get(i).getEsami().size(); j++){ %>
+			   				<% for(int j = 0; j< ob1.get(i).getEsami().size(); j++){ %>
 		    					  <tr>
-		        					<td scope="row"><%=obb.get(i).getEsami().get(j).getNome() %></td>
-		        					<td><%=obb.get(i).getEsami().get(j).getCFU() %></td>
+		        					<td scope="row"><%=ob1.get(i).getEsami().get(j).getNome() %></td>
+		        					<td><%=ob1.get(i).getEsami().get(j).getCFU() %></td>
 		      					</tr>
 			     			<%}%>
 			   				</tbody>
 			     	</table>
 			     </div>
-				 <%if(anni == 2){ %>	
+			     <%} %>
+			     <br>
+			     <br>
+				 <!-- esami opzionali anno 1 -->
+    			 <%for(int i = 0; i < op1.size(); i++){ %>	
 				  <div class="table-wrapper-scroll-y">
 				   	<table class="table table-bordered table-striped">
 						<thead>
-							<tr><td><b><%=(i+1) %> anno opzionale</b></td><td><%=" " %></td></tr>
+							<tr><td><b>1 anno opzionale <%=op1.get(i).getTotCFU() %> CFU</b></td><td><%=" " %></td></tr>
 			      				<tr>
-							        <th scope="col">Nome esame</th>
-							        <th scope="col">CFU</th>
+							         <th scope="col" style="width:80%">Nome esame</th>
+						        	 <th scope="col" style="width:20%">CFU</th>
 			      				</tr>
 			    		</thead>
 			    		<tbody>
-				   			<% for(int j = 0; j< opz.get(i).getEsami().size(); j++){ %>
-			    				<tr>
-			        				<td scope="row"><%=opz.get(i).getEsami().get(j).getNome() %></td>
-			        				<td><%=opz.get(i).getEsami().get(j).getCFU() %></td>
-			      				</tr>
-				     		<%}%>
+				   			<% for(int j = 0; j< op1.get(i).getEsami().size(); j++){ %>
+				    				<tr>
+				        				<td scope="row"><%=op1.get(i).getEsami().get(j).getNome() %></td>
+				        				<td><%=op1.get(i).getEsami().get(j).getCFU() %></td>
+				      				</tr>
+					     		<%}%>
 				   		</tbody>
 				     </table>
 				    </div>
 				    <%} %>
-				     <%if(anni == 3 && i == 2){ %>
-				     	<div class="table-wrapper-scroll-y">
-				   			<table class="table table-bordered table-striped">
-								<thead>
-									<tr><td><b><%=(i+1) %> anno opzionale</b></td><td><%=" " %></td></tr>
-				      					<tr>
-								     	   <th scope="col">Nome esame</th>
-								        	<th scope="col">CFU</th>
-				      					</tr>
-				    			</thead>
-				    			<tbody>
-					   				<% for(int j = 0; j< opz.get(0).getEsami().size(); j++){ %>  
-					   					<tr>
-				        					<td scope="row"><%=opz.get(0).getEsami().get(j).getNome() %></td>
-				        					<td><%=opz.get(0).getEsami().get(j).getCFU() %></td>
-				      					</tr>
-					     			<%}%>
-					   			</tbody>
-				     	</table>
-				     </div>
+				    
+				 <!-- esami obbligatori anno 2 -->
+   				<%for(int i = 0; i < ob2.size(); i++){ %>
+		    	<div class="table-wrapper-scroll-y">
+			   		<table class="table table-bordered table-striped">
+						<thead>
+						<tr><td ><b><%=ob2.get(i).getAnno() %> anno obbligatorio</b></td><td><%=" " %></td></tr>
+		      				<tr>
+						         <th scope="col" style="width:80%">Nome esame</th>
+						         <th scope="col" style="width:20%">CFU</th>
+		      				</tr>
+		    			</thead>
+		    				<tbody>
+			   				<% for(int j = 0; j< ob2.get(i).getEsami().size(); j++){ %>
+		    					  <tr>
+		        					<td scope="row"><%=ob2.get(i).getEsami().get(j).getNome() %></td>
+		        					<td><%=ob2.get(i).getEsami().get(j).getCFU() %></td>
+		      					</tr>
+			     			<%}%>
+			   				</tbody>
+			     	</table>
+			     </div>
+			     <%} %>
+			     <br>
+			     <br>
+				 <!-- esami opzionali anno 2 -->
+    			 <%for(int i = 0; i < op2.size(); i++){ %>	
+				  <div class="table-wrapper-scroll-y">
+				   	<table class="table table-bordered table-striped">
+						<thead>
+							<tr><td><b>2 anno opzionale <%=op2.get(i).getTotCFU() %> CFU</b></td><td><%=" " %></td></tr>
+			      				<tr>
+							         <th scope="col" style="width:80%">Nome esame</th>
+						        	 <th scope="col" style="width:20%">CFU</th>
+			      				</tr>
+			    		</thead>
+			    		<tbody>
+				   			<% for(int j = 0; j< op2.get(i).getEsami().size(); j++){ %>
+				    				<tr>
+				        				<td scope="row"><%=op2.get(i).getEsami().get(j).getNome() %></td>
+				        				<td><%=op2.get(i).getEsami().get(j).getCFU() %></td>
+				      				</tr>
+					     		<%}%>
+				   		</tbody>
+				     </table>
+				    </div>
 				    <%} %>
-			   	<% } %>
+			   	
+			   	<!-- esami obbligatori anno 3 -->
+   				<%for(int i = 0; i < ob3.size(); i++){ %>
+		    	<div class="table-wrapper-scroll-y">
+			   		<table class="table table-bordered table-striped">
+						<thead>
+						<tr><td ><b><%=ob3.get(i).getAnno() %> anno obbligatorio</b></td><td><%=" " %></td></tr>
+		      				<tr>
+						         <th scope="col" style="width:80%">Nome esame</th>
+						         <th scope="col" style="width:20%">CFU</th>
+		      				</tr>
+		    			</thead>
+		    				<tbody>
+			   				<% for(int j = 0; j< ob3.get(i).getEsami().size(); j++){ %>
+		    					  <tr>
+		        					<td scope="row"><%=ob3.get(i).getEsami().get(j).getNome() %></td>
+		        					<td><%=ob3.get(i).getEsami().get(j).getCFU() %></td>
+		      					</tr>
+			     			<%}%>
+			   				</tbody>
+			     	</table>
+			     </div>
+			     <%} %>
+			     <br>
+			     <br>
+				 <!-- esami opzionali anno 3 -->
+    			 <%for(int i = 0; i < op3.size(); i++){ %>	
+				  <div class="table-wrapper-scroll-y">
+				   	<table class="table table-bordered table-striped">
+						<thead>
+							<tr><td><b>3 anno opzionale <%=op3.get(i).getTotCFU() %> CFU</b></td><td><%=" " %></td></tr>
+			      				<tr>
+							         <th scope="col" style="width:80%">Nome esame</th>
+						        	 <th scope="col" style="width:20%">CFU</th>
+			      				</tr>
+			    		</thead>
+			    		<tbody>
+				   			<% for(int j = 0; j< op3.get(i).getEsami().size(); j++){ %>
+				    				<tr>
+				        				<td scope="row"><%=op3.get(i).getEsami().get(j).getNome() %></td>
+				        				<td><%=op3.get(i).getEsami().get(j).getCFU() %></td>
+				      				</tr>
+					     		<%}%>
+				   		</tbody>
+				     </table>
+				    </div>
+				    <%} %>
+			   	
 	   		</div>
+	   		
+	   		
+	   		
 		</div>
 	 <br>
-  	 <center><button name="button" class="btn btn-default btn-responsive center" onclick="HTMLtoPDF()">Scarica piano</button>
-  	 <a href="https://esse3web.unisa.it/Home.do" name="button" class="btn btn-default btn-responsive center">Vai ad Esse3</a></center>
+	  	 <center><button name="button" class="btn btn-default btn-responsive center" onclick="HTMLtoPDF()">Scarica piano</button>
+	  	 <a href="https://esse3web.unisa.it/Home.do" name="button" class="btn btn-default btn-responsive center">Vai ad Esse3</a></center>
+  	 <br>
   </body>
 </html>

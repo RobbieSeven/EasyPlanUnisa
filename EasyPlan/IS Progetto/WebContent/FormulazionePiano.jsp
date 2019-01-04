@@ -10,37 +10,81 @@
     	ArrayList<CurriculumBean> cm = cd.get(0).getCurricula();
     	ArrayList<GruppoEsamiObbligatoriBean> gob = cm.get(0).getGruppi_obbligatori();
     	ArrayList<GruppoEsamiOpzionaliBean> gop = cm.get(0).getGruppi_opzionali();
-    	int tri = 0;
-    	if(cd.get(0).isTipo()==1)
-    		tri = 3;
     	
-    	session = request.getSession(true);
-    	ArrayList<GruppoEsamiOpzionaliBean> opz = new ArrayList<GruppoEsamiOpzionaliBean>();
-    	GruppoEsamiOpzionaliBean op = new GruppoEsamiOpzionaliBean();
-    	GruppoEsamiOpzionaliBean op2 = new GruppoEsamiOpzionaliBean();
+    	ArrayList<GruppoEsamiObbligatoriBean> ob1 = new ArrayList<GruppoEsamiObbligatoriBean>();
+    	ArrayList<GruppoEsamiObbligatoriBean>  ob2 = new ArrayList<GruppoEsamiObbligatoriBean>();
+    	ArrayList<GruppoEsamiObbligatoriBean> ob3 = new  ArrayList<GruppoEsamiObbligatoriBean>();
+    	ArrayList<GruppoEsamiOpzionaliBean> op1 = new ArrayList<GruppoEsamiOpzionaliBean>();
+    	ArrayList<GruppoEsamiOpzionaliBean>  op2 = new ArrayList<GruppoEsamiOpzionaliBean>();
+    	ArrayList<GruppoEsamiOpzionaliBean> op3 = new  ArrayList<GruppoEsamiOpzionaliBean>();
     	
-    	ArrayList<GruppoEsamiObbligatoriBean> ob = new ArrayList<GruppoEsamiObbligatoriBean>();
-    	synchronized(session){
-    		session.setAttribute("offertaFormativa",of);
-
-        	if(ob.isEmpty()){
-        		ob = gob;
-        		session.removeAttribute("obbligatori");
-        		session.setAttribute("obbligatori", ob);
-        	}
-        	if(session.getAttribute("opzionali") == null){
-	        	if(opz.isEmpty()){
-	        		opz.add(op);
-	        		opz.add(op2);
-	        		session.setAttribute("opzionali", opz);
-	        	}
-        	}
-        	else
-        	{
-        		opz = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali");
-        		session.removeAttribute("opzionali");
-        		session.setAttribute("opzionali", opz);
-        	}
+    	for(int i = 0; i < gob.size(); i++ ){
+    		if(gob.get(i).getAnno() == 1)
+    			ob1.add(gob.get(i));
+    		else if(gob.get(i).getAnno() == 2)
+    			ob2.add(gob.get(i));
+    		else if(gob.get(i).getAnno() == 3)
+    			ob3.add(gob.get(i));
+    	}
+    	
+    	for(int i = 0; i < gop.size(); i++ ){
+    		if(gop.get(i).getAnno() == 1)
+    			op1.add(gop.get(i));
+    		else if(gop.get(i).getAnno() == 2)
+    			op2.add(gop.get(i));
+    		else if(gop.get(i).getAnno() == 3)
+    			op3.add(gop.get(i));
+    	}
+    	
+    	if(session.getAttribute("obbligatori1") != null){
+    		ob1 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori1");
+    		session.removeAttribute("obbligatori1");
+    		session.setAttribute("obbligatori1", ob1);
+    	}else
+    		session.setAttribute("obbligatori1", ob1);
+    	
+    	if(session.getAttribute("obbligatori2") != null){
+    		ob2 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori2");
+    		session.removeAttribute("obbligatori2");
+    		session.setAttribute("obbligatori2", ob2);
+    	}
+    	else
+    		session.setAttribute("obbligatori2", ob2);
+    	
+    	if(session.getAttribute("obbligatori3") != null){
+    		ob3 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori3");
+    		session.removeAttribute("obbligatori3");
+    		session.setAttribute("obbligatori3", ob3);
+    	}else
+    		session.setAttribute("obbligatori3", ob3);
+    	
+    	
+    	if(session.getAttribute("opzionali1") != null){
+    		op1 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali1");
+    		session.removeAttribute("opzionali1");
+    		session.setAttribute("opzionali1", op1);
+    		System.out.println("forse");
+    	}else
+    		session.setAttribute("opzionali1", op1);
+    	
+    	if(session.getAttribute("opzionali2") != null){
+    		op2 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali2");
+    		session.removeAttribute("opzionali2");
+    		session.setAttribute("opzionali2", op2);
+    	}
+    	else
+    		session.setAttribute("opzionali2", op2);
+    	
+    	if(session.getAttribute("opzionali3") != null){
+    		op3 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali3");
+    		session.removeAttribute("opzionali3");
+    		session.setAttribute("opzionali3", op3);
+    	}else
+    		session.setAttribute("opzionali3", op3);
+    	
+    	
+    	session.setAttribute("offertaFormativa",of);
+    	
      %>
      
      
@@ -56,17 +100,18 @@
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="centerelements.css">
     <style type="text/css">
     .navbar-inverse {
    	 background-color: #ada2b2;
    	 border-color: #ada2b2;
     }
     .table-wrapper-scroll-y {
-display: block;
-max-height: 200px;
-overflow-y: auto;
--ms-overflow-style: -ms-autohiding-scrollbar;
-}
+		display: block;
+		max-height: 200px;
+		overflow-y: auto;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+	}
     </style>
   </head>
   <body>
@@ -86,37 +131,43 @@ overflow-y: auto;
         </div>
       </div>
     </nav>
+    <%if(session.getAttribute("errore")!= null){ %>
+    	<h4  style="color:red; text-align:center"><%=session.getAttribute("errore") %></h4>
+    <%session.removeAttribute("errore");} %>
     <div class="col-md-12">
-    <%for(int anno = 1; anno <= 3; anno++){ %>
-    	<%for(int i = 0; i < gob.size(); i++){ %>
-    		<%if(gob.get(i).getAnno()== anno){ %>
-    			<%=anno+"° anno obbligatorio" %>
+    	<!-- esami obbligatori anno 1 -->
+   		<%for(int i = 0; i < ob1.size(); i++){ %>
+    		
+    			<h3><b><%=ob1.get(i).getAnno()+"° anno obbligatorio" %></b></h3>
     			
     			<div class="table-wrapper-scroll-y">
 	   				<table class="table table-bordered table-striped">
 						<thead>
       						<tr>
-				        		<th scope="col">Nome esame</th><th scope="col">CFU</th><th scope="col">Selezionato</th>
+				        		<th scope="col" style="width:70%">Nome esame</th><th scope="col" style="width:15%">CFU</th><th scope="col"style="width:15%">Selezionato</th>
       						</tr>
     					</thead>
     				<tbody>
-	   					<% for(int j = 0; j < gob.get(i).getEsami().size(); j++){ %>
+	   					<% for(int j = 0; j < ob1.get(i).getEsami().size(); j++){ %>
     					  <tr>
     					  <form action="selectionOfferta" method = "post">
-        					<th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=gob.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=gob.get(i).getEsami().get(j).getNome()%></a>
-        						<div class="collapse" id="collapseExample<%=gob.get(i).getEsami().get(j).getCodiceEsame()%>">
+        					<th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=ob1.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=ob1.get(i).getEsami().get(j).getNome()%></a>
+        						<div class="collapse" id="collapseExample<%=ob1.get(i).getEsami().get(j).getCodiceEsame()%>">
  			 						<div class="card card-body">
-   									  Descrizione <%=gob.get(i).getEsami().get(j).getDescrizione()%><br>
-   									  <%for(int z = 0; z < gob.get(i).getEsami().get(j).getDocenti().size(); z++){ %>
-   									 	<a href=" <%=gob.get(i).getEsami().get(j).getDocenti().get(z).getIndirizzoPaginaWeb() %>">link docente <%=(z + 1) %></a><br>
+   									  Descrizione <%=ob1.get(i).getEsami().get(j).getDescrizione()%><br>
+   									  <%for(int z = 0; z < ob1.get(i).getEsami().get(j).getDocenti().size(); z++){ %>
+   									 	<a href=" <%=ob1.get(i).getEsami().get(j).getDocenti().get(z).getIndirizzoPaginaWeb() %>">link docente <%=(z + 1) %></a><br>
    									  <%} %>
-   									 ore di lezione <%=gob.get(i).getEsami().get(j).getOreLezione() %><br>
+   									 ore di lezione <%=ob1.get(i).getEsami().get(j).getOreLezione() %><br>
   									</div>
 								</div>
        						</th>
-        					<td><%=gob.get(i).getEsami().get(j).getCFU()%></td>
+        					<td><%=ob1.get(i).getEsami().get(j).getCFU()%></td>
         					<td>
-        						<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
+        						<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
+        							<span class="checkmark"></span>
+								</label>
         					</td>
       					</tr>
       					</form>
@@ -124,39 +175,91 @@ overflow-y: auto;
 	     		</tbody>
 	     	</table>
 	     </div>
-	     
-    		<%} %>
-    		<%if(tri == 0){if(gop.get(i).getAnno()== anno){ %>
-    			<%=anno+"° anno opzionale CFU massimi selezionabili: "+ gop.get(i).getTotCFU() %>
+	    <%} %>
+	    <!-- esami opzionali anno 1 -->
+    		<%for(int i = 0; i < op1.size(); i++){ %>
+    			<h3><b><%=op1.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op1.get(i).getTotCFU() %></b></h3>
     			
     			<div class="table-wrapper-scroll-y">
 	   				<table class="table table-bordered table-striped">
 						<thead>
       						<tr>
-				        		<th scope="col">Nome esame</th><th scope="col">CFU</th><th scope="col">Selezionato</th>
+				        		<th scope="col" style="width:70%">Nome esame</th><th scope="col" style="width:15%">CFU</th><th scope="col"style="width:15%">Selezionato</th>
       						</tr>
     					</thead>
     				<tbody>
-	   					<% for(int j = 0; j < gop.get(i).getEsami().size(); j++){ %>
+	   					<% for( int j = 0 ; j < op1.get(i).getEsami().size(); j++){%>
     					  <tr>
     					  <form action="selectionOfferta" method = "post">
-    					  <input type="hidden" name="gruppoopz" value="<%=i%>">
-    					  <input type="hidden" name="esame" value="<%=gop.get(i).getEsami().get(j).getCodiceEsame()%>">
-        					<th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=gop.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=gop.get(i).getEsami().get(j).getNome()%></a>
-        						<div class="collapse" id="collapseExample<%=gop.get(i).getEsami().get(j).getCodiceEsame()%>">
+    						  <input type="hidden" name="gruppoopz" value="opzA1<%=+i%>">
+    						  <input type="hidden" name="cfu" value="<%=op1.get(i).getTotCFU()%>">
+    						  <input type="hidden" name="esame" value="<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
+        					  <th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=op1.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=op1.get(i).getEsami().get(j).getNome()%></a>
+        						<div class="collapse" id="collapseExample<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
  			 						<div class="card card-body">
-   									  Descrizione <%=gop.get(i).getEsami().get(j).getDescrizione()%><br>
-   									  <%for(int z = 0; z < gop.get(i).getEsami().get(j).getDocenti().size(); z++){ %>
-   									 	<a href=" <%=gop.get(i).getEsami().get(j).getDocenti().get(z).getIndirizzoPaginaWeb() %>">link docente <%=(z + 1) %></a><br>
+   									  Descrizione <%=op1.get(i).getEsami().get(j).getDescrizione()%><br>
+   									  <%for(int z = 0; z < op1.get(i).getEsami().get(j).getDocenti().size(); z++){ %>
+   									 	<a href=" <%=op1.get(i).getEsami().get(j).getDocenti().get(z).getIndirizzoPaginaWeb() %>">link docente <%=(z + 1) %></a><br>
    									  <%} %>
-   									 ore di lezione <%=gop.get(i).getEsami().get(j).getOreLezione() %><br>
+   									 ore di lezione <%=op1.get(i).getEsami().get(j).getOreLezione() %><br>
   									</div>
 								</div>
        						</th>
-        					<td><%=gop.get(i).getEsami().get(j).getCFU()%></td>
+        					<td><%=op1.get(i).getEsami().get(j).getCFU()%></td>
         					<td>
-        					<input type="hidden" name="metodo" value="<%=gop.get(i).getEsami().get(j).getCodiceEsame()%>">
-        						<input type="checkbox" class="form-check-input filled-in" name="check<%=gop.get(i).getEsami().get(j).getCodiceEsame()%>" onChange="this.form.submit()">		
+        					<input type="hidden" name="metodo" value="<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
+        					<% if(op1.get(i).getEsami().get(j).isCheck()) {  %>
+        						<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in" checked name="check<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>" onChange="this.form.submit()">	
+        							<span class="checkmark"></span>
+								</label>
+        					<%}else {  %>
+        						<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in"  name="check<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>" onChange="this.form.submit()">	
+        							<span class="checkmark"></span>
+								</label>
+        					<%} %>	
+        					</td>
+      					</tr>
+      					</form>
+	     			<%}
+	   				}%>
+	     		</tbody>
+	     	</table>
+	     </div>
+	   <!-- esami obbligatori anno 2 -->
+    	<%for(int i = 0; i < ob2.size(); i++){ %>
+    		
+    			<h3><b><%=ob2.get(i).getAnno()+"° anno obbligatorio" %></b></h3>
+    			
+    			<div class="table-wrapper-scroll-y">
+	   				<table class="table table-bordered table-striped">
+						<thead>
+      						<tr>
+				        		<th scope="col" style="width:70%">Nome esame</th><th scope="col" style="width:15%">CFU</th><th scope="col"style="width:15%">Selezionato</th>
+      						</tr>
+    					</thead>
+    				<tbody>
+	   					<% for(int j = 0; j < ob2.get(i).getEsami().size(); j++){ %>
+    					  <tr>
+    					  <form action="selectionOfferta" method = "post">
+        					<th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=ob2.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=ob2.get(i).getEsami().get(j).getNome()%></a>
+        						<div class="collapse" id="collapseExample<%=ob2.get(i).getEsami().get(j).getCodiceEsame()%>">
+ 			 						<div class="card card-body">
+   									  Descrizione <%=ob2.get(i).getEsami().get(j).getDescrizione()%><br>
+   									  <%for(int z = 0; z < ob2.get(i).getEsami().get(j).getDocenti().size(); z++){ %>
+   									 	<a href=" <%=ob2.get(i).getEsami().get(j).getDocenti().get(z).getIndirizzoPaginaWeb() %>">link docente <%=(z + 1) %></a><br>
+   									  <%} %>
+   									 ore di lezione <%=ob2.get(i).getEsami().get(j).getOreLezione() %><br>
+  									</div>
+								</div>
+       						</th>
+        					<td><%=ob2.get(i).getEsami().get(j).getCFU()%></td>
+        					<td>
+        						<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
+        							<span class="checkmark"></span>
+								</label>
         					</td>
       					</tr>
       					</form>
@@ -164,56 +267,161 @@ overflow-y: auto;
 	     		</tbody>
 	     	</table>
 	     </div>
-	     
-    		<%}} %>
-    	<%} %>
-    <%} %>    
-    <%if(gop.get(0).getAnno()== 3 && tri == 3){ %>
-    			<%="3° anno opzionale CFU massimi selezionabili: "+ gop.get(0).getTotCFU() %>
+	    <%} %>
+	    <!-- esami opzionali anno 2 -->
+    		<%for(int i = 0; i < op2.size(); i++){ %>
+    			<h3><b><%=op2.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op2.get(i).getTotCFU() %></b></h3>
+    			
     			<div class="table-wrapper-scroll-y">
 	   				<table class="table table-bordered table-striped">
 						<thead>
       						<tr>
-				        		<th scope="col">Nome esame</th><th scope="col">CFU</th><th scope="col">Selezionato</th>
+				        		<th scope="col" style="width:70%">Nome esame</th><th scope="col" style="width:15%">CFU</th><th scope="col"style="width:15%">Selezionato</th>
       						</tr>
     					</thead>
     				<tbody>
-	   					<% for(int j = 0; j < gop.get(0).getEsami().size(); j++){ %>
+	   					<% for( int j = 0 ; j < op2.get(i).getEsami().size(); j++){ %>
     					  <tr>
     					  <form action="selectionOfferta" method = "post">
-    					  <input type="hidden" name="gruppoopz" value="<%=2%>">
-    					  <input type="hidden" name="esame" value="<%=gop.get(0).getEsami().get(j).getCodiceEsame()%>">
-        					<th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=gop.get(0).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=gop.get(0).getEsami().get(j).getNome()%></a>
-        						<div class="collapse" id="collapseExample<%=gop.get(0).getEsami().get(j).getCodiceEsame()%>">
+    						  <input type="hidden" name="gruppoopz" value="opzA2<%=+i%>">
+    						  <input type="hidden" name="cfu" value="<%=op2.get(i).getTotCFU()%>">
+    						  <input type="hidden" name="esame" value="<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
+        					  <th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=op2.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=op2.get(i).getEsami().get(j).getNome()%></a>
+        						<div class="collapse" id="collapseExample<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
  			 						<div class="card card-body">
-   									  Descrizione <%=gop.get(0).getEsami().get(j).getDescrizione()%><br>
-   									  <%for(int z = 0; z < gop.get(0).getEsami().get(j).getDocenti().size(); z++){ %>
-   									 	<a href=" <%=gop.get(0).getEsami().get(j).getDocenti().get(z).getIndirizzoPaginaWeb() %>">link docente <%=(z + 1) %></a><br>
+   									  Descrizione <%=op2.get(i).getEsami().get(j).getDescrizione()%><br>
+   									  <%for(int z = 0; z < op2.get(i).getEsami().get(j).getDocenti().size(); z++){ %>
+   									 	<a href=" <%=op2.get(i).getEsami().get(j).getDocenti().get(z).getIndirizzoPaginaWeb() %>">link docente <%=(z + 1) %></a><br>
    									  <%} %>
-   									 ore di lezione <%=gop.get(0).getEsami().get(j).getOreLezione() %><br>
+   									 ore di lezione <%=op2.get(i).getEsami().get(j).getOreLezione() %><br>
   									</div>
 								</div>
        						</th>
-        					<td><%=gop.get(0).getEsami().get(j).getCFU()%></td>
+        					<td><%=op2.get(i).getEsami().get(j).getCFU()%></td>
         					<td>
-        						<input type="hidden" name="metodo" value="<%=gop.get(0).getEsami().get(j).getCodiceEsame()%>">
-       							<input type="checkbox" class="form-check-input filled-in" name="check<%=gop.get(0).getEsami().get(j).getCodiceEsame()%>" onChange="this.form.submit()">
+        					<input type="hidden" name="metodo" value="<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
+        					<% if(op2.get(i).getEsami().get(j).isCheck()) {  %>
+        						<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in" checked name="check<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>" onChange="this.form.submit()">	
+        							<span class="checkmark"></span>
+								</label>
+        					<%}else {  %>
+        						<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in"  name="check<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>" onChange="this.form.submit()">	
+        							<span class="checkmark"></span>
+								</label>
+        					<%} %>	
+        					</td>
+      					</tr>
+      					</form>
+	     			<%}
+	   				}%>
+	     		</tbody>
+	     	</table>
+	     </div>
+    	
+    <!-- esami obbligatori anno 3 -->
+    <%for(int i = 0; i < ob3.size(); i++){ %>
+    		
+    			<h3><b><%=ob3.get(i).getAnno()+"° anno obbligatorio" %></b></h3>
+    			
+    			<div class="table-wrapper-scroll-y">
+	   				<table class="table table-bordered table-striped">
+						<thead>
+      						<tr>
+				        		<th scope="col" style="width:70%">Nome esame</th><th scope="col" style="width:15%">CFU</th><th scope="col"style="width:15%">Selezionato</th>
+      						</tr>
+    					</thead>
+    				<tbody>
+	   					<% for(int j = 0; j < ob3.get(i).getEsami().size(); j++){ %>
+    					  <tr>
+    					  <form action="selectionOfferta" method = "post">
+        					<th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=ob3.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=ob3.get(i).getEsami().get(j).getNome()%></a>
+        						<div class="collapse" id="collapseExample<%=ob3.get(i).getEsami().get(j).getCodiceEsame()%>">
+ 			 						<div class="card card-body">
+   									  Descrizione <%=ob3.get(i).getEsami().get(j).getDescrizione()%><br>
+   									  <%for(int z = 0; z < ob3.get(i).getEsami().get(j).getDocenti().size(); z++){ %>
+   									 	<a href=" <%=ob3.get(i).getEsami().get(j).getDocenti().get(z).getIndirizzoPaginaWeb() %>">link docente <%=(z + 1) %></a><br>
+   									  <%} %>
+   									 ore di lezione <%=ob3.get(i).getEsami().get(j).getOreLezione() %><br>
+  									</div>
+								</div>
+       						</th>
+        					<td><%=ob3.get(i).getEsami().get(j).getCFU()%></td>
+        					<td>
+        						<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
+        							<span class="checkmark"></span>
+								</label>
         					</td>
       					</tr>
       					</form>
 	     			<%} %>
-	     			</tbody>
-	     			</table>
-	     			</div>
-	     			
-	     		<%} %>
+	     		</tbody>
+	     	</table>
+	     </div>
+	    <%} %>
+	    <!-- esami opzionali anno 3 -->
+    		<%for(int i = 0; i < op3.size(); i++){ %>
+    			<h3><b><%=op3.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op3.get(i).getTotCFU() %></b></h3>
+    			
+    			<div class="table-wrapper-scroll-y">
+	   				<table class="table table-bordered table-striped">
+						<thead>
+      						<tr>
+				        		<th scope="col" style="width:70%">Nome esame</th><th scope="col" style="width:15%">CFU</th><th scope="col"style="width:15%">Selezionato</th>
+      						</tr>
+    					</thead>
+    				<tbody>
+	   					<% for( int j = 0 ; j < op3.get(i).getEsami().size(); j++){ %>
+    					  <tr>
+    					  <form action="selectionOfferta" method = "post">
+    						  <input type="hidden" name="gruppoopz" value="opzA3<%=+i%>">
+    						  <input type="hidden" name="cfu" value="<%=op3.get(i).getTotCFU()%>">
+    						  <input type="hidden" name="esame" value="<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
+        					  <th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=op3.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=op3.get(i).getEsami().get(j).getNome()%></a>
+        						<div class="collapse" id="collapseExample<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
+ 			 						<div class="card card-body">
+   									  Descrizione <%=op3.get(i).getEsami().get(j).getDescrizione()%><br>
+   									  <%for(int z = 0; z < op3.get(i).getEsami().get(j).getDocenti().size(); z++){ %>
+   									 	<a href=" <%=op3.get(i).getEsami().get(j).getDocenti().get(z).getIndirizzoPaginaWeb() %>">link docente <%=(z + 1) %></a><br>
+   									  <%} %>
+   									 ore di lezione <%=op3.get(i).getEsami().get(j).getOreLezione() %><br>
+  									</div>
+								</div>
+       						</th>
+        					<td><%=op3.get(i).getEsami().get(j).getCFU()%></td>
+        					<td>
+        					<input type="hidden" name="metodo" value="<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
+        					<% if(op3.get(i).getEsami().get(j).isCheck()) {  %>
+        						<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in" checked name="check<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>" onChange="this.form.submit()">	
+        							<span class="checkmark"></span>
+								</label>
+        					<%}else {  %>
+        						<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in"  name="check<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>" onChange="this.form.submit()">	
+        							<span class="checkmark"></span>
+								</label>
+        					<%} %>	
+        					</td>
+      					</tr>
+      					</form>
+	     			<%}
+	   				}%>
+	     		</tbody>
+	     	</table>
+	     </div>
+    
+    
     </div>
-    <%} 
-    %>
+    
+    <br>
     <br>
 	<form action="selectionOfferta" method="Post">
 		<input type="hidden" name="metodo" value="fine">
-   		<button name="fine" id="laureaScelta" class="btn btn-default btn-responsive center-block">Fine</button>
+   		<button name="fine" id="laureaScelta" class="btn btn-default btn-responsive center-block buttonwidth">Fine</button>
   	</form>
+  	<br>
   </body>
 </html>
