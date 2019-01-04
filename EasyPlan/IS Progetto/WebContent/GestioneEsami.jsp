@@ -631,7 +631,7 @@
 																<%}else {%>
 																<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
 																<%}} 
-																for(int b = 0; b < grop3.size(); b++){
+																for(int b = 0; b < grob3.size(); b++){
 																%>
 															<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
 															<%}
