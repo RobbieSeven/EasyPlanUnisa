@@ -1,5 +1,17 @@
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.CorsoDiLaureaBean"%>
+<%@page import="model.CorsoDiLaureaBeanDAO"%>
+<%@page import="model.OffertaFormativaBeanDAO"%>
+<%@page import="model.OffertaFormativaBean"%>
 <!DOCTYPE html>
 <html>
+<%
+	String offerta = request.getParameter("offerta");
+	ArrayList<CorsoDiLaureaBean> lauree = new ArrayList<>();
+	CorsoDiLaureaBeanDAO ldao = new CorsoDiLaureaBeanDAO();
+	lauree.addAll(ldao.doRetriveCorsoDiLaureaInOfferta(offerta));
+%>
   <head>
     <meta charset="UTF-8">
     <title>EasyPlan Admin | Scelta laurea </title>
@@ -45,15 +57,17 @@
       <br>
       
        <form action="SelezionaCurriculaAm.jsp" method = "post">
-       <input type="hidden" name="laurea" value="triennale">
-       <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
-         <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea triennale</button>
-         </form>
+	       <input type="hidden" name="laurea" value="triennale">
+	       <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
+	       <input type="hidden" name="idCorsoDiLaureaTriennale" value="<%=lauree.get(0).getIdCorsoDiLaurea()%>">
+         	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea triennale</button>
+        </form>
          <br>
          <form action="SelezionaCurriculaAm.jsp" method = "post">
-         <input type="hidden" name="laurea" value="magistrale">
-          <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
-         <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea magistrale</button>
+	         <input type="hidden" name="laurea" value="magistrale">
+	          <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
+	          <input type="hidden" name="idCorsoDiLaureaMagistrale" value="<%=lauree.get(1).getIdCorsoDiLaurea()%>">
+	         <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea magistrale</button>
    		</form>
        </div>
   </body>

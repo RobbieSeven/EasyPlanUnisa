@@ -191,4 +191,39 @@ public class CorsoDiLaureaBeanDAO {
 		}
 		return codiceDocente;
 	}
+	
+	public synchronized ArrayList<CorsoDiLaureaBean> doRetriveCorsoDiLaureaInOfferta(String anno){
+		ArrayList<CorsoDiLaureaBean> lista = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			String query = "select c.IDCorsoDiLaurea, c.Tipo, c.AnnoOffertaFormativa"
+						+ "		from corsodilaurea as c join offertaformativa as o "
+						+ "		on c.AnnoOffertaFormativa = o.AnnoOffertaFormativa "
+						+ "			where o.AnnoOffertaFormativa = ?";
+			ps = conn.prepareStatement(query);
+			
+			ps.setString(1, anno);
+
+			ResultSet items = ps.executeQuery();
+
+			while (items.next()) {
+				CorsoDiLaureaBean laurea = new CorsoDiLaureaBean();
+				laurea.setAnnoOffertaFormativa(items.getString("AnnoOffertaFormativa"));
+				laurea.setCurricula(null);
+				laurea.setIdCorsoDiLaurea(items.getInt("IDCorsoDiLaurea"));
+				laurea.setTipo(items.getInt("Tipo"));
+
+				lista.add(laurea);
+				
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
 }

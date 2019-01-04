@@ -30,9 +30,11 @@ public class GestioneOffertaFormativa extends HttpServlet {
 			OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, null, false);
 			ofbd.doSave(ofb);
 			CorsoDiLaureaBeanDAO daoLaurea = new CorsoDiLaureaBeanDAO();
-			CorsoDiLaureaBean corsoDiLaureaTriennale = new CorsoDiLaureaBean((daoLaurea.doRetrieveLastID() +1),1, nomeOfferta, null);
-			CorsoDiLaureaBean corsoDiLaureaMagistrale = new CorsoDiLaureaBean((daoLaurea.doRetrieveLastID() +1),2, nomeOfferta, null);
+			int nuovoIdLaureaTriennale = daoLaurea.doRetrieveLastID() +1;
+			CorsoDiLaureaBean corsoDiLaureaTriennale = new CorsoDiLaureaBean(nuovoIdLaureaTriennale,1, nomeOfferta, null);
 			daoLaurea.doSave(corsoDiLaureaTriennale);
+			int nuovoIdLaureaMagistrale = daoLaurea.doRetrieveLastID() +1;
+			CorsoDiLaureaBean corsoDiLaureaMagistrale = new CorsoDiLaureaBean(nuovoIdLaureaMagistrale,2, nomeOfferta, null);
 			daoLaurea.doSave(corsoDiLaureaMagistrale);
 		} else if(request.getParameter("metodo").equals("eliminaOfferta")) {
 			String nomeOfferta = request.getParameter("nomeOfferta");

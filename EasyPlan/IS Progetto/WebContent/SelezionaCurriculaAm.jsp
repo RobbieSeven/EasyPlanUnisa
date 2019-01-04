@@ -8,11 +8,18 @@
      	 ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
      	CurriculumBeanDAO cd = new CurriculumBeanDAO();
      	String laurea=request.getParameter("laurea");
-     	System.out.println(laurea);
+     	
+     	String id = "";
      	int tipo;
+     	
      	if(laurea.equals("triennale")){
-     	tipo=1;	
-     	}else {tipo=2;}
+	     	tipo=1;	
+	     	id = request.getParameter("idCorsoDiLaureaTriennale");
+     	}else {
+     		tipo=2;
+     		id = request.getParameter("idCorsoDiLaureaMagistrale");
+     	}
+     	
      	String offerta= request.getParameter("offerta");
      	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(tipo,offerta);
      %>
@@ -63,9 +70,10 @@
             <form action="GestioneEsami.jsp" method="POST">
              <input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
              <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
-             <input type="hidden" name="curriculum" value="<%= lista.get(i).getNomeCurriculum()%>">
+             <input type="hidden" name="curriculum" value="<%= lista.get(i).getNomeCurriculum()%>">            
              <button class="btn btn-default btn-responsive center" class="btn btn-default btn-responsive center"><%=lista.get(i).getNomeCurriculum()%></button>
              <input type="hidden" name="idCurriculum" value="<%=lista.get(i).getIdCurriculum()%>">
+             <input type="hidden" name="idCorsoDiLaurea" value="<%=id %>"></input>
             </form>
             
             <form action="GestioneCurricula" method="POST">
@@ -74,6 +82,7 @@
 						<input type="hidden" name="laurea" value="<%=laurea%>">
 						<input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
 						<input type="hidden" name="idCurriculum" value="<%=lista.get(i).getIdCurriculum()%>">
+						<input type="hidden" name="idCorsoDiLaurea" value="<%=id %>"></input>
             <span class="glyphicon glyphicon-trash"></span></button>
             </form>
           </div></center>
@@ -86,6 +95,7 @@
           <input type="hidden" name="metodo" value="aggiuntaCurricula">
           <input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
           <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
+          <input type="hidden" name="idCorsoDiLaurea" value="<%=id %>"></input>
           <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-plus"><br>Aggiungi</button></span></div></center>
 		  </form>
    

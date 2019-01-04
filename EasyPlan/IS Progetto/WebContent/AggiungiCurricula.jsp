@@ -5,17 +5,9 @@
 
 <%
 	// Simulazione dati presi dal database
-	ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
-	CurriculumBeanDAO cd = new CurriculumBeanDAO();
 	String laurea = request.getParameter("laurea");
-	int tipo;
-	if (laurea.equals("triennale")) {
-		tipo = 1;
-	} else {
-		tipo = 2;
-	}
 	String offerta = request.getParameter("offerta");
-	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(tipo, offerta);
+	String idCorsoDiLaurea = request.getParameter("idCorsoDiLaurea");
 %>
 <!DOCTYPE html>
 <html>
@@ -84,6 +76,7 @@
 	<form action="SelezionaCurriculaAm.jsp">
 		<input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>"> 
 		<input type="hidden" name="offerta"value="<%=request.getParameter("offerta")%>"> 
+		
 		<input type="submit" class="btn btn-default" name="indietro"value="Indietro">
 	</form>
 
@@ -96,6 +89,7 @@
 				<input type="hidden" name="metodo" value="aggiuntaCurricula">
 				<input type="hidden" name="laurea" value="<%=laurea%>"> 
 				<input type="hidden" name="offerta" value="<%=offerta%>">
+				<input type="hidden" name="idCorsoDiLaurea" value="<%=idCorsoDiLaurea %>"/>
 				<div class="form-group">
 					<label class="control-label col-sm-5" for="email">Nome
 						curricula:</label>

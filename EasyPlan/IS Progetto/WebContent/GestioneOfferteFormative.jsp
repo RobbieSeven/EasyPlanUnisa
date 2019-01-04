@@ -1,13 +1,15 @@
+<%@page import="model.CorsoDiLaureaBean"%>
+<%@page import="model.CorsoDiLaureaBeanDAO"%>
 <%@page import="model.OffertaFormativaBeanDAO"%>
 <%@page import="model.OffertaFormativaBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>
 
 <%
-     	// Simulazione dati presi dal database
-     	ArrayList<OffertaFormativaBean> of = new ArrayList<OffertaFormativaBean>();
-     	OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
-     	of = ofbd.doRetriveByAll();
+     // Simulazione dati presi dal database
+     ArrayList<OffertaFormativaBean> of = new ArrayList<>();
+     OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
+     of = ofbd.doRetriveByAll(); 	
      %>
 
 <!DOCTYPE html>
@@ -76,6 +78,7 @@
 
 					<input type="hidden" name="offerta" value="<%=of.get(i).getAnnoOffertaFormativa()%>">
 					<a href="SelezionaLaureaAm.jsp?offerta=<%=of.get(i).getAnnoOffertaFormativa()%>"> <%=of.get(i).getAnnoOffertaFormativa() %></a>
+					
 					<!-- Default switch -->
 					<label class="switch">
 					
