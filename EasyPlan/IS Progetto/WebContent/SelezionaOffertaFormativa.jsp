@@ -47,6 +47,9 @@
         </div>
       </div>
     </nav>
+    <form action="Homepage.html" method = "post">
+    	<button name="button"  class="btn btn-default btn-responsive left-block">Indietro</button>
+    </form>
     <img alt="logo" src="immagini/logo.png" class="img-responsive center-block centerImg">
     <div class="col-md-12">
 	    

@@ -54,10 +54,12 @@
         </div>
       </div>
     </nav>
+    <form action="getCorsiDiLaureaServlet" method = "post">
+    	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
+    	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive left-block">Indietro</button>
+    </form>
     <img alt="logo" src="immagini/logo.png" class="img-responsive center-block centerImg">
     <div class="col-md-12">
-	    
-	    
 	    <%for(int i = 0; i < cm.size(); i++){ %>
 	    <form action="getEsamiOffertaFormativa" method = "post">
 		    <input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">

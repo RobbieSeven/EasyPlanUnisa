@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import model.DocenteBean;
 import model.DocenteBeanDAO;
 import model.EsameBean;
@@ -24,7 +26,18 @@ public class GestioneEsamiServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		HttpSession session = request.getSession(true);
+		synchronized (session)
+		{
+			if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
+			{
+				RequestDispatcher view = request.getRequestDispatcher("Login.html");
+				view.forward(request, response);
+		
+			}
+		}
+		
 		if (request.getParameter("metodo").equals("aggiuntaNuovoEsame")) {
 			int idGruppo = Integer.parseInt(request.getParameter("codiceGruppo"));
 			int cfu = Integer.parseInt(request.getParameter("cfu"));

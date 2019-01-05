@@ -125,12 +125,19 @@
           </button>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-left">
+        </ul>
           <ul class="nav navbar-nav navbar-right">
 <!-- "Login amministratore" --><li><a href="Login.html" style="color:#000000">Admin</a></li>
           </ul>
         </div>
       </div>
     </nav>
+    <form action="getCurriculaFromLaureaOff" method = "post">
+    	  <input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
+	      <input type="hidden" name="laurea" value="<%=cd.get(0).isTipo()%>">
+    	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive left-block">Indietro</button>
+    </form>
     <%if(session.getAttribute("errore")!= null){ %>
     	<h4  style="color:red; text-align:center"><%=session.getAttribute("errore") %></h4>
     <%session.removeAttribute("errore");} %>

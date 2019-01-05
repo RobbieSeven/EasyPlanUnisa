@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.CorsoDiLaureaBean;
 import model.CorsoDiLaureaBeanDAO;
@@ -23,6 +24,18 @@ public class GestioneOffertaFormativa extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		synchronized (session)
+		{
+			if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
+			{
+				RequestDispatcher view = request.getRequestDispatcher("Login.html");
+				view.forward(request, response);
+		
+			}
+		}
+		
+		
 		// Aggiunta Offerta
 		if(request.getParameter("metodo").equals("aggiungiOfferta")) {
 			String nomeOfferta = request.getParameter("nomeOfferta");

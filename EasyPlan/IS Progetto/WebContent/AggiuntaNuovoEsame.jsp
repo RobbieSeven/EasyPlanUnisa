@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	synchronized (session)
+	{
+		if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
+		{
+			RequestDispatcher view = request.getRequestDispatcher("Login.html");
+			view.forward(request, response);
+	
+		}
+	}
 	int codiceGruppo = Integer.parseInt(request.getParameter("codiceGruppo"));
 	String tipoGruppo = request.getParameter("tipoGruppo");
 	String laurea=request.getParameter("laurea");
@@ -75,7 +84,7 @@ input[type=button]:active {
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
 					<!-- "Login amministratore" -->
-					<li><a href="Login amministratore" style="color: #000000">Log
+					<li><a href="Logout" style="color: #000000">Log
 							out <span class="glyphicon glyphicon-log-out"></span>
 					</a></li>
 				</ul>

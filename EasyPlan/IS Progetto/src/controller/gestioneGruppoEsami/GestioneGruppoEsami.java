@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.GruppoEsamiObbligatoriBean;
 import model.GruppoEsamiObbligatoriBeanDAO;
@@ -34,7 +35,16 @@ public class GestioneGruppoEsami extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		HttpSession session = request.getSession(true);
+		synchronized (session)
+		{
+			if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
+			{
+				RequestDispatcher view = request.getRequestDispatcher("Login.html");
+				view.forward(request, response);
+		
+			}
+		}
 		if(request.getParameter("metodo").equals("aggiungiGruppo")) {
 			String tipoGruppoScelto = request.getParameter("esame");
 			int anno = Integer.parseInt(request.getParameter("anno"));

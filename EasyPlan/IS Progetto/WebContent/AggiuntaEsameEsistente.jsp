@@ -8,6 +8,15 @@
      	ArrayList<OffertaFormativaBean> offerte = new ArrayList<>();
     	OffertaFormativaBeanDAO dao = new OffertaFormativaBeanDAO();
     	offerte.addAll(dao.doRetriveByAll());*/
+    	synchronized (session)
+		{
+			if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
+			{
+				RequestDispatcher view = request.getRequestDispatcher("Login.html");
+				view.forward(request, response);
+		
+			}
+		}
     	
     	int codiceGruppo = Integer.parseInt(request.getParameter("codiceGruppo"));
     	String tipoGruppo = request.getParameter("tipoGruppo");
@@ -51,7 +60,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-			<!-- "Login amministratore" --><li><a href="Login amministratore" style="color:#000000">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+			<!-- "Login amministratore" --><li><a href="Logout" style="color:#000000">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
           </ul>
         </div>
       </div>

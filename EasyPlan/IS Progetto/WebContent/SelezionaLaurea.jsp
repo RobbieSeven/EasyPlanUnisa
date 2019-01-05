@@ -42,6 +42,9 @@
         </div>
       </div>
     </nav>
+    <form action="SelezionaOffertaFormativa.jsp" method = "post">
+    	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive left-block">Indietro</button>
+    </form>
     <img alt="logo" src="immagini/logo.png" class="img-responsive center-block centerImg">
 
     <div class="col-md-12">

@@ -7,6 +7,15 @@
 <!DOCTYPE html>
 <html>
 <%
+	synchronized (session)
+	{
+		if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
+		{
+			RequestDispatcher view = request.getRequestDispatcher("Login.html");
+			view.forward(request, response);
+	
+		}
+	}
 	String offerta = request.getParameter("offerta");
 	ArrayList<CorsoDiLaureaBean> lauree = new ArrayList<>();
 	CorsoDiLaureaBeanDAO ldao = new CorsoDiLaureaBeanDAO();
@@ -44,7 +53,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-<!-- "Login amministratore" --><li><a href="Login amministratore">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+<!-- "Login amministratore" --><li><a href="Logout">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
           </ul>
         </div>
       </div>

@@ -3,6 +3,15 @@
 <html>
 
 <% 
+		synchronized (session)
+		{
+			if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
+			{
+				RequestDispatcher view = request.getRequestDispatcher("Login.html");
+				view.forward(request, response);
+		
+			}
+		}
 		String laurea=request.getParameter("laurea");
 		String offerta= request.getParameter("offerta");
 		String curriculum = request.getParameter("curriculum");
@@ -56,7 +65,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
             <!-- "Login amministratore" -->
-            <li><a href="Login amministratore" style="color:#000000">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+            <li><a href="Logout" style="color:#000000">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
           </ul>
         </div>
       </div>
