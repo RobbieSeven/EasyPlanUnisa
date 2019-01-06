@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- for social icon -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="AdminStyle.css">
+    
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -69,14 +71,14 @@
 	       <input type="hidden" name="laurea" value="triennale">
 	       <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
 	       <input type="hidden" name="idCorsoDiLaureaTriennale" value="<%=lauree.get(0).getIdCorsoDiLaurea()%>">
-         	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea triennale</button>
+         	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block dimButton centerButton">Laurea triennale</button>
         </form>
          <br>
          <form action="SelezionaCurriculaAm.jsp" method = "post">
 	         <input type="hidden" name="laurea" value="magistrale">
 	          <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
 	          <input type="hidden" name="idCorsoDiLaureaMagistrale" value="<%=lauree.get(1).getIdCorsoDiLaurea()%>">
-	         <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block">Laurea magistrale</button>
+	         <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block dimButton">Laurea magistrale</button>
    		</form>
        </div>
   </body>

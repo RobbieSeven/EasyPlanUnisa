@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- for social icon -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="AdminStyle.css">
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -75,18 +76,18 @@
     <div class="col-md-12">
       <center><h2>Seleziona curricula da modificare</h2></center>
       <%for(int i=0; i<lista.size(); i++){ %>
-          <center><div>
+          <center><div style="display: -webkit-inline-box">
             <form action="GestioneEsami.jsp" method="POST">
              <input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
              <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
              <input type="hidden" name="curriculum" value="<%= lista.get(i).getNomeCurriculum()%>">            
-             <button class="btn btn-default btn-responsive center" class="btn btn-default btn-responsive center"><%=lista.get(i).getNomeCurriculum()%></button>
+             <button class="btn btn-default btn-responsive center dimBigButton" class="btn btn-default btn-responsive center dimBigButton"><%=lista.get(i).getNomeCurriculum()%></button>
              <input type="hidden" name="idCurriculum" value="<%=lista.get(i).getIdCurriculum()%>">
              <input type="hidden" name="idCorsoDiLaurea" value="<%=id %>"></input>
             </form>
             
             <form action="GestioneCurricula" method="POST">
-            <button class="btn btn-default btn-responsive center">
+            <button class="btn btn-default btn-responsive center" style="margin-left: -250px">
 						<input type="hidden" name="metodo" value="eliminaCurricula">
 						<input type="hidden" name="laurea" value="<%=laurea%>">
 						<input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
@@ -105,7 +106,7 @@
           <input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
           <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
           <input type="hidden" name="idCorsoDiLaurea" value="<%=id %>"></input>
-          <button class="btn btn-default btn-responsive center"><span class="glyphicon glyphicon-plus"><br>Aggiungi</button></span></div></center>
+          <button class="btn btn-default btn-responsive center dimButton"><span class="glyphicon glyphicon-plus"><br>Aggiungi</button></span></div></center>
 		  </form>
    
     </div>

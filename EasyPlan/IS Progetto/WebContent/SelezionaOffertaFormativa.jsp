@@ -42,7 +42,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-<!-- "Login amministratore" --><li><a href="../../Login.html" style="color:#000000">Admin</a></li>
+<!-- "Login amministratore" --><li><a href="Login.html" style="color:#000000">Admin</a></li>
           </ul>
         </div>
       </div>

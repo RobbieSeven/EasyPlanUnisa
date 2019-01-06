@@ -29,6 +29,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="AdminStyle.css">
+	
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -65,8 +67,8 @@
 	<div class="col-md-12">
 		<form action="AggiungiOffertaFormativa.jsp" method="post">
 			<center>
-				<div>
-					<button class="btn btn-default btn-responsive center">
+				<div class="centerButton">
+					<button class="btn btn-default btn-responsive center dimButton">
 						<span class="glyphicon glyphicon-plus"><br>Aggiungi
 					</button>
 					</span>
@@ -75,18 +77,18 @@
 			<br>
 			<%for(int i=0; i<of.size(); i++){ %>
 			<center>
-				<div class=center-block style="border: 2px solid black; width: 15%;">
+				<div class="center-block Myfieldset">
 					
-					<form action="GestioneOffertaFormativa" method="POST">
+					<form action="GestioneOffertaFormativa" style="display: inline" method="POST">
 						<input type="hidden" name="metodo" value="eliminaOfferta">
 						<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa()%>">
-							<button>
+							<button style="margin-right: 20px">
 								<span class="glyphicon glyphicon-trash"></span>
 							</button>
 					</form>
 
 					<input type="hidden" name="offerta" value="<%=of.get(i).getAnnoOffertaFormativa()%>">
-					<a href="SelezionaLaureaAm.jsp?offerta=<%=of.get(i).getAnnoOffertaFormativa()%>"> <%=of.get(i).getAnnoOffertaFormativa() %></a>
+					<a href="SelezionaLaureaAm.jsp?offerta=<%=of.get(i).getAnnoOffertaFormativa()%>"  style="margin-right: 20px"> <%=of.get(i).getAnnoOffertaFormativa() %></a>
 					
 					<!-- Default switch -->
 					<label class="switch">
@@ -96,10 +98,16 @@
 							<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa() %>">
 							<% if(of.get(i).isVisibilita()) { %> 
 								<input type="hidden" name="visibile" value="si">
-								<input type="checkbox" checked onChange="this.form.submit()"> <span class="slider"></span>
+									<label class="c">
+        								<input type="checkbox" class="form-check-input filled-in" onChange="this.form.submit()" checked >
+        								<span class="checkmark slider" style="margin-top: -13px"></span>
+									</label>
 							<% } else { %>
 								<input type="hidden" name="visibile" value="no">
-								<input type="checkbox" onChange="this.form.submit()"> <span class="slider"></span>
+								<label class="c">
+        							<input type="checkbox" class="form-check-input filled-in" onChange="this.form.submit()">
+        							<span class="checkmark slider" style="margin-top: -13px"></span>
+								</label>
 							<% } %>
 							
 						</form>
