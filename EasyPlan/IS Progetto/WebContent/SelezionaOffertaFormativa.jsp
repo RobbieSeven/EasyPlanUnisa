@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
-    pageEncoding="UTF-8"%>
-    
+    pageEncoding="UTF-8" import="model.OffertaFormativaBeanDAO" import="model.OffertaFormativaBean"%>
+
     
      <%
      	// Simulazione dati presi dal database
-     	ArrayList<String> curricula = new ArrayList<String>();
-     curricula.add("Sicurezza"); curricula.add("SITS"); curricula.add("Cloud computing");
+     	ArrayList<OffertaFormativaBean> of = new ArrayList<OffertaFormativaBean>();
+     	OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
+     	of = ofbd.doRetriveByAll();
      %>
      
      
@@ -13,7 +14,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>EasyPlan | Scelta curricula</title>
+    <title>EasyPlan | Offerta formativa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- for social icon -->
@@ -21,6 +22,7 @@
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="centerelements.css">
     <style type="text/css">
     .navbar-inverse {
    	 background-color: #ada2b2;
@@ -40,21 +42,27 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-<!-- "Login amministratore" --><li><a href="Login amministratore" style="color:#000000">Admin</a></li>
+<!-- "Login amministratore" --><li><a href="Login.html" style="color:#000000">Admin</a></li>
           </ul>
         </div>
       </div>
     </nav>
-    <img alt="logo" src="../../immagini/logo.png" class="img-responsive center-block">
+    <form action="Homepage.html" method = "post">
+    	<button name="button"  class="btn btn-default btn-responsive left-block">Indietro</button>
+    </form>
+    <img alt="logo" src="immagini/logo.png" class="img-responsive center-block centerImg">
     <div class="col-md-12">
-	    <form action="DioBrando" method = "post">
 	    
-	    <%for(int i = 0; i < curricula.size(); i++){ %>
-	         <button name="button" id="curricula##" class="btn btn-default btn-responsive center-block"><%=curricula.get(i) %></button>
-	         <br>
+	    
+	    <%for(int i = 0; i < of.size(); i++){ %>
+	    	<%if(of.get(i).isVisibilita()){ %>
+	    	<form action="getCorsiDiLaureaServlet" method = "post">
+		    	<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa() %>">
+		         	<button name="button" id="offertaformativa"<%=+i%> class="btn btn-default btn-responsive center-block buttonwidth"><%=of.get(i).getAnnoOffertaFormativa() %></button>
+		         <br>
+	         </form>
+	         <%} %>
 	     <%}%>
-	     
-	   </form>
     </div>
   </body>
 </html>

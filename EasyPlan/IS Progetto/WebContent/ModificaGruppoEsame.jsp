@@ -1,7 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+<% 
+		synchronized (session)
+		{
+			if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
+			{
+				RequestDispatcher view = request.getRequestDispatcher("Login.html");
+				view.forward(request, response);
+		
+			}
+		}
+		String laurea=request.getParameter("laurea");
+		String offerta= request.getParameter("offerta");
+		String curriculum = request.getParameter("curriculum");
+		int codiceGruppo = Integer.parseInt(request.getParameter("codiceGruppo"));
+		int id= Integer.parseInt(request.getParameter("idCurriculum"));
+		int totCFU = Integer.parseInt(request.getParameter("totCFU"));
+		%>
 
 <head>
   <meta charset="UTF-8">
@@ -48,7 +65,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
             <!-- "Login amministratore" -->
-            <li><a href="Login amministratore" style="color:#000000">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+            <li><a href="Logout" style="color:#000000">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
           </ul>
         </div>
       </div>
@@ -61,23 +78,25 @@
             <center>
               <h2>Modifica gruppo di esami</h2>
             </center>
-            <form class="form-horizontal">
+            <form class="form-horizontal" action = "GestioneGruppoEsami" method="POST">
+            	<input type="hidden" name="laurea" value="<%=laurea%>"></input>
+				<input type="hidden" name="offerta" value="<%=offerta%>"></input>
+				<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
+				<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
+				<input type="hidden" name="codiceGruppo" value="<%=codiceGruppo%>"></input>
+				<input type="hidden" name="metodo" value="modificaGruppo"></input>
               <div class="form-group">
                 <label class="control-label col-sm-6" for="numerocfu">Numero CFU:</label>
                 <div class="col-sm-1">
-                  <input type="number" name="quantity" min="0" max="18" step="1" value="30">
+                  <input type="number" name="quantity" min="1"  step="1" value="<%=totCFU%>">
                 </div>
-              </div>
-          </div>
-          <div class="col-sm-offset-5 col-sm-10">
-            <br>
-            <form action="">
-              <input type="radio" name="esame" value="obbligatorio"> Obbligatorio<br>
-              <input type="radio" name="esame" value="opzionale"> Opzionale
-            </form>
-          </div>
-          <center><input type="submit" name="" value="Aggiungi nuovo curricula" class="btn btn-default" style="margin-top:2%"></center>
-        </div>
+              </div>         	
+          	<div class="col-sm-offset-5 col-sm-10">         
+         	 <input type="submit" name="" value="Modifica CFU" class="btn btn-default" style="margin-top:2%">
+       	 	</div>
+       	 </form>
+       	</div>
+       </div>
       </fieldset>
     </center>
   </div>

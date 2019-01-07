@@ -6,7 +6,7 @@ public class CorsoDiLaureaBean {
 
 	// VARIABILI DI ISTANZA
 	private int idCorsoDiLaurea;
-	private boolean tipo;
+	private int tipo;
 	private String annoOffertaFormativa;
 	private ArrayList<CurriculumBean> curricula;
 
@@ -14,7 +14,7 @@ public class CorsoDiLaureaBean {
 	public CorsoDiLaureaBean() {
 	}
 
-	public CorsoDiLaureaBean(int idCorsoDiLaurea, boolean tipo, String annoOffertaFormativa,
+	public CorsoDiLaureaBean(int idCorsoDiLaurea, int tipo, String annoOffertaFormativa,
 			ArrayList<CurriculumBean> curricula) {
 		this.idCorsoDiLaurea = idCorsoDiLaurea;
 		this.tipo = tipo;
@@ -31,11 +31,11 @@ public class CorsoDiLaureaBean {
 		this.idCorsoDiLaurea = idCorsoDiLaurea;
 	}
 
-	public boolean isTipo() {
+	public int isTipo() {
 		return tipo;
 	}
 
-	public void setTipo(boolean tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 
@@ -68,7 +68,6 @@ public class CorsoDiLaureaBean {
 		int result = 1;
 		result = prime * result + ((annoOffertaFormativa == null) ? 0 : annoOffertaFormativa.hashCode());
 		result = prime * result + idCorsoDiLaurea;
-		result = prime * result + (tipo ? 1231 : 1237);
 		return result;
 	}
 

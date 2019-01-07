@@ -73,15 +73,6 @@ public class CurriculumBean {
 				+ idCorsoDiLaurea + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + idCorsoDiLaurea;
-		result = prime * result + idCurriculum;
-		result = prime * result + ((nomeCurriculum == null) ? 0 : nomeCurriculum.hashCode());
-		return result;
-	}
 
 	@Override
 	public boolean equals(Object obj) {

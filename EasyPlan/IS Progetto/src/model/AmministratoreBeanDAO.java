@@ -17,7 +17,7 @@ public class AmministratoreBeanDAO {
 
 			conn = DriverManagerConnectionPool.getConnection();
 
-			ps = conn.prepareStatement("SELECT * FROM amministratore WHERE Username=? AND Password=?");
+			ps = conn.prepareStatement("SELECT * FROM amministratore WHERE Username=?");
 			ps.setString(1, username);
 
 			ResultSet res = ps.executeQuery();

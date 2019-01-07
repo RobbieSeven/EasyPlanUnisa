@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    synchronized (session)
+	{
+		if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
+		{
+			RequestDispatcher view = request.getRequestDispatcher("Login.html");
+			view.forward(request, response);
+	
+		}
+	}
+    %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,6 +32,8 @@
 		</style>
 	</head>
 	<body>
+	
+		<!--  Navbar -->
 		<nav class="navbar navbar-inverse ">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -32,15 +46,19 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
 					<!-- "Login amministratore" -->
-					<li><a href="Login amministratore" style="color:#000000">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+					<li><a href="Logout" style="color:#000000">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
 				</ul>
 			</div>
 			</div>
 		</nav>
+		<!--  ./Navbar -->
+		
 		<center>
-			<h2>Inserisci il nome della nuova offerta formativa</h2>
+			<h2>Modifica il nome dell'offerta formativa</h2>
 		</center>
+		
 		<br><br>
+		
 		<div class="container col-sm-12 col-lg-12">
 			<div class=" col-sm-4 col-lg-4"></div>
 			<div class="col-sm-3 col-lg-4 ">
@@ -48,7 +66,9 @@
 			</div>
 			<div class=" col-sm-5 col-lg-4"></div>
 		</div>
+		
 		<br><br>
+		
 		<center><input type="submit" class="btn btn-default" name="conferma" value="Conferma"></center>
 	</body>
 </html>

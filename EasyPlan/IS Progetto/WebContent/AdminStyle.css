@@ -1,0 +1,359 @@
+.centerButton{
+	margin-top: 10%;
+	margin-bottom: 2%;
+}
+
+textarea{
+	width: 90%;
+}
+
+.applica{
+	margin-left: 30%;
+    width: 124px;
+    height: 48px;
+}
+
+.deleteEsame{
+	margin-left: 110%;
+}
+
+.codice{
+	width: 50px;
+    margin-left: -180%;
+    margin-top: 5px;
+}
+
+.divContents{
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.button2of4{
+	margin-left: -300%;
+}
+
+.button3of4{
+	margin-left: -690%;
+}
+
+.button4of4{
+	margin-left: -1250%;
+}
+
+.dimBigButton{
+	 width: 350px;
+}
+
+.dimButtonHeight{
+	height: 48px;
+}
+
+.div3Button{
+	margin-left: -80%;
+    margin-top: 15px;
+    display: -webkit-inline-box;
+}
+
+.div4Button{
+	margin-left: -80%;
+    margin-top: 15px;
+    display: -webkit-inline-box;
+}
+
+.dimButton{
+	width: 200px; 
+}
+
+.Myfieldset{
+	border: 1px solid gray;
+    width: 200px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 4px;
+}
+
+@media screen and (max-width: 1280px){
+	.button2of4{
+		margin-left: -350%;
+	}
+	
+	.button3of4{
+		margin-left: -740%;
+	}
+	
+	.button4of4{
+		margin-left: -1350%;
+	}
+}
+@media screen and (max-width: 1250px){
+	
+	.button2{
+   		 margin-left: -55%;
+	}
+
+	.button3{
+		margin-left: -55%;
+	}
+}
+
+@media screen and (max-width: 1200px){
+	
+	.button2{
+   		 margin-left: -80%;
+	}
+
+	.button3{
+		margin-left: -95%;
+	}
+	
+	.button2of4{
+		margin-left: -400%;
+	}
+	
+	.button3of4{
+		margin-left: -790%;
+	}
+	
+	.button4of4{
+		margin-left: -1450%;
+	}
+}
+
+@media screen and (max-width: 1150px) {
+	.button2{
+   		 margin-left: -100%;
+	}
+
+	.button3{
+		margin-left: -250%;
+	}
+	
+	.button2of4{
+		margin-left: -400%;
+	}
+	
+	.button3of4{
+		margin-left: -800%;
+	}
+	
+	.button4of4{
+		margin-left: -1600%;
+	}
+}
+
+@media screen and (max-width: 1100px) {	
+	.centerButton{
+		margin-top: 15%;
+		margin-bottom: 2%;
+	}
+	
+	.button2{
+   		 margin-left: -120%;
+	}
+
+	.button3{
+		margin-left: -275%;
+	}
+}
+
+@media screen and (max-width: 1000px) {	
+	
+	.button2{
+   		 margin-left: -150%;
+	}
+
+	.button3{
+		margin-left: -300%;
+	}
+	
+	.button2of4{
+		margin-left: -450%;
+	}
+	
+	.button3of4{
+		margin-left: -900%;
+	}
+	
+	.button4of4{
+		margin-left: -1700%;
+	}
+}
+
+@media screen and (max-width: 950px) {	
+	
+	.button2{
+   		 margin-left: -180%;
+	}
+
+	.button3{
+		margin-left: -350%;
+	}
+	
+	.button2of4{
+		margin-left: 0;
+		margin-top: 10px;
+	}
+	
+	.button3of4{
+		margin-left: 0;
+		margin-top: 10px;
+	}
+	
+	.button4of4{
+		margin-left: 0;
+		margin-top: 10px;
+	}
+	
+	.div4Button{
+	margin-left: 0;
+    margin-top: 15px;
+    display: block;
+}
+}
+
+@media screen and (max-width: 900px) {	
+	
+	.button2{
+   		 margin-left: -210%;
+	}
+
+	.button3{
+		margin-left: -380%;
+	}
+}
+
+@media screen and (max-width: 860px) {
+	.centerButton{
+	margin-top: 20%;
+	margin-bottom: 2%;
+	}
+	
+	.button2{
+   		 margin-left: -250%;
+	}
+
+	.button3{
+		margin-left: -450%;
+	}
+}
+
+@media screen and (max-width: 810px) {
+	.button2{
+   		 margin-left: -230%;
+	}
+
+	.button3{
+		margin-left: -480%;
+	}
+}
+
+@media screen and (max-width: 767px){
+	.codice{
+	width: 50px;
+    margin-left: 0;
+    margin-top: 0;
+   }
+}
+
+@media screen and (max-width: 750px) {
+	.div3Button{
+        margin-top: 15px;
+        display: block;
+        margin-left: 0;
+    }
+    
+    .button2{
+   		 margin-left: 0;
+   		 margin-top: 10px;
+	}
+
+	.button3{
+		margin-left: 0;
+		margin-top: 10px;
+	}
+	
+	.deleteEsame{
+		margin-left: 0;
+    }
+	
+	.applica{
+		margin-left: 38%;
+    	width: 124px;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.centerButton{
+	margin-top: 30%;
+	margin-bottom: 2%;
+	}
+}
+
+/*-----------------checkbox---------------------*/
+/* The container */
+.c {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 32px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* nascondo al browser la checkbox di default*/
+.c input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/*creazione checkbox base*/
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #ccc;
+}
+
+/*colore quando ci passo sopra*/
+.c:hover input ~ .checkmark {
+  background-color: #888a85;  
+}
+
+/* quando premo lo fondo diventa verde */
+.c input:checked ~ .checkmark {
+  background-color: #90ee90;
+}
+
+/* creo la v quando clicco */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* mostro la vi quando è checcata la chekbox*/
+.c input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Stile della v */
+.c .checkmark:after {
+  left: 9px;
+  top: 3px;
+  width: 10px;
+  height: 15px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

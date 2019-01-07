@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class EsameBean {
 
 	// VARIABILI D'ISTANZA
@@ -9,6 +11,8 @@ public class EsameBean {
 	private String descrizione;
 	private int oreLezione;
 	private String semestre;
+	private ArrayList<DocenteBean> docenti = new ArrayList<DocenteBean>();
+	private boolean check = false;
 
 	// COSTRUTTORI
 	public EsameBean() {
@@ -72,6 +76,22 @@ public class EsameBean {
 		this.semestre = semestre;
 	}
 
+	public ArrayList<DocenteBean> getDocenti() {
+		return docenti;
+	}
+
+	public void setDocenti(ArrayList<DocenteBean> docenti) {
+		this.docenti = docenti;
+	}
+	
+	public boolean isCheck() {
+		return check;
+	}
+
+	public void setCheck(boolean check) {
+		this.check = check;
+	}
+	
 	// METODI OBJECT
 	@Override
 	public String toString() {
