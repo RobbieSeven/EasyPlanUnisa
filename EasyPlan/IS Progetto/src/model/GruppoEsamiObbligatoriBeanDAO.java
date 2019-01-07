@@ -46,10 +46,7 @@ public class GruppoEsamiObbligatoriBeanDAO {
 			conn = DriverManagerConnectionPool.getConnection();
 
 			String query = null;
-			ResultSet result = ps.executeQuery(
-					"SELECT CodiceGEOb FROM gruppoesamiobbligatori WHERE CodiceGEOb='" + gb.getCodiceGEOb() + "'");
-
-			if (result.next()) {
+			
 				query = "UPDATE gruppoesamiobbligatori SET Anno=?,Curriculum=? WHERE CodiceGEOb=?";
 				ps = conn.prepareStatement(query);
 
@@ -60,7 +57,7 @@ public class GruppoEsamiObbligatoriBeanDAO {
 				int i = ps.executeUpdate();
 				if (i != 0)
 					return true;
-			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

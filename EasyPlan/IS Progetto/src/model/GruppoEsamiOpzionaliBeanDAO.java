@@ -44,10 +44,7 @@ public class GruppoEsamiOpzionaliBeanDAO {
 			conn = DriverManagerConnectionPool.getConnection();
 
 			String query = null;
-			ResultSet result = ps.executeQuery(
-					"SELECT CodiceGEOp FROM gruppoesamiopzionali WHERE CodiceGEOp='" + gb.getCodiceGEOp() + "'");
 
-			if (result.next()) {
 				query = "UPDATE gruppoesamiopzionali SET Anno=?, TotCFU=?, IDCurriculum=? WHERE CodiceGEOp=?";
 				ps = conn.prepareStatement(query);
 
@@ -59,7 +56,6 @@ public class GruppoEsamiOpzionaliBeanDAO {
 				int i = ps.executeUpdate();
 				if (i != 0)
 					return true;
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
