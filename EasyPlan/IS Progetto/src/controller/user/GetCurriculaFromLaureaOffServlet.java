@@ -21,13 +21,13 @@ import model.OffertaFormativaBean;
  * Servlet implementation class getCurriculaFromLaureaOff
  */
 @WebServlet("/getCurriculaFromLaureaOff")
-public class getCurriculaFromLaureaOff extends HttpServlet {
+public class GetCurriculaFromLaureaOffServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getCurriculaFromLaureaOff() {
+    public GetCurriculaFromLaureaOffServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

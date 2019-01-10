@@ -18,13 +18,13 @@ import model.OffertaFormativaBeanDAO;
  * Servlet implementation class GestioneCurricula
  */
 @WebServlet("/GestioneCurricula")
-public class GestioneCurricula extends HttpServlet {
+public class GestioneCurriculaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GestioneCurricula() {
+    public GestioneCurriculaServlet() {
        
         // TODO Auto-generated constructor stub
     }

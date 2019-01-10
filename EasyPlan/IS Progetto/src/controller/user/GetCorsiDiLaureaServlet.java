@@ -18,13 +18,13 @@ import model.OffertaFormativaBean;
  * Servlet implementation class getCorsiDiLaureaServlet
  */
 @WebServlet("/getCorsiDiLaureaServlet")
-public class getCorsiDiLaureaServlet extends HttpServlet {
+public class GetCorsiDiLaureaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getCorsiDiLaureaServlet() {
+    public GetCorsiDiLaureaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

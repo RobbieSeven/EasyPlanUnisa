@@ -16,10 +16,10 @@ import model.OffertaFormativaBean;
 import model.OffertaFormativaBeanDAO;
 
 @WebServlet("/GestioneOffertaFormativa")
-public class GestioneOffertaFormativa extends HttpServlet {
+public class GestioneOffertaFormativaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public GestioneOffertaFormativa() {
+    public GestioneOffertaFormativaServlet() {
         super();
     }
 

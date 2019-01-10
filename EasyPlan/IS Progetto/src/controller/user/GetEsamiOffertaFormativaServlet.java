@@ -28,13 +28,13 @@ import model.OffertaFormativaBeanDAO;
  * Servlet implementation class getEsamiOffertaFormativa
  */
 @WebServlet("/getEsamiOffertaFormativa")
-public class getEsamiOffertaFormativa extends HttpServlet {
+public class GetEsamiOffertaFormativaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getEsamiOffertaFormativa() {
+    public GetEsamiOffertaFormativaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

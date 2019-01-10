@@ -23,13 +23,13 @@ import model.OffertaFormativaBean;
  * Servlet implementation class selectionOfferta
  */
 @WebServlet("/selectionOfferta")
-public class selectionOfferta extends HttpServlet {
+public class SelectionOffertaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selectionOfferta() {
+    public SelectionOffertaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
