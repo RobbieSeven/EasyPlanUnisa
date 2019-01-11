@@ -1,10 +1,10 @@
-<%@page import="model.GruppoEsamiObbligatoriBeanDAO"%>
+<%@page import="model.GruppoEsamiObbligatoriBeanDao"%>
 <%@page import="model.GruppoEsamiObbligatoriBean"%>
-<%@page import="model.GruppoEsamiOpzionaliBeanDAO"%>
+<%@page import="model.GruppoEsamiOpzionaliBeanDao"%>
 <%@page import="model.GruppoEsamiOpzionaliBean"%>
-<%@page import="model.EsameBeanDAO"%>
+<%@page import="model.EsameBeanDao"%>
 <%@page import="model.EsameBean"%>
-<%@page import="model.DocenteBeanDAO"%>
+<%@page import="model.DocenteBeanDao"%>
 <%@page import="model.DocenteBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>

@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.CorsoDiLaureaBean;
-import model.CorsoDiLaureaBeanDAO;
+import model.CorsoDiLaureaBeanDao;
 import model.OffertaFormativaBean;
-import model.OffertaFormativaBeanDAO;
+import model.OffertaFormativaBeanDao;
 
 @WebServlet("/GestioneOffertaFormativa")
 public class GestioneOffertaFormativaServlet extends HttpServlet {
@@ -38,18 +38,18 @@ public class GestioneOffertaFormativaServlet extends HttpServlet {
     // Aggiunta Offerta
     if (request.getParameter("metodo").equals("aggiungiOfferta")) {
       String nomeOfferta = request.getParameter("nomeOfferta");
-      OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
+      OffertaFormativaBeanDao ofbd = new OffertaFormativaBeanDao();
       OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, null, false);
       ofbd.doSave(ofb);
       
-      CorsoDiLaureaBeanDAO daoLaurea = new CorsoDiLaureaBeanDAO();
-      int nuovoIdLaureaTriennale = daoLaurea.doRetrieveLastID() + 1;
+      CorsoDiLaureaBeanDao daoLaurea = new CorsoDiLaureaBeanDao();
+      int nuovoIdLaureaTriennale = daoLaurea.doRetrieveLastId() + 1;
       
       CorsoDiLaureaBean corsoDiLaureaTriennale = 
           new CorsoDiLaureaBean(nuovoIdLaureaTriennale, 1, nomeOfferta, null);
       daoLaurea.doSave(corsoDiLaureaTriennale);
       
-      int nuovoIdLaureaMagistrale = daoLaurea.doRetrieveLastID() + 1;
+      int nuovoIdLaureaMagistrale = daoLaurea.doRetrieveLastId() + 1;
       
       CorsoDiLaureaBean corsoDiLaureaMagistrale = 
           new CorsoDiLaureaBean(nuovoIdLaureaMagistrale, 2, nomeOfferta, null);
@@ -57,7 +57,7 @@ public class GestioneOffertaFormativaServlet extends HttpServlet {
       
     } else if (request.getParameter("metodo").equals("eliminaOfferta")) {
       String nomeOfferta = request.getParameter("nomeOfferta");
-      OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
+      OffertaFormativaBeanDao ofbd = new OffertaFormativaBeanDao();
       ofbd.doDelete(nomeOfferta);
       
     } else if (request.getParameter("metodo").equals("visibilita")) {
@@ -71,7 +71,7 @@ public class GestioneOffertaFormativaServlet extends HttpServlet {
         visibile = true;
       }
       
-      OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
+      OffertaFormativaBeanDao ofbd = new OffertaFormativaBeanDao();
       System.out.println("Visibile:" + visibile);
       OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, null, visibile);
       System.out.println(ofbd.doSaveOrUpdate(ofb));

@@ -1,13 +1,13 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.CorsoDiLaureaBean"%>
-<%@page import="model.CorsoDiLaureaBeanDAO"%>
-<%@page import="model.OffertaFormativaBeanDAO"%>
+<%@page import="model.CorsoDiLaureaBeanDao"%>
+<%@page import="model.OffertaFormativaBeanDao"%>
 <%@page import="model.OffertaFormativaBean"%>
 <!DOCTYPE html>
 <html>
 <%
-	synchronized (session)
+  synchronized (session)
 	{
 		if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
 		{
@@ -18,7 +18,7 @@
 	}
 	String offerta = request.getParameter("offerta");
 	ArrayList<CorsoDiLaureaBean> lauree = new ArrayList<>();
-	CorsoDiLaureaBeanDAO ldao = new CorsoDiLaureaBeanDAO();
+	CorsoDiLaureaBeanDao ldao = new CorsoDiLaureaBeanDao();
 	lauree.addAll(ldao.doRetriveCorsoDiLaureaInOfferta(offerta));
 %>
   <head>

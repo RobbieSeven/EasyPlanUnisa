@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
-    pageEncoding="UTF-8" import="model.OffertaFormativaBeanDAO" import="model.OffertaFormativaBean"%>
+    pageEncoding="UTF-8" import="model.OffertaFormativaBeanDao" import="model.OffertaFormativaBean"%>
 
     
      <%
-     	// Simulazione dati presi dal database
-     	ArrayList<OffertaFormativaBean> of = new ArrayList<OffertaFormativaBean>();
-     	OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
-     	of = ofbd.doRetriveByAll();
-     %>
+           // Simulazione dati presi dal database
+              	ArrayList<OffertaFormativaBean> of = new ArrayList<OffertaFormativaBean>();
+              	OffertaFormativaBeanDao ofbd = new OffertaFormativaBeanDao();
+              	of = ofbd.doRetriveByAll();
+         %>
      
      
 <!DOCTYPE html>

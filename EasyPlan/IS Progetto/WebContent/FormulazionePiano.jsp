@@ -169,7 +169,7 @@
   									</div>
 								</div>
        						</th>
-        					<td><%=ob1.get(i).getEsami().get(j).getCFU()%></td>
+        					<td><%=ob1.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
         						<label class="c">
         							<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
@@ -185,7 +185,7 @@
 	    <%} %>
 	    <!-- esami opzionali anno 1 -->
     		<%for(int i = 0; i < op1.size(); i++){ %>
-    			<h3><b><%=op1.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op1.get(i).getTotCFU() %></b></h3>
+    			<h3><b><%=op1.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op1.get(i).getTotCfu() %></b></h3>
     			
     			<div class="table-wrapper-scroll-y">
 	   				<table class="table table-bordered table-striped">
@@ -199,7 +199,7 @@
     					  <tr>
     					  <form action="selectionOfferta" method = "post">
     						  <input type="hidden" name="gruppoopz" value="opzA1<%=+i%>">
-    						  <input type="hidden" name="cfu" value="<%=op1.get(i).getTotCFU()%>">
+    						  <input type="hidden" name="cfu" value="<%=op1.get(i).getTotCfu()%>">
     						  <input type="hidden" name="esame" value="<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
         					  <th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=op1.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=op1.get(i).getEsami().get(j).getNome()%></a>
         						<div class="collapse" id="collapseExample<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
@@ -212,7 +212,7 @@
   									</div>
 								</div>
        						</th>
-        					<td><%=op1.get(i).getEsami().get(j).getCFU()%></td>
+        					<td><%=op1.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
         					<input type="hidden" name="metodo" value="<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
         					<% if(op1.get(i).getEsami().get(j).isCheck()) {  %>
@@ -261,7 +261,7 @@
   									</div>
 								</div>
        						</th>
-        					<td><%=ob2.get(i).getEsami().get(j).getCFU()%></td>
+        					<td><%=ob2.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
         						<label class="c">
         							<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
@@ -277,7 +277,7 @@
 	    <%} %>
 	    <!-- esami opzionali anno 2 -->
     		<%for(int i = 0; i < op2.size(); i++){ %>
-    			<h3><b><%=op2.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op2.get(i).getTotCFU() %></b></h3>
+    			<h3><b><%=op2.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op2.get(i).getTotCfu() %></b></h3>
     			
     			<div class="table-wrapper-scroll-y">
 	   				<table class="table table-bordered table-striped">
@@ -291,7 +291,7 @@
     					  <tr>
     					  <form action="selectionOfferta" method = "post">
     						  <input type="hidden" name="gruppoopz" value="opzA2<%=+i%>">
-    						  <input type="hidden" name="cfu" value="<%=op2.get(i).getTotCFU()%>">
+    						  <input type="hidden" name="cfu" value="<%=op2.get(i).getTotCfu()%>">
     						  <input type="hidden" name="esame" value="<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
         					  <th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=op2.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=op2.get(i).getEsami().get(j).getNome()%></a>
         						<div class="collapse" id="collapseExample<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
@@ -304,7 +304,7 @@
   									</div>
 								</div>
        						</th>
-        					<td><%=op2.get(i).getEsami().get(j).getCFU()%></td>
+        					<td><%=op2.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
         					<input type="hidden" name="metodo" value="<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
         					<% if(op2.get(i).getEsami().get(j).isCheck()) {  %>
@@ -354,7 +354,7 @@
   									</div>
 								</div>
        						</th>
-        					<td><%=ob3.get(i).getEsami().get(j).getCFU()%></td>
+        					<td><%=ob3.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
         						<label class="c">
         							<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
@@ -370,7 +370,7 @@
 	    <%} %>
 	    <!-- esami opzionali anno 3 -->
     		<%for(int i = 0; i < op3.size(); i++){ %>
-    			<h3><b><%=op3.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op3.get(i).getTotCFU() %></b></h3>
+    			<h3><b><%=op3.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op3.get(i).getTotCfu() %></b></h3>
     			
     			<div class="table-wrapper-scroll-y">
 	   				<table class="table table-bordered table-striped">
@@ -384,7 +384,7 @@
     					  <tr>
     					  <form action="selectionOfferta" method = "post">
     						  <input type="hidden" name="gruppoopz" value="opzA3<%=+i%>">
-    						  <input type="hidden" name="cfu" value="<%=op3.get(i).getTotCFU()%>">
+    						  <input type="hidden" name="cfu" value="<%=op3.get(i).getTotCfu()%>">
     						  <input type="hidden" name="esame" value="<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
         					  <th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=op3.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=op3.get(i).getEsami().get(j).getNome()%></a>
         						<div class="collapse" id="collapseExample<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
@@ -397,7 +397,7 @@
   									</div>
 								</div>
        						</th>
-        					<td><%=op3.get(i).getEsami().get(j).getCFU()%></td>
+        					<td><%=op3.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
         					<input type="hidden" name="metodo" value="<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
         					<% if(op3.get(i).getEsami().get(j).isCheck()) {  %>

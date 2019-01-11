@@ -2,71 +2,45 @@ package model;
 
 public class AmministratoreBean {
 
-	// VARIABILI D'ISTANZA
-	private String username;
-	private String password;
+  // variabili d'istanza
+  private String username;
+  private String password;
 
-	// COSTRUTTORI
-	public AmministratoreBean() {
-	}
+  /**
+   * Metodo costruttore vuoto.
+   */
+  public AmministratoreBean() {}
 
-	public AmministratoreBean(String username, String password) {
-		this.username = username;
-		this.password = password;
-	}
+  /**
+   * Costruttore con parametri.
+   * @param username username dell'amministratore
+   * @param password password dell'amministratore
+   */
+  public AmministratoreBean(String username, String password) {
+    this.username = username;
+    this.password = password;
+  }
 
-	// GETTER E SETTER
-	public String getUsername() {
-		return username;
-	}
+  // GETTER E SETTER
+  public String getUsername() {
+    return username;
+  }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-	public String getPassword() {
-		return password;
-	}
+  public String getPassword() {
+    return password;
+  }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-	// METODI OBJECT
-	@Override
-	public String toString() {
-		return "AmministratoreBean [username=" + username + ", password=" + password + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AmministratoreBean other = (AmministratoreBean) obj;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
-	}
-
+  // METODI OBJECT
+  @Override
+  public String toString() {
+    return "AmministratoreBean [username=" + username + ", password=" + password + "]";
+  }
 }

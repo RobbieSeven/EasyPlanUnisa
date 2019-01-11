@@ -1,17 +1,16 @@
-<%@page import="model.GruppoEsamiObbligatoriBeanDAO"%>
+<%@page import="model.GruppoEsamiObbligatoriBeanDao"%>
 <%@page import="model.GruppoEsamiObbligatoriBean"%>
-<%@page import="model.GruppoEsamiOpzionaliBeanDAO"%>
+<%@page import="model.GruppoEsamiOpzionaliBeanDao"%>
 <%@page import="model.GruppoEsamiOpzionaliBean"%>
-<%@page import="model.EsameBeanDAO"%>
+<%@page import="model.EsameBeanDao"%>
 <%@page import="model.EsameBean"%>
-<%@page import="model.DocenteBeanDAO"%>
+<%@page import="model.DocenteBeanDao"%>
 <%@page import="model.DocenteBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>
 
 <%
-		
-		synchronized (session)
+  synchronized (session)
 		{
 			if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
 			{
@@ -35,65 +34,65 @@
 		ArrayList<GruppoEsamiOpzionaliBean> grop1 = new ArrayList<GruppoEsamiOpzionaliBean>();
 		ArrayList<GruppoEsamiOpzionaliBean> grop2 = new ArrayList<GruppoEsamiOpzionaliBean>();
 		ArrayList<GruppoEsamiOpzionaliBean> grop3 = new ArrayList<GruppoEsamiOpzionaliBean>();
-		GruppoEsamiObbligatoriBeanDAO grupObDao = new GruppoEsamiObbligatoriBeanDAO();
-		GruppoEsamiOpzionaliBeanDAO grupOpDao = new GruppoEsamiOpzionaliBeanDAO();
-		EsameBeanDAO esameB = new EsameBeanDAO();
-		DocenteBeanDAO docentiB = new DocenteBeanDAO();
+		GruppoEsamiObbligatoriBeanDao grupObDao = new GruppoEsamiObbligatoriBeanDao();
+		GruppoEsamiOpzionaliBeanDao grupOpDao = new GruppoEsamiOpzionaliBeanDao();
+		EsameBeanDao esameB = new EsameBeanDao();
+		DocenteBeanDao docentiB = new DocenteBeanDao();
 		
 		//GRUPPI ESAMI OBB E OPP PRIMO ANNO
 		grob1.addAll(grupObDao.doRetriveGruppoEsamiObbByOffertaAndAnno(offerta, tipo, curriculum, 1));
 		for(int i =0; i < grob1.size(); i++)
-			grob1.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob1.get(i).getCodiceGEOb()));
+			grob1.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob1.get(i).getCodiceGeOb()));
 		for(int  j = 0; j < grob1.size(); j++) {
 			for(int d = 0; d < grob1.get(j).getEsami().size(); d++)
-				grob1.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob1.get(j).getCodiceGEOb(), grob1.get(j).getEsami().get(d).getNome()));
+				grob1.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob1.get(j).getCodiceGeOb(), grob1.get(j).getEsami().get(d).getNome()));
 		}
 		//gruppo opzionali
 		grop1.addAll(grupOpDao.doRetriveGruppoEsamiOpzByOffertaAndAnno(offerta, tipo, curriculum, 1));
 		for(int i=0; i<grop1.size(); i++)
-			grop1.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(offerta, tipo, curriculum, grop1.get(i).getCodiceGEOp()));
+			grop1.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(offerta, tipo, curriculum, grop1.get(i).getCodiceGeOp()));
 		for(int z=0; z<grop1.size(); z++) {
 			for(int d1 = 0; d1<grop1.get(z).getEsami().size(); d1++)
-				grop1.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop1.get(z).getCodiceGEOp(), grop1.get(z).getEsami().get(d1).getNome()));
+				grop1.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop1.get(z).getCodiceGeOp(), grop1.get(z).getEsami().get(d1).getNome()));
 		}
 		
 		//GRUPPI ESAMI OBB E OPP SECONDO ANNO
 		grob2.addAll(grupObDao.doRetriveGruppoEsamiObbByOffertaAndAnno(offerta, tipo, curriculum, 2));
 		for(int i =0; i < grob2.size(); i++)
-			grob2.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob2.get(i).getCodiceGEOb()));
+			grob2.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob2.get(i).getCodiceGeOb()));
 		for(int  j = 0; j < grob2.size(); j++) {
 			for(int d = 0; d < grob2.get(j).getEsami().size(); d++)
-				grob2.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob2.get(j).getCodiceGEOb(), grob2.get(j).getEsami().get(d).getNome()));
+				grob2.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob2.get(j).getCodiceGeOb(), grob2.get(j).getEsami().get(d).getNome()));
 		}
 		//gruppo opzionali
 		grop2.addAll(grupOpDao.doRetriveGruppoEsamiOpzByOffertaAndAnno(offerta, tipo, curriculum, 2));
 		for(int i =0; i < grop2.size(); i++)
-			grop2.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(offerta, tipo, curriculum, grop2.get(i).getCodiceGEOp()));
+			grop2.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(offerta, tipo, curriculum, grop2.get(i).getCodiceGeOp()));
 		for(int  z = 0; z < grop2.size(); z++) {
 			for(int d1 = 0; d1 < grop2.get(z).getEsami().size(); d1++)
-				grop2.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop2.get(z).getCodiceGEOp(), grop2.get(z).getEsami().get(d1).getNome()));
+				grop2.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop2.get(z).getCodiceGeOp(), grop2.get(z).getEsami().get(d1).getNome()));
 		}
 		
 		//GRUPPI ESAMI OBB E OPP TERZO ANNO (LAUREA TRIENNALE ONLY)
 		if(tipo == 1){
 			grob3.addAll(grupObDao.doRetriveGruppoEsamiObbByOffertaAndAnno(offerta, tipo, curriculum, 3));
 			for(int i =0; i < grob3.size(); i++)
-				grob3.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob3.get(i).getCodiceGEOb()));
+				grob3.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaObb(offerta, tipo, curriculum, grob3.get(i).getCodiceGeOb()));
 			for(int  j = 0; j < grob3.size(); j++) {
 				for(int d = 0; d < grob3.get(j).getEsami().size(); d++)
-					grob3.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob3.get(j).getCodiceGEOb(), grob3.get(j).getEsami().get(d).getNome()));
+					grob3.get(j).getEsami().get(d).setDocenti(docentiB.doRetrieveDocEsameObb(offerta, tipo, curriculum, grob3.get(j).getCodiceGeOb(), grob3.get(j).getEsami().get(d).getNome()));
 			}
 			//gruppo opzionali
 			grop3.addAll(grupOpDao.doRetriveGruppoEsamiOpzByOffertaAndAnno(offerta, tipo, curriculum, 3));
 			for(int i =0; i < grop3.size(); i++){
-				grop3.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(offerta, tipo, curriculum, grop3.get(i).getCodiceGEOp()));
+				grop3.get(i).setEsami(esameB.doRetriveEsamiOffertaFormativaOpz(offerta, tipo, curriculum, grop3.get(i).getCodiceGeOp()));
 			}
 			for(int  z = 0; z < grop3.size(); z++) {
 				for(int d1 = 0; d1 < grop3.get(z).getEsami().size(); d1++)
-					grop3.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop3.get(z).getCodiceGEOp(), grop3.get(z).getEsami().get(d1).getNome()));
+					grop3.get(z).getEsami().get(d1).setDocenti(docentiB.doRetrieveDocEsameOpz(offerta, tipo, curriculum, grop3.get(z).getCodiceGeOp(), grop3.get(z).getEsami().get(d1).getNome()));
 			}
 		}
-     %>
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -192,7 +191,7 @@
 	        		esami1.addAll(grob1.get(j).getEsami());
 	        %>
 					<fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width: 97%">
-						<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob1.get(j).getCodiceGEOb() %></legend>
+						<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob1.get(j).getCodiceGeOb() %></legend>
 						
 						<!--  Esame -->
 						<% for(int k=0; k<esami1.size(); k++) {  
@@ -200,7 +199,7 @@
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>			
 						
 						<form action ="GestioneEsamiServlet" method = "POST">
-							<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+							<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -218,39 +217,39 @@
 										<center>
 											<div class="row">
 												<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-													<input type="hidden" name="gruppoIniziale" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+													<input type="hidden" name="gruppoIniziale" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 														<%for(int b = 0; b < grob1.size(); b++){
 														if(b == j){%>
-														<option value="<%=grob1.get(b).getCodiceGEOb()%>,obbligatorio" selected>Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+														<option value="<%=grob1.get(b).getCodiceGeOb()%>,obbligatorio" selected>Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 														<%}else {%>
-														<option value="<%=grob1.get(b).getCodiceGEOb()%>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+														<option value="<%=grob1.get(b).getCodiceGeOb()%>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 														<%}} for(int b = 0; b < grob2.size(); b++){
 														%>
-														<option value="<%=grob2.get(b).getCodiceGEOb()%>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+														<option value="<%=grob2.get(b).getCodiceGeOb()%>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 														<%}
 															for(int b = 0;b < grob3.size(); b++){
 															%>
-														<option value="<%=grob3.get(b).getCodiceGEOb()%>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+														<option value="<%=grob3.get(b).getCodiceGeOb()%>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGeOb()%> </option>
 														<%}
 															for(int b = 0;b < grop1.size(); b++){
 															%>
-														<option value="<%=grop1.get(b).getCodiceGEOp()%>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+														<option value="<%=grop1.get(b).getCodiceGeOp()%>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 														<%}
 															for(int b = 0;b < grop2.size(); b++){
 															%>
-														<option value="<%=grop2.get(b).getCodiceGEOp()%>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+														<option value="<%=grop2.get(b).getCodiceGeOp()%>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 														<%}
 															for(int b = 0;b < grop3.size(); b++){
 															%>
-														<option value="<%=grop3.get(b).getCodiceGEOp()%>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+														<option value="<%=grop3.get(b).getCodiceGeOp()%>,opzionale">Gruppo <%=grop3.get(b).getTotCfu() %> CFU a scelta </option>
 														<%} %>													
 													</select>
 												</div>
@@ -332,7 +331,7 @@
 						<center>
 							<div class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -343,7 +342,7 @@
 									</button>
 								</form>
 								<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -352,7 +351,7 @@
 									<button type="submit" class="btn btn-default btn-responsive center button2" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 								</form>
 								<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -372,14 +371,14 @@
 	    		%>
 					<fieldset class="reset-this redo-fieldset"
 						style="margin-left: 10px; width: 97%">
-						<legend class="reset-this redo-legend"><%=grop1.get(j).getTotCFU() %> a scelta tra: </legend>
+						<legend class="reset-this redo-legend"><%=grop1.get(j).getTotCfu() %> a scelta tra: </legend>
 						
 						<!--  Esame -->
 						<% for(int k=0; k<esami1.size(); k++) {  
 							EsameBean esame = esami1.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 						<form action="GestioneEsamiServlet" method = "post">
-							<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+							<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -398,39 +397,41 @@
 										<center>
 											<div class="row">
 												<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
-												</div>
+													CFU <input type="number" min="1" max="12"
+													class="btn btn-default" name="insertCFU"
+													value="<%= esame.getCfu() %>" size="2">
+											</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-														<input type="hidden" name="gruppoIniziale" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+														<input type="hidden" name="gruppoIniziale" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0;b < grob3.size(); b++){
 																%>
-															<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+															<option value="<%=grob3.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGeOb()%> </option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																if(b == j){%>
-																<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+																<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale" selected>Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 																<%}else {%>
-																<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+																<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 																<%}} for(int b = 0; b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop3.size(); b++){
 																%>
-															<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop3.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCfu() %> CFU a scelta </option>
 															<%} %>													
 														</select>
 												</div>
@@ -517,7 +518,7 @@
 						<center>
 							<div class="div4Button">	
 							 <form action="GestioneGruppoEsami" method="POST"> 
-								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -528,7 +529,7 @@
 								</button>		
 							</form>	
 							<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
-								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -537,7 +538,7 @@
 								<button class="btn btn-default btn-responsive center button2of4 " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 							</form>
 							<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
-								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -546,8 +547,8 @@
 								<button class="btn btn-default btn-responsive center button3of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 							</form>
 							<form action = "ModificaGruppoEsame.jsp" method = "POST">
-								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
-								<input type="hidden" name="totCFU" value ="<%=grop1.get(j).getTotCFU() %>"></input>
+								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
+								<input type="hidden" name="totCFU" value ="<%=grop1.get(j).getTotCfu() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -583,14 +584,14 @@
 		        %>
 						<fieldset class="reset-this redo-fieldset"
 							style="margin-left: 10px; width: 97%">
-							<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob2.get(j).getCodiceGEOb() %></legend>
+							<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob2.get(j).getCodiceGeOb() %></legend>
 							
 							<!--  Esame -->
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 							<form action="GestioneEsamiServlet" method = "post">
-								<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+								<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -608,40 +609,40 @@
 											<center>
 												<div class="row">
 													<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno 
-														<input type="hidden" name="gruppoIniziale" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+														<input type="hidden" name="gruppoIniziale" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 															<%}
 															for(int b = 0;b < grob2.size(); b++){
 																if(b == j){%>
-																<option value="<%=grob2.get(b).getCodiceGEOb()%>,obbligatorio" selected>Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+																<option value="<%=grob2.get(b).getCodiceGeOb()%>,obbligatorio" selected>Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 																<%}else {%>
-																<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+																<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 																<%}} 
 																for(int b = 0; b < grob3.size(); b++){
 																%>
-															<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+															<option value="<%=grob3.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGeOb()%> </option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop3.size(); b++){
 																%>
-															<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop3.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCfu() %> CFU a scelta </option>
 															<%} %>													
 														</select>
 													</div>
@@ -729,7 +730,7 @@
 							<center>
 								<div class="div3Button">
 									<form action = "GestioneGruppoEsami" method = "POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -740,7 +741,7 @@
 										</button>
 									</form>
 									<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -750,7 +751,7 @@
 										</button>
 									</form>
 									<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -770,14 +771,14 @@
 		    		%>
 						<fieldset class="reset-this redo-fieldset"
 							style="margin-left: 10px; width: 97%">
-							<legend class="reset-this redo-legend"><%=grop2.get(j).getTotCFU() %>a scelta tra: </legend>
+							<legend class="reset-this redo-legend"><%=grop2.get(j).getTotCfu() %>a scelta tra: </legend>
 							
 							<!--  Esame -->
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 							<form action="GestioneEsamiServlet" method = "post">
-								<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+								<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -795,40 +796,40 @@
 											<center>
 												<div class="row">
 													<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 													</div>
 													<div class="col-sm-2 col-lg-2">
 														Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 													</div>
 													<div class="col-sm-6 col-lg-6">
 													Anno 
-														<input type="hidden" name="gruppoIniziale" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+														<input type="hidden" name="gruppoIniziale" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0;b < grob3.size(); b++){
 																%>
-															<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+															<option value="<%=grob3.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGeOb()%> </option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																if(b == j){%>
-																<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+																<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale" selected>Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 																<%}else {%>
-																<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+																<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 																<%}} 
 																for(int b = 0; b < grop3.size(); b++){
 																%>
-															<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop3.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCfu() %> CFU a scelta </option>
 															<%} %>													
 														</select>
 													</div>
@@ -916,7 +917,7 @@
 							<center>
 								<div class="div4Button">
 									<form action="GestioneGruppoEsami" method="POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -927,7 +928,7 @@
 										</button>	
 									</form>
 									<form action="AggiuntaNuovoEsame.jsp" method="POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -936,7 +937,7 @@
 										<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame </button>
 									</form>
 									<form action="AggiuntaEsameEsistente.jsp" method="POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -945,8 +946,8 @@
 										<button class="btn btn-default btn-responsive center button3of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente </button>
 									</form>
 									<form action="ModificaGruppoEsame.jsp" method="POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
-										<input type="hidden" name="totCFU" value ="<%=grop2.get(j).getTotCFU() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
+										<input type="hidden" name="totCFU" value ="<%=grop2.get(j).getTotCfu() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -982,14 +983,14 @@
 	        		esami3.addAll(grob3.get(j).getEsami());
 	        %>
 					<fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width: 97%">
-						<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob3.get(j).getCodiceGEOb() %></legend>
+						<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob3.get(j).getCodiceGeOb() %></legend>
 						
 						<!--  Esame -->
 						<% for(int k=0; k<esami3.size(); k++) {  
 							EsameBean esame = esami3.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 						<form action="GestioneEsamiServlet" method = "post">
-							<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
+							<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGeOb() %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1009,40 +1010,40 @@
 										<center>
 											<div class="row">
 												<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-													<input type="hidden" name="gruppoIniziale" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
+													<input type="hidden" name="gruppoIniziale" value="<%=grob3.get(j).getCodiceGeOb() %>"></input>
 													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0;b < grob3.size(); b++){
 																if(b == j){%>
-																<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio" selected>Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+																<option value="<%=grob3.get(b).getCodiceGeOb() %>,obbligatorio" selected>Gruppo obbligatorio <%=grob3.get(b).getCodiceGeOb()%> </option>
 																<%}else {%>
-																<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+																<option value="<%=grob3.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGeOb()%> </option>
 																<%}} 
 																for(int b = 0; b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop3.size(); b++){
 																%>
-															<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop3.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCfu() %> CFU a scelta </option>
 															<%} %>													
 													</select>
 												</div>
@@ -1125,7 +1126,7 @@
 						<center>
 							<div class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1136,7 +1137,7 @@
 									</button>
 								</form>
 								<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1145,7 +1146,7 @@
 									<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame </button>
 								</form>
 								<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGEOb() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1164,14 +1165,14 @@
 	    		esami3.addAll(grop3.get(j).getEsami());
 	    		%>
 					<fieldset class="reset-this redo-fieldset" style="margin-left: 10px; width: 97%">
-						<legend class="reset-this redo-legend"><%=grop3.get(j).getTotCFU() %> a scelta tra:
+						<legend class="reset-this redo-legend"><%=grop3.get(j).getTotCfu() %> a scelta tra:
 						</legend>
 						<!--  Esame -->
 						<% for(int k=0; k<esami3.size(); k++) {  
 							EsameBean esame = esami3.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 						<form action="GestioneEsamiServlet" method = "post">
-							<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+							<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1191,40 +1192,40 @@
 										<center>
 											<div class="row">
 												<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-													<input type="hidden" name="gruppoIniziale" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+													<input type="hidden" name="gruppoIniziale" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0;b < grob3.size(); b++){
 																%>
-															<option value="<%=grob3.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGEOb()%> </option>
+															<option value="<%=grob3.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbligatorio <%=grob3.get(b).getCodiceGeOb()%> </option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop3.size(); b++){
 																	if(b == j){%>
-																	<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta</option>
+																	<option value="<%=grop3.get(b).getCodiceGeOp() %>,opzionale" selected>Gruppo <%=grop3.get(b).getTotCfu() %> CFU a scelta</option>
 																	<%}else {%>
-																	<option value="<%=grop3.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCFU() %> CFU a scelta </option>
+																	<option value="<%=grop3.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop3.get(b).getTotCfu() %> CFU a scelta </option>
 																<%}}%>													
 													</select>
 												</div>
@@ -1310,7 +1311,7 @@
 						<center>
 							<div class="div4Button">
 								<form action="GestioneGruppoEsami" method="POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1321,7 +1322,7 @@
 									</button>	
 								</form>	
 								<form action="AggiuntaNuovoEsame.jsp" method="POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1330,7 +1331,7 @@
 									<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 								</form>
 								<form action="AggiuntaEsameEsistente.jsp" method="POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1339,8 +1340,8 @@
 									<button class="btn btn-default btn-responsive center button3of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 								</form>
 								<form action="ModificaGruppoEsame.jsp" method="POST">	
-									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGEOp() %>"></input>
-									<input type="hidden" name="totCFU" value ="<%=grop3.get(j).getTotCFU() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
+									<input type="hidden" name="totCFU" value ="<%=grop3.get(j).getTotCfu() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1393,14 +1394,14 @@
 	        %>
 					<fieldset class="reset-this redo-fieldset"
 						style="margin-left: 10px; width: 97%">
-						<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob1.get(j).getCodiceGEOb() %></legend>
+						<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob1.get(j).getCodiceGeOb() %></legend>
 						
 						<!--  Esame -->
 						<% for(int k=0; k<esami1.size(); k++) {  
 							EsameBean esame = esami1.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 						<form action="GestioneEsamiServlet" method = "post">
-							<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+							<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1420,32 +1421,32 @@
 										<center>
 											<div class="row">
 												<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-													<input type="hidden" name="gruppoIniziale" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+													<input type="hidden" name="gruppoIniziale" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0;b < grob1.size(); b++){
 																if(b == j){%>
-																	<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio" selected>Gruppo obbligatorio <%=grob1.get(b).getCodiceGEOb()%> </option>
+																	<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio" selected>Gruppo obbligatorio <%=grob1.get(b).getCodiceGeOb()%> </option>
 																	<%}else {%>
-																	<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbligatorio <%=grob1.get(b).getCodiceGEOb()%> </option>
+																	<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbligatorio <%=grob1.get(b).getCodiceGeOb()%> </option>
 																	<%}} 
 																for(int b = 0; b < grob2.size(); b++){
 																%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}%>													
 													</select>
 												</div>
@@ -1531,7 +1532,7 @@
 						<center>
 							<div class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1542,7 +1543,7 @@
 									</button>
 								</form>
 								<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1551,7 +1552,7 @@
 									<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 								</form>
 								<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGEOb() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1570,7 +1571,7 @@
 	    		%>
 					<fieldset class="reset-this redo-fieldset"
 						style="margin-left: 10px; width: 97%">
-						<legend class="reset-this redo-legend"><%=grop1.get(j).getTotCFU() %>a scelta tra:
+						<legend class="reset-this redo-legend"><%=grop1.get(j).getTotCfu() %>a scelta tra:
 						</legend>
 						
 						<!--  Esame -->
@@ -1578,7 +1579,7 @@
 							EsameBean esame = esami1.get(k);
 							ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 						<form action="GestioneEsamiServlet" method = "post">
-							<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+							<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 							<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1598,32 +1599,32 @@
 										<center>
 											<div class="row">
 												<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-													<input type="hidden" name="gruppoIniziale" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+													<input type="hidden" name="gruppoIniziale" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 													<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																	if(b == j){%>
-																		<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+																		<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale" selected>Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 																		<%}else {%>
-																		<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+																		<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 																		<%}} 
 																for(int b = 0; b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}%>													
 													</select>
 												</div>
@@ -1707,7 +1708,7 @@
 						<center>
 							<div class="div4Button">
 								<form action="GestioneGruppoEsami" method="POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1718,7 +1719,7 @@
 									</button>			
 								</form>
 								<form action="AggiuntaNuovoEsame.jsp" method="POST">		
-									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1727,7 +1728,7 @@
 									<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 								</form>
 								<form action="AggiuntaEsameEsistente.jsp" method="POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1736,8 +1737,8 @@
 									<button class="btn btn-default btn-responsive center button3of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 								</form>
 								<form action="ModificaGruppoEsame.jsp" method="POST">
-									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGEOp() %>"></input>
-									<input type="hidden" name="totCFU" value ="<%=grop1.get(j).getTotCFU() %>"></input>
+									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
+									<input type="hidden" name="totCFU" value ="<%=grop1.get(j).getTotCfu() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1774,14 +1775,14 @@
 		        %>
 						<fieldset class="reset-this redo-fieldset"
 							style="margin-left: 10px; width: 97%">
-							<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob2.get(j).getCodiceGEOb() %></legend>
+							<legend class="reset-this redo-legend">Gruppo obbligatorio <%=grob2.get(j).getCodiceGeOb() %></legend>
 							
 							<!--  Esame -->
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 							<form action="GestioneEsamiServlet" method = "post">
-								<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+								<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1801,32 +1802,32 @@
 											<center>
 												<div class="row">
 													<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno 
-														<input type="hidden" name="gruppoIniziale" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+														<input type="hidden" name="gruppoIniziale" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 															<%}
 															for(int b = 0;b < grob2.size(); b++){
 																	if(b == j){%>
-																		<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio" selected>Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+																		<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio" selected>Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 																		<%}else {%>
-																		<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%> </option>
+																		<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%> </option>
 																		<%}} 
 																for(int b = 0; b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																%>
-															<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}%>													
 														</select>
 													</div>
@@ -1911,7 +1912,7 @@
 							<center>
 								<div class="div3Button">
 									<form action = "GestioneGruppoEsami" method = "POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1922,7 +1923,7 @@
 										</button>
 									</form>
 									<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1931,7 +1932,7 @@
 										<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 									</form>
 									<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGEOb() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1950,14 +1951,14 @@
 		    		%>
 						<fieldset class="reset-this redo-fieldset"
 							style="margin-left: 10px; width: 97%">
-							<legend class="reset-this redo-legend"><%=grop2.get(j).getTotCFU() %> a scelta tra: </legend>
+							<legend class="reset-this redo-legend"><%=grop2.get(j).getTotCfu() %> a scelta tra: </legend>
 							
 							<!--  Esame -->
 							<% for(int k=0; k<esami2.size(); k++) {  
 								EsameBean esame = esami2.get(k);
 								ArrayList<DocenteBean> docenti = esame.getDocenti(); %>
 							<form action="GestioneEsamiServlet" method = "post">
-								<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+								<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -1976,32 +1977,32 @@
 											<center>
 												<div class="row">
 													<div class="col-sm-2 col-lg-2">
-													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCFU() %>" size="2">
+													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
 												<div class="col-sm-6 col-lg-6">
 													Anno
-														<input type="hidden" name="gruppoIniziale" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+														<input type="hidden" name="gruppoIniziale" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
-															<option value="<%=grob1.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0; b < grob2.size(); b++){
 															%>
-															<option value="<%=grob2.get(b).getCodiceGEOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGEOb()%></option>
+															<option value="<%=grob2.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob2.get(b).getCodiceGeOb()%></option>
 															<%}
 																for(int b = 0;b < grop1.size(); b++){
 																%>
-															<option value="<%=grop1.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCFU() %> CFU a scelta </option>
+															<option value="<%=grop1.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop1.get(b).getTotCfu() %> CFU a scelta </option>
 															<%}
 																for(int b = 0;b < grop2.size(); b++){
 																	if(b == j){%>
-																		<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale" selected>Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta </option>
+																		<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale" selected>Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta </option>
 																		<%}else {%>
-																		<option value="<%=grop2.get(b).getCodiceGEOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCFU() %> CFU a scelta  </option>
+																		<option value="<%=grop2.get(b).getCodiceGeOp() %>,opzionale">Gruppo <%=grop2.get(b).getTotCfu() %> CFU a scelta  </option>
 																<%}}%>													
 														</select>
 													</div>
@@ -2085,7 +2086,7 @@
 							<center>
 								<div class="div4Button">
 									<form action="GestioneGruppoEsami" method="POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -2096,7 +2097,7 @@
 										</button>
 									</form>				
 									<form action="AggiuntaNuovoEsame.jsp" method="POST">		
-										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -2105,7 +2106,7 @@
 										<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 									</form>
 									<form action="AggiuntaEsameEsistente.jsp" method="POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
@@ -2114,8 +2115,8 @@
 										<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 									</form>
 									<form action="ModificaGruppoEsame.jsp" method="POST">
-										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGEOp() %>"></input>
-										<input type="hidden" name="totCFU" value ="<%=grop2.get(j).getTotCFU() %>"></input>
+										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
+										<input type="hidden" name="totCFU" value ="<%=grop2.get(j).getTotCfu() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>

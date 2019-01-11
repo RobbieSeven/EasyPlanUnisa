@@ -11,44 +11,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.CorsoDiLaureaBean;
-import model.CorsoDiLaureaBeanDAO;
+import model.CorsoDiLaureaBeanDao;
 import model.OffertaFormativaBean;
 
 /**
- * Servlet implementation class getCorsiDiLaureaServlet
+ * Servlet implementation class getCorsiDiLaureaServlet.
  */
 @WebServlet("/getCorsiDiLaureaServlet")
 public class GetCorsiDiLaureaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetCorsiDiLaureaServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nomeOfferta = request.getParameter("nomeOfferta");
-		CorsoDiLaureaBeanDAO cdLD = new CorsoDiLaureaBeanDAO();
-		ArrayList<CorsoDiLaureaBean> cdL = cdLD.getCorsiLaureaOfferta(nomeOfferta);
-		OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, cdL, true);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("SelezionaLaurea.jsp");
-		request.setAttribute("offertaFormativa", ofb);
-		rd.forward(request, response);
-	}
+  /**
+   * Metodo costruttore.
+   * @see HttpServlet#HttpServlet()
+   */
+  public GetCorsiDiLaureaServlet() {
+    super();
+  }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+  /**
+   * Metodo doGet.
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+   *      response)
+   */
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+      throws ServletException, IOException {
+    String nomeOfferta = request.getParameter("nomeOfferta");
+    CorsoDiLaureaBeanDao cdLd = new CorsoDiLaureaBeanDao();
+    ArrayList<CorsoDiLaureaBean> cdL = cdLd.getCorsiLaureaOfferta(nomeOfferta);
+    OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, cdL, true);
+
+    RequestDispatcher rd = request.getRequestDispatcher("SelezionaLaurea.jsp");
+    request.setAttribute("offertaFormativa", ofb);
+    rd.forward(request, response);
+  }
+
+  /**
+   * Metodo doPost.
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+   *      response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+      throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+  }
 
 }

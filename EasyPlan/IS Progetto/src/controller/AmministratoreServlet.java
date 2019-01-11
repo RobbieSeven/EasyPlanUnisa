@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.AmministratoreBean;
-import model.AmministratoreBeanDAO;
+import model.AmministratoreBeanDao;
 
 /**
  * Servlet implementation class AmministratoreServlet.
@@ -67,7 +67,7 @@ public class AmministratoreServlet extends HttpServlet {
     synchronized (session) {
       if (missingData(user) && validateField(user, "[0-9a-zA-Z\\S]+")) {
         if (missingData(password) && validateField(password, "([A-Za-z0-9]){3,16}")) {
-          AmministratoreBeanDAO amDao = new AmministratoreBeanDAO();
+          AmministratoreBeanDao amDao = new AmministratoreBeanDao();
           AmministratoreBean am = amDao.doRetrieveByKey(user);
 
           if (am != null) {

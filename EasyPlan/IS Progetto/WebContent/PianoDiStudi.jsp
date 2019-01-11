@@ -80,7 +80,7 @@
 			   				<% for(int j = 0; j< ob1.get(i).getEsami().size(); j++){ %>
 		    					  <tr>
 		        					<td scope="row"><%=ob1.get(i).getEsami().get(j).getNome() %></td>
-		        					<td><%=ob1.get(i).getEsami().get(j).getCFU() %></td>
+		        					<td><%=ob1.get(i).getEsami().get(j).getCfu() %></td>
 		      					</tr>
 			     			<%}%>
 			   				</tbody>
@@ -94,7 +94,7 @@
 				  <div class="table-wrapper-scroll-y">
 				   	<table class="table table-bordered table-striped">
 						<thead>
-							<tr><td><b>1 anno opzionale <%=op1.get(i).getTotCFU() %> CFU</b></td><td><%=" " %></td></tr>
+							<tr><td><b>1 anno opzionale <%=op1.get(i).getTotCfu() %> CFU</b></td><td><%=" " %></td></tr>
 			      				<tr>
 							         <th scope="col" style="width:80%">Nome esame</th>
 						        	 <th scope="col" style="width:20%">CFU</th>
@@ -104,7 +104,7 @@
 				   			<% for(int j = 0; j< op1.get(i).getEsami().size(); j++){ %>
 				    				<tr>
 				        				<td scope="row"><%=op1.get(i).getEsami().get(j).getNome() %></td>
-				        				<td><%=op1.get(i).getEsami().get(j).getCFU() %></td>
+				        				<td><%=op1.get(i).getEsami().get(j).getCfu() %></td>
 				      				</tr>
 					     		<%}%>
 				   		</tbody>
@@ -127,7 +127,7 @@
 			   				<% for(int j = 0; j< ob2.get(i).getEsami().size(); j++){ %>
 		    					  <tr>
 		        					<td scope="row"><%=ob2.get(i).getEsami().get(j).getNome() %></td>
-		        					<td><%=ob2.get(i).getEsami().get(j).getCFU() %></td>
+		        					<td><%=ob2.get(i).getEsami().get(j).getCfu() %></td>
 		      					</tr>
 			     			<%}%>
 			   				</tbody>
@@ -141,7 +141,7 @@
 				  <div class="table-wrapper-scroll-y">
 				   	<table class="table table-bordered table-striped">
 						<thead>
-							<tr><td><b>2 anno opzionale <%=op2.get(i).getTotCFU() %> CFU</b></td><td><%=" " %></td></tr>
+							<tr><td><b>2 anno opzionale <%=op2.get(i).getTotCfu() %> CFU</b></td><td><%=" " %></td></tr>
 			      				<tr>
 							         <th scope="col" style="width:80%">Nome esame</th>
 						        	 <th scope="col" style="width:20%">CFU</th>
@@ -151,7 +151,7 @@
 				   			<% for(int j = 0; j< op2.get(i).getEsami().size(); j++){ %>
 				    				<tr>
 				        				<td scope="row"><%=op2.get(i).getEsami().get(j).getNome() %></td>
-				        				<td><%=op2.get(i).getEsami().get(j).getCFU() %></td>
+				        				<td><%=op2.get(i).getEsami().get(j).getCfu() %></td>
 				      				</tr>
 					     		<%}%>
 				   		</tbody>
@@ -174,7 +174,7 @@
 			   				<% for(int j = 0; j< ob3.get(i).getEsami().size(); j++){ %>
 		    					  <tr>
 		        					<td scope="row"><%=ob3.get(i).getEsami().get(j).getNome() %></td>
-		        					<td><%=ob3.get(i).getEsami().get(j).getCFU() %></td>
+		        					<td><%=ob3.get(i).getEsami().get(j).getCfu() %></td>
 		      					</tr>
 			     			<%}%>
 			   				</tbody>
@@ -188,7 +188,7 @@
 				  <div class="table-wrapper-scroll-y">
 				   	<table class="table table-bordered table-striped">
 						<thead>
-							<tr><td><b>3 anno opzionale <%=op3.get(i).getTotCFU() %> CFU</b></td><td><%=" " %></td></tr>
+							<tr><td><b>3 anno opzionale <%=op3.get(i).getTotCfu() %> CFU</b></td><td><%=" " %></td></tr>
 			      				<tr>
 							         <th scope="col" style="width:80%">Nome esame</th>
 						        	 <th scope="col" style="width:20%">CFU</th>
@@ -198,7 +198,7 @@
 				   			<% for(int j = 0; j< op3.get(i).getEsami().size(); j++){ %>
 				    				<tr>
 				        				<td scope="row"><%=op3.get(i).getEsami().get(j).getNome() %></td>
-				        				<td><%=op3.get(i).getEsami().get(j).getCFU() %></td>
+				        				<td><%=op3.get(i).getEsami().get(j).getCfu() %></td>
 				      				</tr>
 					     		<%}%>
 				   		</tbody>

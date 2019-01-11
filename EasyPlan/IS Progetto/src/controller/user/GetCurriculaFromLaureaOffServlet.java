@@ -12,59 +12,65 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.CorsoDiLaureaBean;
-import model.CorsoDiLaureaBeanDAO;
+import model.CorsoDiLaureaBeanDao;
 import model.CurriculumBean;
-import model.CurriculumBeanDAO;
+import model.CurriculumBeanDao;
 import model.OffertaFormativaBean;
 
 /**
- * Servlet implementation class getCurriculaFromLaureaOff
+ * Servlet implementation class getCurriculaFromLaureaOff.
  */
 @WebServlet("/getCurriculaFromLaureaOff")
 public class GetCurriculaFromLaureaOffServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetCurriculaFromLaureaOffServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * Metodo costruttore.
+   * @see HttpServlet#HttpServlet()
+   */
+  public GetCurriculaFromLaureaOffServlet() {
+    super();
+  }
+
+  /**
+   * Metodo doGet.
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+   *      response)
+   */
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+      throws ServletException, IOException {
+    String nomeOfferta = request.getParameter("nomeOfferta");
+    String laurea = request.getParameter("laurea");
+
+    CorsoDiLaureaBeanDao cdLd = new CorsoDiLaureaBeanDao();
+    ArrayList<CorsoDiLaureaBean> cdL = new ArrayList<CorsoDiLaureaBean>();
+    cdL.add(cdLd.doRetrieveByKey(Integer.parseInt(laurea)));
+
+    CurriculumBeanDao crmD = new CurriculumBeanDao();
+    ArrayList<CurriculumBean> crm = null;
+    try {
+      crm = crmD.doRetriveByCorsoDiLaureaOffertaFormativa(Integer.parseInt(laurea), nomeOfferta);
+    } catch (NumberFormatException | ClassNotFoundException | SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
+    cdL.get(0).setCurricula(crm);
+    OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, cdL, true);
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nomeOfferta = request.getParameter("nomeOfferta");
-		String laurea = request.getParameter("laurea");
-		
-		CorsoDiLaureaBeanDAO cdLD = new CorsoDiLaureaBeanDAO();
-		ArrayList<CorsoDiLaureaBean> cdL = new ArrayList<CorsoDiLaureaBean>();
-		cdL.add(cdLD.doRetrieveByKey(Integer.parseInt(laurea)));
-		
-		CurriculumBeanDAO crmD = new CurriculumBeanDAO();
-		ArrayList<CurriculumBean> crm = null;
-		try {
-			crm = crmD.doRetriveByCorsoDiLaureaOffertaFormativa(Integer.parseInt(laurea), nomeOfferta);
-		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		cdL.get(0).setCurricula(crm);
-		OffertaFormativaBean ofb = new OffertaFormativaBean(nomeOfferta, cdL, true);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("SelezionaCurricula.jsp");
-		request.setAttribute("offertaFormativa", ofb);
-		rd.forward(request, response);
-	}
+    RequestDispatcher rd = request.getRequestDispatcher("SelezionaCurricula.jsp");
+    request.setAttribute("offertaFormativa", ofb);
+    rd.forward(request, response);
+  }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+  /**
+   * Metodo doPost.
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+   *      response)
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+      throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    doGet(request, response);
+  }
 
 }

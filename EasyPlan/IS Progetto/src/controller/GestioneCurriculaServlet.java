@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.CurriculumBean;
-import model.CurriculumBeanDAO;
+import model.CurriculumBeanDao;
 
 /**
  * Servlet implementation class GestioneCurricula.
@@ -73,7 +73,7 @@ public class GestioneCurriculaServlet extends HttpServlet {
   }
 
   public void removeCurriculum(int id) throws IOException {
-    CurriculumBeanDAO cbd = new CurriculumBeanDAO();
+    CurriculumBeanDao cbd = new CurriculumBeanDao();
     cbd.doDelete(id);
   }
 
@@ -85,8 +85,8 @@ public class GestioneCurriculaServlet extends HttpServlet {
    */
   public void addCurriculum(String nome, int idCorsoDiLaurea)
       throws IOException {
-    CurriculumBeanDAO cbd = new CurriculumBeanDAO();
-    int id = cbd.doRetrieveByIDMaggiore();
+    CurriculumBeanDao cbd = new CurriculumBeanDao();
+    int id = cbd.doRetrieveByIdMaggiore();
     CurriculumBean cb = new CurriculumBean(nome, id, idCorsoDiLaurea, null, null);
     cbd.doSave(cb);
   }

@@ -1,12 +1,12 @@
 <%@page import="model.CorsoDiLaureaBean"%>
-<%@page import="model.CorsoDiLaureaBeanDAO"%>
-<%@page import="model.OffertaFormativaBeanDAO"%>
+<%@page import="model.CorsoDiLaureaBeanDao"%>
+<%@page import="model.OffertaFormativaBeanDao"%>
 <%@page import="model.OffertaFormativaBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>
 
 <%
-		synchronized (session)
+  synchronized (session)
 		{
 			if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
 			{
@@ -17,9 +17,9 @@
 		}
      // Simulazione dati presi dal database
      ArrayList<OffertaFormativaBean> of = new ArrayList<>();
-     OffertaFormativaBeanDAO ofbd = new OffertaFormativaBeanDAO();
-     of = ofbd.doRetriveByAll(); 	
-     %>
+     OffertaFormativaBeanDao ofbd = new OffertaFormativaBeanDao();
+     of = ofbd.doRetriveByAll();
+%>
 
 <!DOCTYPE html>
 <html>

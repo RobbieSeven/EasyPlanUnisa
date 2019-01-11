@@ -1,10 +1,10 @@
-<%@page import="model.CurriculumBeanDAO"%>
+<%@page import="model.CurriculumBeanDao"%>
 <%@page import="model.CurriculumBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>
 
 <%
-		synchronized (session)
+  synchronized (session)
 		{
 			if(session.getAttribute("amministratore") == null && session.getAttribute("password") == null )
 			{
@@ -15,7 +15,7 @@
 		}
      	// Simulazione dati presi dal database
      	 ArrayList<CurriculumBean> lista = new ArrayList<CurriculumBean>();
-     	CurriculumBeanDAO cd = new CurriculumBeanDAO();
+     	CurriculumBeanDao cd = new CurriculumBeanDao();
      	String laurea=request.getParameter("laurea");
      	
      	String id = "";
@@ -31,7 +31,7 @@
      	
      	String offerta= request.getParameter("offerta");
      	lista = cd.doRetriveByCorsoDiLaureaOffertaFormativa(tipo,offerta);
-     %>
+%>
 
 <!DOCTYPE html>
 <html>

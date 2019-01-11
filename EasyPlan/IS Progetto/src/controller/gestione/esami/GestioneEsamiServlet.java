@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.DocenteBean;
-import model.DocenteBeanDAO;
+import model.DocenteBeanDao;
 import model.EsameBean;
-import model.EsameBeanDAO;
-import model.GruppoEsamiObbligatoriBeanDAO;
-import model.GruppoEsamiOpzionaliBeanDAO;
+import model.EsameBeanDao;
+import model.GruppoEsamiObbligatoriBeanDao;
+import model.GruppoEsamiOpzionaliBeanDao;
 
 @WebServlet("/GestioneEsamiServlet")
 public class GestioneEsamiServlet extends HttpServlet {
@@ -53,10 +53,10 @@ public class GestioneEsamiServlet extends HttpServlet {
 
       String tipoGruppo = request.getParameter("tipoGruppo");
 
-      DocenteBeanDAO docenteDao = new DocenteBeanDAO();
-      int nuovoIdDocente = docenteDao.doRetrieveLastID() + 1;
-      EsameBeanDAO esameDao = new EsameBeanDAO();
-      int nuovoIdEsame = esameDao.doRetrieveLastID() + 1;
+      DocenteBeanDao docenteDao = new DocenteBeanDao();
+      int nuovoIdDocente = docenteDao.doRetrieveLastId() + 1;
+      EsameBeanDao esameDao = new EsameBeanDao();
+      int nuovoIdEsame = esameDao.doRetrieveLastId() + 1;
 
       EsameBean nuovoEsame = 
           new EsameBean(nuovoIdEsame, nomeEsame, cfu, descrizioneEsame, ore, semestre);
@@ -67,10 +67,10 @@ public class GestioneEsamiServlet extends HttpServlet {
       docenteDao.doSave(nuovoDocente, nuovoIdEsame);
 
       if (tipoGruppo.equals("obbligatorio")) {
-        GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
+        GruppoEsamiObbligatoriBeanDao dao = new GruppoEsamiObbligatoriBeanDao();
         dao.insertEsameInGruppo(idGruppo, nuovoIdEsame);
       } else if (tipoGruppo.equals("opzionale")) {
-        GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
+        GruppoEsamiOpzionaliBeanDao dao = new GruppoEsamiOpzionaliBeanDao();
         dao.insertEsameInGruppo(idGruppo, nuovoIdEsame);
       }
     } else if (request.getParameter("metodo").equals("cancellaEsame")) {
@@ -79,10 +79,10 @@ public class GestioneEsamiServlet extends HttpServlet {
       String tipoGruppo = request.getParameter("tipoGruppo");
 
       if (tipoGruppo.equals("obbligatorio")) {
-        GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
+        GruppoEsamiObbligatoriBeanDao dao = new GruppoEsamiObbligatoriBeanDao();
         dao.deleteEsameInGruppo(idGruppo, idEsame);
       } else if (tipoGruppo.equals("opzionale")) {
-        GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
+        GruppoEsamiOpzionaliBeanDao dao = new GruppoEsamiOpzionaliBeanDao();
         dao.deleteEsameInGruppo(idGruppo, idEsame);
       }
     } else if (request.getParameter("metodo").equals("updateEsame")) {
@@ -105,24 +105,24 @@ public class GestioneEsamiServlet extends HttpServlet {
       if (!gruppoIniziale.equals(gruppoScelto) || !tipoScelto.equals(tipoGruppo)) {
         // Rimozione
         if (tipoGruppo.equals("opzionale")) {
-          GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
+          GruppoEsamiOpzionaliBeanDao dao = new GruppoEsamiOpzionaliBeanDao();
           dao.deleteEsame(Integer.parseInt(gruppoIniziale), codice);
         } else {
-          GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
+          GruppoEsamiObbligatoriBeanDao dao = new GruppoEsamiObbligatoriBeanDao();
           dao.deleteEsame(Integer.parseInt(gruppoIniziale), codice);
         }
 
         // Aggiunta
         if (tipoScelto.equals("opzionale")) {
-          GruppoEsamiOpzionaliBeanDAO dao = new GruppoEsamiOpzionaliBeanDAO();
+          GruppoEsamiOpzionaliBeanDao dao = new GruppoEsamiOpzionaliBeanDao();
           dao.insertEsameInGruppo(Integer.parseInt(gruppoScelto), codice);
         } else {
-          GruppoEsamiObbligatoriBeanDAO dao = new GruppoEsamiObbligatoriBeanDAO();
+          GruppoEsamiObbligatoriBeanDao dao = new GruppoEsamiObbligatoriBeanDao();
           dao.insertEsameInGruppo(Integer.parseInt(gruppoScelto), codice);
         }
       }
 
-      DocenteBeanDAO dao = new DocenteBeanDAO();
+      DocenteBeanDao dao = new DocenteBeanDao();
 
       int size = Integer.parseInt(request.getParameter("sizeArray"));
       for (int i = 1; i <= size; i++) {
@@ -135,19 +135,19 @@ public class GestioneEsamiServlet extends HttpServlet {
         dao.doSaveOrUpdate(db, codice);
       }
 
-      EsameBeanDAO esameDao = new EsameBeanDAO();
+      EsameBeanDao esameDao = new EsameBeanDao();
       EsameBean esame = new EsameBean(codice, nomeEsame, cfu, descrizioneEsame, ore, semestre);
       esameDao.doSaveOrUpdate(esame);
     } else if (request.getParameter("metodo").equals("aggiuntaEsameEsistente")) {
-      EsameBeanDAO dao = new EsameBeanDAO();
+      EsameBeanDao dao = new EsameBeanDao();
       EsameBean esame = dao.doRetrieveByKey(Integer.parseInt(request.getParameter("codiceEsame")));
       String tipoGruppo = request.getParameter("tipoGruppo");
       if (tipoGruppo.equals("obbligatorio")) {
-        GruppoEsamiObbligatoriBeanDAO gruppoObDao = new GruppoEsamiObbligatoriBeanDAO();
+        GruppoEsamiObbligatoriBeanDao gruppoObDao = new GruppoEsamiObbligatoriBeanDao();
         gruppoObDao.insertEsameInGruppo(
             Integer.parseInt(request.getParameter("codiceGruppo")), esame.getCodiceEsame());
       } else {
-        GruppoEsamiOpzionaliBeanDAO gruppoObDao = new GruppoEsamiOpzionaliBeanDAO();
+        GruppoEsamiOpzionaliBeanDao gruppoObDao = new GruppoEsamiOpzionaliBeanDao();
         gruppoObDao.insertEsameInGruppo(
             Integer.parseInt(request.getParameter("codiceGruppo")), esame.getCodiceEsame());
       }
