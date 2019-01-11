@@ -83,13 +83,13 @@
       </div>
     </nav>
 
-    <center>
+    <div align=center>
       <fieldset class="reset-this redo-fieldset" style="margin-left: 10px;">
         <div class="col-md-12">
           <div class="container">
-            <center>
-              <h2>Aggiunta nuovo gruppo di esami</h2>
-            </center>
+           
+              <h2 align=center>Aggiunta nuovo gruppo di esami</h2>
+            
             <form class="form-horizontal" action="GestioneGruppoEsami" method="POST">
             	
 				<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -116,7 +116,7 @@
           </div>
         </div>
       </fieldset>
-    </center>
+    </div>
   </div>
 </body>
 

@@ -66,21 +66,21 @@
 	</nav>
 	<div class="col-md-12">
 		<form action="AggiungiOffertaFormativa.jsp" method="post">
-			<center>
-				<div class="centerButton">
+			
+				<div align=center class="centerButton">
 					<button class="btn btn-default btn-responsive center dimButton">
-						<span class="glyphicon glyphicon-plus"><br>Aggiungi
+						<span class="glyphicon glyphicon-plus"><br>Aggiungi</span>
 					</button>
-					</span>
+					
 				</div>
-			</center>
+		</form>
 			<br>
 			<%for(int i=0; i<of.size(); i++){ %>
-			<center>
-				<div class="center-block Myfieldset">
+			
+				<div  align=center class="center-block Myfieldset">
 					
 					<form action="GestioneOffertaFormativa" style="display: inline" method="POST">
-						<input type="hidden" name="metodo" value="eliminaOfferta">
+						<input type="hidden" name="metodo" value="eliminaOfferta" >
 						<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa()%>">
 							<button style="margin-right: 20px">
 								<span class="glyphicon glyphicon-trash"></span>
@@ -91,33 +91,33 @@
 					<a href="SelezionaLaureaAm.jsp?offerta=<%=of.get(i).getAnnoOffertaFormativa()%>"  style="margin-right: 20px"> <%=of.get(i).getAnnoOffertaFormativa() %></a>
 					
 					<!-- Default switch -->
-					<label class="switch">
 					
-						<form action="GestioneOffertaFormativa" method="POST">
-							<input type="hidden" name="metodo" value="visibilita">
-							<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa() %>">
-							<% if(of.get(i).isVisibilita()) { %> 
-								<input type="hidden" name="visibile" value="si">
+					<label class=switch>
+						   <form action="GestioneOffertaFormativa" method = "post">
+								<input type="hidden" name="metodo" value="visibilita">
+								<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa() %>">
+								<% if(of.get(i).isVisibilita()) { %> 
+									<input type="hidden" name="visibile" value="si"/>
+										<label class="c">
+	        								<input type="checkbox" class="form-check-input filled-in" onChange="this.form.submit()" checked >
+	        								<span class="checkmark slider" style="margin-top: -13px"></span>
+										</label>
+								<% } else { %>
+									<input type="hidden" name="visibile" value="no"/>
 									<label class="c">
-        								<input type="checkbox" class="form-check-input filled-in" onChange="this.form.submit()" checked >
-        								<span class="checkmark slider" style="margin-top: -13px"></span>
+	        							<input type="checkbox" class="form-check-input filled-in" onChange="this.form.submit()">
+	        							<span class="checkmark slider" style="margin-top: -13px"></span>
 									</label>
-							<% } else { %>
-								<input type="hidden" name="visibile" value="no">
-								<label class="c">
-        							<input type="checkbox" class="form-check-input filled-in" onChange="this.form.submit()">
-        							<span class="checkmark slider" style="margin-top: -13px"></span>
-								</label>
-							<% } %>
-							
-						</form>
-					</label>
+								<% } %>
+							</form>
+					</label>	
+					
 				</div>
-			</center>
+			
 			<br>
 			<%}%>
 
-		</form>
+		
 	</div>
 
 </body>

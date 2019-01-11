@@ -99,9 +99,9 @@
 			<div class=" col-sm-4 col-lg-4"></div>
 			<br><br><br><br>
 			
-			<center>
+			<div align=center>
 				<input type="submit" class="btn btn-default" name="conferma" value="Conferma">
-			</center>
+			</div>
 		</form>
 		
 	</body>

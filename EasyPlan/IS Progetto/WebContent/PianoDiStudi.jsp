@@ -3,7 +3,7 @@
     import="model.CurriculumBean" import="model.EsameBean" import="model.DocenteBean"
     import="model.GruppoEsamiObbligatoriBean" import="model.GruppoEsamiOpzionaliBean" %>
     
-    
+    <%! @SuppressWarnings("unchecked") %>
     <%// Simulazione dati presi dal database
     
     ArrayList<GruppoEsamiObbligatoriBean> ob1 = (ArrayList<GruppoEsamiObbligatoriBean>) session.getAttribute("obbligatori1");
@@ -63,7 +63,7 @@
       </div>
     </nav>
     <div id="HTMLtoPDF">
-    	<center><h3>Il tuo Piano di studi</h3></center><br>
+    	<h3 align=center>Il tuo Piano di studi</h3><br>
     		<div class="col-md-12">
 		      <!-- esami obbligatori anno 1 -->
    				<%for(int i = 0; i < ob1.size(); i++){ %>
@@ -212,8 +212,10 @@
 	   		
 		</div>
 	 <br>
-	  	 <center><button name="button" class="btn btn-default btn-responsive center" onclick="HTMLtoPDF()">Scarica piano</button>
-	  	 <a href="https://esse3web.unisa.it/Home.do" name="button" class="btn btn-default btn-responsive center">Vai ad Esse3</a></center>
+	 	<div align=center>
+	  	 <button name="button" class="btn btn-default btn-responsive center" onclick="HTMLtoPDF()">Scarica piano</button>
+	  	 <a href="https://esse3web.unisa.it/Home.do"  class="btn btn-default btn-responsive center">Vai ad Esse3</a>
+  		</div>
   	 <br>
   </body>
 </html>

@@ -99,11 +99,10 @@ input[type=button]:active {
 		<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 		<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 		<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
-		<div class="container">
-			<center>
-				<center>
-					<h2>Aggiunta di un nuovo esame</h2>
-				</center>
+		<div class="container" align=center>
+			
+					<h2 align=center>Aggiunta di un nuovo esame</h2>
+				
 				<br>
 				<br>
 				<br>
@@ -122,7 +121,7 @@ input[type=button]:active {
 					</div>
 					
 				</div>
-			</center>
+			
 			<div id="prof1" class="row">
 				<br> <br>
 				<div class="col-sm-3 col-lg-3"></div>
@@ -185,7 +184,7 @@ input[type=button]:active {
 							value="Aggiungi" style="margin-left: 15%; height: 45px">
 					</div>
 				</div>
-				
+			</div>
 	</form>
 </body>
 </html>

@@ -170,7 +170,7 @@
 	       		<input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
 	        	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive left-block">Indietro</button>
 	        </form>
-			<center>
+			<div align="center">
 				<h1>
 					Curriculum
 					<%=request.getParameter("curriculum") %>
@@ -214,8 +214,7 @@
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container divContents">
-										<center>
-											<div class="row">
+											<div align=center class="row">
 												<div class="col-sm-2 col-lg-2">
 													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
@@ -257,7 +256,6 @@
 													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
-										</center>
 										<div id="prof1" class="row">
 											<br> <br>
 											<div class="col-sm-12 col-lg-12">
@@ -311,13 +309,13 @@
 											</div>
 										</div>	
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-											<center>
-														<div>
+											
+														<div align=center>
 															<button type="submit" class="btn btn-default btn-responsive center deleteEsame" name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 															</button>												
 														</div>
-											</center>										
+																					
 										</div>
 											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
 												<button class="btn btn-default applica" type="submit" name="metodo" value="updateEsame">Applica</button>
@@ -328,8 +326,8 @@
 						</form>	
 						<% } %>
 						
-						<center>
-							<div class="div3Button">
+						
+							<div align=center class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -361,7 +359,7 @@
 								</form>
 								
 							</div>
-						</center>	
+							
 					</fieldset>
 					<% } 
 	        	esami1.clear();
@@ -394,13 +392,13 @@
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container divContents">
-										<center>
-											<div class="row">
+										
+											<div  align=center class="row">
 												<div class="col-sm-2 col-lg-2">
 													CFU <input type="number" min="1" max="12"
 													class="btn btn-default" name="insertCFU"
 													value="<%= esame.getCfu() %>" size="2">
-											</div>
+												</div>
 												<div class="col-sm-2 col-lg-2">
 													Ore <input type="number"  min="1" max="96" class="btn btn-default" name="insertOre" value="<%= esame.getOreLezione() %>" size="2">
 												</div>
@@ -439,7 +437,7 @@
 													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
-										</center>
+										
 										<div id="prof1" class="row">
 											<br> <br>
 											<div class="col-sm-12 col-lg-12">
@@ -495,15 +493,15 @@
 										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-											<center>
+											
 												
-													<div>
+													<div align=center>
 														<button type="submit" class="btn btn-default btn-responsive center deleteEsame" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>										
 												
-											</center>
+											
 										</div>
 										
 											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
@@ -515,8 +513,8 @@
 							</form>	
 						<% } %>
 						
-						<center>
-							<div class="div4Button">	
+						
+							<div align=center class="div4Button">	
 							 <form action="GestioneGruppoEsami" method="POST"> 
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -559,21 +557,21 @@
 								</button>
 							</form>
 							</div>
-						</center>
+						
 					</fieldset>
 					<%} %>
-					<center>
-						<div>
+					
+						<div align=center>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
 							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
 							<input type="hidden" name="anno" value="1"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
-							<button class="btn btn-default btn-responsive center" style="margin-top: 10px" type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
+							<button class="btn btn-default btn-responsive center" style="margin-top: 10px" type="submit" name="metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
 						</form>
 						</div>
-					</center>
+					
 					<% }
 	
 			 else if(i == 2){ // Secondo anno
@@ -606,8 +604,8 @@
 								<div class="contents">
 									<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 										<div class="container divContents">
-											<center>
-												<div class="row">
+											
+												<div align=center class="row">
 													<div class="col-sm-2 col-lg-2">
 													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
@@ -650,7 +648,7 @@
 													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 													</div>
 												</div>
-											</center>
+											
 											<div id="prof1" class="row">
 												<br> <br>
 												<div class="col-sm-12 col-lg-12">
@@ -706,13 +704,13 @@
 											</div>	
 											
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-												<center>
-														<div>
+												
+														<div align=center>
 															<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 															</button>												
 														</div>	
-												</center>
+												
 											</div>
 											
 												<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
@@ -727,8 +725,8 @@
 							</form>	
 						<% } %>
 							
-							<center>
-								<div class="div3Button">
+							
+								<div align=center class="div3Button">
 									<form action = "GestioneGruppoEsami" method = "POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -761,7 +759,7 @@
 										</button>
 									</form>
 								</div>
-							</center>
+							
 						</fieldset>
 						<% } 
 		        	esami2.clear();
@@ -793,8 +791,8 @@
 								<div class="contents">
 									<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 										<div class="container divContents">
-											<center>
-												<div class="row">
+											
+												<div align=center class="row">
 													<div class="col-sm-2 col-lg-2">
 													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 													</div>
@@ -837,7 +835,7 @@
 														Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 													</div>
 												</div>
-											</center>
+											
 											<div id="prof1" class="row">
 												<br> <br>
 												<div class="col-sm-12 col-lg-12">
@@ -892,14 +890,14 @@
 											</div>	
 											
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-												<center>
-														<div>
+												
+														<div align=center>
 															<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 															</button>												
 														</div>
 													
-												</center>
+												
 											</div>
 											
 												<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
@@ -914,8 +912,8 @@
 							</form>	
 						<% } %>
 							
-							<center>
-								<div class="div4Button">
+							
+								<div align=center class="div4Button">
 									<form action="GestioneGruppoEsami" method="POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -959,21 +957,21 @@
 									</form>
 									
 								</div>
-							</center>
+							
 						</fieldset>
 						<%} %>
-						<center>
-						<div>
+						
+						<div align=center>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
 							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
 							<input type="hidden" name="anno" value="2"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
-							<button class="btn btn-default btn-responsive center" style="margin-top: 10px"  type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
+							<button class="btn btn-default btn-responsive center" style="margin-top: 10px"  type="submit" name="metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
 						</form>
 						</div>
-					</center>
+					
 						<% }
 	    	
 	    	else if(i == 3){ // Terzo anno
@@ -1007,8 +1005,8 @@
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container divContents">
-										<center>
-											<div class="row">
+										
+											<div align=center class="row">
 												<div class="col-sm-2 col-lg-2">
 													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
@@ -1051,7 +1049,7 @@
 													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
-										</center>
+										
 										<div id="prof1" class="row">
 											<br> <br>
 											<div class="col-sm-12 col-lg-12">
@@ -1106,13 +1104,13 @@
 										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-											<center>
-													<div> 
+											
+													<div align=center> 
 														<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>
-											</center>
+											
 										</div>
 												<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
 													<button class="btn btn-default btn-responsive center applica" name="metodo" value="updateEsame">Applica </button>
@@ -1123,8 +1121,8 @@
 						</form>	
 						<% } %>
 						
-						<center>
-							<div class="div3Button">
+						
+							<div align=center class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1156,7 +1154,7 @@
 								</form>
 								
 							</div>
-						</center>
+						
 					</fieldset>
 					<% } 
 	        	esami3.clear();
@@ -1189,8 +1187,8 @@
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container divContents">
-										<center>
-											<div class="row">
+										
+											<div align=center class="row">
 												<div class="col-sm-2 col-lg-2">
 													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
@@ -1233,7 +1231,7 @@
 													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
-										</center>
+										
 										<div id="prof1" class="row">
 											<br> <br>
 											<div class="col-sm-12 col-lg-12">
@@ -1288,14 +1286,13 @@
 										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-											<center>
 											
-													<div>
+													<div align=center>
 														<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>				
-											</center>	
+												
 										</div>
 						                            <div class="col-sm-8 col-lg-8" style="margin-top: 2%">
 													<button class="btn btn-default btn-responsive center applica"  type="submit" name="metodo" value="updateEsame">
@@ -1308,8 +1305,8 @@
 						</form>	
 						<% } %>
 						
-						<center>
-							<div class="div4Button">
+						
+							<div align=center class="div4Button">
 								<form action="GestioneGruppoEsami" method="POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1353,21 +1350,21 @@
 								</form>
 									
 							</div>
-						</center>
+						
 					</fieldset>
 					<%} %>
-						<center>
-						<div>
+						
+						<div align=center>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
 							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
 							<input type="hidden" name="anno" value="3"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
-							<button class="btn btn-default btn-responsive center" style="margin-top: 10px"  type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
+							<button class="btn btn-default btn-responsive center" style="margin-top: 10px"  type="submit" name="metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
 						</form>
 						</div>
-					</center>
+					
 					<% } %>
 	
 				</fieldset>
@@ -1418,8 +1415,8 @@
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container divContents">
-										<center>
-											<div class="row">
+										
+											<div align=center class="row">
 												<div class="col-sm-2 col-lg-2">
 													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
@@ -1454,7 +1451,6 @@
 													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
-										</center>
 										<div id="prof1" class="row">
 											<br> <br>
 											<div class="col-sm-12 col-lg-12">
@@ -1509,14 +1505,13 @@
 										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-											<center>
-												
-													<div>
+										
+													<div align=center>
 														<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>
-											</center>
+											
 										</div>
 											<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
 													<button class="btn btn-default btn-responsive center applica" type="submit" name="metodo" value="updateEsame">
@@ -1529,8 +1524,8 @@
 						</form>	
 						<% } %>
 						
-						<center>
-							<div class="div3Button">
+						
+							<div align=center class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1561,7 +1556,7 @@
 									<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 								</form>
 							</div>
-						</center>
+						
 					</fieldset>
 					<% } 
 	        	esami1.clear();
@@ -1596,8 +1591,8 @@
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container divContents">
-										<center>
-											<div class="row">
+										
+											<div align=center class="row">
 												<div class="col-sm-2 col-lg-2">
 													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
@@ -1632,7 +1627,7 @@
 													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
 											</div>
-										</center>
+										
 										<div id="prof1" class="row">
 											<br> <br>
 											<div class="col-sm-12 col-lg-12">
@@ -1687,14 +1682,13 @@
 										</div>	
 										
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-											<center>
-												
-													<div>
+											
+													<div align=center>
 														<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>
-											</center>
+											
 										</div>
 										<div class="col-sm-8 col-lg-8" style="margin-top: 2%">
 													<button class="btn btn-default btn-responsive center applica" type="submit" name="metodo" value="updateEsame">Applica</button>
@@ -1705,8 +1699,8 @@
 						</form>	
 						<% } %>
 						
-						<center>
-							<div class="div4Button">
+						
+							<div align=center class="div4Button">
 								<form action="GestioneGruppoEsami" method="POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1749,22 +1743,22 @@
 									</button>
 								</form>
 							</div>
-						</center>
+						
 						
 					</fieldset>
 					<%} %>
-					<center>
-						<div>
+					
+						<div align=center>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
 							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
 							<input type="hidden" name="anno" value="1"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
-							<button class="btn btn-default btn-responsive center" style="margin-top: 10px"  type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
+							<button class="btn btn-default btn-responsive center" style="margin-top: 10px"  type="submit" name="metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
 						</form>
 						</div>
-					</center>
+					
 					<% }
 					
 			 else if(i == 2){ // Secondo anno
@@ -1799,8 +1793,8 @@
 								<div class="contents">
 									<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 										<div class="container divContents">
-											<center>
-												<div class="row">
+											
+												<div align=center class="row">
 													<div class="col-sm-2 col-lg-2">
 													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
@@ -1835,7 +1829,7 @@
 														Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 													</div>
 												</div>
-											</center>
+											
 											<div id="prof1" class="row">
 												<br> <br>
 												<div class="col-sm-12 col-lg-12">
@@ -1890,14 +1884,14 @@
 											</div>	
 											
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-												<center>
+												
 													
-														<div>
+														<div align=center>
 															<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash" ><br>Cancella esame </span>
 															</button>												
 														</div>		
-												</center>
+												
 											</div>
 											
 												  <div class="col-sm-8 col-lg-8" style="margin-top: 2%">
@@ -1909,8 +1903,8 @@
 						</form>	
 						<% } %>
 							
-							<center>
-								<div class="div3Button">
+							
+								<div align=center class="div3Button">
 									<form action = "GestioneGruppoEsami" method = "POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1941,7 +1935,7 @@
 										<button class="btn btn-default btn-responsive center button3" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 									</form>
 								</div>
-							</center>
+							
 						</fieldset>
 						<% } 
 		        	esami2.clear();
@@ -1974,8 +1968,8 @@
 								<div class="contents">
 									<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 										<div class="container divContents">
-											<center>
-												<div class="row">
+											
+												<div align=center class="row">
 													<div class="col-sm-2 col-lg-2">
 													CFU <input type="number"  min="1" max="12" class="btn btn-default" name="insertCFU" value="<%= esame.getCfu() %>" size="2">
 												</div>
@@ -2010,7 +2004,7 @@
 														Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 													</div>
 												</div>
-											</center>
+											
 											<div id="prof1" class="row">
 												<br> <br>
 												<div class="col-sm-12 col-lg-12">
@@ -2065,13 +2059,13 @@
 											</div>	
 											
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
-												<center>
-														<div>
+												
+														<div align=center>
 															<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 															</button>												
 														</div>		
-												</center>
+												
 											</div>
 											
 													 <div class="col-sm-8 col-lg-8" style="margin-top: 2%">
@@ -2083,8 +2077,8 @@
 						</form>	
 						<% } %>
 							
-							<center>
-								<div class="div4Button">
+							
+								<div align=center class="div4Button">
 									<form action="GestioneGruppoEsami" method="POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -2127,25 +2121,25 @@
 										</button>
 									</form>
 								</div>
-							</center>
+							
 						</fieldset>
 						<%} %>
-						<center>
-						<div>
+						
+						<div align=center>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
 							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
 							<input type="hidden" name="idCurriculum" value="<%=id %>"></input>
 							<input type="hidden" name="anno" value="2"></input>
 							<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
-							<button class="btn btn-default btn-responsive center" style="margin-top: 10px" type="submit" metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
+							<button class="btn btn-default btn-responsive center" style="margin-top: 10px" type="submit" name="metodo" value="aggiungiGruppo"> Aggiungi nuovo gruppo d'esami </button>
 						</form>
 						</div>
-					</center>
+					
 						<% }%>
 				</fieldset>
 				<%}} %>
-			</center>
+			</div>
 		</div>
 	</body>
 </html>

@@ -95,7 +95,7 @@
 		    			  </select>
 		 	</br> </br>-->
 		 	<input type="text" name="codiceEsame" placeholder="Inserire codice esame"></input>
-		 	</select>
+		 	
 		     <button class="btn btn-default btn-responsive center" style="margin-top:15px; margin-left: 30px;">Aggiungi esame</button>
 	   </form>
     </div>

@@ -53,9 +53,9 @@
 		</nav>
 		<!--  ./Navbar -->
 		
-		<center>
-			<h2>Modifica il nome dell'offerta formativa</h2>
-		</center>
+		
+			<h2 align=center>Modifica il nome dell'offerta formativa</h2>
+		
 		
 		<br><br>
 		
@@ -68,7 +68,8 @@
 		</div>
 		
 		<br><br>
-		
-		<center><input type="submit" class="btn btn-default" name="conferma" value="Conferma"></center>
+		<div align=center>
+			<input type="submit" class="btn btn-default" name="conferma" value="Conferma">
+		</div>
 	</body>
 </html>

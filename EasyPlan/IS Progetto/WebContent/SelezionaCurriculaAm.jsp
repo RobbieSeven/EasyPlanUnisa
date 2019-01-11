@@ -73,10 +73,10 @@
        	<input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
     	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive left-block">Indietro</button>
     </form>
-    <div class="col-md-12">
-      <center><h2>Seleziona curricula da modificare</h2></center>
+    <div align=center class="col-md-12">
+      <h2 align=center>Seleziona curricula da modificare</h2>
       <%for(int i=0; i<lista.size(); i++){ %>
-          <center><div style="display: -webkit-inline-box">
+          <div align=center style="display: -webkit-inline-box">
             <form action="GestioneEsami.jsp" method="POST">
              <input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
              <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
@@ -87,27 +87,30 @@
             </form>
             
             <form action="GestioneCurricula" method="POST">
-            <button class="btn btn-default btn-responsive center" style="margin-left: -250px">
-						<input type="hidden" name="metodo" value="eliminaCurricula">
-						<input type="hidden" name="laurea" value="<%=laurea%>">
-						<input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
-						<input type="hidden" name="idCurriculum" value="<%=lista.get(i).getIdCurriculum()%>">
-						<input type="hidden" name="idCorsoDiLaurea" value="<%=id %>"></input>
-            <span class="glyphicon glyphicon-trash"></span></button>
+            	<input type="hidden" name="metodo" value="eliminaCurricula">
+				<input type="hidden" name="laurea" value="<%=laurea%>">
+				<input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
+				<input type="hidden" name="idCurriculum" value="<%=lista.get(i).getIdCurriculum()%>">
+				<input type="hidden" name="idCorsoDiLaurea" value="<%=id %>">
+            	<button class="btn btn-default btn-responsive center" style="margin-left: -250px">		
+            		<span class="glyphicon glyphicon-trash"></span>
+            	</button>
             </form>
-          </div></center>
+          </div>
           <br>
           <% } %>
 
           <br>
-          <center><div>
-          <form action="AggiungiCurricula.jsp" method="POST">
-          <input type="hidden" name="metodo" value="aggiuntaCurricula">
-          <input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
-          <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
-          <input type="hidden" name="idCorsoDiLaurea" value="<%=id %>"></input>
-          <button class="btn btn-default btn-responsive center dimButton"><span class="glyphicon glyphicon-plus"><br>Aggiungi</button></span></div></center>
-		  </form>
+          <div align=center>
+	          <form action="AggiungiCurricula.jsp" method="POST">
+		          <input type="hidden" name="metodo" value="aggiuntaCurricula">
+		          <input type="hidden" name="laurea" value="<%=request.getParameter("laurea")%>">
+		          <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
+		          <input type="hidden" name="idCorsoDiLaurea" value="<%=id %>"></input>
+	          	  <button class="btn btn-default btn-responsive center dimButton"><span class="glyphicon glyphicon-plus"><br>Aggiungi</span></button>
+	          </form>
+          </div>
+		  
    
     </div>
   </body>

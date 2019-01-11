@@ -2,7 +2,9 @@
     pageEncoding="UTF-8" import="model.OffertaFormativaBean" import="model.CorsoDiLaureaBean"
     import="model.CurriculumBean" import="model.EsameBean" import="model.DocenteBean"
     import="model.GruppoEsamiObbligatoriBean" import="model.GruppoEsamiOpzionaliBean" %>
+    
       
+     <%! @SuppressWarnings("unchecked") %>
      <%
      	// Simulazione dati presi dal database
      	OffertaFormativaBean of = (OffertaFormativaBean) request.getAttribute("offertaFormativa"); 
@@ -112,6 +114,9 @@
 		overflow-y: auto;
 		-ms-overflow-style: -ms-autohiding-scrollbar;
 	}
+	form{
+		display:contents;
+	}
     </style>
   </head>
   <body>
@@ -157,7 +162,7 @@
     				<tbody>
 	   					<% for(int j = 0; j < ob1.get(i).getEsami().size(); j++){ %>
     					  <tr>
-    					  <form action="selectionOfferta" method = "post">
+    					  
         					<th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=ob1.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=ob1.get(i).getEsami().get(j).getNome()%></a>
         						<div class="collapse" id="collapseExample<%=ob1.get(i).getEsami().get(j).getCodiceEsame()%>">
  			 						<div class="card card-body">
@@ -171,13 +176,15 @@
        						</th>
         					<td><%=ob1.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
+        					<form action="selectionOfferta"  method = "post">
         						<label class="c">
         							<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
         							<span class="checkmark"></span>
 								</label>
+							</form>
         					</td>
       					</tr>
-      					</form>
+      					
 	     			<%} %>
 	     		</tbody>
 	     	</table>
@@ -197,10 +204,7 @@
     				<tbody>
 	   					<% for( int j = 0 ; j < op1.get(i).getEsami().size(); j++){%>
     					  <tr>
-    					  <form action="selectionOfferta" method = "post">
-    						  <input type="hidden" name="gruppoopz" value="opzA1<%=+i%>">
-    						  <input type="hidden" name="cfu" value="<%=op1.get(i).getTotCfu()%>">
-    						  <input type="hidden" name="esame" value="<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
+    					  
         					  <th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=op1.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=op1.get(i).getEsami().get(j).getNome()%></a>
         						<div class="collapse" id="collapseExample<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
  			 						<div class="card card-body">
@@ -214,6 +218,10 @@
        						</th>
         					<td><%=op1.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
+        					<form action="selectionOfferta" method = "post">
+    						  <input type="hidden" name="gruppoopz" value="opzA1<%=+i%>">
+    						  <input type="hidden" name="cfu" value="<%=op1.get(i).getTotCfu()%>">
+    						  <input type="hidden" name="esame" value="<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
         					<input type="hidden" name="metodo" value="<%=op1.get(i).getEsami().get(j).getCodiceEsame()%>">
         					<% if(op1.get(i).getEsami().get(j).isCheck()) {  %>
         						<label class="c">
@@ -226,9 +234,9 @@
         							<span class="checkmark"></span>
 								</label>
         					<%} %>	
+        					</form>
         					</td>
       					</tr>
-      					</form>
 	     			<%}
 	   				}%>
 	     		</tbody>
@@ -249,7 +257,7 @@
     				<tbody>
 	   					<% for(int j = 0; j < ob2.get(i).getEsami().size(); j++){ %>
     					  <tr>
-    					  <form action="selectionOfferta" method = "post">
+    					  
         					<th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=ob2.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=ob2.get(i).getEsami().get(j).getNome()%></a>
         						<div class="collapse" id="collapseExample<%=ob2.get(i).getEsami().get(j).getCodiceEsame()%>">
  			 						<div class="card card-body">
@@ -263,13 +271,15 @@
        						</th>
         					<td><%=ob2.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
+        					<form action="selectionOfferta" method = "post">
         						<label class="c">
         							<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
         							<span class="checkmark"></span>
 								</label>
+							</form>
         					</td>
       					</tr>
-      					</form>
+      					
 	     			<%} %>
 	     		</tbody>
 	     	</table>
@@ -289,10 +299,7 @@
     				<tbody>
 	   					<% for( int j = 0 ; j < op2.get(i).getEsami().size(); j++){ %>
     					  <tr>
-    					  <form action="selectionOfferta" method = "post">
-    						  <input type="hidden" name="gruppoopz" value="opzA2<%=+i%>">
-    						  <input type="hidden" name="cfu" value="<%=op2.get(i).getTotCfu()%>">
-    						  <input type="hidden" name="esame" value="<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
+    					  
         					  <th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=op2.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=op2.get(i).getEsami().get(j).getNome()%></a>
         						<div class="collapse" id="collapseExample<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
  			 						<div class="card card-body">
@@ -306,6 +313,10 @@
        						</th>
         					<td><%=op2.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
+        					<form action="selectionOfferta" method = "post">
+    						  <input type="hidden" name="gruppoopz" value="opzA2<%=+i%>">
+    						  <input type="hidden" name="cfu" value="<%=op2.get(i).getTotCfu()%>">
+    						  <input type="hidden" name="esame" value="<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
         					<input type="hidden" name="metodo" value="<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>">
         					<% if(op2.get(i).getEsami().get(j).isCheck()) {  %>
         						<label class="c">
@@ -317,10 +328,11 @@
         							<input type="checkbox" class="form-check-input filled-in"  name="check<%=op2.get(i).getEsami().get(j).getCodiceEsame()%>" onChange="this.form.submit()">	
         							<span class="checkmark"></span>
 								</label>
-        					<%} %>	
+        					<%} %>
+        						</form>	
         					</td>
       					</tr>
-      					</form>
+      				
 	     			<%}
 	   				}%>
 	     		</tbody>
@@ -342,7 +354,7 @@
     				<tbody>
 	   					<% for(int j = 0; j < ob3.get(i).getEsami().size(); j++){ %>
     					  <tr>
-    					  <form action="selectionOfferta" method = "post">
+    					  
         					<th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=ob3.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=ob3.get(i).getEsami().get(j).getNome()%></a>
         						<div class="collapse" id="collapseExample<%=ob3.get(i).getEsami().get(j).getCodiceEsame()%>">
  			 						<div class="card card-body">
@@ -356,13 +368,15 @@
        						</th>
         					<td><%=ob3.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
+        					<form action="selectionOfferta" method = "post">
         						<label class="c">
         							<input type="checkbox" class="form-check-input filled-in" id="" disabled checked>
         							<span class="checkmark"></span>
 								</label>
+								</form>
         					</td>
       					</tr>
-      					</form>
+      					
 	     			<%} %>
 	     		</tbody>
 	     	</table>
@@ -382,10 +396,7 @@
     				<tbody>
 	   					<% for( int j = 0 ; j < op3.get(i).getEsami().size(); j++){ %>
     					  <tr>
-    					  <form action="selectionOfferta" method = "post">
-    						  <input type="hidden" name="gruppoopz" value="opzA3<%=+i%>">
-    						  <input type="hidden" name="cfu" value="<%=op3.get(i).getTotCfu()%>">
-    						  <input type="hidden" name="esame" value="<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
+    					  
         					  <th scope="row"><a  data-toggle="collapse" href="#collapseExample<%=op3.get(i).getEsami().get(j).getCodiceEsame() %>" role="button" aria-expanded="false" aria-controls="collapseExample"><%=op3.get(i).getEsami().get(j).getNome()%></a>
         						<div class="collapse" id="collapseExample<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
  			 						<div class="card card-body">
@@ -399,6 +410,10 @@
        						</th>
         					<td><%=op3.get(i).getEsami().get(j).getCfu()%></td>
         					<td>
+        					<form action="selectionOfferta" method = "post">
+    						  <input type="hidden" name="gruppoopz" value="opzA3<%=+i%>">
+    						  <input type="hidden" name="cfu" value="<%=op3.get(i).getTotCfu()%>">
+    						  <input type="hidden" name="esame" value="<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
         					<input type="hidden" name="metodo" value="<%=op3.get(i).getEsami().get(j).getCodiceEsame()%>">
         					<% if(op3.get(i).getEsami().get(j).isCheck()) {  %>
         						<label class="c">
@@ -411,9 +426,10 @@
         							<span class="checkmark"></span>
 								</label>
         					<%} %>	
+        					</form>
         					</td>
       					</tr>
-      					</form>
+      					
 	     			<%}
 	   				}%>
 	     		</tbody>
