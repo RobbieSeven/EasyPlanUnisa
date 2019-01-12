@@ -1,6 +1,6 @@
 <%@page import="model.curriculum.CurriculumBeanDao"%>
 <%@page import="model.curriculum.CurriculumBean"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>
 
 <%
