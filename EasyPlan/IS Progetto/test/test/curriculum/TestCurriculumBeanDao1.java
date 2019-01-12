@@ -3,10 +3,11 @@ package test.curriculum;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import model.CurriculumBean;
-import model.CurriculumBeanDao;
 
 import org.junit.Test;
+
+import model.curriculum.CurriculumBean;
+import model.curriculum.CurriculumBeanDao;
 
 public class TestCurriculumBeanDao1 {
 

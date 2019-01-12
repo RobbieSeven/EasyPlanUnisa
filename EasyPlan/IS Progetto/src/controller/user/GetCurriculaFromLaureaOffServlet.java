@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.CorsoDiLaureaBean;
-import model.CorsoDiLaureaBeanDao;
-import model.CurriculumBean;
-import model.CurriculumBeanDao;
-import model.OffertaFormativaBean;
+import model.corso.di.laurea.CorsoDiLaureaBean;
+import model.corso.di.laurea.CorsoDiLaureaBeanDao;
+import model.curriculum.CurriculumBean;
+import model.curriculum.CurriculumBeanDao;
+import model.offerta.formativa.OffertaFormativaBean;
 
 /**
  * Servlet implementation class getCurriculaFromLaureaOff.

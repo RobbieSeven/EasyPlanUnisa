@@ -1,6 +1,8 @@
-package model;
+package model.gruppo.esami.obbligatori;
 
 import java.util.ArrayList;
+
+import model.esame.EsameBean;
 
 public class GruppoEsamiObbligatoriBean {
 

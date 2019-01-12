@@ -1,7 +1,7 @@
-<%@page import="model.CorsoDiLaureaBean"%>
-<%@page import="model.CorsoDiLaureaBeanDao"%>
-<%@page import="model.OffertaFormativaBeanDao"%>
-<%@page import="model.OffertaFormativaBean"%>
+<%@page import="model.corso.di.laurea.CorsoDiLaureaBean"%>
+<%@page import="model.corso.di.laurea.CorsoDiLaureaBeanDao"%>
+<%@page import="model.offerta.formativa.OffertaFormativaBeanDao"%>
+<%@page import="model.offerta.formativa.OffertaFormativaBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>
 

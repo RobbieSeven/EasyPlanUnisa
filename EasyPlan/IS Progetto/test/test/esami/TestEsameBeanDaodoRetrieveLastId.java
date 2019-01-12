@@ -4,8 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Scanner;
 
-import model.EsameBeanDao;
 import org.junit.Test;
+
+import model.esame.EsameBeanDao;
 
 
 

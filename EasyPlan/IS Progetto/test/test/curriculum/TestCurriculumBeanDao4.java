@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
 
-import model.CurriculumBeanDao;
-
 import org.junit.Test;
+
+import model.curriculum.CurriculumBeanDao;
 
 
 public class TestCurriculumBeanDao4 {

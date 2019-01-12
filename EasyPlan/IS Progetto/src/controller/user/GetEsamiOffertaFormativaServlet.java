@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.CorsoDiLaureaBean;
-import model.CorsoDiLaureaBeanDao;
-import model.CurriculumBean;
-import model.CurriculumBeanDao;
-import model.DocenteBeanDao;
-import model.EsameBeanDao;
-import model.GruppoEsamiObbligatoriBean;
-import model.GruppoEsamiObbligatoriBeanDao;
-import model.GruppoEsamiOpzionaliBean;
-import model.GruppoEsamiOpzionaliBeanDao;
-import model.OffertaFormativaBean;
+import model.corso.di.laurea.CorsoDiLaureaBean;
+import model.corso.di.laurea.CorsoDiLaureaBeanDao;
+import model.curriculum.CurriculumBean;
+import model.curriculum.CurriculumBeanDao;
+import model.docente.DocenteBeanDao;
+import model.esame.EsameBeanDao;
+import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBean;
+import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBeanDao;
+import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBean;
+import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBeanDao;
+import model.offerta.formativa.OffertaFormativaBean;
 
 /**
  * Servlet implementation class getEsamiOffertaFormativa.

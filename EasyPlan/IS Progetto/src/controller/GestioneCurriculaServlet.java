@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.CurriculumBean;
-import model.CurriculumBeanDao;
+import model.curriculum.CurriculumBean;
+import model.curriculum.CurriculumBeanDao;
 
 /**
  * Servlet implementation class GestioneCurricula.

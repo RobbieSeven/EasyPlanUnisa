@@ -3,9 +3,11 @@ package test.esami;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import model.EsameBean;
-import model.EsameBeanDao;
+
 import org.junit.Test;
+
+import model.esame.EsameBean;
+import model.esame.EsameBeanDao;
 
 public class TestEsameBeanDaodoSaveOrUpdate {
 

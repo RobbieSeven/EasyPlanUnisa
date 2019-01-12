@@ -1,6 +1,8 @@
-package model;
+package model.esame;
 
 import java.util.ArrayList;
+
+import model.docente.DocenteBean;
 
 public class EsameBean {
 

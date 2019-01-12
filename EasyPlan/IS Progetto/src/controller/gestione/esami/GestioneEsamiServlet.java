@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.DocenteBean;
-import model.DocenteBeanDao;
-import model.EsameBean;
-import model.EsameBeanDao;
-import model.GruppoEsamiObbligatoriBeanDao;
-import model.GruppoEsamiOpzionaliBeanDao;
+import model.docente.DocenteBean;
+import model.docente.DocenteBeanDao;
+import model.esame.EsameBean;
+import model.esame.EsameBeanDao;
+import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBeanDao;
+import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBeanDao;
 
 @WebServlet("/GestioneEsamiServlet")
 public class GestioneEsamiServlet extends HttpServlet {

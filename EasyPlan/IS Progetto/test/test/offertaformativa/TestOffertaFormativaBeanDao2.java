@@ -3,8 +3,10 @@ package test.offertaformativa;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import model.OffertaFormativaBeanDao;
+
 import org.junit.Test;
+
+import model.offerta.formativa.OffertaFormativaBeanDao;
 
 public class TestOffertaFormativaBeanDao2 {
   OffertaFormativaBeanDao ofd = new OffertaFormativaBeanDao();

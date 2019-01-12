@@ -3,8 +3,10 @@ package test.offertaformativa;
 import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
-import model.OffertaFormativaBeanDao;
+
 import org.junit.Test;
+
+import model.offerta.formativa.OffertaFormativaBeanDao;
 
 public class TestOffertaFormativaDao3 {
   int size = 2;

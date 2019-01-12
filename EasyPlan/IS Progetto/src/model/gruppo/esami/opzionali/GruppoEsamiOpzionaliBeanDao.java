@@ -1,4 +1,4 @@
-package model;
+package model.gruppo.esami.opzionali;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import model.DriverManagerConnectionPool;
+import model.esame.EsameBeanDao;
 
 public class GruppoEsamiOpzionaliBeanDao {
 

@@ -3,9 +3,11 @@ package test.gruppo.esami.obbligatori;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import model.GruppoEsamiObbligatoriBean;
-import model.GruppoEsamiObbligatoriBeanDao;
+
 import org.junit.Test;
+
+import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBean;
+import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBeanDao;
 
 public class TestGruppoEsamiObbligatoriBeanDaodoSave {
 

@@ -1,4 +1,4 @@
-package model;
+package model.docente;
 
 public class DocenteBean {
 

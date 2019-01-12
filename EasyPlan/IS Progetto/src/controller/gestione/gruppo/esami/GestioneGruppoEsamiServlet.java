@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.GruppoEsamiObbligatoriBean;
-import model.GruppoEsamiObbligatoriBeanDao;
-import model.GruppoEsamiOpzionaliBean;
-import model.GruppoEsamiOpzionaliBeanDao;
+import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBean;
+import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBeanDao;
+import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBean;
+import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBeanDao;
 
 /**
  * Servlet implementation class GestioneGruppoEsamiOpzionali.

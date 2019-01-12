@@ -1,6 +1,8 @@
-package model;
+package model.gruppo.esami.opzionali;
 
 import java.util.ArrayList;
+
+import model.esame.EsameBean;
 
 public class GruppoEsamiOpzionaliBean {
 

@@ -1,9 +1,11 @@
-package model;
+package model.amministratore;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import model.DriverManagerConnectionPool;
 
 public class AmministratoreBeanDao {
 

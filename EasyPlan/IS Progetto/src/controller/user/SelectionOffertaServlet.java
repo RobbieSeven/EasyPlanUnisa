@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.EsameBean;
-import model.EsameBeanDao;
-import model.GruppoEsamiObbligatoriBean;
-import model.GruppoEsamiOpzionaliBean;
-import model.OffertaFormativaBean;
+import model.esame.EsameBean;
+import model.esame.EsameBeanDao;
+import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBean;
+import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBean;
+import model.offerta.formativa.OffertaFormativaBean;
 
 /**
  * Servlet implementation class selectionOfferta.

@@ -2,12 +2,10 @@ package test.amministratore;
 
 import static org.junit.Assert.assertEquals;
 
-import model.AmministratoreBean;
-import model.AmministratoreBeanDao;
- 
+import model.amministratore.AmministratoreBean;
+import model.amministratore.AmministratoreBeanDao;
+
 import org.junit.Test;
-
-
 
 public class TestAmministratoreBeanDao {
 

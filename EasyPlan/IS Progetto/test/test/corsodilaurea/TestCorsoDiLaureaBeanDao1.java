@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
-import model.CorsoDiLaureaBean;
-import model.CorsoDiLaureaBeanDao;
-
 import org.junit.Test;
+
+import model.corso.di.laurea.CorsoDiLaureaBean;
+import model.corso.di.laurea.CorsoDiLaureaBeanDao;
 
 public class TestCorsoDiLaureaBeanDao1 {
   CorsoDiLaureaBean cl = new CorsoDiLaureaBean(17, 2, "2018/19", null);

@@ -1,11 +1,11 @@
-<%@page import="model.GruppoEsamiObbligatoriBeanDao"%>
-<%@page import="model.GruppoEsamiObbligatoriBean"%>
-<%@page import="model.GruppoEsamiOpzionaliBeanDao"%>
-<%@page import="model.GruppoEsamiOpzionaliBean"%>
-<%@page import="model.EsameBeanDao"%>
-<%@page import="model.EsameBean"%>
-<%@page import="model.DocenteBeanDao"%>
-<%@page import="model.DocenteBean"%>
+<%@page import="model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBeanDao"%>
+<%@page import="model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBean"%>
+<%@page import="model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBeanDao"%>
+<%@page import="model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBean"%>
+<%@page import="model.esame.EsameBeanDao"%>
+<%@page import="model.esame.EsameBean"%>
+<%@page import="model.docente.DocenteBeanDao"%>
+<%@page import="model.docente.DocenteBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="java.util.ArrayList" pageEncoding="UTF-8"%>
 

@@ -3,9 +3,11 @@ package test.docente;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import model.DocenteBean;
-import model.DocenteBeanDao;
+
 import org.junit.Test;
+
+import model.docente.DocenteBean;
+import model.docente.DocenteBeanDao;
 
 public class TestDocenteBeanDao1 {
 

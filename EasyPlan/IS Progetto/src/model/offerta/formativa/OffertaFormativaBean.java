@@ -1,6 +1,8 @@
-package model;
+package model.offerta.formativa;
 
 import java.util.ArrayList;
+
+import model.corso.di.laurea.CorsoDiLaureaBean;
 
 public class OffertaFormativaBean {
 

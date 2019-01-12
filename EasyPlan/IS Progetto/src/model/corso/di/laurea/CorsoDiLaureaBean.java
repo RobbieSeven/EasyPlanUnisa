@@ -1,6 +1,8 @@
-package model;
+package model.corso.di.laurea;
 
 import java.util.ArrayList;
+
+import model.curriculum.CurriculumBean;
 
 public class CorsoDiLaureaBean {
 

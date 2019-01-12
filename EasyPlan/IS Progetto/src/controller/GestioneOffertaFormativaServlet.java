@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.CorsoDiLaureaBean;
-import model.CorsoDiLaureaBeanDao;
-import model.OffertaFormativaBean;
-import model.OffertaFormativaBeanDao;
+import model.corso.di.laurea.CorsoDiLaureaBean;
+import model.corso.di.laurea.CorsoDiLaureaBeanDao;
+import model.offerta.formativa.OffertaFormativaBean;
+import model.offerta.formativa.OffertaFormativaBeanDao;
 
 @WebServlet("/GestioneOffertaFormativa")
 public class GestioneOffertaFormativaServlet extends HttpServlet {

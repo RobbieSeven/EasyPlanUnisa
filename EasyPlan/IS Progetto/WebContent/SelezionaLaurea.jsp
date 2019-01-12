@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
-    pageEncoding="UTF-8" import="model.OffertaFormativaBean" import="model.CorsoDiLaureaBean"%>
+    pageEncoding="UTF-8" import="model.offerta.formativa.OffertaFormativaBean" import="model.corso.di.laurea.CorsoDiLaureaBean"%>
     
     <%
     	OffertaFormativaBean of = (OffertaFormativaBean) request.getAttribute("offertaFormativa"); 

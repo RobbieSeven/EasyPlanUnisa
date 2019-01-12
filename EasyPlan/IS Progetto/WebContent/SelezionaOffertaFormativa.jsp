@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
-    pageEncoding="UTF-8" import="model.OffertaFormativaBeanDao" import="model.OffertaFormativaBean"%>
+    pageEncoding="UTF-8" import="model.offerta.formativa.OffertaFormativaBeanDao" import="model.offerta.formativa.OffertaFormativaBean"%>
 
     
      <%

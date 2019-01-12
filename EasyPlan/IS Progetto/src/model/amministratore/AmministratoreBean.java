@@ -1,4 +1,4 @@
-package model;
+package model.amministratore;
 
 public class AmministratoreBean {
 

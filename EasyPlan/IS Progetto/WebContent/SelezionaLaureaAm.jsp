@@ -1,9 +1,9 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.CorsoDiLaureaBean"%>
-<%@page import="model.CorsoDiLaureaBeanDao"%>
-<%@page import="model.OffertaFormativaBeanDao"%>
-<%@page import="model.OffertaFormativaBean"%>
+<%@page import="model.corso.di.laurea.CorsoDiLaureaBean"%>
+<%@page import="model.corso.di.laurea.CorsoDiLaureaBeanDao"%>
+<%@page import="model.offerta.formativa.OffertaFormativaBeanDao"%>
+<%@page import="model.offerta.formativa.OffertaFormativaBean"%>
 <!DOCTYPE html>
 <html>
 <%

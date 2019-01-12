@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.AmministratoreBean;
-import model.AmministratoreBeanDao;
+import model.amministratore.AmministratoreBean;
+import model.amministratore.AmministratoreBeanDao;
 
 /**
  * Servlet implementation class AmministratoreServlet.

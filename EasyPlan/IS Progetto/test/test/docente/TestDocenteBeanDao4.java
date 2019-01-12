@@ -2,8 +2,9 @@ package test.docente;
 
 import static org.junit.Assert.assertEquals;
 
-import model.DocenteBeanDao;
 import org.junit.Test;
+
+import model.docente.DocenteBeanDao;
 
 public class TestDocenteBeanDao4 {
   DocenteBeanDao dd = new DocenteBeanDao();

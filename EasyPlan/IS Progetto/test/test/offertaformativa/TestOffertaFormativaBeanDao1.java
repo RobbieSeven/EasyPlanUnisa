@@ -3,9 +3,11 @@ package test.offertaformativa;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import model.OffertaFormativaBean;
-import model.OffertaFormativaBeanDao;
+
 import org.junit.Test;
+
+import model.offerta.formativa.OffertaFormativaBean;
+import model.offerta.formativa.OffertaFormativaBeanDao;
 
 public class TestOffertaFormativaBeanDao1 {
   OffertaFormativaBean of = new OffertaFormativaBean("2022/23", null, true);
