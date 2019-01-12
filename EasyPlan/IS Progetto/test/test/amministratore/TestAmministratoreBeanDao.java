@@ -17,6 +17,6 @@ public class TestAmministratoreBeanDao {
   @Test
   public void testdoRetriveByKey() {
 
-    assertEquals(ab, amd.doRetrieveByKey(username));
+    assertEquals(ab.toString(), amd.doRetrieveByKey(username).toString());
   }
 }
