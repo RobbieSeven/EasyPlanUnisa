@@ -3,10 +3,8 @@ package test.gruppo.esami.obbligatori;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-
-import org.junit.Test;
-
 import model.gruppo.esami.GruppoEsamiObbligatoriBeanDao;
+import org.junit.Test;
 
 
 public class TestGruppoEsamiObbligatoriBeanDaodoDelete {
