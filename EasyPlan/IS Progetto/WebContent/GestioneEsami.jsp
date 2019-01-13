@@ -1,7 +1,7 @@
-<%@page import="model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBeanDao"%>
-<%@page import="model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBean"%>
-<%@page import="model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBeanDao"%>
-<%@page import="model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBean"%>
+<%@page import="model.gruppo.esami.GruppoEsamiObbligatoriBeanDao"%>
+<%@page import="model.gruppo.esami.GruppoEsamiObbligatoriBean"%>
+<%@page import="model.gruppo.esami.GruppoEsamiOpzionaliBeanDao"%>
+<%@page import="model.gruppo.esami.GruppoEsamiOpzionaliBean"%>
 <%@page import="model.esame.EsameBeanDao"%>
 <%@page import="model.esame.EsameBean"%>
 <%@page import="model.docente.DocenteBeanDao"%>

@@ -4,8 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBeanDao;
+
 import org.junit.Test;
+
+import model.gruppo.esami.GruppoEsamiObbligatoriBeanDao;
 
 
 

@@ -1,4 +1,4 @@
-package model.gruppo.esami.obbligatori;
+package model.gruppo.esami;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import model.DriverManagerConnectionPool;
 import model.esame.EsameBeanDao;
 
-public class GruppoEsamiObbligatoriBeanDao {
+public class GruppoEsamiOpzionaliBeanDao {
 
   /**
-   * Metodo per salvare un gruppo di esami obbligatori.
+   * Metodo per salvare un gruppo di esami opzionali.
    * @param gb gruppo obbligatorio
    * @return intero per controllare che il salvataggio è andato a buon fine
    * @throws IOException eccezione lanciata su I/O
    */
-  public synchronized int doSave(GruppoEsamiObbligatoriBean gb) throws IOException {
+  public synchronized int doSave(GruppoEsamiOpzionaliBean gb) throws IOException {
     Connection conn = null;
     PreparedStatement ps = null;
 
@@ -27,15 +27,16 @@ public class GruppoEsamiObbligatoriBeanDao {
 
       String query = null;
 
-      query = "INSERT INTO gruppoesamiobbligatori(CodiceGEOb,Anno,Curriculum) values (?, ?, ?)";
+      query = "INSERT INTO gruppoesamiopzionali(CodiceGEOp, Anno, TotCFU, IDCurriculum) " 
+          + "values (?, ?, ?, ?)";
       ps = conn.prepareStatement(query);
 
-      ps.setInt(1, gb.getCodiceGeOb());
+      ps.setInt(1, gb.getCodiceGeOp());
       ps.setInt(2, gb.getAnno());
-      ps.setInt(3, gb.getIdCurriculum());
+      ps.setInt(3, gb.getTotCfu());
+      ps.setInt(4, gb.getIdCurriculum());
 
       int i = ps.executeUpdate();
-
       if (i != 0) {
         return gb.getIdCurriculum();
       }
@@ -46,12 +47,12 @@ public class GruppoEsamiObbligatoriBeanDao {
   }
 
   /**
-   * Metodo per salvare un gruppo di esami obbligatori.
+   * Metodo per salvare un gruppo di esami opzionali.
    * @param gb gruppo obbligatorio
    * @return boolean per controllare che il salvataggio è andato a buon fine
    * @throws IOException eccezione lanciata su I/O
    */
-  public synchronized boolean doSaveOrUpdate(GruppoEsamiObbligatoriBean gb) throws IOException {
+  public synchronized boolean doSaveOrUpdate(GruppoEsamiOpzionaliBean gb) throws IOException {
     Connection conn = null;
     PreparedStatement ps = null;
 
@@ -60,18 +61,18 @@ public class GruppoEsamiObbligatoriBeanDao {
 
       String query = null;
 
-      query = "UPDATE gruppoesamiobbligatori SET Anno=?,Curriculum=? WHERE CodiceGEOb=?";
+      query = "UPDATE gruppoesamiopzionali SET Anno=?, TotCFU=?, IDCurriculum=? WHERE CodiceGEOp=?";
       ps = conn.prepareStatement(query);
 
       ps.setInt(1, gb.getAnno());
-      ps.setInt(2, gb.getIdCurriculum());
-      ps.setInt(3, gb.getCodiceGeOb());
+      ps.setInt(2, gb.getTotCfu());
+      ps.setInt(3, gb.getIdCurriculum());
+      ps.setInt(4, gb.getCodiceGeOp());
 
       int i = ps.executeUpdate();
       if (i != 0) {
         return true;
       }
-
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -81,27 +82,28 @@ public class GruppoEsamiObbligatoriBeanDao {
 
   /**
    * Metodo che ritorna un gruppo obbligatorio data la sua chiave.
-   * @param codiceGeOb codice del gruppo
-   * @return gruppo obbligatorio
+   * @param codiceGeOp codice del gruppo
+   * @return gruppo opzionali
    */
-  public synchronized GruppoEsamiObbligatoriBean doRetrieveByKey(int codiceGeOb) {
-    GruppoEsamiObbligatoriBean gb = new GruppoEsamiObbligatoriBean();
+  public synchronized GruppoEsamiOpzionaliBean doRetrieveByKey(int codiceGeOp) {
+    GruppoEsamiOpzionaliBean gb = new GruppoEsamiOpzionaliBean();
     Connection conn = null;
     PreparedStatement ps = null;
 
     try {
       conn = DriverManagerConnectionPool.getConnection();
 
-      String query = "SELECT * FROM gruppoesamiobbligatori WHERE CodiceGEOb= ?";
+      String query = "SELECT * FROM gruppoesamiopzionali WHERE CodiceGEOp= ?";
       ps = conn.prepareStatement(query);
-      ps.setInt(1, codiceGeOb);
+      ps.setInt(1, codiceGeOp);
 
       ResultSet items = ps.executeQuery();
 
       while (items.next()) {
-        gb.setCodiceGeOb(codiceGeOb);
+        gb.setCodiceGeOp(codiceGeOp);
         gb.setAnno(items.getInt("Anno"));
-        gb.setIdCurriculum(items.getInt("Curriculum"));
+        gb.setIdCurriculum(items.getInt("IDCurriculum"));
+        gb.setTotCfu(items.getInt("TotCFU"));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -111,30 +113,32 @@ public class GruppoEsamiObbligatoriBeanDao {
   }
 
   /**
-   * Metodo che restituisce tutti i gruppi obbligatori.
-   * @return lista di gruppi obbligatori
+   * Metodo che restituisce tutti i gruppi opzionali.
+   * @return lista di gruppi opzionali
    * @throws ClassNotFoundException eccezione lanciata se la classe non corrisponde
    * @throws SQLException eccezione lanciata se c'è un problema sql
    */
-  public synchronized ArrayList<GruppoEsamiObbligatoriBean> doRetriveAll() 
+  public synchronized ArrayList<GruppoEsamiOpzionaliBean> doRetriveAll() 
       throws ClassNotFoundException, SQLException {
-    ArrayList<GruppoEsamiObbligatoriBean> lista = new ArrayList<GruppoEsamiObbligatoriBean>();
+    ArrayList<GruppoEsamiOpzionaliBean> lista = new ArrayList<GruppoEsamiOpzionaliBean>();
     Connection conn = null;
     PreparedStatement ps = null;
 
     try {
       conn = DriverManagerConnectionPool.getConnection();
-      String query = "SELECT * FROM gruppoesamiobbligatori";
+      String query = "SELECT * FROM gruppoesamiopzionali";
 
       ps = conn.prepareStatement(query);
 
       ResultSet items = ps.executeQuery();
 
       while (items.next()) {
-        GruppoEsamiObbligatoriBean gb = new GruppoEsamiObbligatoriBean();
+        GruppoEsamiOpzionaliBean gb = new GruppoEsamiOpzionaliBean();
         gb.setAnno(items.getInt("Anno"));
-        gb.setCodiceGeOb(items.getInt("CodiceGEOb"));
-        gb.setIdCurriculum(items.getInt("Curriculum"));
+        gb.setCodiceGeOp(items.getInt("CodiceGEOp"));
+        gb.setIdCurriculum(items.getInt("IDCurriculum"));
+        gb.setTotCfu(items.getInt("TotCFU"));
+
         lista.add(gb);
       }
     } catch (SQLException e) {
@@ -145,22 +149,22 @@ public class GruppoEsamiObbligatoriBeanDao {
   }
 
   /**
-   * Metodo che cancella un gruppo obbligatorio.
-   * @param codiceGeOb codice del gruppo
+   * Metodo che cancella un gruppo opzionale.
+   * @param codiceGeOp codice del gruppo
    * @return ritorna un booleano per controllare l'avvenuta cancellazione
    * @throws IOException eccezione lanciata su I/O
    */
-  public synchronized boolean doDelete(int codiceGeOb) throws IOException {
+  public synchronized boolean doDelete(int codiceGeOp) throws IOException {
     Connection conn = null;
     PreparedStatement ps = null;
 
     try {
       conn = DriverManagerConnectionPool.getConnection();
 
-      String query = "DELETE FROM gruppoesamiobbligatori WHERE CodiceGEOb=?";
+      String query = "DELETE FROM gruppoesamiopzionali WHERE CodiceGEOp=?";
 
       ps = conn.prepareStatement(query);
-      ps.setInt(1, codiceGeOb);
+      ps.setInt(1, codiceGeOp);
 
       int i = ps.executeUpdate();
       if (i != 0) {
@@ -174,29 +178,29 @@ public class GruppoEsamiObbligatoriBeanDao {
   }
 
   /**
-   * Metodo che restituisce i gruppi obbligatori di un offerta formativa.
+   * Metodo che restituisce i gruppi opzionali di un offerta formativa.
    * @param anno anno dell'offerta formativa
    * @param laurea codice della laurea
    * @param curricula nome del curricula
-   * @return lista di gruppi obbligatori
+   * @return lista di gruppi opzionali
    * @throws ClassNotFoundException lancia l'eccezione se la classe non corrisponde
    * @throws SQLException lancia l'eccezione se c'e' un problema sql
    */
-  public synchronized ArrayList<GruppoEsamiObbligatoriBean> doRetriveGruppoEsamiObbByOfferta(
+  public synchronized ArrayList<GruppoEsamiOpzionaliBean> doRetriveGruppoEsamiOpzByOfferta(
       String anno, int laurea,
       String curricula) throws ClassNotFoundException, SQLException {
     
-    ArrayList<GruppoEsamiObbligatoriBean> lista = new ArrayList<GruppoEsamiObbligatoriBean>();
+    ArrayList<GruppoEsamiOpzionaliBean> lista = new ArrayList<GruppoEsamiOpzionaliBean>();
     Connection conn = null;
     PreparedStatement ps = null;
 
     try {
       conn = DriverManagerConnectionPool.getConnection();
-      String query = "select go.CodiceGEOb, go.Anno, go.Curriculum"
-          + " from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa"
-          + " = c.AnnoOffertaFormativa ) join curriculum as cu \n"
-          + " on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori as "
-          + "go on cu.IDCurriculum = go.Curriculum\n"
+      String query = "select go.CodiceGEOp, go.Anno, go.IDCurriculum, go.TotCFU"
+          + " from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa = "
+          + " c.AnnoOffertaFormativa ) join curriculum as cu \n"
+          + " on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiopzionali as "
+          + " go on cu.IDCurriculum = go.IDCurriculum\n"
           + " where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ?";
 
       ps = conn.prepareStatement(query);
@@ -207,10 +211,12 @@ public class GruppoEsamiObbligatoriBeanDao {
       ResultSet items = ps.executeQuery();
 
       while (items.next()) {
-        GruppoEsamiObbligatoriBean gb = new GruppoEsamiObbligatoriBean();
+        GruppoEsamiOpzionaliBean gb = new GruppoEsamiOpzionaliBean();
         gb.setAnno(items.getInt("Anno"));
-        gb.setCodiceGeOb(items.getInt("CodiceGEOb"));
-        gb.setIdCurriculum(items.getInt("Curriculum"));
+        gb.setCodiceGeOp(items.getInt("CodiceGEOp"));
+        gb.setIdCurriculum(items.getInt("IDCurriculum"));
+        gb.setTotCfu(items.getInt("TotCFU"));
+
         lista.add(gb);
       }
     } catch (SQLException e) {
@@ -221,30 +227,31 @@ public class GruppoEsamiObbligatoriBeanDao {
   }
 
   /**
-   * Metodo che restituisce i gruppi obbligatori di un offerta formativa 
+   * Metodo che restituisce i gruppi opzionali di un offerta formativa 
    *        di un determinato anno del curriculum.
    * @param anno anno dell'offerta formativa
    * @param laurea codice della laurea
    * @param curricula nome del curricula
-   * @return lista di gruppi obbligatori
+   * @return lista di gruppi opzionali
    * @throws ClassNotFoundException lancia l'eccezione se la classe non corrisponde
    * @throws SQLException lancia l'eccezione se c'e' un problema sql
    */
-  public synchronized ArrayList<GruppoEsamiObbligatoriBean> doRetriveGruppoEsamiObbByOffertaAndAnno(
-      String offertaForm,
+  public synchronized ArrayList<GruppoEsamiOpzionaliBean> 
+      doRetriveGruppoEsamiOpzByOffertaAndAnno(String offertaForm,
       int laurea, String curricula, int anno) throws ClassNotFoundException, SQLException {
     
-    ArrayList<GruppoEsamiObbligatoriBean> lista = new ArrayList<GruppoEsamiObbligatoriBean>();
+    ArrayList<GruppoEsamiOpzionaliBean> lista = new ArrayList<GruppoEsamiOpzionaliBean>();
     Connection conn = null;
     PreparedStatement ps = null;
 
     try {
       conn = DriverManagerConnectionPool.getConnection();
-      String query = "select go.CodiceGEOb, go.Anno, go.Curriculum"
-          + " from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa "
-          + "= c.AnnoOffertaFormativa ) join curriculum as cu \n"
-          + " on c.IDcorsodilaurea = cu.IDcorsodilaurea) join gruppoesamiobbligatori "
-          + "as go on cu.IDCurriculum = go.Curriculum\n"
+      String query = "select go.CodiceGEOp, go.Anno, go.IDCurriculum, go.TotCFU"
+          + " from ((corsodilaurea as c join offertaformativa as o on o.AnnoOffertaFormativa ="
+          + " c.AnnoOffertaFormativa ) join curriculum as cu \n"
+          + " on c.IDcorsodilaurea = cu.IDcorsodilaurea) join"
+          + " gruppoesamiopzionali as go on cu.IDCurriculum ="
+          + " go.IDCurriculum\n"
           + " where o.AnnoOffertaFormativa = ? && c.tipo = ? && cu.Nome = ? && go.anno = ?";
 
       ps = conn.prepareStatement(query);
@@ -252,14 +259,15 @@ public class GruppoEsamiObbligatoriBeanDao {
       ps.setInt(2, laurea);
       ps.setString(3, curricula);
       ps.setInt(4, anno);
-
       ResultSet items = ps.executeQuery();
 
       while (items.next()) {
-        GruppoEsamiObbligatoriBean gb = new GruppoEsamiObbligatoriBean();
+        GruppoEsamiOpzionaliBean gb = new GruppoEsamiOpzionaliBean();
         gb.setAnno(items.getInt("Anno"));
-        gb.setCodiceGeOb(items.getInt("CodiceGEOb"));
-        gb.setIdCurriculum(items.getInt("Curriculum"));
+        gb.setCodiceGeOp(items.getInt("CodiceGEOp"));
+        gb.setIdCurriculum(items.getInt("IDCurriculum"));
+        gb.setTotCfu(items.getInt("TotCFU"));
+
         lista.add(gb);
       }
     } catch (SQLException e) {
@@ -286,7 +294,7 @@ public class GruppoEsamiObbligatoriBeanDao {
 
       String query = null;
 
-      query = "INSERT INTO formazione(CodiceGEOb,CodiceEsame) values (?,?)";
+      query = "INSERT INTO formato(CodiceGEOp,CodiceEsame) values (?,?)";
       ps = conn.prepareStatement(query);
 
       ps.setInt(1, codiceGruppo);
@@ -320,7 +328,7 @@ public class GruppoEsamiObbligatoriBeanDao {
 
       String query = null;
 
-      query = "DELETE FROM formazione WHERE CodiceGEOb = ? && CodiceEsame = ? ";
+      query = "DELETE FROM formato WHERE CodiceGEOp = ? && CodiceEsame = ? ";
       ps = conn.prepareStatement(query);
 
       ps.setInt(1, codiceGruppo);
@@ -342,7 +350,6 @@ public class GruppoEsamiObbligatoriBeanDao {
         ResultSet item = ps.executeQuery();
         while (item.next()) {
           numeroDiOccorrenzeInGruppiObbligatori = item.getInt("numeroDiOccorrenze");
-          System.out.println(numeroDiOccorrenzeInGruppiObbligatori);
         }
         // controllo se � presente in formazione
         query = "select count(*) as numeroDiOccorrenze"
@@ -362,7 +369,6 @@ public class GruppoEsamiObbligatoriBeanDao {
           EsameBeanDao dao = new EsameBeanDao();
           dao.doDelete(codiceEsame);
         }
-
         return 1;
       }
 
@@ -377,7 +383,7 @@ public class GruppoEsamiObbligatoriBeanDao {
    * @param codiceGruppo codice del gruppo
    * @param codiceEsame codice dell'esame
    * @return intero per il successo dell'operazione
-   * @throws IOException IOException eccezione  lancia su I/O
+   * @throws IOException eccezione  lanciata su I/O
    */
   public synchronized int deleteEsame(int codiceGruppo, int codiceEsame) throws IOException {
     Connection conn = null;
@@ -388,7 +394,7 @@ public class GruppoEsamiObbligatoriBeanDao {
 
       String query = null;
 
-      query = "DELETE FROM formazione WHERE CodiceGEOb = ? && CodiceEsame = ? ";
+      query = "DELETE FROM formato WHERE CodiceGEOp = ? && CodiceEsame = ? ";
       ps = conn.prepareStatement(query);
 
       ps.setInt(1, codiceGruppo);
@@ -407,7 +413,7 @@ public class GruppoEsamiObbligatoriBeanDao {
   }
 
   /**
-   * Metodo che ritorna l'ultimo id dei gruppi obbligatori.
+   * Metodo che ritorna l'ultimo id dei gruppi opzionali.
    * @return ultimo id
    */
   public synchronized int doRetrieveLastId() {
@@ -418,7 +424,7 @@ public class GruppoEsamiObbligatoriBeanDao {
     try {
       conn = DriverManagerConnectionPool.getConnection();
 
-      String query = "SELECT max(CodiceGEOb) AS massimoID FROM gruppoesamiobbligatori";
+      String query = "SELECT max(CodiceGEOp) AS massimoID FROM gruppoesamiopzionali";
       ps = conn.prepareStatement(query);
 
       ResultSet items = ps.executeQuery();
@@ -429,5 +435,40 @@ public class GruppoEsamiObbligatoriBeanDao {
       e.printStackTrace();
     }
     return codiceDocente;
+  }
+
+  /**
+   * Metodo che aggiorna i cfu di un gruppo opzionali.
+   * @param codiceGruppo codice del gruppo
+   * @param numeroCfu numero dei cfu
+   * @return un booleano per controlla l'avvenuta modifica
+   * @throws IOException  eccezione  lanciata su I/O
+   */
+  public synchronized boolean updateTotCfu(int codiceGruppo, int numeroCfu) 
+      throws IOException {
+    Connection conn = null;
+    PreparedStatement ps = null;
+
+    try {
+      conn = DriverManagerConnectionPool.getConnection();
+
+      String query = null;
+
+      query = "UPDATE gruppoesamiopzionali SET  TotCFU=? WHERE CodiceGEOp=?";
+      ps = conn.prepareStatement(query);
+
+      ps.setInt(1, codiceGruppo);
+      ps.setInt(2, numeroCfu);
+
+      int i = ps.executeUpdate();
+      if (i != 0) {
+        return true;
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return false;
   }
 }

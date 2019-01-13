@@ -13,8 +13,8 @@ import model.docente.DocenteBean;
 import model.docente.DocenteBeanDao;
 import model.esame.EsameBean;
 import model.esame.EsameBeanDao;
-import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBeanDao;
-import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBeanDao;
+import model.gruppo.esami.GruppoEsamiObbligatoriBeanDao;
+import model.gruppo.esami.GruppoEsamiOpzionaliBeanDao;
 
 @WebServlet("/GestioneEsamiServlet")
 public class GestioneEsamiServlet extends HttpServlet {

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
     import="java.util.HashMap" pageEncoding="UTF-8" import="model.offerta.formativa.OffertaFormativaBean" import="model.corso.di.laurea.CorsoDiLaureaBean"
     import="model.curriculum.CurriculumBean" import="model.esame.EsameBean" import="model.docente.DocenteBean"
-    import="model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBean" import="model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBean" %>
+    import="model.gruppo.esami.GruppoEsamiObbligatoriBean" import="model.gruppo.esami.GruppoEsamiOpzionaliBean" %>
     
     <%! @SuppressWarnings("unchecked") %>
     <%// Simulazione dati presi dal database

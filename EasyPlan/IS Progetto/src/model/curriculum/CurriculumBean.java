@@ -2,8 +2,8 @@ package model.curriculum;
 
 import java.util.ArrayList;
 
-import model.gruppo.esami.obbligatori.GruppoEsamiObbligatoriBean;
-import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBean;
+import model.gruppo.esami.GruppoEsamiObbligatoriBean;
+import model.gruppo.esami.GruppoEsamiOpzionaliBean;
 
 public class CurriculumBean {
 

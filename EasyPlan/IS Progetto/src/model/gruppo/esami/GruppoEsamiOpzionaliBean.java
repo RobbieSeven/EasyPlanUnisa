@@ -1,42 +1,44 @@
-package model.gruppo.esami.obbligatori;
+package model.gruppo.esami;
 
 import java.util.ArrayList;
 
 import model.esame.EsameBean;
 
-public class GruppoEsamiObbligatoriBean {
+public class GruppoEsamiOpzionaliBean {
 
   // VARIABILI D'ISTANZA
-  private int codiceGeOb;
+  private int codiceGeOp;
   private int anno;
+  private int totCfu;
   private int idCurriculum;
   private ArrayList<EsameBean> esami;
 
   // COSTRUTTORI
-  public GruppoEsamiObbligatoriBean() {}
+  public GruppoEsamiOpzionaliBean() {}
 
   /**
    * Metodo costruttore con parametri.
-   * @param codiceGeOb codice del gruppo obbligatorio
+   * @param codiceGeOp codice del gruppo obbligatorio
    * @param anno anno del gruppo
    * @param idCurriculum id del curricula a cui appartiene
    * @param esami lista di esami sel gruppo
    */
-  public GruppoEsamiObbligatoriBean(int codiceGeOb, int anno, int idCurriculum,
-      ArrayList<EsameBean> esami) {
-    this.codiceGeOb = codiceGeOb;
+  public GruppoEsamiOpzionaliBean(int codiceGeOp, int anno, int totCfu,
+      int idCurriculum, ArrayList<EsameBean> esami) {
+    this.codiceGeOp = codiceGeOp;
     this.anno = anno;
+    this.totCfu = totCfu;
     this.idCurriculum = idCurriculum;
     this.esami = esami;
   }
 
   // GETTER E SETTER
-  public int getCodiceGeOb() {
-    return codiceGeOb;
+  public int getCodiceGeOp() {
+    return codiceGeOp;
   }
 
-  public void setCodiceGeOb(int codiceGeOb) {
-    this.codiceGeOb = codiceGeOb;
+  public void setCodiceGeOp(int codiceGeOp) {
+    this.codiceGeOp = codiceGeOp;
   }
 
   public int getAnno() {
@@ -45,6 +47,14 @@ public class GruppoEsamiObbligatoriBean {
 
   public void setAnno(int anno) {
     this.anno = anno;
+  }
+
+  public int getTotCfu() {
+    return totCfu;
+  }
+
+  public void setTotCfu(int totCfu) {
+    this.totCfu = totCfu;
   }
 
   public int getIdCurriculum() {
@@ -66,8 +76,8 @@ public class GruppoEsamiObbligatoriBean {
   // METODI OBJECT
   @Override
   public String toString() {
-    return "GruppoEsamiObbligatoriBean [codiceGEOb=" + codiceGeOb + ", anno=" + anno 
-        + ", idCurriculum=" + idCurriculum
-        + "]";
+    return "GruppoEsamiOpzionali [codiceGEOp=" + codiceGeOp 
+        + ", anno=" + anno + ", totCFU=" + totCfu
+        + ", idCurriculum=" + idCurriculum + "]";
   }
 }
