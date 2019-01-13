@@ -69,15 +69,17 @@ public class AmministratoreServlet extends HttpServlet {
         if (missingData(password) && validateField(password, "([A-Za-z0-9]){3,16}")) {
           AmministratoreBeanDao amDao = new AmministratoreBeanDao();
           AmministratoreBean am = amDao.doRetrieveByKey(user);
-          
-          if (am != null) {
-        	  System.out.println("ciao am non null");
+
+          if (am != null && am.getPassword().equals(password)) {
             session.setAttribute("amministratore", user);
             session.setAttribute("password", password);
 
             RequestDispatcher view = request.getRequestDispatcher("GestioneOfferteFormative.jsp");
             view.forward(request, response);
 
+          } else {
+            RequestDispatcher view = request.getRequestDispatcher("Login.html");
+            view.forward(request, response);
           }
         } else {
           RequestDispatcher view = request.getRequestDispatcher("Login.html");
