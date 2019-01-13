@@ -1,4 +1,4 @@
-package testing;
+package testing_sistema;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class TestLogin {
-public static final String PATH = "C:\\Users\\Franc\\Desktop\\GoogleDriver\\chromedriver.exe";
+public static final String PATH="C:\\Users\\franc\\Desktop\\PROGETTO\\chromedriver.exe";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -25,7 +25,7 @@ public static final String PATH = "C:\\Users\\Franc\\Desktop\\GoogleDriver\\chro
 	      //Maximize the browser
 	      driver.manage().window().maximize();
 	      
-	     driver.findElement(By.xpath("./html/body/nav/div/div[2]/ul/li/a")).click();
+	      driver.findElement(By.xpath("./html/body/nav/div/div[2]/ul/li/a")).click();
 	      
 	      driver.findElement(By.xpath("//*[@id=\"username\"]")).click();
 	      
@@ -39,7 +39,7 @@ public static final String PATH = "C:\\Users\\Franc\\Desktop\\GoogleDriver\\chro
 	     
 	      
 	      //Close the Browser.
-	     // driver.close();
+	      driver.close();
 	}
 
 }

@@ -71,14 +71,14 @@
 	       <input type="hidden" name="laurea" value="triennale">
 	       <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
 	       <input type="hidden" name="idCorsoDiLaureaTriennale" value="<%=lauree.get(0).getIdCorsoDiLaurea()%>">
-         	<button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block dimButton centerButton">Laurea triennale</button>
+         	<button name="button" id="laureaScelta1" class="btn btn-default btn-responsive center-block dimButton centerButton">Laurea triennale</button>
         </form>
          <br>
          <form action="SelezionaCurriculaAm.jsp" method = "post">
 	         <input type="hidden" name="laurea" value="magistrale">
 	          <input type="hidden" name="offerta" value="<%=request.getParameter("offerta")%>">
 	          <input type="hidden" name="idCorsoDiLaureaMagistrale" value="<%=lauree.get(1).getIdCorsoDiLaurea()%>">
-	         <button name="button" id="laureaScelta" class="btn btn-default btn-responsive center-block dimButton">Laurea magistrale</button>
+	         <button name="button" id="laureaScelta2" class="btn btn-default btn-responsive center-block dimButton">Laurea magistrale</button>
    		</form>
        </div>
   </body>
