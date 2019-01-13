@@ -3,11 +3,9 @@ package test.docente;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-
-import org.junit.Test;
-
 import model.docente.DocenteBean;
 import model.docente.DocenteBeanDao;
+import org.junit.Test;
 
 public class TestDocenteBeanDao1 {
 

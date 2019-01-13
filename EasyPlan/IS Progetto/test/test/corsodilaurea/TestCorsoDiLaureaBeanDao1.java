@@ -3,11 +3,10 @@ package test.corsodilaurea;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-
-import org.junit.Test;
-
 import model.corso.di.laurea.CorsoDiLaureaBean;
 import model.corso.di.laurea.CorsoDiLaureaBeanDao;
+
+import org.junit.Test;
 
 public class TestCorsoDiLaureaBeanDao1 {
   CorsoDiLaureaBean cl = new CorsoDiLaureaBean(17, 2, "2018/19", null);

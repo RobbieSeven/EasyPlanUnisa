@@ -326,8 +326,8 @@
 						</form>	
 						<% } %>
 						
-						
-							<div align=center class="div3Button">
+						<div align=center>
+							<div  class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -359,7 +359,7 @@
 								</form>
 								
 							</div>
-							
+							</div>
 					</fieldset>
 					<% } 
 	        	esami1.clear();
@@ -513,8 +513,8 @@
 							</form>	
 						<% } %>
 						
-						
-							<div align=center class="div4Button">	
+						<div align=center>
+							<div class="div4Button">	
 							 <form action="GestioneGruppoEsami" method="POST"> 
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -557,7 +557,7 @@
 								</button>
 							</form>
 							</div>
-						
+						</div>
 					</fieldset>
 					<%} %>
 					
@@ -725,8 +725,8 @@
 							</form>	
 						<% } %>
 							
-							
-								<div align=center class="div3Button">
+							<div align=center>
+								<div  class="div3Button">
 									<form action = "GestioneGruppoEsami" method = "POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -759,7 +759,7 @@
 										</button>
 									</form>
 								</div>
-							
+							</div>
 						</fieldset>
 						<% } 
 		        	esami2.clear();
@@ -912,8 +912,8 @@
 							</form>	
 						<% } %>
 							
-							
-								<div align=center class="div4Button">
+							<div align=center>
+								<div  class="div4Button">
 									<form action="GestioneGruppoEsami" method="POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -957,7 +957,7 @@
 									</form>
 									
 								</div>
-							
+							</div>
 						</fieldset>
 						<%} %>
 						
@@ -1121,8 +1121,8 @@
 						</form>	
 						<% } %>
 						
-						
-							<div align=center class="div3Button">
+						<div align=center>
+							<div class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1154,7 +1154,7 @@
 								</form>
 								
 							</div>
-						
+						</div>
 					</fieldset>
 					<% } 
 	        	esami3.clear();
@@ -1305,8 +1305,8 @@
 						</form>	
 						<% } %>
 						
-						
-							<div align=center class="div4Button">
+						<div align=center>
+							<div  class="div4Button">
 								<form action="GestioneGruppoEsami" method="POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1350,7 +1350,7 @@
 								</form>
 									
 							</div>
-						
+						</div>
 					</fieldset>
 					<%} %>
 						
@@ -1524,8 +1524,8 @@
 						</form>	
 						<% } %>
 						
-						
-							<div align=center class="div3Button">
+						<div align=center>
+							<div class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1556,7 +1556,7 @@
 									<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 								</form>
 							</div>
-						
+						</div>
 					</fieldset>
 					<% } 
 	        	esami1.clear();
@@ -1699,8 +1699,8 @@
 						</form>	
 						<% } %>
 						
-						
-							<div align=center class="div4Button">
+						<div align=center>
+							<div class="div4Button">
 								<form action="GestioneGruppoEsami" method="POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1743,7 +1743,7 @@
 									</button>
 								</form>
 							</div>
-						
+						</div>
 						
 					</fieldset>
 					<%} %>
@@ -1903,8 +1903,8 @@
 						</form>	
 						<% } %>
 							
-							
-								<div align=center class="div3Button">
+							<div align=center>
+								<div  class="div3Button">
 									<form action = "GestioneGruppoEsami" method = "POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1935,7 +1935,7 @@
 										<button class="btn btn-default btn-responsive center button3" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 									</form>
 								</div>
-							
+							</div>
 						</fieldset>
 						<% } 
 		        	esami2.clear();
@@ -2077,8 +2077,8 @@
 						</form>	
 						<% } %>
 							
-							
-								<div align=center class="div4Button">
+							<div align=center>
+								<div class="div4Button">
 									<form action="GestioneGruppoEsami" method="POST">
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -2121,7 +2121,7 @@
 										</button>
 									</form>
 								</div>
-							
+							</div>
 						</fieldset>
 						<%} %>
 						

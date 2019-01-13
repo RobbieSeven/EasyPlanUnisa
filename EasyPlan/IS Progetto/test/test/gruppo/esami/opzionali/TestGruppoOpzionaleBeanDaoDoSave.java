@@ -2,10 +2,9 @@ package test.gruppo.esami.opzionali;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
 import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBean;
 import model.gruppo.esami.opzionali.GruppoEsamiOpzionaliBeanDao;
+import org.junit.Test;
 
 public class TestGruppoOpzionaleBeanDaoDoSave {
 

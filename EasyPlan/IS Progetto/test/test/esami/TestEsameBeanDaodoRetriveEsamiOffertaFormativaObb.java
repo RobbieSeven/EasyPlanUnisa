@@ -4,10 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-
-import org.junit.Test;
-
 import model.esame.EsameBeanDao;
+import org.junit.Test;
 
 
 public class TestEsameBeanDaodoRetriveEsamiOffertaFormativaObb {

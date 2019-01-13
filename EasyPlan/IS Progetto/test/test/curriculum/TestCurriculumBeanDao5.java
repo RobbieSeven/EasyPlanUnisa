@@ -2,9 +2,10 @@ package test.curriculum;
 
 import static org.junit.Assert.assertEquals;
 
+import model.curriculum.CurriculumBeanDao;
 import org.junit.Test;
 
-import model.curriculum.CurriculumBeanDao;
+;
 
 public class TestCurriculumBeanDao5 {
 

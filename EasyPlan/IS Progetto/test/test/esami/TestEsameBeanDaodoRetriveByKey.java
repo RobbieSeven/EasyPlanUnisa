@@ -2,9 +2,10 @@ package test.esami;
 
 import static org.junit.Assert.assertEquals;
 
+import model.esame.EsameBeanDao;
 import org.junit.Test;
 
-import model.esame.EsameBeanDao;
+
 
 
 
