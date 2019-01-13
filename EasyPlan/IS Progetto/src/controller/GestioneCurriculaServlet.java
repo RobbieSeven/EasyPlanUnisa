@@ -46,7 +46,6 @@ public class GestioneCurriculaServlet extends HttpServlet {
     }
     if (request.getParameter("metodo").equals("eliminaCurricula")) {
       int id = Integer.parseInt(request.getParameter("idCurriculum"));
-      System.out.println(id);
       removeCurriculum(id);
     }
     if (request.getParameter("metodo").equals("aggiuntaCurricula")) {
