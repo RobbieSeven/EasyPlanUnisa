@@ -69,8 +69,9 @@ public class AmministratoreServlet extends HttpServlet {
         if (missingData(password) && validateField(password, "([A-Za-z0-9]){3,16}")) {
           AmministratoreBeanDao amDao = new AmministratoreBeanDao();
           AmministratoreBean am = amDao.doRetrieveByKey(user);
-
+          
           if (am != null) {
+        	  System.out.println("ciao am non null");
             session.setAttribute("amministratore", user);
             session.setAttribute("password", password);
 
