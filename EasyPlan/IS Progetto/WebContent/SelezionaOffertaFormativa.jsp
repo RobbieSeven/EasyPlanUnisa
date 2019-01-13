@@ -52,7 +52,7 @@
     </form>
     <img alt="logo" src="immagini/logo.png" class="img-responsive center-block centerImg">
     <div class="col-md-12">
-	    
+	       
 	    
 	    <%for(int i = 0; i < of.size(); i++){ %>
 	    	<%if(of.get(i).isVisibilita()){ %>
