@@ -1,4 +1,4 @@
-package testing_sistema;
+package testing;
 
 import java.util.concurrent.TimeUnit;
 
