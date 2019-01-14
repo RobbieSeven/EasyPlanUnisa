@@ -311,7 +311,7 @@
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											
 														<div align=center>
-															<button type="submit" class="btn btn-default btn-responsive center deleteEsame" name="metodo" value="cancellaEsame">
+															<button type="submit" class="btn btn-default btn-responsive center " name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 															</button>												
 														</div>
@@ -326,7 +326,7 @@
 						</form>	
 						<% } %>
 						
-						<div align=center>
+						<div>
 							<div  class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
@@ -339,23 +339,23 @@
 										<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
 									</button>
 								</form>
-								<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+								<form action = "AggiuntaNuovoEsame.jsp" method = "POST" class=button2>
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>									
-									<button type="submit" class="btn btn-default btn-responsive center button2" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+									<button type="submit" class="btn btn-default btn-responsive center " name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 								</form>
-								<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+								<form action = "AggiuntaEsameEsistente.jsp" method = "POST" class=button3>
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>	
-									<button type="submit" class="btn btn-default btn-responsive center button3" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente </button>
+									<button type="submit" class="btn btn-default btn-responsive center" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente </button>
 								</form>
 								
 							</div>
@@ -392,8 +392,8 @@
 							<div class="contents">
 								<div id="<%= esame.getCodiceEsame() %>" class="collapse">
 									<div class="container divContents">
-										
-											<div  align=center class="row">
+										<div align=center>
+											<div class="row">
 												<div class="col-sm-2 col-lg-2">
 													CFU <input type="number" min="1" max="12"
 													class="btn btn-default" name="insertCFU"
@@ -436,6 +436,7 @@
 												<div class="col-sm-2 col-lg-2">
 													Semestre <input type="text" name="semestre" value="<%=esame.getSemestre()%>" size="7">
 												</div>
+											</div>
 											</div>
 										
 										<div id="prof1" class="row">
@@ -495,11 +496,11 @@
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											
 												
-													<div align=center>
-														<button type="submit" class="btn btn-default btn-responsive center deleteEsame" name="metodo" value="cancellaEsame">
+													<div>
+														<button type="submit" class="btn btn-default btn-responsive center " name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
-													</div>										
+													</div>									
 												
 											
 										</div>
@@ -513,7 +514,7 @@
 							</form>	
 						<% } %>
 						
-						<div align=center>
+						<div>
 							<div class="div4Button">	
 							 <form action="GestioneGruppoEsami" method="POST"> 
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
@@ -526,25 +527,25 @@
 									<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
 								</button>		
 							</form>	
-							<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+							<form action = "AggiuntaNuovoEsame.jsp" method = "POST" class=button2of4>
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="opzionale"></input>		
-								<button class="btn btn-default btn-responsive center button2of4 " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+								<button class="btn btn-default btn-responsive center  " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 							</form>
-							<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+							<form action = "AggiuntaEsameEsistente.jsp" method = "POST" class=button3of4>
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 								<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-								<button class="btn btn-default btn-responsive center button3of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+								<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 							</form>
-							<form action = "ModificaGruppoEsame.jsp" method = "POST">
+							<form action = "ModificaGruppoEsame.jsp" method = "POST" class=button4of4>
 								<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 								<input type="hidden" name="totCFU" value ="<%=grop1.get(j).getTotCfu() %>"></input>
 								<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -552,7 +553,7 @@
 								<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 								<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 								<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-								<button class="btn btn-default btn-responsive center button4of4" type="submit" name="metodo" value="updateGruppo">
+								<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="updateGruppo">
 									<span class="glyphicon glyphicon-pencil"></span><br>Modifica gruppo
 								</button>
 							</form>
@@ -561,7 +562,7 @@
 					</fieldset>
 					<%} %>
 					
-						<div align=center>
+						<div>
 						 <form action="AggiuntaGruppoEsami.jsp" method="POST"> 
 							<input type="hidden" name="offerta" value="<%=offerta %>"></input>
 							<input type="hidden" name="laurea" value="<%=laurea %>"></input>
@@ -705,11 +706,11 @@
 											
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 												
-														<div align=center>
-															<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
+													<div align=center>
+															<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 															</button>												
-														</div>	
+												 </div>													
 												
 											</div>
 											
@@ -738,24 +739,24 @@
 											<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
 										</button>
 									</form>
-									<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+									<form action = "AggiuntaNuovoEsame.jsp" method = "POST" class=button2>
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
-										<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame
+										<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame
 										</button>
 									</form>
-									<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+									<form action = "AggiuntaEsameEsistente.jsp" method = "POST" class=button3>
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
-										<button class="btn btn-default btn-responsive center button3" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente
+										<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente
 										</button>
 									</form>
 								</div>
@@ -892,11 +893,10 @@
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 												
 														<div align=center>
-															<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
+															<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 															</button>												
-														</div>
-													
+														</div>													
 												
 											</div>
 											
@@ -925,25 +925,25 @@
 											<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
 										</button>	
 									</form>
-									<form action="AggiuntaNuovoEsame.jsp" method="POST">
+									<form action="AggiuntaNuovoEsame.jsp" method="POST" class=button2of4>
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="opzionale"></input>				
-										<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame </button>
+										<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame </button>
 									</form>
-									<form action="AggiuntaEsameEsistente.jsp" method="POST">
+									<form action="AggiuntaEsameEsistente.jsp" method="POST" class=button3of4>
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-										<button class="btn btn-default btn-responsive center button3of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente </button>
+										<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente </button>
 									</form>
-									<form action="ModificaGruppoEsame.jsp" method="POST">
+									<form action="ModificaGruppoEsame.jsp" method="POST" class=button4of4>
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="totCFU" value ="<%=grop2.get(j).getTotCfu() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -951,7 +951,7 @@
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="opzionale"></input>	
-										<button class="btn btn-default btn-responsive center button4of4" type="submit"  name="metodo" value="updateGruppo">
+										<button class="btn btn-default btn-responsive center " type="submit"  name="metodo" value="updateGruppo">
 											<span class="glyphicon glyphicon-pencil"><br>Modifica gruppo </span>
 										</button>
 									</form>
@@ -1106,7 +1106,7 @@
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											
 													<div align=center> 
-														<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
+														<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>
@@ -1134,23 +1134,23 @@
 										<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
 									</button>
 								</form>
-								<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+								<form action = "AggiuntaNuovoEsame.jsp" method = "POST" class=button2>
 									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
-									<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame </button>
+									<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame </button>
 								</form>
-								<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+								<form action = "AggiuntaEsameEsistente.jsp" method = "POST" class=button3>
 									<input type="hidden" name="codiceGruppo" value="<%=grob3.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
-									<button class="btn btn-default btn-responsive center button3" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente </button>
+									<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente </button>
 								</form>
 								
 							</div>
@@ -1288,7 +1288,7 @@
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											
 													<div align=center>
-														<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
+														<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>				
@@ -1318,25 +1318,25 @@
 										<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
 									</button>	
 								</form>	
-								<form action="AggiuntaNuovoEsame.jsp" method="POST">
+								<form action="AggiuntaNuovoEsame.jsp" method="POST" class=button2of4>
 									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="opzionale"></input>					
-									<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+									<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 								</form>
-								<form action="AggiuntaEsameEsistente.jsp" method="POST">
+								<form action="AggiuntaEsameEsistente.jsp" method="POST" class=button3of4>
 									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-									<button class="btn btn-default btn-responsive center button3of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+									<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 								</form>
-								<form action="ModificaGruppoEsame.jsp" method="POST">	
+								<form action="ModificaGruppoEsame.jsp" method="POST" class=button4of4>	
 									<input type="hidden" name="codiceGruppo" value="<%=grop3.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="totCFU" value ="<%=grop3.get(j).getTotCfu() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1344,7 +1344,7 @@
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-									<button class="btn btn-default btn-responsive center button4of4" type="submit" name="metodo" value="updateGruppo">
+									<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="updateGruppo">
 										<span class="glyphicon glyphicon-pencil"><br>Modifica gruppo </span>
 									</button>
 								</form>
@@ -1507,7 +1507,7 @@
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 										
 													<div align=center>
-														<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
+														<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>
@@ -1537,23 +1537,23 @@
 										<span class="glyphicon glyphicon-trash" ><br>Cancella gruppo </span>
 									</button>
 								</form>
-								<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+								<form action = "AggiuntaNuovoEsame.jsp" method = "POST" class=button2>
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
-									<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+									<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 								</form>
-								<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+								<form action = "AggiuntaEsameEsistente.jsp" method = "POST" class=button3>
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
-									<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+									<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 								</form>
 							</div>
 						</div>
@@ -1684,7 +1684,7 @@
 										<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 											
 													<div align=center>
-														<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
+														<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="cancellaEsame">
 															<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 														</button>												
 													</div>
@@ -1712,25 +1712,25 @@
 										<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
 									</button>			
 								</form>
-								<form action="AggiuntaNuovoEsame.jsp" method="POST">		
+								<form action="AggiuntaNuovoEsame.jsp" method="POST" class=button2of4>		
 									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-									<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+									<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 								</form>
-								<form action="AggiuntaEsameEsistente.jsp" method="POST">
+								<form action="AggiuntaEsameEsistente.jsp" method="POST" class=button3of4>
 									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 									<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-									<button class="btn btn-default btn-responsive center button3of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+									<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 								</form>
-								<form action="ModificaGruppoEsame.jsp" method="POST">
+								<form action="ModificaGruppoEsame.jsp" method="POST" class=button4of4>
 									<input type="hidden" name="codiceGruppo" value="<%=grop1.get(j).getCodiceGeOp() %>"></input>
 									<input type="hidden" name="totCFU" value ="<%=grop1.get(j).getTotCfu() %>"></input>
 									<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -1738,7 +1738,7 @@
 									<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 									<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 									<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-									<button class="btn btn-default btn-responsive center button4of4"type="submit" name="metodo" value="updateGruppo" >
+									<button class="btn btn-default btn-responsive center "type="submit" name="metodo" value="updateGruppo" >
 										<span class="glyphicon glyphicon-pencil"><br>Modifica gruppo </span>
 									</button>
 								</form>
@@ -1887,7 +1887,7 @@
 												
 													
 														<div align=center>
-															<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
+															<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash" ><br>Cancella esame </span>
 															</button>												
 														</div>		
@@ -1916,23 +1916,23 @@
 											<span class="glyphicon glyphicon-trash" ><br>Cancella gruppo </span>
 										</button>
 									</form>
-									<form action = "AggiuntaNuovoEsame.jsp" method = "POST">
+									<form action = "AggiuntaNuovoEsame.jsp" method = "POST" class=button2>
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
-										<button class="btn btn-default btn-responsive center button2" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+										<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 									</form>
-									<form action = "AggiuntaEsameEsistente.jsp" method = "POST">
+									<form action = "AggiuntaEsameEsistente.jsp" method = "POST" class=button3>
 										<input type="hidden" name="codiceGruppo" value="<%=grob2.get(j).getCodiceGeOb() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="obbligatorio"></input>
-										<button class="btn btn-default btn-responsive center button3" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+										<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 									</form>
 								</div>
 							</div>
@@ -1979,7 +1979,7 @@
 												<div class="col-sm-6 col-lg-6">
 													Anno
 														<input type="hidden" name="gruppoIniziale" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
-														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline">
+														<select class="form-control selcls" name="sceltaAnno" style="width: 40%; display: inline;">
 															<%for(int b = 0; b < grob1.size(); b++){
 															%>
 															<option value="<%=grob1.get(b).getCodiceGeOb() %>,obbligatorio">Gruppo obbiligatorio <%=grob1.get(b).getCodiceGeOb()%></option>
@@ -2061,7 +2061,7 @@
 											<div class="col-sm-4 col-lg-4" style="margin-top: 2%">
 												
 														<div align=center>
-															<button class="btn btn-default btn-responsive center deleteEsame" type="submit" name="metodo" value="cancellaEsame">
+															<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="cancellaEsame">
 																<span class="glyphicon glyphicon-trash"><br>Cancella esame </span>
 															</button>												
 														</div>		
@@ -2090,25 +2090,25 @@
 											<span class="glyphicon glyphicon-trash"><br>Cancella gruppo </span>
 										</button>
 									</form>				
-									<form action="AggiuntaNuovoEsame.jsp" method="POST">		
+									<form action="AggiuntaNuovoEsame.jsp" method="POST" class=button2of4>		
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-										<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
+										<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsame">Aggiungi un nuovo esame</button>
 									</form>
-									<form action="AggiuntaEsameEsistente.jsp" method="POST">
+									<form action="AggiuntaEsameEsistente.jsp" method="POST" class=button3of4>
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
 										<input type="hidden" name="offerta" value="<%=offerta%>"></input>
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-										<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
+										<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="aggiungiEsameEsistente">Aggiungi esame esistente</button>
 									</form>
-									<form action="ModificaGruppoEsame.jsp" method="POST">
+									<form action="ModificaGruppoEsame.jsp" method="POST" class=button4of4>
 										<input type="hidden" name="codiceGruppo" value="<%=grop2.get(j).getCodiceGeOp() %>"></input>
 										<input type="hidden" name="totCFU" value ="<%=grop2.get(j).getTotCfu() %>"></input>
 										<input type="hidden" name="laurea" value="<%=laurea%>"></input>
@@ -2116,7 +2116,7 @@
 										<input type="hidden" name="curriculum" value="<%=curriculum%>"></input>
 										<input type="hidden" name="idCurriculum" value="<%=id%>"></input>
 										<input type="hidden" name="tipoGruppo" value="opzionale"></input>
-										<button class="btn btn-default btn-responsive center button2of4" type="submit" name="metodo" value="updateGruppo">
+										<button class="btn btn-default btn-responsive center " type="submit" name="metodo" value="updateGruppo">
 											<span class="glyphicon glyphicon-pencil"><br>Modifica gruppo </span>
 										</button>
 									</form>
