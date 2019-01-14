@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import model.curriculum.CurriculumBean;
 import model.curriculum.CurriculumBeanDao;
 
+
 /**
  * Servlet implementation class GestioneCurricula.
  */
