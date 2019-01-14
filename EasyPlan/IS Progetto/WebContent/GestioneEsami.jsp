@@ -326,7 +326,7 @@
 						</form>	
 						<% } %>
 						
-						<div>
+						<div align=center>
 							<div  class="div3Button">
 								<form action = "GestioneGruppoEsami" method = "POST">
 									<input type="hidden" name="codiceGruppo" value="<%=grob1.get(j).getCodiceGeOb() %>"></input>
