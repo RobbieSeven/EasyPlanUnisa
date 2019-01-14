@@ -53,7 +53,7 @@
     <form action="getCurriculaFromLaureaOff" method = "post">
       	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
       	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
-         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block buttonwidth">Laurea triennale</button>
+         <button name="button" id="l<%=+cd.get(i).getIdCorsoDiLaurea() %>" <%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block buttonwidth">Laurea triennale</button>
     </form>
     <%}else{
     	%>
@@ -61,7 +61,7 @@
       	<br>
       	<input type="hidden" name="nomeOfferta" value="<%=of.getAnnoOffertaFormativa() %>">
       	<input type="hidden" name="laurea" value="<%=cd.get(i).isTipo()%>">
-         <button name="button" id="l"<%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block buttonwidth">Laurea magistrale</button>
+         <button name="button" id="l<%=+cd.get(i).getIdCorsoDiLaurea() %>" <%=+cd.get(i).getIdCorsoDiLaurea() %> class="btn btn-default btn-responsive center-block buttonwidth">Laurea magistrale</button>
     </form>
     <%} %>
    <%} %>
