@@ -58,7 +58,7 @@
 	    	<%if(of.get(i).isVisibilita()){ %>
 	    	<form action="getCorsiDiLaureaServlet" method = "post">
 		    	<input type="hidden" name="nomeOfferta" value="<%=of.get(i).getAnnoOffertaFormativa() %>">
-		         	<button name="button" id="offertaformativa"<%=+i%> class="btn btn-default btn-responsive center-block buttonwidth"><%=of.get(i).getAnnoOffertaFormativa() %></button>
+		         	<button name="button" id="offertaformativa<%=+i%>"<%=+i%> class="btn btn-default btn-responsive center-block buttonwidth"><%=of.get(i).getAnnoOffertaFormativa() %></button>
 		         <br>
 	         </form>
 	         <%} %>

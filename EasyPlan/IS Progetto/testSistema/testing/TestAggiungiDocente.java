@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TestVisibilità {
+public class TestAggiungiDocente {
 
 	public static final String PATH= "C:\\Users\\Franc\\Desktop\\GoogleDriver\\" + "chromedriver.exe";
 	public static final String URL="http://localhost:8080/IS_Progetto/Homepage.html";
@@ -36,9 +36,27 @@ public class TestVisibilità {
 	      driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("admin");
 	      
 	      driver.findElement(By.xpath("/html/body/div[1]/div/form/div[3]/button")).click();
-	     
-	      driver.findElement(By.xpath("/html/body/div[1]/div[1]/label/form/label/span")).click();
 	      
+	      driver.findElement(By.xpath("/html/body/div[1]/div[2]/a")).click();
+	      
+	      driver.findElement(By.xpath("//*[@id=\"laureaScelta2\"]")).click();
+	    //Curriculum di Cloud Computing
+	      driver.findElement(By.xpath("/html/body/div[1]/div[1]/form[1]/button")).click();
+	      
+	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset/form[1]/fieldset/input[1]")).click();
+	      
+	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset/form[1]/div/div/div/div[2]/div[3]/div[5]/button/span")).click();
+	      
+	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset/form[1]/div/div/div/div[3]/div[2]/input")).click();
+	      
+	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset/form[1]/div/div/div/div[3]/div[2]/input")).sendKeys("Docente");
+	      
+	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset/form[1]/div/div/div/div[3]/div[3]/input")).click();
+	      
+	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset/form[1]/div/div/div/div[3]/div[3]/input")).sendKeys("www.prova.it");
+	      
+	      driver.findElement(By.xpath(" /html/body/div[1]/div/fieldset[1]/fieldset/form[1]/div/div/div/div[6]/button")).click();
+	     
 	      //Close the Browser.
 	      driver.close();
 	}

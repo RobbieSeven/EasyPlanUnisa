@@ -8,9 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestAggiungiOfferta {
 
-	public static final String PATH="C:\\Users\\franc\\Desktop\\PROGETTO\\chromedriver.exe";
-	public static final String URL="http://localhost:8080/IS_Progetto_prova_2/Homepage.html";
-	public static final String URL2="http://localhost:8080/IS_Progetto/Homepage.html";
+	public static final String PATH= "C:\\Users\\Franc\\Desktop\\GoogleDriver\\" + "chromedriver.exe" ;
+	public static final String URL="http://localhost:8080/IS_Progetto/Homepage.html";
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

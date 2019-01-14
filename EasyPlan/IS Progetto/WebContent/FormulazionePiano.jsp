@@ -442,7 +442,7 @@
     <br>
 	<form action="selectionOfferta" method="Post">
 		<input type="hidden" name="metodo" value="fine">
-   		<button name="fine" id="laureaScelta" class="btn btn-default btn-responsive center-block buttonwidth">Fine</button>
+   		<button name="fine" id="fine" class="btn btn-default btn-responsive center-block buttonwidth">Fine</button>
   	</form>
   	<br>
   </body>
