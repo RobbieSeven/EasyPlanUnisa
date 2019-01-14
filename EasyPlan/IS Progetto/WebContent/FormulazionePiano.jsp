@@ -65,7 +65,6 @@
     		op1 = (ArrayList<GruppoEsamiOpzionaliBean>) session.getAttribute("opzionali1");
     		session.removeAttribute("opzionali1");
     		session.setAttribute("opzionali1", op1);
-    		System.out.println("forse");
     	}else
     		session.setAttribute("opzionali1", op1);
     	

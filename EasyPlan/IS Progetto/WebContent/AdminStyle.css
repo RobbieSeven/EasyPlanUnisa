@@ -13,9 +13,6 @@ textarea{
     height: 48px;
 }
 
-.deleteEsame{
-	margin-left: 110%;
-}
 
 .codice{
 	width: 50px;
@@ -29,15 +26,15 @@ textarea{
 }
 
 .button2of4{
-	margin-left: -300%;
+	margin-left: -90%;
 }
 
 .button3of4{
-	margin-left: -690%;
+	margin-left: -200%;
 }
 
 .button4of4{
-	margin-left: -1250%;
+	margin-left: -275%;
 }
 
 .dimBigButton{
@@ -74,15 +71,15 @@ textarea{
 
 @media screen and (max-width: 1280px){
 	.button2of4{
-		margin-left: -350%;
+		margin-left: -140%;
 	}
 	
 	.button3of4{
-		margin-left: -740%;
+		margin-left: -250%;
 	}
 	
 	.button4of4{
-		margin-left: -1350%;
+		margin-left: -325%;
 	}
 }
 @media screen and (max-width: 1250px){
@@ -107,37 +104,37 @@ textarea{
 	}
 	
 	.button2of4{
-		margin-left: -400%;
+		margin-left: -110%;
 	}
 	
 	.button3of4{
-		margin-left: -790%;
+		margin-left: -220%;
 	}
 	
 	.button4of4{
-		margin-left: -1450%;
+		margin-left: -310%;
 	}
 }
 
 @media screen and (max-width: 1150px) {
 	.button2{
-   		 margin-left: -100%;
+   		 margin-left: -30%;
 	}
 
 	.button3{
-		margin-left: -250%;
+		margin-left: -55%;
 	}
 	
 	.button2of4{
-		margin-left: -400%;
+		margin-left: -115%;
 	}
 	
 	.button3of4{
-		margin-left: -800%;
+		margin-left: -225%;
 	}
 	
 	.button4of4{
-		margin-left: -1600%;
+		margin-left: -325%;
 	}
 }
 
@@ -148,45 +145,70 @@ textarea{
 	}
 	
 	.button2{
-   		 margin-left: -120%;
+   		 margin-left: -45%;
 	}
 
 	.button3{
-		margin-left: -275%;
+		margin-left: -75%;
+	}
+	
+	.button2of4{
+		margin-left: -115%;
+	}
+	
+	.button3of4{
+		margin-left: -230%;
+	}
+	
+	.button4of4{
+		margin-left: -340%;
+	}
+}
+
+@media screen and (max-width: 1050px) {	
+	.button2{
+   		 margin-left: -30%;
+	}
+
+	.button3{
+		margin-left: -85%;
+	}
+	.button4of4{
+		margin-left: -350%;
 	}
 }
 
 @media screen and (max-width: 1000px) {	
 	
 	.button2{
-   		 margin-left: -150%;
+   		 margin-left: -50%;
 	}
 
 	.button3{
-		margin-left: -300%;
+		margin-left: -97%;
 	}
 	
 	.button2of4{
-		margin-left: -450%;
+		margin-left: -115%;
 	}
 	
 	.button3of4{
-		margin-left: -900%;
+		margin-left: -230%;
 	}
 	
 	.button4of4{
-		margin-left: -1700%;
+		margin-left: -360%;
 	}
 }
 
 @media screen and (max-width: 950px) {	
 	
 	.button2{
-   		 margin-left: -180%;
+   		 margin-left: -60%;
 	}
 
 	.button3{
-		margin-left: -350%;
+		margin-left: -130%;
 	}
 	
 	.button2of4{
@@ -214,11 +236,11 @@ textarea{
 @media screen and (max-width: 900px) {	
 	
 	.button2{
-   		 margin-left: -210%;
+   		 margin-left: -74%;
 	}
 
 	.button3{
-		margin-left: -380%;
+		margin-left: -150%;
 	}
 }
 
@@ -229,21 +251,21 @@ textarea{
 	}
 	
 	.button2{
-   		 margin-left: -250%;
+   		 margin-left: -74%;
 	}
 
 	.button3{
-		margin-left: -450%;
+		margin-left: -150%;
 	}
 }
 
-@media screen and (max-width: 810px) {
+@media screen and (max-width: 820px) {
 	.button2{
-   		 margin-left: -230%;
+   		 margin-left: -95%;
 	}
 
 	.button3{
-		margin-left: -480%;
+		margin-left: -175%;
 	}
 }
 

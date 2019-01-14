@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestLogin {
 public static final String PATH="C:\\Users\\franc\\Desktop\\PROGETTO\\chromedriver.exe";
+public static final String URL="http://localhost:8080/IS_Progetto_prova_2/Homepage.html";
+public static final String URL2="http://localhost:8080/IS_Progetto/Homepage.html";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -20,7 +22,7 @@ public static final String PATH="C:\\Users\\franc\\Desktop\\PROGETTO\\chromedriv
 	      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	      
 	      //Launch website
-	      driver.navigate().to("http://localhost:8080/IS_Progetto/Homepage.html");
+	      driver.navigate().to(URL);
 	      
 	      //Maximize the browser
 	      driver.manage().window().maximize();
