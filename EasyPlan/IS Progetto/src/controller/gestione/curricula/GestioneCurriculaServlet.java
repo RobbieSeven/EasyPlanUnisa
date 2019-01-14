@@ -1,4 +1,4 @@
-package controller;
+package controller.gestione.curricula;
 
 import java.io.IOException;
 

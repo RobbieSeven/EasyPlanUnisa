@@ -71,4 +71,43 @@ public class CorsoDiLaureaBean {
         + "tipo=" + tipo + ", annoOffertaFormativa="
           + annoOffertaFormativa + "]";
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((annoOffertaFormativa == null) ? 0 : annoOffertaFormativa.hashCode());
+    result = prime * result + ((curricula == null) ? 0 : curricula.hashCode());
+    result = prime * result + idCorsoDiLaurea;
+    result = prime * result + tipo;
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    CorsoDiLaureaBean other = (CorsoDiLaureaBean) obj;
+    if (annoOffertaFormativa == null) {
+      if (other.annoOffertaFormativa != null)
+        return false;
+    } else if (!annoOffertaFormativa.equals(other.annoOffertaFormativa))
+      return false;
+    if (curricula == null) {
+      if (other.curricula != null)
+        return false;
+    } else if (!curricula.equals(other.curricula))
+      return false;
+    if (idCorsoDiLaurea != other.idCorsoDiLaurea)
+      return false;
+    if (tipo != other.tipo)
+      return false;
+    return true;
+  }
+  
+  
 }

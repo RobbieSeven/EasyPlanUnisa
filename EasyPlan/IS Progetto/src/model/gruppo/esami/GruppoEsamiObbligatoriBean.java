@@ -70,4 +70,39 @@ public class GruppoEsamiObbligatoriBean {
         + ", idCurriculum=" + idCurriculum
         + "]";
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + anno;
+    result = prime * result + codiceGeOb;
+    result = prime * result + ((esami == null) ? 0 : esami.hashCode());
+    result = prime * result + idCurriculum;
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GruppoEsamiObbligatoriBean other = (GruppoEsamiObbligatoriBean) obj;
+    if (anno != other.anno)
+      return false;
+    if (codiceGeOb != other.codiceGeOb)
+      return false;
+    if (esami == null) {
+      if (other.esami != null)
+        return false;
+    } else if (!esami.equals(other.esami))
+      return false;
+    if (idCurriculum != other.idCurriculum)
+      return false;
+    return true;
+  }
+  
 }

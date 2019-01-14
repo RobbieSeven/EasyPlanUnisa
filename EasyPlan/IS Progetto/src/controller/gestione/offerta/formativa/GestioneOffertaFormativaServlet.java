@@ -1,4 +1,4 @@
-package controller;
+package controller.gestione.offerta.formativa;
 
 import java.io.IOException;
 

@@ -110,4 +110,61 @@ public class EsameBean {
         + ", CFU=" + cfu + ", descrizione=" + descrizione
         + ", ore_lezione=" + oreLezione + ", semestre=" + semestre + "]";
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + cfu;
+    result = prime * result + (check ? 1231 : 1237);
+    result = prime * result + codiceEsame;
+    result = prime * result + ((descrizione == null) ? 0 : descrizione.hashCode());
+    result = prime * result + ((docenti == null) ? 0 : docenti.hashCode());
+    result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+    result = prime * result + oreLezione;
+    result = prime * result + ((semestre == null) ? 0 : semestre.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    EsameBean other = (EsameBean) obj;
+    if (cfu != other.cfu)
+      return false;
+    if (check != other.check)
+      return false;
+    if (codiceEsame != other.codiceEsame)
+      return false;
+    if (descrizione == null) {
+      if (other.descrizione != null)
+        return false;
+    } else if (!descrizione.equals(other.descrizione))
+      return false;
+    if (docenti == null) {
+      if (other.docenti != null)
+        return false;
+    } else if (!docenti.equals(other.docenti))
+      return false;
+    if (nome == null) {
+      if (other.nome != null)
+        return false;
+    } else if (!nome.equals(other.nome))
+      return false;
+    if (oreLezione != other.oreLezione)
+      return false;
+    if (semestre == null) {
+      if (other.semestre != null)
+        return false;
+    } else if (!semestre.equals(other.semestre))
+      return false;
+    return true;
+  }
+  
+  
 }

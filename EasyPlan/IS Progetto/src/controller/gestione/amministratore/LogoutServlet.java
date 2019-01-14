@@ -1,4 +1,4 @@
-package controller;
+package controller.gestione.amministratore;
 
 import java.io.IOException;
 

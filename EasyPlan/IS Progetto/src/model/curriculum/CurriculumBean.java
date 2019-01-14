@@ -7,6 +7,49 @@ import model.gruppo.esami.GruppoEsamiOpzionaliBean;
 
 public class CurriculumBean {
 
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((gruppiObbligatori == null) ? 0 : gruppiObbligatori.hashCode());
+    result = prime * result + ((gruppiOpzionali == null) ? 0 : gruppiOpzionali.hashCode());
+    result = prime * result + idCorsoDiLaurea;
+    result = prime * result + idCurriculum;
+    result = prime * result + ((nomeCurriculum == null) ? 0 : nomeCurriculum.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    CurriculumBean other = (CurriculumBean) obj;
+    if (gruppiObbligatori == null) {
+      if (other.gruppiObbligatori != null)
+        return false;
+    } else if (!gruppiObbligatori.equals(other.gruppiObbligatori))
+      return false;
+    if (gruppiOpzionali == null) {
+      if (other.gruppiOpzionali != null)
+        return false;
+    } else if (!gruppiOpzionali.equals(other.gruppiOpzionali))
+      return false;
+    if (idCorsoDiLaurea != other.idCorsoDiLaurea)
+      return false;
+    if (idCurriculum != other.idCurriculum)
+      return false;
+    if (nomeCurriculum == null) {
+      if (other.nomeCurriculum != null)
+        return false;
+    } else if (!nomeCurriculum.equals(other.nomeCurriculum))
+      return false;
+    return true;
+  }
+
   // VARIABILI DI ISTANZA
   private String nomeCurriculum;
   private int idCurriculum;
