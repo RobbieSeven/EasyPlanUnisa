@@ -6,12 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TestAggiungiOfferta {
+public class TestEliminaEsame {
 
 	public static final String PATH="C:\\Users\\franc\\Desktop\\PROGETTO\\chromedriver.exe";
 	public static final String URL="http://localhost:8080/IS_Progetto_prova_2/Homepage.html";
 	public static final String URL2="http://localhost:8080/IS_Progetto/Homepage.html";
-	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -39,13 +38,15 @@ public class TestAggiungiOfferta {
 	      
 	      driver.findElement(By.xpath("/html/body/div[1]/div/form/div[3]/button")).click();
 	      
-	      driver.findElement(By.xpath("/html/body/div[1]/form/div/button/span")).click();
+	      driver.findElement(By.xpath("/html/body/div[1]/div[2]/a")).click();
 	      
-	      driver.findElement(By.xpath("//*[@id=\"nomeOfferta\"]")).click();
+	      driver.findElement(By.xpath("//*[@id=\"laureaScelta2\"]")).click();
+	    //Curriculum di Cloud Computing
+	      driver.findElement(By.xpath("/html/body/div[1]/div[1]/form[1]/button")).click();
 	      
-	      driver.findElement(By.xpath("//*[@id=\"nomeOfferta\"]")).sendKeys("2020/21");
+	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset[1]/form[4]/fieldset/input[1]")).click();
 	      
-	      driver.findElement(By.xpath("/html/body/form[2]/div[4]/input")).click();
+	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset[1]/form[4]/div/div/div/div[4]/div/button/span")).click();
 	      
 	      //Close the Browser.
 	      driver.close();

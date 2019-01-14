@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TestAggiungiOfferta {
+public class TestEliminaCurriculum {
 
 	public static final String PATH="C:\\Users\\franc\\Desktop\\PROGETTO\\chromedriver.exe";
 	public static final String URL="http://localhost:8080/IS_Progetto_prova_2/Homepage.html";
@@ -39,13 +39,11 @@ public class TestAggiungiOfferta {
 	      
 	      driver.findElement(By.xpath("/html/body/div[1]/div/form/div[3]/button")).click();
 	      
-	      driver.findElement(By.xpath("/html/body/div[1]/form/div/button/span")).click();
+	      driver.findElement(By.xpath("/html/body/div[1]/div[2]/a")).click();
 	      
-	      driver.findElement(By.xpath("//*[@id=\"nomeOfferta\"]")).click();
-	      
-	      driver.findElement(By.xpath("//*[@id=\"nomeOfferta\"]")).sendKeys("2020/21");
-	      
-	      driver.findElement(By.xpath("/html/body/form[2]/div[4]/input")).click();
+	      driver.findElement(By.xpath("//*[@id=\"laureaScelta2\"]")).click();
+	    
+	      driver.findElement(By.xpath("/html/body/div[1]/div[6]/form[2]/button")).click();
 	      
 	      //Close the Browser.
 	      driver.close();
