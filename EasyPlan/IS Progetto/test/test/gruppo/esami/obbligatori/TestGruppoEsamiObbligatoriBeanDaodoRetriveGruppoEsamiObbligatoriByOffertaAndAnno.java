@@ -24,7 +24,7 @@ public class TestGruppoEsamiObbligatoriBeanDaodoRetriveGruppoEsamiObbligatoriByO
         + "su cui si intende testare il metodo: ");
     Scanner in = new Scanner(System.in);
     String temp = in.next();
-    System.out.println("Inseriro 1 se ï¿½ laurea triennale, 2 se ï¿½ magistrale: ");
+    System.out.println("Inseriro 1 se è laurea triennale, 2 se è magistrale: ");
     String codiceOfferta = temp;
     int tipoLaurea = in.nextInt();
     Scanner in2 = new Scanner(System.in);

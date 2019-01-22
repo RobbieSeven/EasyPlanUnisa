@@ -191,7 +191,7 @@
 	    <%} %>
 	    <!-- esami opzionali anno 1 -->
     		<%for(int i = 0; i < op1.size(); i++){ %>
-    			<h3><b><%=op1.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op1.get(i).getTotCfu() %></b></h3>
+    			<h3><b><%=op1.get(i).getAnno()+"° anno opzionale CFU minimi selezionabili: "+ op1.get(i).getTotCfu() %></b></h3>
     			
     			<div class="table-wrapper-scroll-y">
 	   				<table class="table table-bordered table-striped">
@@ -286,7 +286,7 @@
 	    <%} %>
 	    <!-- esami opzionali anno 2 -->
     		<%for(int i = 0; i < op2.size(); i++){ %>
-    			<h3><b><%=op2.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op2.get(i).getTotCfu() %></b></h3>
+    			<h3><b><%=op2.get(i).getAnno()+"° anno opzionale CFU minimi selezionabili: "+ op2.get(i).getTotCfu() %></b></h3>
     			
     			<div class="table-wrapper-scroll-y">
 	   				<table class="table table-bordered table-striped">
@@ -383,7 +383,7 @@
 	    <%} %>
 	    <!-- esami opzionali anno 3 -->
     		<%for(int i = 0; i < op3.size(); i++){ %>
-    			<h3><b><%=op3.get(i).getAnno()+"° anno opzionale CFU massimi selezionabili: "+ op3.get(i).getTotCfu() %></b></h3>
+    			<h3><b><%=op3.get(i).getAnno()+"° anno opzionale CFU minimi selezionabili: "+ op3.get(i).getTotCfu() %></b></h3>
     			
     			<div class="table-wrapper-scroll-y">
 	   				<table class="table table-bordered table-striped">

@@ -52,6 +52,6 @@ public class TestModificaEsame {
 	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset/form[1]/div/div/div/div[5]/button")).click();
 	      
 	      //Close the Browser.
-	      //driver.close();
+	      driver.close();
 	}
 }
