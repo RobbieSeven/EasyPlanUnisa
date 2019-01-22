@@ -49,6 +49,6 @@ public class TestFormulaPianoMagistrale {
 	        driver.findElement(By.xpath("//*[@id=\"fine\"]")).click();
 	        
 	        //Close the Browser.
-	       // driver.close();
+	        driver.close();
 	  }
 }

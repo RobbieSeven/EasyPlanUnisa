@@ -54,6 +54,6 @@ public class TestAggiungiGruppoObbligatorio {
 	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset/div/div/form/div[3]/input")).click();
 	      
 	      //Close the Browser.
-	      //driver.close();
+	      driver.close();
 	}
 }

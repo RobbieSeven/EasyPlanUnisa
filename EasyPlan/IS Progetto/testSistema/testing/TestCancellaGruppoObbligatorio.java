@@ -46,6 +46,6 @@ public class TestCancellaGruppoObbligatorio {
 	      driver.findElement(By.xpath("/html/body/div[1]/div/fieldset[1]/fieldset[2]/div/div/form[1]/button/span")).click();
 	      
 	      //Close the Browser.
-	      //driver.close();
+	      driver.close();
 	}
 }
